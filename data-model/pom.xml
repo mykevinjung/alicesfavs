@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>data-model</artifactId>
 	<packaging>jar</packaging>
-	<name>data-model</name>
+	<name>Data Model</name>
 	<dependencies>
 	</dependencies>
 </project>

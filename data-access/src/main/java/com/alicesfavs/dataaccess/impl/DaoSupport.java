@@ -43,8 +43,8 @@ public class DaoSupport<T> extends JdbcDaoSupport
 
         Map<String, Object> result = keyHolder.getKeys();
         final ModelBase modelBase = new ModelBase((Long) result.get(COLUMN_ID),
-                DateTimeUtils.toLocalDateTime((Timestamp) result.get(COLUMN_CREATED_DATE)),
-                DateTimeUtils.toLocalDateTime((Timestamp) result.get(COLUMN_UPDATED_DATE)));
+            DateTimeUtils.toLocalDateTime((Timestamp) result.get(COLUMN_CREATED_DATE)),
+            DateTimeUtils.toLocalDateTime((Timestamp) result.get(COLUMN_UPDATED_DATE)));
 
         return modelBase;
     }

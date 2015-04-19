@@ -1,0 +1,26 @@
+[
+    {
+        "nextPageSpec":{
+            "containerSpec":{
+                "id":null,
+                "tagName":null,
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "elementSpec":{
+                "id":null,
+                "tagName":null,
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "dataSpec":{
+                "attributeKey":null,
+                "valuePattern":null,
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        }
+    }
+]

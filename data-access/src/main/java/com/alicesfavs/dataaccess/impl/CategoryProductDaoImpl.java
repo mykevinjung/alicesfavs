@@ -29,36 +29,36 @@ public class CategoryProductDaoImpl implements CategoryProductDao
     private DaoSupport<CategoryProduct> daoSupport;
 
     private static final String INSERT = "INSERT INTO CATEGORY_PRODUCT (CATEGORY_ID, PRODUCT_ID, DISPLAY_ORDER, "
-            + "EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE) VALUES (?, ?, ?, ?, ?, ?)";
+        + "EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE) VALUES (?, ?, ?, ?, ?, ?)";
 
     private static final String UPDATE = "UPDATE CATEGORY_PRODUCT SET CATEGORY_ID = ?, PRODUCT_ID = ?, "
-            + "DISPLAY_ORDER = ?, EXTRACT_STATUS = ?, EXTRACT_JOB_ID = ?, EXTRACTED_DATE = ? WHERE ID = ?";
+        + "DISPLAY_ORDER = ?, EXTRACT_STATUS = ?, EXTRACT_JOB_ID = ?, EXTRACTED_DATE = ? WHERE ID = ?";
 
     private static final String UPDATE_EXTRACT_STATUS = "UPDATE CATEGORY_PRODUCT SET EXTRACT_STATUS = ? "
-            + "WHERE EXISTS (SELECT * FROM CATEGORY C WHERE C.SITE_ID = ? AND C.ID = CATEGORY_PRODUCT.CATEGORY_ID "
-            + "AND EXTRACT_JOB_ID <> ?)";
+        + "WHERE EXISTS (SELECT * FROM CATEGORY C WHERE C.SITE_ID = ? AND C.ID = CATEGORY_PRODUCT.CATEGORY_ID "
+        + "AND EXTRACT_JOB_ID <> ?)";
 
     private static final String SELECT_BY_IDS = "SELECT ID, CATEGORY_ID, PRODUCT_ID, DISPLAY_ORDER, "
-            + "EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, CREATED_DATE, UPDATED_DATE FROM CATEGORY_PRODUCT "
-            + "WHERE CATEGORY_ID = ? AND PRODUCT_ID = ?";
+        + "EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, CREATED_DATE, UPDATED_DATE FROM CATEGORY_PRODUCT "
+        + "WHERE CATEGORY_ID = ? AND PRODUCT_ID = ?";
 
     private static final int[] INSERT_PARAM_TYPES =
-    { Types.BIGINT, Types.BIGINT, Types.INTEGER, Types.INTEGER, Types.BIGINT, Types.TIMESTAMP };
+        { Types.BIGINT, Types.BIGINT, Types.INTEGER, Types.INTEGER, Types.BIGINT, Types.TIMESTAMP };
 
     private static final int[] UPDATE_PARAM_TYPES =
-    { Types.BIGINT, Types.BIGINT, Types.INTEGER, Types.INTEGER, Types.BIGINT, Types.TIMESTAMP, Types.BIGINT };
+        { Types.BIGINT, Types.BIGINT, Types.INTEGER, Types.INTEGER, Types.BIGINT, Types.TIMESTAMP, Types.BIGINT };
 
     private static final int[] SELECT_PARAM_TYPES =
-    { Types.BIGINT, Types.BIGINT };
+        { Types.BIGINT, Types.BIGINT };
 
     private static final int[] UPDATE_EXTRACT_STATUS_PARAM_TYPES =
-    { Types.INTEGER, Types.BIGINT, Types.BIGINT };
+        { Types.INTEGER, Types.BIGINT, Types.BIGINT };
 
     public CategoryProduct insertCategoryProduct(long categoryId, long productId, Integer displayOrder,
-            ExtractStatus extractStatus, Long extractJobId, LocalDateTime extractedDate)
+        ExtractStatus extractStatus, Long extractJobId, LocalDateTime extractedDate)
     {
         final Object[] params =
-        { categoryId, productId, displayOrder, extractStatus.getCode(), extractJobId,
+            { categoryId, productId, displayOrder, extractStatus.getCode(), extractJobId,
                 DateTimeUtils.toTimestamp(extractedDate) };
         final ModelBase modelBase = daoSupport.insert(INSERT, INSERT_PARAM_TYPES, params);
 
@@ -74,7 +74,7 @@ public class CategoryProductDaoImpl implements CategoryProductDao
     public void updateCategoryProduct(CategoryProduct categoryProduct)
     {
         final Object[] params =
-        { categoryProduct.categoryId, categoryProduct.productId, categoryProduct.displayOrder,
+            { categoryProduct.categoryId, categoryProduct.productId, categoryProduct.displayOrder,
                 categoryProduct.extractStatus.getCode(), categoryProduct.extractJobId,
                 DateTimeUtils.toTimestamp(categoryProduct.extractedDate), categoryProduct.id };
         categoryProduct.updatedDate = daoSupport.update(UPDATE, UPDATE_PARAM_TYPES, params);
@@ -83,7 +83,7 @@ public class CategoryProductDaoImpl implements CategoryProductDao
     public CategoryProduct selectCategoryProduct(long categoryId, long productId)
     {
         final Object[] params =
-        { categoryId, productId };
+            { categoryId, productId };
 
         try
         {
@@ -94,7 +94,7 @@ public class CategoryProductDaoImpl implements CategoryProductDao
             if (e.getActualSize() > 1)
             {
                 throw new DaoException("Schema Alert - more than one record found: selectCategoryProduct ["
-                        + categoryId + ", " + productId + "]", e);
+                    + categoryId + ", " + productId + "]", e);
             }
             return null;
         }
@@ -103,7 +103,7 @@ public class CategoryProductDaoImpl implements CategoryProductDao
     public int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus extractStatus)
     {
         final Object[] params =
-        { extractStatus.getCode(), siteId, excludingJobId };
+            { extractStatus.getCode(), siteId, excludingJobId };
 
         return daoSupport.updateMultiple(UPDATE_EXTRACT_STATUS, UPDATE_EXTRACT_STATUS_PARAM_TYPES, params);
     }

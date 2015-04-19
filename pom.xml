@@ -12,6 +12,9 @@
     <modules>
 		<module>data-access</module>
         <module>data-model</module>
+		<module>service</module>
+		<module>site-scraper</module>
+		<module>site-scrape-batch</module>
     </modules>
 
     <scm>

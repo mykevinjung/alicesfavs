@@ -22,7 +22,7 @@ import com.alicesfavs.datamodel.BrandLevel;
  * Hello world!
  *
  */
-public class App
+public class DataAccessApp
 {
     public static void main(String[] args) throws Exception
     {

@@ -9,7 +9,7 @@ import com.alicesfavs.batch.SiteScrapeJob;
  * Hello world!
  *
  */
-public class App
+public class SiteScrapeBatchApp
 {
     public static void main(String[] args) throws Exception
     {

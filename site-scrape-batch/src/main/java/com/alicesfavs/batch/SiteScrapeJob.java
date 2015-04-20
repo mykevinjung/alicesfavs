@@ -75,14 +75,6 @@ public class SiteScrapeJob
         // end job
     }
 
-    public static void main(String[] args)
-    {
-        // get site string id from args
-        final String siteId = args[0];
-        final SiteScrapeJob job = new SiteScrapeJob();
-        job.execute(siteId);
-    }
-
     public SiteService getSiteService()
     {
         return siteService;

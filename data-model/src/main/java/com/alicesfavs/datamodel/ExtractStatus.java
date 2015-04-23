@@ -2,7 +2,7 @@ package com.alicesfavs.datamodel;
 
 public enum ExtractStatus
 {
-    EXTRACTED(1), NOT_FOUND(2), IN_PROCESS(3);
+    EXTRACTED(1), NOT_FOUND(2), HIDDEN(3);
 
     private final int code;
 

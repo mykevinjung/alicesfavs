@@ -159,6 +159,7 @@ public class ProductServiceImpl implements ProductService
         existingProduct.wasPrice = newWasPrice;
         existingProduct.extractJobId = jobId;
         existingProduct.extractedDate = LocalDateTime.now();
+        // TODO extract status should be hidden when site.display is false
         existingProduct.extractStatus = ExtractStatus.EXTRACTED;
 
         productDao.updateProduct(existingProduct);

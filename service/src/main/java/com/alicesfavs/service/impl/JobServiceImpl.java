@@ -17,26 +17,21 @@ public class JobServiceImpl implements JobService
     @Autowired
     private JobDao jobDao;
     
-    public JobServiceImpl()
-    {
-        // TODO Auto-generated constructor stub
-    }
-
     public Job createJob(long siteId, Mode jobMode)
     {
-        return jobDao.insertJob(siteId, jobMode, Job.Status.CREATED, LocalDateTime.now(), null, 0, 0);
+        return jobDao.insertJob(siteId, jobMode, Job.Status.CREATED, LocalDateTime.now(), null, 0, 0, 0, 0);
     }
 
-    public void updateJob(Job job)
+    public void completeJob(Job job)
     {
-        // TODO Auto-generated method stub
-
+        job.endTime = LocalDateTime.now();
+        job.status = Job.Status.COMPLETED;
+        jobDao.updateJob(job);
     }
 
     public Job getJob(long jobId)
     {
-        // TODO Auto-generated method stub
-        return null;
+        return jobDao.selectJobById(jobId);
     }
 
 }

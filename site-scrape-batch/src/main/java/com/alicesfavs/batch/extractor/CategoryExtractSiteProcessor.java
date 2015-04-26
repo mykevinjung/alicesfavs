@@ -1,18 +1,15 @@
-package com.alicesfavs.batch.processor;
+package com.alicesfavs.batch.extractor;
 
 import java.io.IOException;
 import java.util.List;
 
+import com.alicesfavs.datamodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.alicesfavs.batch.BatchConfig;
-import com.alicesfavs.datamodel.Category;
-import com.alicesfavs.datamodel.CategoryExtract;
-import com.alicesfavs.datamodel.MultirootTree;
-import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.CategoryService;
 import com.alicesfavs.sitescraper.SiteScrapeException;
 import com.alicesfavs.sitescraper.SiteScraper;
@@ -33,7 +30,7 @@ public class CategoryExtractSiteProcessor implements SiteProcessor
     @Autowired
     private CategoryService categoryService;
 
-    public void process(long jobId, Site site) throws SiteProcessException
+    public void process(Job job, Site site) throws SiteProcessException
     {
         try
         {
@@ -47,9 +44,10 @@ public class CategoryExtractSiteProcessor implements SiteProcessor
             final List<Category> categories = categoryService.getSiteCategories(site.id);
             if (testCategoryExtracts(categoryExtracts, categories))
             {
-                categoryService.saveCategoryExtract(jobId, site.id, categoryExtracts);
-                final int count = categoryService.markNotFoundCategory(jobId, site.id);
-                LOGGER.info("Number of not found category: " + count);
+                final List<Category> categoryList = categoryService.saveCategoryExtract(job.id, site.id, categoryExtracts);
+                job.foundCategoryNo = categoryList.size();
+                job.notFoundCategoryNo = categoryService.markNotFoundCategory(job.id, site.id);
+                LOGGER.info("Number of not found category: " + job.notFoundCategoryNo);
             }
         }
         catch (IOException e)

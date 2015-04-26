@@ -185,6 +185,7 @@ public class ProductServiceImpl implements ProductService
     {
         try
         {
+            // TODO use site.currency
             int lastCurrencyIndex = price.lastIndexOf("$");
             if (lastCurrencyIndex == -1)
             {

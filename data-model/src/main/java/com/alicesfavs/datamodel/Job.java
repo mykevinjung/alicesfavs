@@ -7,11 +7,12 @@ public class Job extends ModelBase
     public final long siteId;
     public final Mode mode;
     public Status status;
-    public int stepNumber;
     public LocalDateTime startTime;
     public LocalDateTime endTime;
-    public Integer foundCategoryNo;
-    public Integer foundProductNo;
+    public int foundCategoryNo = 0;
+    public int foundProductNo = 0;
+    public int notFoundCategoryNo = 0;
+    public int notFoundProductNo = 0;
 
     public Job(long id, LocalDateTime createdDate, long siteId, Mode mode)
     {

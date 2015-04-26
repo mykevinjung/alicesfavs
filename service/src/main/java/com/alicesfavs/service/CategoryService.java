@@ -11,7 +11,7 @@ import com.alicesfavs.datamodel.Product;
 public interface CategoryService
 {
 
-    void saveCategoryExtract(long jobId, long siteId, MultirootTree<CategoryExtract> categoryExtracts);
+    List<Category> saveCategoryExtract(long jobId, long siteId, MultirootTree<CategoryExtract> categoryExtracts);
 
     List<Category> getSiteCategories(long siteId);
 

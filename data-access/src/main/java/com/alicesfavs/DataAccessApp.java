@@ -2,6 +2,7 @@ package com.alicesfavs;
 
 import java.time.LocalDateTime;
 
+import com.alicesfavs.datamodel.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -9,14 +10,6 @@ import com.alicesfavs.dataaccess.CategoryDao;
 import com.alicesfavs.dataaccess.PriceHistoryDao;
 import com.alicesfavs.dataaccess.ProductDao;
 import com.alicesfavs.dataaccess.SiteDao;
-import com.alicesfavs.datamodel.Category;
-import com.alicesfavs.datamodel.CategoryExtract;
-import com.alicesfavs.datamodel.ExtractStatus;
-import com.alicesfavs.datamodel.PriceHistory;
-import com.alicesfavs.datamodel.Product;
-import com.alicesfavs.datamodel.ProductExtract;
-import com.alicesfavs.datamodel.Site;
-import com.alicesfavs.datamodel.BrandLevel;
 
 /**
  * Hello world!
@@ -36,17 +29,18 @@ public class DataAccessApp
     {
         ApplicationContext context = new ClassPathXmlApplicationContext("data-access.xml");
         SiteDao siteDao = context.getBean(SiteDao.class);
-        Site site = siteDao.insertSite("jcrew", "J.Crew", "www.jcrew.com", true, 4,
-                BrandLevel.PREMIUM, false);
+        Site site = siteDao.insertSite("jcrew", Country.US, "", "www.jcrew.com", false, 4,
+                BrandLevel.PREMIUM, true, "");
         System.out.println(site);
 
         Thread.sleep(1000);
 
-        site.display = false;
+        site.display = true;
         site.displayWeight = 5;
-        site.displayName = "";
+        site.displayName = "J.Crew";
         site.brandLevel = BrandLevel.GENERAL;
-        site.useStoredImage = true;
+        site.useStoredImage = false;
+        site.currency = "$";
         siteDao.updateSite(site);
         System.out.println(site);
 

@@ -2,27 +2,34 @@ package com.alicesfavs.batch;
 
 import java.util.List;
 
+import com.alicesfavs.batch.extractor.ProductExtractor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import com.alicesfavs.batch.processor.SiteProcessException;
-import com.alicesfavs.batch.processor.SiteProcessor;
+import com.alicesfavs.batch.extractor.SiteProcessException;
+import com.alicesfavs.batch.extractor.SiteProcessor;
 import com.alicesfavs.datamodel.Job;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.JobService;
 import com.alicesfavs.service.SiteService;
 
+@Component("siteScrapeJob")
 public class SiteScrapeJob
 {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SiteScrapeJob.class);
 
+    @Autowired
     private SiteService siteService;
 
+    @Autowired
     private JobService jobService;
 
-    private List<SiteProcessor> siteProcessors;
+    @Autowired
+    private ProductExtractor productExtractor;
 
     // job can run for sale category only
     public void execute(String siteId)
@@ -34,27 +41,21 @@ public class SiteScrapeJob
         final Job job = jobService.createJob(site.id, Job.Mode.FULL_EXTRACT);
         LOGGER.info("Job is created: " + job.id);
 
-        for (int index = 0; index < siteProcessors.size(); index++)
+        try
         {
-            try
-            {
-                final SiteProcessor siteProcessor = siteProcessors.get(index);
-                siteProcessor.process(job.id, site);
-                LOGGER.info("SiteProcessor " + index + " executed: " + siteProcessor);
-            }
-            catch (SiteProcessException e)
-            {
-                LOGGER.error("Error in siteProcessor", e);
-                System.out.println("Error here: " + e);
-                break;
-            }
-            catch (Exception e)
-            {
-                LOGGER.error("Unknown exception in siteProcessor", e);
-                System.out.println("Error here: " + e);
-                break;
-            }
+            productExtractor.extractProduct(job, site);
         }
+        catch (SiteProcessException e)
+        {
+            LOGGER.error("Error in productExtractor", e);
+        }
+        catch (Exception e)
+        {
+            LOGGER.error("Unknown exception in productExtractor", e);
+        }
+
+        jobService.completeJob(job);
+
         // create new job record
         // extract category structure
         // siteScraper.extractLeafCategories(site, categoryExtractSpecList);
@@ -73,36 +74,6 @@ public class SiteScrapeJob
         // update onsale table
 
         // end job
-    }
-
-    public SiteService getSiteService()
-    {
-        return siteService;
-    }
-
-    public void setSiteService(SiteService siteService)
-    {
-        this.siteService = siteService;
-    }
-
-    public JobService getJobService()
-    {
-        return jobService;
-    }
-
-    public void setJobService(JobService jobService)
-    {
-        this.jobService = jobService;
-    }
-
-    public List<SiteProcessor> getSiteProcessors()
-    {
-        return siteProcessors;
-    }
-
-    public void setSiteProcessors(List<SiteProcessor> siteProcessors)
-    {
-        this.siteProcessors = siteProcessors;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.alicesfavs.batch.processor;
+package com.alicesfavs.batch.extractor;
 
 public class SiteProcessSoftException extends SiteProcessException
 {

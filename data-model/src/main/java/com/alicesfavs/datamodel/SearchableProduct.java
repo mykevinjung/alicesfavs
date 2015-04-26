@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class SearchableProduct
 {
 
+    // this is Product.id
     public long id;
 
     // site info
@@ -20,15 +21,16 @@ public class SearchableProduct
     public String[] categoryNames;
 
     // product info
-    public String productId;
+    public String productExtractId;
     public String name;
-    public String priceText;
-    public String wasPriceText;
+    public String price;
+    public String wasPrice;
     public String brandName;
     public String url;
     public String imageUrl;
-    public Double price;
-    public Double wasPrice;
     public LocalDateTime saleStartDate;
+
+    // to be able to show new arrivals first
+    public LocalDateTime createdDate;
 
 }

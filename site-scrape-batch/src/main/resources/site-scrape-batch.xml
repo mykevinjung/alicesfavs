@@ -15,15 +15,4 @@
 	<context:component-scan base-package="com.alicesfavs.batch" />
 	<context:component-scan base-package="com.alicesfavs.service" />
 
-	<bean id="siteScrapeJob" class="com.alicesfavs.batch.SiteScrapeJob">
-		<property name="siteProcessors">
-			<list>
-				<ref bean="categoryExtractSiteProcessor" />
-				<ref bean="productExtractSiteProcessor" />
-			</list>
-		</property>
-		<property name="siteService" ref="siteService" />
-		<property name="jobService" ref="jobService" />
-	</bean>
-
 </beans>

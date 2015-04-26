@@ -1,6 +1,7 @@
 package com.alicesfavs.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
@@ -28,15 +29,19 @@ public class CategoryServiceImpl implements CategoryService
     @Autowired
     private CategoryProductDao categoryProductDao;
 
-    public void saveCategoryExtract(long jobId, long siteId, MultirootTree<CategoryExtract> categoryExtracts)
+    public List<Category> saveCategoryExtract(long jobId, long siteId, MultirootTree<CategoryExtract> categoryExtracts)
     {
         final List<Node<CategoryExtract>> leafCategories = categoryExtracts.getLeafNodes();
         final LocalDateTime now = LocalDateTime.now();
+        final List<Category> categories = new ArrayList<>();
         for (int index = 0; index < leafCategories.size(); index++)
         {
             final CategoryExtract[] categoryHierarchy = getCategoryHierarchy(leafCategories.get(index));
-            saveCategoryExtract(jobId, siteId, index, now, categoryHierarchy);
+            final Category category = saveCategoryExtract(jobId, siteId, index, now, categoryHierarchy);
+            categories.add(category);
         }
+
+        return categories;
     }
 
     public List<Category> getSiteCategories(long siteId)
@@ -78,14 +83,14 @@ public class CategoryServiceImpl implements CategoryService
         return categoryProductDao.updateExtractStatus(siteId, jobId, ExtractStatus.NOT_FOUND);
     }
 
-    private void saveCategoryExtract(long jobId, long siteId, int displayOrder, LocalDateTime extractTime,
+    private Category saveCategoryExtract(long jobId, long siteId, int displayOrder, LocalDateTime extractTime,
             CategoryExtract[] categoryHierarchy)
     {
         Category existingCategory = categoryDao.selectCategoryByName(siteId, getCategoryName(categoryHierarchy[0]),
                 getCategoryName(categoryHierarchy[1]), getCategoryName(categoryHierarchy[2]));
         if (existingCategory == null)
         {
-            categoryDao.insertCategory(siteId, categoryHierarchy[0], categoryHierarchy[1], categoryHierarchy[2],
+            return categoryDao.insertCategory(siteId, categoryHierarchy[0], categoryHierarchy[1], categoryHierarchy[2],
                     displayOrder, ExtractStatus.EXTRACTED, jobId, extractTime);
         }
         else
@@ -98,6 +103,7 @@ public class CategoryServiceImpl implements CategoryService
             existingCategory.extractJobId = jobId;
             existingCategory.extractStatus = ExtractStatus.EXTRACTED;
             categoryDao.updateCategory(existingCategory);
+            return existingCategory;
         }
     }
 

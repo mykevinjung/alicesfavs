@@ -7,7 +7,7 @@ public interface JobService
 
     Job createJob(long siteId, Job.Mode jobMode);
 
-    void updateJob(Job job);
+    void completeJob(Job job);
 
     Job getJob(long jobId);
 

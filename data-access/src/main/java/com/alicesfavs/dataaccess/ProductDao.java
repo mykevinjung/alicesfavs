@@ -13,7 +13,7 @@ public interface ProductDao
             Double regularPrice, LocalDateTime saleStartDate, String storedImagePath, ExtractStatus extractStatus,
             Long extractJobId, LocalDateTime extractedDate);
 
-    void updateProduct(Product product);
+    Product updateProduct(Product product);
 
     Product selectProductById(Long siteId, String productId);
 

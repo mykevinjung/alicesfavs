@@ -1,7 +1,5 @@
 package com.alicesfavs.batch;
 
-import java.util.List;
-
 import com.alicesfavs.batch.extractor.ProductExtractor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import com.alicesfavs.batch.extractor.SiteProcessException;
-import com.alicesfavs.batch.extractor.SiteProcessor;
+import com.alicesfavs.batch.extractor.ExtractException;
 import com.alicesfavs.datamodel.Job;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.JobService;
@@ -44,17 +41,19 @@ public class SiteScrapeJob
         try
         {
             productExtractor.extractProduct(job, site);
+            jobService.completeJob(job);
         }
-        catch (SiteProcessException e)
+        catch (ExtractException e)
         {
             LOGGER.error("Error in productExtractor", e);
+            jobService.failJob(job);
         }
         catch (Exception e)
         {
             LOGGER.error("Unknown exception in productExtractor", e);
+            jobService.failJob(job);
         }
 
-        jobService.completeJob(job);
 
         // create new job record
         // extract category structure

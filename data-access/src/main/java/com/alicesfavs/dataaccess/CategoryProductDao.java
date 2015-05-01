@@ -13,7 +13,7 @@ public interface CategoryProductDao
 
     CategoryProduct selectCategoryProduct(long categoryId, long productId);
 
-    void updateCategoryProduct(CategoryProduct categoryProduct);
+    CategoryProduct updateCategoryProduct(CategoryProduct categoryProduct);
 
     int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus extractStatus);
 

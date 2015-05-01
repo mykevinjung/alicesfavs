@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 public class AliceCategory extends ModelBase
 {
     public final String name;
-    public Integer displayOrder;
 
     public AliceCategory(long id, LocalDateTime createdDate, String name)
     {

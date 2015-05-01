@@ -16,17 +16,26 @@ public class JobServiceImpl implements JobService
 
     @Autowired
     private JobDao jobDao;
-    
+
     public Job createJob(long siteId, Mode jobMode)
     {
-        return jobDao.insertJob(siteId, jobMode, Job.Status.CREATED, LocalDateTime.now(), null, 0, 0, 0, 0);
+        return jobDao.insertJob(siteId, jobMode, Job.Status.STARTED, LocalDateTime.now(), null, null, null, null, null);
     }
 
-    public void completeJob(Job job)
+    public Job completeJob(Job job)
     {
         job.endTime = LocalDateTime.now();
         job.status = Job.Status.COMPLETED;
-        jobDao.updateJob(job);
+
+        return jobDao.updateJob(job);
+    }
+
+    public Job failJob(Job job)
+    {
+        job.endTime = LocalDateTime.now();
+        job.status = Job.Status.FAILED;
+
+        return jobDao.updateJob(job);
     }
 
     public Job getJob(long jobId)

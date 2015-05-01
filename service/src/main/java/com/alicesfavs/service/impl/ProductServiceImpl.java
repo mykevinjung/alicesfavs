@@ -32,7 +32,8 @@ public class ProductServiceImpl implements ProductService
     @Autowired
     private PriceHistoryDao priceHistoryDao;
 
-    public Map<String, Product> saveProduct(long jobId, long siteId, Map<String, List<ProductExtract>> peMap)
+    public Map<String, Product> saveProduct(long jobId, long siteId, ExtractStatus extractStatus,
+        Map<String, List<ProductExtract>> peMap)
     {
         LOGGER.info("Size of Product Extract map: " + peMap.size());
         final Map<String, Product> productMap = new HashMap<>();
@@ -41,7 +42,7 @@ public class ProductServiceImpl implements ProductService
             try
             {
                 final List<ProductExtract> peList = peMap.get(extractId);
-                final Product product = saveProduct(jobId, siteId, peList);
+                final Product product = saveProduct(jobId, siteId, extractStatus, peList);
                 productMap.put(extractId, product);
             }
             catch (Exception e)
@@ -53,10 +54,11 @@ public class ProductServiceImpl implements ProductService
         return productMap;
     }
 
-    public Product saveProduct(long jobId, long siteId, List<ProductExtract> productExtractList)
+    public Product saveProduct(long jobId, long siteId, ExtractStatus extractStatus,
+        List<ProductExtract> productExtractList)
     {
         final ProductExtract bestProduct = findBestExtract(productExtractList);
-        return saveProduct(jobId, siteId, bestProduct);
+        return saveProduct(jobId, siteId, extractStatus, bestProduct);
     }
 
     public Product findProduct(long siteId, String siteProductId)
@@ -64,16 +66,16 @@ public class ProductServiceImpl implements ProductService
         return productDao.selectProductById(siteId, siteProductId);
     }
 
-    public Product saveProduct(long jobId, long siteId, ProductExtract productExtract)
+    public Product saveProduct(long jobId, long siteId, ExtractStatus extractStatus, ProductExtract productExtract)
     {
         Product product = findProduct(siteId, productExtract.id);
         if (product == null)
         {
-            product = createProduct(jobId, siteId, productExtract);
+            product = createProduct(jobId, siteId, extractStatus, productExtract);
         }
         else
         {
-            updateProduct(jobId, product, productExtract);
+            product = updateProduct(jobId, product, extractStatus, productExtract);
         }
 
         return product;
@@ -112,7 +114,7 @@ public class ProductServiceImpl implements ProductService
         return bestExtract;
     }
 
-    private Product createProduct(long jobId, long siteId, ProductExtract productExtract)
+    private Product createProduct(long jobId, long siteId, ExtractStatus extractStatus, ProductExtract productExtract)
     {
         final Double price = stringPriceToDouble(productExtract.price);
         final Double wasPrice = stringPriceToDouble(productExtract.wasPrice);
@@ -120,10 +122,11 @@ public class ProductServiceImpl implements ProductService
         final Double regularPrice = (wasPrice != null) ? wasPrice : price;
 
         return productDao.insertProduct(siteId, productExtract, price, wasPrice, regularPrice, saleStartDate, null,
-                ExtractStatus.EXTRACTED, jobId, LocalDateTime.now());
+            extractStatus, jobId, LocalDateTime.now());
     }
 
-    private void updateProduct(long jobId, Product existingProduct, ProductExtract newExtract)
+    private Product updateProduct(long jobId, Product existingProduct, ExtractStatus extractStatus,
+        ProductExtract newExtract)
     {
         final String newPriceExtract = newExtract.price;
         final Double newPrice = stringPriceToDouble(newPriceExtract);
@@ -149,7 +152,7 @@ public class ProductServiceImpl implements ProductService
         else if (newWasPrice == null)
         {
             if ((oldWasPrice != null) || (hasPriceIncreased(oldPrice, newPrice, MIN_CHANGE_PERCENTAGE))
-                    || (existingProduct.saleStartDate.isBefore(LocalDateTime.now().minusDays(MAX_SALE_DATE))))
+                || (existingProduct.saleStartDate.isBefore(LocalDateTime.now().minusDays(MAX_SALE_DATE))))
             {
                 existingProduct.saleStartDate = null;
             }
@@ -159,16 +162,16 @@ public class ProductServiceImpl implements ProductService
         existingProduct.wasPrice = newWasPrice;
         existingProduct.extractJobId = jobId;
         existingProduct.extractedDate = LocalDateTime.now();
-        // TODO extract status should be hidden when site.display is false
-        existingProduct.extractStatus = ExtractStatus.EXTRACTED;
+        existingProduct.extractStatus = extractStatus;
 
-        productDao.updateProduct(existingProduct);
-
+        final Product product = productDao.updateProduct(existingProduct);
         if (!newPrice.equals(oldPrice))
         {
             priceHistoryDao
-                    .insertPriceHistory(existingProduct.id, oldPriceExtract, newPriceExtract, oldPrice, newPrice);
+                .insertPriceHistory(existingProduct.id, oldPriceExtract, newPriceExtract, oldPrice, newPrice);
         }
+
+        return product;
     }
 
     private boolean hasPriceDecreased(Double oldPrice, Double newPrice, double minimumPercentage)

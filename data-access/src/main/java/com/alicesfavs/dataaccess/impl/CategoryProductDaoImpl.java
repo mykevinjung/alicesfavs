@@ -71,13 +71,15 @@ public class CategoryProductDaoImpl implements CategoryProductDao
         return categoryProduct;
     }
 
-    public void updateCategoryProduct(CategoryProduct categoryProduct)
+    public CategoryProduct updateCategoryProduct(CategoryProduct categoryProduct)
     {
         final Object[] params =
             { categoryProduct.categoryId, categoryProduct.productId, categoryProduct.displayOrder,
                 categoryProduct.extractStatus.getCode(), categoryProduct.extractJobId,
                 DateTimeUtils.toTimestamp(categoryProduct.extractedDate), categoryProduct.id };
         categoryProduct.updatedDate = daoSupport.update(UPDATE, UPDATE_PARAM_TYPES, params);
+
+        return categoryProduct;
     }
 
     public CategoryProduct selectCategoryProduct(long categoryId, long productId)

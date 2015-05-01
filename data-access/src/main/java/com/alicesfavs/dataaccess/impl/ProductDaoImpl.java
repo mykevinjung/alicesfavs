@@ -87,7 +87,7 @@ public class ProductDaoImpl implements ProductDao
         return product;
     }
 
-    public void updateProduct(Product product)
+    public Product updateProduct(Product product)
     {
         final Object[] params =
         { product.siteId, product.productExtract.id, product.productExtract.name, product.productExtract.price,
@@ -97,6 +97,8 @@ public class ProductDaoImpl implements ProductDao
                 product.extractStatus.getCode(), product.extractJobId,
                 DateTimeUtils.toTimestamp(product.extractedDate), product.id };
         product.updatedDate = daoSupport.update(UPDATE_PRODUCT, UPDATE_PARAM_TYPES, params);
+
+        return product;
     }
 
     public Product selectProductById(Long siteId, String productId)

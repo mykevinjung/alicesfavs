@@ -9,10 +9,10 @@ public class Job extends ModelBase
     public Status status;
     public LocalDateTime startTime;
     public LocalDateTime endTime;
-    public int foundCategoryNo = 0;
-    public int foundProductNo = 0;
-    public int notFoundCategoryNo = 0;
-    public int notFoundProductNo = 0;
+    public int foundCategory = 0;
+    public int foundProduct = 0;
+    public int notFoundCategory = 0;
+    public int notFoundProduct = 0;
 
     public Job(long id, LocalDateTime createdDate, long siteId, Mode mode)
     {
@@ -60,7 +60,7 @@ public class Job extends ModelBase
 
     public static enum Status
     {
-        CREATED(1), PROCESSING(2), COMPLETED(3), ERRORED(4);
+        STARTED(1), COMPLETED(2), FAILED(3);
 
         private final int code;
 

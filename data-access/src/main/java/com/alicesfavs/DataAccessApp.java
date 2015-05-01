@@ -13,7 +13,6 @@ import com.alicesfavs.dataaccess.SiteDao;
 
 /**
  * Hello world!
- *
  */
 public class DataAccessApp
 {
@@ -30,7 +29,7 @@ public class DataAccessApp
         ApplicationContext context = new ClassPathXmlApplicationContext("data-access.xml");
         SiteDao siteDao = context.getBean(SiteDao.class);
         Site site = siteDao.insertSite("jcrew", Country.US, "", "www.jcrew.com", false, 4,
-                BrandLevel.PREMIUM, true, "");
+            true, "");
         System.out.println(site);
 
         Thread.sleep(1000);
@@ -38,7 +37,6 @@ public class DataAccessApp
         site.display = true;
         site.displayWeight = 5;
         site.displayName = "J.Crew";
-        site.brandLevel = BrandLevel.GENERAL;
         site.useStoredImage = false;
         site.currency = "$";
         siteDao.updateSite(site);
@@ -60,7 +58,7 @@ public class DataAccessApp
         productExtract.wasPrice = null;
 
         Product product = productDao.insertProduct(1002L, productExtract, 134.32, null, 150.00, null, null,
-                ExtractStatus.EXTRACTED, 1L, LocalDateTime.now());
+            ExtractStatus.EXTRACTED, 1L, LocalDateTime.now());
         System.out.println(product);
 
         Thread.sleep(1000);
@@ -91,7 +89,7 @@ public class DataAccessApp
         CategoryExtract categoryExtract3 = new CategoryExtract("test");
         categoryExtract3.url = "test invalid url";
         Category category = categoryDao.insertCategory(1002L, categoryExtract1, categoryExtract2, categoryExtract3, 1,
-                ExtractStatus.EXTRACTED, 1L, LocalDateTime.now());
+            ExtractStatus.EXTRACTED, 1L, LocalDateTime.now());
         System.out.println(category);
 
         Thread.sleep(1000);

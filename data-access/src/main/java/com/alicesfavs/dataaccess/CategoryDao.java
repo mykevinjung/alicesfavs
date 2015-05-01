@@ -14,7 +14,7 @@ public interface CategoryDao
             CategoryExtract categoryExtract3, Integer displayOrder, ExtractStatus extractStatus, Long extractJobId,
             LocalDateTime extractedDate);
 
-    void updateCategory(Category category);
+    Category updateCategory(Category category);
 
     Category selectCategoryByName(long siteId, String categoryName1, String categoryName2, String categoryName3);
 

@@ -82,7 +82,7 @@ public class CategoryDaoImpl implements CategoryDao
         return category;
     }
 
-    public void updateCategory(Category category)
+    public Category updateCategory(Category category)
     {
         final Object[] params =
         { category.siteId, getCategoryName(category.categoryExtract1), getCategoryUrl(category.categoryExtract1),
@@ -91,6 +91,8 @@ public class CategoryDaoImpl implements CategoryDao
                 category.displayOrder, category.extractStatus.getCode(), category.extractJobId,
                 DateTimeUtils.toTimestamp(category.extractedDate), category.id };
         category.updatedDate = daoSupport.update(UPDATE_CATEGORY, UPDATE_PARAM_TYPES, params);
+
+        return category;
     }
 
     public Category selectCategoryByName(long siteId, String categoryName1, String categoryName2, String categoryName3)

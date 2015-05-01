@@ -3,39 +3,37 @@ package com.alicesfavs.dataaccess.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Map;
 
-import com.alicesfavs.datamodel.Country;
+import com.alicesfavs.datamodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.alicesfavs.dataaccess.SiteDao;
-import com.alicesfavs.datamodel.ModelBase;
-import com.alicesfavs.datamodel.Site;
-import com.alicesfavs.datamodel.BrandLevel;
 
 @Repository
 public class SiteDaoImpl implements SiteDao
 {
 
     private static final String INSERT_SITE = "INSERT INTO SITE (STRING_ID, COUNTRY_CODE, DISPLAY_NAME, DOMAIN, "
-        + "DISPLAY, DISPLAY_WEIGHT, BRAND_LEVEL, USE_STORED_IMAGE, CURRENCY) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        + "DISPLAY, DISPLAY_WEIGHT, USE_STORED_IMAGE, CURRENCY) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String UPDATE_SITE = "UPDATE SITE SET STRING_ID = ?, COUNTRY_CODE = ?, DISPLAY_NAME = ?, "
-        + "DOMAIN = ?, DISPLAY = ?, DISPLAY_WEIGHT = ?, BRAND_LEVEL = ?, USE_STORED_IMAGE = ?, CURRENCY = ? WHERE ID = ?";
+        + "DOMAIN = ?, DISPLAY = ?, DISPLAY_WEIGHT = ?, USE_STORED_IMAGE = ?, CURRENCY = ? WHERE ID = ?";
 
     private static final String SELECT_BY_STRING_ID =
         "SELECT ID, STRING_ID, COUNTRY_CODE, DISPLAY_NAME, DOMAIN, DISPLAY, "
-            + "DISPLAY_WEIGHT, BRAND_LEVEL, USE_STORED_IMAGE, CURRENCY, CREATED_DATE, UPDATED_DATE FROM SITE "
+            + "DISPLAY_WEIGHT, USE_STORED_IMAGE, CURRENCY, CREATED_DATE, UPDATED_DATE FROM SITE "
             + "WHERE STRING_ID = ?";
 
     private static final int[] INSERT_PARAM_TYPES =
-        { Types.VARCHAR, Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.CHAR, Types.INTEGER, Types.INTEGER,
-            Types.CHAR, Types.VARCHAR };
+        { Types.VARCHAR, Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.CHAR, Types.INTEGER, Types.CHAR,
+            Types.VARCHAR };
 
     private static final int[] UPDATE_PARAM_TYPES =
-        { Types.VARCHAR, Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.CHAR, Types.INTEGER, Types.INTEGER,
-            Types.CHAR, Types.VARCHAR, Types.BIGINT };
+        { Types.VARCHAR, Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.CHAR, Types.INTEGER, Types.CHAR,
+            Types.VARCHAR, Types.BIGINT };
 
     private static final int[] SELECT_PARAM_TYPES =
         { Types.VARCHAR };
@@ -44,10 +42,10 @@ public class SiteDaoImpl implements SiteDao
     private DaoSupport<Site> daoSupport;
 
     public Site insertSite(String stringId, Country country, String displayName, String domain, boolean display,
-        Integer displayWeight, BrandLevel brandLevel, boolean useStoredImage, String currency)
+        Integer displayWeight, boolean useStoredImage, String currency)
     {
         final Object[] params =
-            { stringId, country.getCode(), displayName, domain, display ? 1 : 0, displayWeight, brandLevel.getCode(),
+            { stringId, country.getCode(), displayName, domain, display ? 1 : 0, displayWeight,
                 useStoredImage ? 1 : 0, currency };
         final ModelBase modelBase = daoSupport.insert(INSERT_SITE, INSERT_PARAM_TYPES, params);
 
@@ -57,19 +55,20 @@ public class SiteDaoImpl implements SiteDao
         site.domain = domain;
         site.display = display;
         site.displayWeight = displayWeight;
-        site.brandLevel = brandLevel;
         site.useStoredImage = useStoredImage;
         site.currency = currency;
 
         return site;
     }
 
-    public void updateSite(Site site)
+    public Site updateSite(Site site)
     {
         final Object[] params =
             { site.stringId, site.country.getCode(), site.displayName, site.domain, site.display ? 1 : 0,
-                site.displayWeight, site.brandLevel.getCode(), site.useStoredImage ? 1 : 0, site.currency, site.id };
+                site.displayWeight, site.useStoredImage ? 1 : 0, site.currency, site.id };
         site.updatedDate = daoSupport.update(UPDATE_SITE, UPDATE_PARAM_TYPES, params);
+
+        return site;
     }
 
     public Site selectSiteByStringId(String stringId)
@@ -90,7 +89,6 @@ public class SiteDaoImpl implements SiteDao
             final String domain = rs.getString("DOMAIN");
             final boolean display = rs.getInt("DISPLAY") == 1 ? true : false;
             final Integer displayWeight = rs.getInt("DISPLAY_WEIGHT");
-            final BrandLevel brandLevel = BrandLevel.fromCode(rs.getInt("BRAND_LEVEL"));
             final boolean useStoredImage = rs.getInt("USE_STORED_IMAGE") == 1 ? true : false;
             final String currency = rs.getString("CURRENCY");
 
@@ -100,7 +98,6 @@ public class SiteDaoImpl implements SiteDao
             site.domain = domain;
             site.display = display;
             site.displayWeight = displayWeight;
-            site.brandLevel = brandLevel;
             site.useStoredImage = useStoredImage;
             site.currency = currency;
 

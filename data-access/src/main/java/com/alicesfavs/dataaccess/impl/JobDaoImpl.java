@@ -58,21 +58,23 @@ public class JobDaoImpl implements JobDao
         job.status = jobStatus;
         job.startTime = startTime;
         job.endTime = endTime;
-        job.foundCategoryNo = foundCategoryNo;
-        job.foundProductNo = foundProductNo;
-        job.notFoundCategoryNo = notFoundCategoryNo;
-        job.notFoundProductNo = notFoundProductNo;
+        job.foundCategory = foundCategoryNo;
+        job.foundProduct = foundProductNo;
+        job.notFoundCategory = notFoundCategoryNo;
+        job.notFoundProduct = notFoundProductNo;
 
         return job;
     }
 
-    public void updateJob(Job job)
+    public Job updateJob(Job job)
     {
         final Object[] params =
             { job.siteId, job.mode.getCode(), job.status.getCode(), DateTimeUtils.toTimestamp(job.startTime),
-                DateTimeUtils.toTimestamp(job.endTime), job.foundCategoryNo, job.foundProductNo, job.notFoundCategoryNo,
-                job.notFoundProductNo, job.id };
+                DateTimeUtils.toTimestamp(job.endTime), job.foundCategory, job.foundProduct, job.notFoundCategory,
+                job.notFoundProduct, job.id };
         job.updatedDate = daoSupport.update(UPDATE_JOB, UPDATE_PARAM_TYPES, params);
+
+        return job;
     }
 
     public Job selectJobById(long jobId)
@@ -83,7 +85,7 @@ public class JobDaoImpl implements JobDao
     }
 
     @Override
-    public Job selectLastJob(long siteId)
+    public Job selectLastCompletedJob(long siteId)
     {
         throw  new RuntimeException("not implemented");
     }
@@ -97,10 +99,10 @@ public class JobDaoImpl implements JobDao
             job.status = Status.fromCode(rs.getInt("STATUS"));
             job.startTime = DateTimeUtils.toLocalDateTime(rs.getTimestamp("START_TIME"));
             job.endTime = DateTimeUtils.toLocalDateTime(rs.getTimestamp("END_TIME"));
-            job.foundCategoryNo = rs.getInt("FOUND_CATEGORY");
-            job.foundProductNo = rs.getInt("FOUND_PRODUCT");
-            job.notFoundCategoryNo = rs.getInt("NOT_FOUND_CATEGORY");
-            job.notFoundProductNo = rs.getInt("NOT_FOUND_PRODUCT");
+            job.foundCategory = rs.getInt("FOUND_CATEGORY");
+            job.foundProduct = rs.getInt("FOUND_PRODUCT");
+            job.notFoundCategory = rs.getInt("NOT_FOUND_CATEGORY");
+            job.notFoundProduct = rs.getInt("NOT_FOUND_PRODUCT");
 
             return job;
         }

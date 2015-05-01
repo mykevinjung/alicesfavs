@@ -39,7 +39,7 @@ public class ProductExtractor
     @Autowired
     private ProductService productService;
 
-    public void extractProduct(Job job, Site site) throws SiteProcessException
+    public void extractProduct(Job job, Site site) throws ExtractException
     {
         List<Category> categories = extractCategory(job, site);
 
@@ -55,17 +55,20 @@ public class ProductExtractor
         }
 
         LOGGER.info("Saving product map...");
-        final Map<String, Product> productMap = productService.saveProduct(job.id, site.id, productExtractMap);
-        job.foundProductNo = productMap.size();
-        job.notFoundProductNo = productService.markNotFoundProduct(job.id, site.id);
-        LOGGER.info("Number of not found product: " + job.notFoundProductNo);
+        final ExtractStatus extractStatus = site.display ? ExtractStatus.EXTRACTED : ExtractStatus.HIDDEN;
+        final Map<String, Product> productMap = productService
+            .saveProduct(job.id, site.id, extractStatus, productExtractMap);
+        job.foundProduct = productMap.size();
+        job.notFoundProduct = productService.markNotFoundProduct(job.id, site.id);
+        LOGGER.info("Number of not found product: " + job.notFoundProduct);
 
         //saveCategoryProduct(job, site, categoryMap, productMap);
 
         //createSearchableProduct(categoryMap, productMap);
+        final SearchableProductCreator creator = new SearchableProductCreator(batchConfig);
     }
 
-    private List<Category> extractCategory(Job job, Site site) throws SiteProcessException
+    private List<Category> extractCategory(Job job, Site site) throws ExtractException
     {
         try
         {
@@ -79,24 +82,24 @@ public class ProductExtractor
             final List<Category> categories = categoryService.getSiteCategories(site.id);
             testCategoryExtracts(categoryExtracts, categories);
             final List<Category> categoryList = categoryService.saveCategoryExtract(job.id, site.id, categoryExtracts);
-            job.foundCategoryNo = categoryList.size();
-            job.notFoundCategoryNo = categoryService.markNotFoundCategory(job.id, site.id);
-            LOGGER.info("Number of not found category: " + job.notFoundCategoryNo);
+            job.foundCategory = categoryList.size();
+            job.notFoundCategory = categoryService.markNotFoundCategory(job.id, site.id);
+            LOGGER.info("Number of not found category: " + job.notFoundCategory);
 
             return categoryList;
         }
-        catch (SiteProcessException e)
+        catch (ExtractException e)
         {
             throw e;
         }
         catch (Exception e)
         {
-            throw new SiteProcessException("Error in extracting categories", e);
+            throw new ExtractException("Error in extracting categories", e);
         }
     }
 
     private void testCategoryExtracts(MultirootTree<CategoryExtract> newCategoryExtracts,
-        List<Category> existingCategories) throws SiteProcessException
+        List<Category> existingCategories) throws ExtractException
     {
         final int existingCount = existingCategories.size();
         final int newCount = newCategoryExtracts.getLeafNodes().size();
@@ -105,7 +108,7 @@ public class ProductExtractor
 
         if (existingCount > 0 && (((existingCount - newCount) * 100) / existingCount > THRESHOLD_PERCENTAGE))
         {
-            throw new SiteProcessException("Too many categories not found");
+            throw new ExtractException("Too many categories not found");
         }
     }
 
@@ -132,24 +135,8 @@ public class ProductExtractor
         LOGGER.info("Number of not found category-product: " + countNotFoundCategoryProduct);
     }
 
-    private void createSearchableProduct(Map<Category, List<ProductExtract>> categoryMap,
-        Map<String, Product> productMap)
-    {
-        for (final Category category : categoryMap.keySet())
-        {
-            for (ProductExtract pe : categoryMap.get(category))
-            {
-                final Product product = productMap.get(pe.id);
-                if (product != null)
-                {
-                    // TODO create SearchableProduct
-                }
-            }
-        }
-    }
-
     private List<ProductExtract> extractCategoryProducts(long jobId, Site site, Category category)
-        throws SiteProcessException
+        throws ExtractException
     {
         try
         {
@@ -159,11 +146,11 @@ public class ProductExtractor
         }
         catch (IOException e)
         {
-            throw new SiteProcessHardException("Error in getting category extract spec", e);
+            throw new ExtractException("Error in getting category extract spec", e);
         }
         catch (SiteScrapeException e)
         {
-            throw new SiteProcessHardException("Error in extracting categories", e);
+            throw new ExtractException("Error in extracting categories", e);
         }
     }
 

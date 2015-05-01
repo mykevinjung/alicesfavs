@@ -1,21 +1,21 @@
 package com.alicesfavs.batch.extractor;
 
-public class SiteProcessException extends Exception
+public class ExtractException extends Exception
 {
 
     private static final long serialVersionUID = 1L;
 
-    public SiteProcessException(String message, Throwable cause)
+    public ExtractException(String message, Throwable cause)
     {
         super(message, cause);
     }
 
-    public SiteProcessException(String message)
+    public ExtractException(String message)
     {
         super(message);
     }
 
-    public SiteProcessException(Throwable cause)
+    public ExtractException(Throwable cause)
     {
         super(cause);
     }

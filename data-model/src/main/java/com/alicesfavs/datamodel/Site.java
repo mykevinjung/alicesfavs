@@ -12,7 +12,6 @@ public class Site extends ModelBase
     public String domain;
     public boolean display;
     public Integer displayWeight;
-    public BrandLevel brandLevel;
     public boolean useStoredImage;
     public String currency;
 
@@ -40,7 +39,7 @@ public class Site extends ModelBase
     {
         return "Site[" + super.toString() + ", country=" + country + ", stringId=" + stringId + ", displayName="
             + displayName + ", domain=" + domain + ", display=" + display + ", displayWeight=" + displayWeight
-            + ", siteLevel=" + brandLevel + ", useStoredImage=" + useStoredImage + ", currency=" + currency + "]";
+            + ", useStoredImage=" + useStoredImage + ", currency=" + currency + "]";
     }
 
 }

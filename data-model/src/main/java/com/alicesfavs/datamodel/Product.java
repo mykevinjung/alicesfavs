@@ -36,6 +36,11 @@ public class Product extends Extractable
      */
     public LocalDateTime saleStartDate;
 
+    /**
+     * The date when this product is first found or the date when the product price was last changed.
+     */
+    public LocalDateTime priceChangedDate;
+
     public String storedImagePath;
 
     public Product(long id, LocalDateTime createdDate, long siteId, ProductExtract productExtract)
@@ -65,8 +70,8 @@ public class Product extends Extractable
     public String toString()
     {
         return "Product[" + super.toString() + ", siteId=" + siteId + ", productExtract=" + productExtract + ", price="
-                + price + ", wasPrice=" + wasPrice + ", regularPrice=" + regularPrice + ", saleStartDate="
-                + saleStartDate + ", storedImagePath=" + storedImagePath + "]";
+            + price + ", wasPrice=" + wasPrice + ", regularPrice=" + regularPrice + ", saleStartDate="
+            + saleStartDate + ", storedImagePath=" + storedImagePath + "]";
     }
 
 }

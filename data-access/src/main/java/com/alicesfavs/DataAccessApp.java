@@ -57,8 +57,8 @@ public class DataAccessApp
         productExtract.brandName = null;
         productExtract.wasPrice = null;
 
-        Product product = productDao.insertProduct(1002L, productExtract, 134.32, null, 150.00, null, null,
-            ExtractStatus.EXTRACTED, 1L, LocalDateTime.now());
+        Product product = productDao.insertProduct(1002L, productExtract, 134.32, null, 150.00, LocalDateTime.now(),
+            null, null, ExtractStatus.EXTRACTED, 1L, LocalDateTime.now());
         System.out.println(product);
 
         Thread.sleep(1000);

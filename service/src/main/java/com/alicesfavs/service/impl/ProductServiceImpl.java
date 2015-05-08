@@ -118,11 +118,12 @@ public class ProductServiceImpl implements ProductService
     {
         final Double price = stringPriceToDouble(productExtract.price);
         final Double wasPrice = stringPriceToDouble(productExtract.wasPrice);
+        final LocalDateTime priceChangedDate = LocalDateTime.now();
         final LocalDateTime saleStartDate = (wasPrice != null) ? LocalDateTime.now() : null;
         final Double regularPrice = (wasPrice != null) ? wasPrice : price;
 
-        return productDao.insertProduct(siteId, productExtract, price, wasPrice, regularPrice, saleStartDate, null,
-            extractStatus, jobId, LocalDateTime.now());
+        return productDao.insertProduct(siteId, productExtract, price, wasPrice, regularPrice, priceChangedDate,
+            saleStartDate, null, extractStatus, jobId, LocalDateTime.now());
     }
 
     private Product updateProduct(long jobId, Product existingProduct, ExtractStatus extractStatus,
@@ -142,6 +143,11 @@ public class ProductServiceImpl implements ProductService
         existingProduct.productExtract.price = newExtract.price;
         existingProduct.productExtract.url = newExtract.url;
         existingProduct.productExtract.wasPrice = newExtract.wasPrice;
+        final boolean hasPriceChanged = !newPrice.equals(oldPrice);
+        if (hasPriceChanged)
+        {
+            existingProduct.priceChangedDate = LocalDateTime.now();
+        }
         if (existingProduct.saleStartDate == null)
         {
             if ((newWasPrice != null) || hasPriceDecreased(oldPrice, newPrice, MIN_CHANGE_PERCENTAGE))
@@ -165,7 +171,7 @@ public class ProductServiceImpl implements ProductService
         existingProduct.extractStatus = extractStatus;
 
         final Product product = productDao.updateProduct(existingProduct);
-        if (!newPrice.equals(oldPrice))
+        if (hasPriceChanged)
         {
             priceHistoryDao
                 .insertPriceHistory(existingProduct.id, oldPriceExtract, newPriceExtract, oldPrice, newPrice);

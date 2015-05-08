@@ -10,8 +10,8 @@ public interface ProductDao
 {
 
     Product insertProduct(long siteId, ProductExtract productExtract, Double price, Double wasPrice,
-            Double regularPrice, LocalDateTime saleStartDate, String storedImagePath, ExtractStatus extractStatus,
-            Long extractJobId, LocalDateTime extractedDate);
+        Double regularPrice, LocalDateTime priceChangedDate, LocalDateTime saleStartDate, String storedImagePath,
+        ExtractStatus extractStatus, Long extractJobId, LocalDateTime extractedDate);
 
     Product updateProduct(Product product);
 

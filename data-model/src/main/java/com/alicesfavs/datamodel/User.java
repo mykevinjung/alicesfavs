@@ -13,10 +13,9 @@ public class User extends ModelBase
     public Integer favLimit;
     public Status status;
 
-    public User(long id, LocalDateTime createdDate, String name)
+    public User(long id, LocalDateTime createdDate)
     {
         super(id, createdDate);
-        this.name = name;
     }
 
     public User(ModelBase modelBase, String name)

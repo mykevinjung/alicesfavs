@@ -38,7 +38,7 @@ public class CategoryDaoImpl implements CategoryDao
             + "DISPLAY_ORDER = ?, EXTRACT_STATUS = ?, EXTRACT_JOB_ID = ?, EXTRACTED_DATE = ? WHERE ID = ?";
 
     private static final String UPDATE_EXTRACT_STATUS = "UPDATE CATEGORY SET EXTRACT_STATUS = ? "
-            + "WHERE SITE_ID = ? AND EXTRACT_JOB_ID <> ?";
+            + "WHERE SITE_ID = ? AND EXTRACT_STATUS <> ? AND EXTRACT_JOB_ID <> ?";
 
     private static final String SELECT_CATEGORY_BY_SITE_ID = "SELECT ID, SITE_ID, NAME_EXTRACT1, URL_EXTRACT1, "
             + "NAME_EXTRACT2, URL_EXTRACT2, NAME_EXTRACT3, URL_EXTRACT3, DISPLAY_ORDER, EXTRACT_STATUS, EXTRACT_JOB_ID, "
@@ -57,7 +57,7 @@ public class CategoryDaoImpl implements CategoryDao
             Types.INTEGER, Types.INTEGER, Types.BIGINT, Types.TIMESTAMP, Types.BIGINT };
 
     private static final int[] UPDATE_EXTRACT_STATUS_PARAM_TYPES =
-    { Types.INTEGER, Types.BIGINT, Types.BIGINT };
+    { Types.INTEGER, Types.BIGINT, Types.INTEGER, Types.BIGINT };
 
     @Autowired
     private DaoSupport<Category> daoSupport;
@@ -138,7 +138,7 @@ public class CategoryDaoImpl implements CategoryDao
     public int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus extractStatus)
     {
         final Object[] params =
-        { extractStatus.getCode(), siteId, excludingJobId };
+        { extractStatus.getCode(), siteId, extractStatus.getCode(), excludingJobId };
 
         return daoSupport.updateMultiple(UPDATE_EXTRACT_STATUS, UPDATE_EXTRACT_STATUS_PARAM_TYPES, params);
     }

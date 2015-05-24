@@ -62,6 +62,12 @@ public class DaoSupport<T> extends JdbcDaoSupport
         return DateTimeUtils.toLocalDateTime((Timestamp) result.get(COLUMN_UPDATED_DATE));
     }
 
+    final int delete(String sql, int[] types, Object[] params)
+    {
+        final PreparedStatementCreatorFactory factory = new PreparedStatementCreatorFactory(sql, types);
+        return getJdbcTemplate().update(factory.newPreparedStatementCreator(params));
+    }
+
     final int updateMultiple(String sql, int[] types, Object[] params)
     {
         final PreparedStatementCreatorFactory factory = new PreparedStatementCreatorFactory(sql, types);

@@ -9,6 +9,7 @@ public class UserFav extends ModelBase
 {
     public long userId;
     public Product product;
+    public String addOnName;
     public Double addOnPrice;
 
     public UserFav(long id, LocalDateTime createdDate)

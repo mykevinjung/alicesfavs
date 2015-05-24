@@ -18,10 +18,9 @@ public class User extends ModelBase
         super(id, createdDate);
     }
 
-    public User(ModelBase modelBase, String name)
+    public User(ModelBase modelBase)
     {
         super(modelBase);
-        this.name = name;
     }
 
     public static enum Status

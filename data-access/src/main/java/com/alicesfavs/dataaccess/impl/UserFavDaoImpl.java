@@ -1,6 +1,5 @@
 package com.alicesfavs.dataaccess.impl;
 
-import com.alicesfavs.dataaccess.UserDao;
 import com.alicesfavs.dataaccess.UserFavDao;
 import com.alicesfavs.dataaccess.util.DateTimeUtils;
 import com.alicesfavs.datamodel.*;

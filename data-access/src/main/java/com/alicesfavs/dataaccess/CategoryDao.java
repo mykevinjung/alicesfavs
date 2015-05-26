@@ -20,6 +20,6 @@ public interface CategoryDao
 
     List<Category> selectCategoryBySiteId(long siteId, ExtractStatus extractStatus);
 
-    int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus extractStatus);
+    int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus currentStatus, ExtractStatus newStatus);
 
 }

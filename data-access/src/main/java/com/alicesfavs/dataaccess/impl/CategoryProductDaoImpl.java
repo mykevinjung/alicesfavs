@@ -36,7 +36,7 @@ public class CategoryProductDaoImpl implements CategoryProductDao
 
     private static final String UPDATE_EXTRACT_STATUS = "UPDATE CATEGORY_PRODUCT SET EXTRACT_STATUS = ? "
         + "WHERE EXISTS (SELECT * FROM CATEGORY C WHERE C.SITE_ID = ? AND C.ID = CATEGORY_PRODUCT.CATEGORY_ID "
-        + "AND EXTRACT_STATUS <> ? AND EXTRACT_JOB_ID <> ?)";
+        + "AND CATEGORY_PRODUCT.EXTRACT_STATUS = ? AND CATEGORY_PRODUCT.EXTRACT_JOB_ID <> ?)";
 
     private static final String SELECT_BY_IDS = "SELECT ID, CATEGORY_ID, PRODUCT_ID, DISPLAY_ORDER, "
         + "EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, CREATED_DATE, UPDATED_DATE FROM CATEGORY_PRODUCT "
@@ -102,10 +102,11 @@ public class CategoryProductDaoImpl implements CategoryProductDao
         }
     }
 
-    public int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus extractStatus)
+    public int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus currentStatus,
+        ExtractStatus newStatus)
     {
         final Object[] params =
-            { extractStatus.getCode(), siteId, extractStatus.getCode(), excludingJobId };
+            { newStatus.getCode(), siteId, currentStatus.getCode(), excludingJobId };
 
         return daoSupport.updateMultiple(UPDATE_EXTRACT_STATUS, UPDATE_EXTRACT_STATUS_PARAM_TYPES, params);
     }

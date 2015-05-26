@@ -74,13 +74,13 @@ public class CategoryServiceImpl implements CategoryService
     @Override
     public int markNotFoundCategory(long jobId, long siteId)
     {
-        return categoryDao.updateExtractStatus(siteId, jobId, ExtractStatus.NOT_FOUND);
+        return categoryDao.updateExtractStatus(siteId, jobId, ExtractStatus.EXTRACTED, ExtractStatus.NOT_FOUND);
     }
 
     @Override
     public int markNotFoundCategoryProduct(long jobId, long siteId)
     {
-        return categoryProductDao.updateExtractStatus(siteId, jobId, ExtractStatus.NOT_FOUND);
+        return categoryProductDao.updateExtractStatus(siteId, jobId, ExtractStatus.EXTRACTED, ExtractStatus.NOT_FOUND);
     }
 
     private Category saveCategoryExtract(long jobId, long siteId, int displayOrder, LocalDateTime extractTime,

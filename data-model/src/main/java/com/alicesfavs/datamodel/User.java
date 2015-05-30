@@ -12,6 +12,7 @@ public class User extends ModelBase
     public String name;
     public Integer favLimit;
     public Status status;
+    public Country registrationCountry;
 
     public User(long id, LocalDateTime createdDate)
     {

@@ -1,5 +1,6 @@
 package com.alicesfavs.dataaccess;
 
+import com.alicesfavs.datamodel.Country;
 import com.alicesfavs.datamodel.User;
 
 /**
@@ -8,7 +9,8 @@ import com.alicesfavs.datamodel.User;
 public interface UserDao
 {
 
-    User insertUser(String emailAddress, String password, String name, Integer favLimit, User.Status status);
+    User insertUser(String emailAddress, String password, String name, Integer favLimit, User.Status status,
+        Country registrationCountry);
 
     User updateUser(User user);
 

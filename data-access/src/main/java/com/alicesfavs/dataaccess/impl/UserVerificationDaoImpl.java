@@ -18,19 +18,20 @@ public class UserVerificationDaoImpl implements UserVerificationDao
 {
 
     private static final String INSERT = "INSERT INTO USER_VERIFICATION (USER_ID, EMAIL_ADDRESS_HASH, "
-        + "VERIFICATION_CODE, VERIFIED, EXPIRATION_DATE) VALUES (?, ?, ?, ?, ?)";
+        + "VERIFICATION_CODE, VERIFIED, EXPIRATION_DATE, EMAIL_SENT_DATE) VALUES (?, ?, ?, ?, ?, ?)";
 
     private static final String UPDATE = "UPDATE USER_VERIFICATION SET USER_ID = ?, EMAIL_ADDRESS_HASH = ?, "
-        + "VERIFICATION_CODE = ?, VERIFIED = ?, EXPIRATION_DATE = ? WHERE ID = ?";
+        + "VERIFICATION_CODE = ?, VERIFIED = ?, EXPIRATION_DATE = ?, EMAIL_SENT_DATE = ? WHERE ID = ?";
 
     private static final String SELECT_BY_HASH = "SELECT ID, USER_ID, EMAIL_ADDRESS_HASH, VERIFICATION_CODE, "
-        + "VERIFIED, EXPIRATION_DATE, CREATED_DATE, UPDATED_DATE FROM USER_VERIFICATION WHERE EMAIL_ADDRESS_HASH = ?";
+        + "VERIFIED, EXPIRATION_DATE, EMAIL_SENT_DATE, CREATED_DATE, UPDATED_DATE FROM USER_VERIFICATION "
+        + "WHERE EMAIL_ADDRESS_HASH = ?";
 
     private static final int[] INSERT_PARAM_TYPES =
-        { Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.TIMESTAMP };
+        { Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.TIMESTAMP, Types.TIMESTAMP };
 
     private static final int[] UPDATE_PARAM_TYPES =
-        { Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.TIMESTAMP, Types.BIGINT };
+        { Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.TIMESTAMP, Types.TIMESTAMP, Types.BIGINT };
 
     private static final int[] SELECT_PARAM_TYPES =
         { Types.VARCHAR };
@@ -39,10 +40,11 @@ public class UserVerificationDaoImpl implements UserVerificationDao
     private DaoSupport<UserVerification> daoSupport;
 
     @Override public UserVerification insertUserVerification(long userId, String emailAddressHash,
-        String verificationCode, boolean verified, LocalDateTime expirationDate)
+        String verificationCode, boolean verified, LocalDateTime expirationDate, LocalDateTime emailSentDate)
     {
         final Object[] params =
-            { userId, emailAddressHash, verificationCode, verified ? 1 : 0, DateTimeUtils.toTimestamp(expirationDate) };
+            { userId, emailAddressHash, verificationCode, verified ? 1 : 0, DateTimeUtils.toTimestamp(expirationDate),
+                DateTimeUtils.toTimestamp(emailSentDate) };
         final ModelBase modelBase = daoSupport.insert(INSERT, INSERT_PARAM_TYPES, params);
 
         final UserVerification userVerification = new UserVerification(modelBase);
@@ -51,6 +53,7 @@ public class UserVerificationDaoImpl implements UserVerificationDao
         userVerification.verificationCode = verificationCode;
         userVerification.verified = verified;
         userVerification.expirationDate = expirationDate;
+        userVerification.emailSentDate = emailSentDate;
 
         return userVerification;
     }
@@ -59,7 +62,8 @@ public class UserVerificationDaoImpl implements UserVerificationDao
     {
         final Object[] params =
             { userVerification.userId, userVerification.emailAddressHash, userVerification.verificationCode,
-                userVerification.verified, userVerification.expirationDate, userVerification.id };
+                userVerification.verified, DateTimeUtils.toTimestamp(userVerification.expirationDate),
+                DateTimeUtils.toTimestamp(userVerification.emailSentDate), userVerification.id };
         userVerification.updatedDate = daoSupport.update(UPDATE, UPDATE_PARAM_TYPES, params);
 
         return userVerification;
@@ -84,6 +88,7 @@ public class UserVerificationDaoImpl implements UserVerificationDao
             userVerification.verificationCode = rs.getString("VERIFICATION_CODE");
             userVerification.verified = rs.getInt("VERIFIED") == 1 ? true : false;
             userVerification.expirationDate = DateTimeUtils.toLocalDateTime(rs.getTimestamp("EXPIRATION_DATE"));
+            userVerification.emailSentDate = DateTimeUtils.toLocalDateTime(rs.getTimestamp("EMAIL_SENT_DATE"));
 
             return userVerification;
         }

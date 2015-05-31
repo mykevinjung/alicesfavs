@@ -12,6 +12,7 @@ public class UserVerification extends ModelBase
     public String verificationCode;
     public boolean verified;
     public LocalDateTime expirationDate;
+    public LocalDateTime emailSentDate;
 
     public UserVerification(long id, LocalDateTime createdDate, long userId)
     {

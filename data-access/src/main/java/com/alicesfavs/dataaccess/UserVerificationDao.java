@@ -11,7 +11,7 @@ public interface UserVerificationDao
 {
 
     UserVerification insertUserVerification(long userId, String emailAddressHash, String verificationCode,
-        boolean verified, LocalDateTime expirationDate);
+        boolean verified, LocalDateTime expirationDate, LocalDateTime emailSentDate);
 
     UserVerification updateUserVerification(UserVerification userVerification);
 

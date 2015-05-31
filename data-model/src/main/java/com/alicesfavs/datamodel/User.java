@@ -26,7 +26,7 @@ public class User extends ModelBase
 
     public static enum Status
     {
-        REGISTERED(1), ACTIVATED(2), DELETED(3);
+        REGISTERED(1), ACTIVATED(2), DELETED(3), INVALID_EMAIL(4);
 
         private final int code;
 

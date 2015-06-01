@@ -6,6 +6,6 @@ package com.alicesfavs.mail;
 public interface MailSender
 {
 
-    void sendUserVerificationMail();
+    void sendUserVerificationMail(UserVerificationMailData userVerificationMailData);
 
 }

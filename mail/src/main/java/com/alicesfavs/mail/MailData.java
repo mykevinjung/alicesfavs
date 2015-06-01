@@ -8,5 +8,6 @@ public class MailData
 
     public String toAddress;
     public String fromAddress;
+    public String replyToAddress;
 
 }

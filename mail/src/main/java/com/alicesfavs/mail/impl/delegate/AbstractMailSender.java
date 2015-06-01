@@ -1,5 +1,6 @@
-package com.alicesfavs.service.emailsender;
+package com.alicesfavs.mail.impl.delegate;
 
+import com.alicesfavs.mail.MailSendException;
 import org.springframework.mail.MailMessage;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -8,16 +9,16 @@ import org.springframework.mail.javamail.MimeMailMessage;
 /**
  * Created by kjung on 5/30/15.
  */
-public abstract class EmailSender
+public abstract class AbstractMailSender
 {
     private final JavaMailSender mailSender;
 
-    public EmailSender(JavaMailSender mailSender)
+    public AbstractMailSender(JavaMailSender mailSender)
     {
         this.mailSender = mailSender;
     }
 
-    public final void send() throws EmailSendException
+    public final void send() throws MailSendException
     {
         final MailMessage mailMessage = getMailMessageInstance();
         prepareMailMessage(mailMessage);

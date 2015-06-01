@@ -1,4 +1,4 @@
-package com.alicesfavs.service.emailsender;
+package com.alicesfavs.mail.impl.delegate;
 
 import org.springframework.mail.MailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -6,7 +6,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 /**
  * Created by kjung on 5/30/15.
  */
-public class UserVerificationEmailSender extends EmailSender
+public class UserVerificationEmailSender extends AbstractMailSender
 {
 
     public UserVerificationEmailSender(JavaMailSender mailSender)
@@ -14,7 +14,8 @@ public class UserVerificationEmailSender extends EmailSender
         super(mailSender);
     }
 
-    @Override protected MailMessage getMailMessageInstance()
+    @Override
+    protected MailMessage getMailMessageInstance()
     {
         return null;
     }

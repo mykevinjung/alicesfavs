@@ -1,5 +1,6 @@
 package com.alicesfavs.mail.impl;
 
+import com.alicesfavs.mail.MailSendException;
 import com.alicesfavs.mail.MailSender;
 import com.alicesfavs.mail.UserVerificationMailData;
 import com.alicesfavs.mail.impl.delegate.UserVerificationMailSender;
@@ -19,7 +20,7 @@ public class MailSenderImpl implements MailSender
     private MailConfig mailConfig;
 
     @Override
-    public void sendUserVerificationMail(UserVerificationMailData userVerificationMailData)
+    public void sendUserVerificationMail(UserVerificationMailData userVerificationMailData) throws MailSendException
     {
         new UserVerificationMailSender(javaMailSender, mailConfig, userVerificationMailData).send();
     }

@@ -3,7 +3,7 @@ package com.alicesfavs.mail;
 /**
  * Created by kjung on 5/30/15.
  */
-public class MailSendException extends RuntimeException
+public class MailSendException extends Exception
 {
     public MailSendException()
     {

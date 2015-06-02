@@ -15,10 +15,13 @@ public class MailSenderImpl implements MailSender
     @Autowired
     private JavaMailSender javaMailSender;
 
+    @Autowired
+    private MailConfig mailConfig;
+
     @Override
     public void sendUserVerificationMail(UserVerificationMailData userVerificationMailData)
     {
-        new UserVerificationMailSender(javaMailSender, userVerificationMailData).send();
+        new UserVerificationMailSender(javaMailSender, mailConfig, userVerificationMailData).send();
     }
 
 }

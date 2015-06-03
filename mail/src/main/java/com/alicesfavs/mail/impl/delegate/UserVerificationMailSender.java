@@ -26,7 +26,7 @@ public class UserVerificationMailSender extends MimeMailSender
 
     @Override protected String getText()
     {
-        return "Hello " + userVerificationMailData.userName + "\n\nVerify your email address\n\n"
+        return "Hello " + userVerificationMailData.toPersonal + "\n\nVerify your email address\n\n"
             + userVerificationMailData.verificationUrl;
     }
 

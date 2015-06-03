@@ -6,10 +6,12 @@ import com.alicesfavs.mail.UserVerificationMailData;
 import com.alicesfavs.mail.impl.delegate.UserVerificationMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by kjung on 5/31/15.
  */
+@Component("mailSender")
 public class MailSenderImpl implements MailSender
 {
 

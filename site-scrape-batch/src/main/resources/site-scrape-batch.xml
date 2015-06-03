@@ -15,4 +15,6 @@
 	<context:component-scan base-package="com.alicesfavs.batch" />
 	<context:component-scan base-package="com.alicesfavs.service" />
 
+	<context:property-placeholder location="classpath:/env/${EXECUTION_ENV:dev}/batch_config.properties" />
+
 </beans>

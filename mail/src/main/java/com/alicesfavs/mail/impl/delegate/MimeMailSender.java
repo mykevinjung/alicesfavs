@@ -6,20 +6,26 @@ import com.alicesfavs.mail.impl.MailConfig;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.util.StringUtils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.Properties;
 
 /**
  * Created by kjung on 6/1/15.
  */
 public abstract class MimeMailSender
 {
+
     protected final JavaMailSender mailSender;
     protected final MailConfig mailConfig;
     protected final MailData mailData;
+
+    protected boolean isHtml = true;
 
     public MimeMailSender(JavaMailSender mailSender, MailConfig mailConfig, MailData mailData)
     {
@@ -42,14 +48,14 @@ public abstract class MimeMailSender
         }
     }
 
-    protected void prepare(MimeMessageHelper helper) throws MessagingException, UnsupportedEncodingException
+    protected void prepare(MimeMessageHelper helper) throws MessagingException, IOException
     {
         helper.setFrom(getFromAddress());
         helper.setReplyTo(getReplyToAddress());
         helper.setSubject(getSubject());
         helper.setTo(getToAddress());
-        helper.setText(getText());
-        helper.setSentDate(getSentDate());
+        helper.setText(getText(), isHtml);
+        helper.setSentDate(new Date());
     }
 
     protected InternetAddress getFromAddress() throws UnsupportedEncodingException
@@ -67,13 +73,25 @@ public abstract class MimeMailSender
         return new InternetAddress(mailData.toAddress, mailData.toPersonal);
     }
 
-    protected Date getSentDate()
+    protected String getText() throws IOException
     {
-        return new Date();
+        final String templatePath = getTemplatePath();
+        if (StringUtils.hasText(templatePath))
+        {
+            final MailTextGenerator generator = new MailTextGenerator(templatePath, getContentProperties());
+            return generator.generateText();
+        }
+
+        return "";
     }
 
-    protected abstract String getSubject();
+    protected Properties getContentProperties()
+    {
+        return null;
+    }
 
-    protected abstract String getText();
+    protected abstract String getTemplatePath();
+
+    protected abstract String getSubject();
 
 }

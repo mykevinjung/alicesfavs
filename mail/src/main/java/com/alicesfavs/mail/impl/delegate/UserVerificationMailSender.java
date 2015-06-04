@@ -4,6 +4,8 @@ import com.alicesfavs.mail.UserVerificationMailData;
 import com.alicesfavs.mail.impl.MailConfig;
 import org.springframework.mail.javamail.JavaMailSender;
 
+import java.util.Properties;
+
 /**
  * Created by kjung on 5/30/15.
  */
@@ -19,15 +21,25 @@ public class UserVerificationMailSender extends MimeMailSender
         this.userVerificationMailData = userVerificationMailData;
     }
 
-    @Override protected String getSubject()
+    @Override
+    protected String getSubject()
     {
         return mailConfig.userVerificationSubject;
     }
 
-    @Override protected String getText()
+    @Override
+    protected Properties getContentProperties()
     {
-        return "Hello " + userVerificationMailData.toPersonal + "\n\nVerify your email address\n\n"
-            + userVerificationMailData.verificationUrl;
+        final Properties properties = new Properties();
+        properties.setProperty("verification_url", userVerificationMailData.verificationUrl);
+
+        return properties;
+    }
+
+    @Override
+    protected String getTemplatePath()
+    {
+        return mailConfig.userVerificationTemplate;
     }
 
 }

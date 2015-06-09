@@ -7,18 +7,17 @@ import java.time.LocalDateTime;
  */
 public class AliceCategory extends ModelBase
 {
-    public final String name;
+    public String name;
+    public boolean display;
 
-    public AliceCategory(long id, LocalDateTime createdDate, String name)
+    public AliceCategory(long id, LocalDateTime createdDate)
     {
         super(id, createdDate);
-        this.name = name;
     }
 
-    public AliceCategory(ModelBase modelBase, String name)
+    public AliceCategory(ModelBase modelBase)
     {
         super(modelBase);
-        this.name = name;
     }
 
 }

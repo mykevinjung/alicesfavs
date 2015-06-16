@@ -10,6 +10,6 @@ import java.util.List;
 public interface AliceCategoryService
 {
 
-    List<AliceCategory> getAllAliceCategories();
+    List<AliceCategory> findAllAliceCategories();
 
 }

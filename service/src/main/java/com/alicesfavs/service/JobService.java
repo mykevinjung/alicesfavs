@@ -11,6 +11,6 @@ public interface JobService
 
     Job failJob(Job job);
 
-    Job getJob(long jobId);
+    Job findJobById(long jobId);
 
 }

@@ -16,7 +16,7 @@ public class AliceCategoryServiceImpl implements AliceCategoryService
     @Autowired
     private AliceCategoryDao aliceCategoryDao;
 
-    @Override public List<AliceCategory> getAllAliceCategories()
+    @Override public List<AliceCategory> findAllAliceCategories()
     {
         return aliceCategoryDao.selectAliceCategoriesByDisplay(true);
     }

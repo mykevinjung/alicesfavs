@@ -28,7 +28,7 @@ public class SiteServiceImpl implements SiteService
         return siteDao.selectSiteByStringId(id);
     }
 
-    @Override public List<Site> getSitesByAliceCategory(long aliceCategoryId)
+    @Override public List<Site> findSitesByAliceCategory(long aliceCategoryId)
     {
         return siteDao.selectSiteByAliceCategory(aliceCategoryId);
     }

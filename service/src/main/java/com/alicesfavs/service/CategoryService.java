@@ -13,7 +13,7 @@ public interface CategoryService
 
     List<Category> saveCategoryExtract(long jobId, long siteId, MultirootTree<CategoryExtract> categoryExtracts);
 
-    List<Category> getSiteCategories(long siteId);
+    List<Category> findSiteCategories(long siteId);
 
     CategoryProduct saveCategoryProduct(Category category, Product product, Integer displayOrder, long extractJobId);
 

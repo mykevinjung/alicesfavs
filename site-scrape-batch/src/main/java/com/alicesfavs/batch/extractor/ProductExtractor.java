@@ -79,7 +79,7 @@ public class ProductExtractor
             final List<CategoryExtractSpec> categoryExtractSpecList = batchConfig.getCategoryExtractSpec(site);
             final MultirootTree<CategoryExtract> categoryExtracts = siteScraper.extractCategories(homeUrl,
                 categoryExtractSpecList);
-            final List<Category> categories = categoryService.getSiteCategories(site.id);
+            final List<Category> categories = categoryService.findSiteCategories(site.id);
             testCategoryExtracts(categoryExtracts, categories);
             final List<Category> categoryList = categoryService.saveCategoryExtract(job.id, site.id, categoryExtracts);
             job.foundCategory = categoryList.size();

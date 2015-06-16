@@ -38,7 +38,7 @@ public class JobServiceImpl implements JobService
         return jobDao.updateJob(job);
     }
 
-    public Job getJob(long jobId)
+    public Job findJobById(long jobId)
     {
         return jobDao.selectJobById(jobId);
     }

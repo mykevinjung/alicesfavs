@@ -44,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService
         return categories;
     }
 
-    public List<Category> getSiteCategories(long siteId)
+    public List<Category> findSiteCategories(long siteId)
     {
         return categoryDao.selectCategoryBySiteId(siteId, ExtractStatus.EXTRACTED);
     }

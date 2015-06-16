@@ -2,6 +2,8 @@ package com.alicesfavs.service;
 
 import com.alicesfavs.datamodel.Site;
 
+import java.util.List;
+
 public interface SiteService
 {
 
@@ -9,5 +11,7 @@ public interface SiteService
         boolean useStoredImage);
 
     Site findSiteById(String id);
+
+    List<Site> getSitesByAliceCategory(long aliceCategoryId);
 
 }

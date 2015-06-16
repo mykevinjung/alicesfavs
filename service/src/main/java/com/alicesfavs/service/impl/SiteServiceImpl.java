@@ -7,6 +7,8 @@ import com.alicesfavs.dataaccess.SiteDao;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.SiteService;
 
+import java.util.List;
+
 @Component("siteService")
 public class SiteServiceImpl implements SiteService
 {
@@ -18,12 +20,17 @@ public class SiteServiceImpl implements SiteService
         boolean useStoredImage)
     {
         // TODO Auto-generated method stub
-        return null;
+        throw new RuntimeException("not implemented yet");
     }
 
     public Site findSiteById(String id)
     {
         return siteDao.selectSiteByStringId(id);
+    }
+
+    @Override public List<Site> getSitesByAliceCategory(long aliceCategoryId)
+    {
+        return siteDao.selectSiteByAliceCategory(aliceCategoryId);
     }
 
 }

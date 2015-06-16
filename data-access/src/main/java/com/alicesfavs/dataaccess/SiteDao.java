@@ -3,6 +3,8 @@ package com.alicesfavs.dataaccess;
 import com.alicesfavs.datamodel.Country;
 import com.alicesfavs.datamodel.Site;
 
+import java.util.List;
+
 public interface SiteDao
 {
 
@@ -13,7 +15,6 @@ public interface SiteDao
 
     Site selectSiteByStringId(String stringId);
 
-    // TODO
-    //Map<AliceCategory, Site> selectAllAliceCategory();
+    List<Site> selectSiteByAliceCategory(long aliceCategoryId);
 
 }

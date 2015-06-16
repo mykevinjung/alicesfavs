@@ -3,6 +3,7 @@ package com.alicesfavs.dataaccess.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 import java.util.Map;
 
 import com.alicesfavs.datamodel.*;
@@ -27,6 +28,13 @@ public class SiteDaoImpl implements SiteDao
             + "DISPLAY_WEIGHT, USE_STORED_IMAGE, CURRENCY, CREATED_DATE, UPDATED_DATE FROM SITE "
             + "WHERE STRING_ID = ?";
 
+    private static final String SELECT_BY_ALICE_CATEGORY_ID =
+        "SELECT ID, STRING_ID, COUNTRY_CODE, DISPLAY_NAME, DOMAIN, DISPLAY, "
+            + "DISPLAY_WEIGHT, USE_STORED_IMAGE, CURRENCY, CREATED_DATE, UPDATED_DATE FROM SITE "
+            + "INNER JOIN ALICE_CATEGORY_SITE "
+            + "ON SITE.ID = ALICE_CATEGORY_SITE.SITE_ID "
+            + "WHERE ALICE_CATEGORY_SITE.ALICE_CATEGORY_ID = ?";
+
     private static final int[] INSERT_PARAM_TYPES =
         { Types.VARCHAR, Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.CHAR, Types.INTEGER, Types.CHAR,
             Types.VARCHAR };
@@ -37,6 +45,9 @@ public class SiteDaoImpl implements SiteDao
 
     private static final int[] SELECT_PARAM_TYPES =
         { Types.VARCHAR };
+
+    private static final int[] SELECT_BY_ALICE_CATEGORY_PARAM_TYPES =
+        { Types.BIGINT };
 
     @Autowired
     private DaoSupport<Site> daoSupport;
@@ -76,6 +87,15 @@ public class SiteDaoImpl implements SiteDao
         final Object[] params =
             { stringId };
         return daoSupport.selectObject(SELECT_BY_STRING_ID, SELECT_PARAM_TYPES, params, new SiteRowMapper());
+    }
+
+    @Override
+    public List<Site> selectSiteByAliceCategory(long aliceCategoryId)
+    {
+        final Object[] params =
+            { aliceCategoryId };
+        return daoSupport.selectObjectList(SELECT_BY_ALICE_CATEGORY_ID, SELECT_BY_ALICE_CATEGORY_PARAM_TYPES,
+            params, new SiteRowMapper());
     }
 
     private class SiteRowMapper implements RowMapper<Site>

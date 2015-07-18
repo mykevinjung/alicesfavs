@@ -10,17 +10,23 @@ EC2 Instance Setup
 JRE
 --------
 https://www.digitalocean.com/community/tutorials/how-to-install-java-on-centos-and-fedora
+
 sudo wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u51-b16/server-jre-8u51-linux-x64.tar.gz"
+
 sudo alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_51/bin/java 1
+
 sudo alternatives --set java /usr/lib/jvm/jdk1.8.0_51/bin/java
+
 sudo alternatives --remove java /usr/lib/jvm/jre-1.7.0-openjdk.x86_64/bin/java
 
 Apache HTTPD
 --------
 yum install httpd
+
 http://www.cyberciti.biz/faq/linux-install-and-start-apache-httpd/
 
 Tomcat
 --------
 https://www.mulesoft.com/tcat/tomcat-linux
-sudo wget http://supergsego.com/apache/tomcat/tomcat-8/v8.0.24/bin/apache-tomcat-8.0.24.tar.gz  
+
+sudo wget http://supergsego.com/apache/tomcat/tomcat-8/v8.0.24/bin/apache-tomcat-8.0.24.tar.gz

@@ -23,4 +23,4 @@ http://www.cyberciti.biz/faq/linux-install-and-start-apache-httpd/
 Tomcat
 --------
 https://www.mulesoft.com/tcat/tomcat-linux
-sudo wget http://supergsego.com/apache/tomcat/tomcat-8/v8.0.24/bin/apache-tomcat-8.0.24.tar.gz
+sudo wget http://supergsego.com/apache/tomcat/tomcat-8/v8.0.24/bin/apache-tomcat-8.0.24.tar.gz  

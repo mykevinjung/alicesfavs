@@ -18,9 +18,18 @@ sudo alternatives --remove java /usr/lib/jvm/jre-1.7.0-openjdk.x86_64/bin/java
 Apache HTTPD
 --------
 yum install httpd<br/>
-http://www.cyberciti.biz/faq/linux-install-and-start-apache-httpd/
+http://www.cyberciti.biz/faq/linux-install-and-start-apache-httpd/<br/>
 
 Tomcat
 --------
 https://www.mulesoft.com/tcat/tomcat-linux<br/>
 sudo wget http://supergsego.com/apache/tomcat/tomcat-8/v8.0.24/bin/apache-tomcat-8.0.24.tar.gz
+
+Apache - Tomcat
+--------
+http://www.ntu.edu.sg/home/ehchua/programming/howto/ApachePlusTomcat_HowTo.html<br/>
+http://www.avajava.com/tutorials/lessons/how-do-i-connect-apache-to-tomcat-using-the-mod-jk-module.html<br/>
+http://community.jaspersoft.com/wiki/connecting-apache-web-server-tomcat-and-writing-re-direct-rules<br/>
+<br/>
+sudo wget https://archive.apache.org/dist/tomcat/tomcat-connectors/jk/binaries/linux/jk-1.2.31/x86_64/mod_jk-1.2.31-httpd-2.2.x.so<br/>
+

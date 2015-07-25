@@ -28,7 +28,7 @@ public class DataAccessApp
     {
         ApplicationContext context = new ClassPathXmlApplicationContext("data-access.xml");
         SiteDao siteDao = context.getBean(SiteDao.class);
-        Site site = siteDao.insertSite("jcrew", Country.US, "", "www.jcrew.com", false, 4,
+        Site site = siteDao.insertSite("www.jcrew.com", Country.US, "", "https://www.jcrew.com", false, 4,
             true, "");
         System.out.println(site);
 
@@ -42,7 +42,7 @@ public class DataAccessApp
         siteDao.updateSite(site);
         System.out.println(site);
 
-        System.out.println(siteDao.selectSiteByStringId("jcrew"));
+        System.out.println(siteDao.selectSiteByStringId("www.jcrew.com"));
     }
 
     private static void testProductDao() throws Exception

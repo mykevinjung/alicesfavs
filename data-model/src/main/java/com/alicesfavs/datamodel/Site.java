@@ -9,7 +9,7 @@ public class Site extends ModelBase
     public Country country;
     public final String stringId;
     public String displayName;
-    public String domain;
+    public String url;
     public boolean display;
     public Integer displayWeight;
     public boolean useStoredImage;
@@ -38,7 +38,7 @@ public class Site extends ModelBase
     public String toString()
     {
         return "Site[" + super.toString() + ", country=" + country + ", stringId=" + stringId + ", displayName="
-            + displayName + ", domain=" + domain + ", display=" + display + ", displayWeight=" + displayWeight
+            + displayName + ", url=" + url + ", display=" + display + ", displayWeight=" + displayWeight
             + ", useStoredImage=" + useStoredImage + ", currency=" + currency + "]";
     }
 

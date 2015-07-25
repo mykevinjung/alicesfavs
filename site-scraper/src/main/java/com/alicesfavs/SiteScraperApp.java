@@ -32,7 +32,7 @@ public class SiteScraperApp
     public static void main(String[] args) throws Exception
     {
         Site site = new Site(1, LocalDateTime.now(), "anthropologie");
-        site.domain = "www.anthropologie.com";
+        site.url = "http://www.anthropologie.com";
 
         // TODO Select lower price when there are two prices!!!!!!!!!!!!!
 
@@ -90,8 +90,7 @@ public class SiteScraperApp
     {
         int count = 0;
         SiteScraper siteScraper = new SiteScraperImpl();
-        final String homeUrl = "http://" + site.domain;
-        final MultirootTree<CategoryExtract> categoryTree = siteScraper.extractCategories(homeUrl,
+        final MultirootTree<CategoryExtract> categoryTree = siteScraper.extractCategories(site.url,
                 categoryExtractSpecList);
         printCategoryTree(categoryTree.roots);
         System.out.println("Total Category: " + categoryCount);
@@ -166,7 +165,7 @@ public class SiteScraperApp
         // categoryExtractInfo.urlInfo.urlPattern = "http://shop.nordstrom.com/c/.*\\?dept=8000001&origin=topnav";
         //
         // Site site = new Site();
-        // site.domain = "www.nordstrom.com";
+        // site.url = "www.nordstrom.com";
         // List<CategoryExtractInfo> categoryExtractInfoList = new ArrayList<CategoryExtractInfo>();
         // categoryExtractInfoList.add(categoryExtractInfo);
         //
@@ -186,7 +185,7 @@ public class SiteScraperApp
         // productExtractInfo.urlInfo.urlPattern = ".*/en-US/.*\\.html";
         //
         // Site site = new Site();
-        // site.domain = "www.bodenusa.com";
+        // site.url = "www.bodenusa.com";
         // List<CategoryExtractInfo> categoryExtractInfoList = new ArrayList<CategoryExtractInfo>();
         // categoryExtractInfoList.add(categoryExtractInfo);
         //

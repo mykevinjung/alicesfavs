@@ -72,12 +72,11 @@ public class ProductExtractor
     {
         try
         {
-            // TODO need to change domain to actual url
+            // TODO need to change url to actual url
             // because home page of a site like jcrew is https://www.jcrew.com, not http
             // although it should not make a difference
-            final String homeUrl = "http://" + site.domain;
             final List<CategoryExtractSpec> categoryExtractSpecList = batchConfig.getCategoryExtractSpec(site);
-            final MultirootTree<CategoryExtract> categoryExtracts = siteScraper.extractCategories(homeUrl,
+            final MultirootTree<CategoryExtract> categoryExtracts = siteScraper.extractCategories(site.url,
                 categoryExtractSpecList);
             final List<Category> categories = categoryService.findSiteCategories(site.id);
             testCategoryExtracts(categoryExtracts, categories);

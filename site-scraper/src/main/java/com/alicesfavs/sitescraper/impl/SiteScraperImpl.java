@@ -141,9 +141,8 @@ public class SiteScraperImpl implements SiteScraper
             throws SiteScrapeException, ElementNotFoundException, DataNotFoundException
     {
         // TODO use Set to avoid duplicate categories!!!!!!!!!
-        final String url = "http://" + site.domain;
         CategoryExtractSpec leafCategorySpec = categoryExtractSpec;
-        List<CategoryExtract> leafCategories = extractCategories(url, categoryExtractSpec);
+        List<CategoryExtract> leafCategories = extractCategories(site.url, categoryExtractSpec);
 
         List<CategoryExtract> parentCategories = null;
         while (leafCategorySpec.subcategorySpec != null)

@@ -33,3 +33,11 @@ http://community.jaspersoft.com/wiki/connecting-apache-web-server-tomcat-and-wri
 <br/>
 sudo wget https://archive.apache.org/dist/tomcat/tomcat-connectors/jk/binaries/linux/jk-1.2.31/x86_64/mod_jk-1.2.31-httpd-2.2.x.so<br/>
 
+Elastic IP
+--------
+Created one Elastic IP and associate it with an EC2 instance<br/>
+
+Route 53
+-------
+Create an A-type Record Set that assigns to the Elastic IP
+

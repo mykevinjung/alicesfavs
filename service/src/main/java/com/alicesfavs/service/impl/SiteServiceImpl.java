@@ -16,7 +16,7 @@ public class SiteServiceImpl implements SiteService
     @Autowired
     private SiteDao siteDao;
 
-    public Site createSite(String stringId, String displayName, String domain, boolean display, Integer displayWeight,
+    public Site createSite(String stringId, String displayName, String url, boolean display, Integer displayWeight,
         boolean useStoredImage)
     {
         // TODO Auto-generated method stub

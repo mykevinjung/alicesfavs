@@ -60,21 +60,17 @@ public class ProductExtractor
             .saveProduct(job.id, site.id, extractStatus, productExtractMap);
         job.foundProduct = productMap.size();
         job.notFoundProduct = productService.markNotFoundProduct(job.id, site.id);
-        LOGGER.info("Number of not found product: " + job.notFoundProduct);
 
-        //saveCategoryProduct(job, site, categoryMap, productMap);
+        saveCategoryProduct(job, site, categoryMap, productMap);
 
         //createSearchableProduct(categoryMap, productMap);
-        final SearchableProductCreator creator = new SearchableProductCreator(batchConfig);
+        //final SearchableProductCreator creator = new SearchableProductCreator(batchConfig);
     }
 
     private List<Category> extractCategory(Job job, Site site) throws ExtractException
     {
         try
         {
-            // TODO need to change url to actual url
-            // because home page of a site like jcrew is https://www.jcrew.com, not http
-            // although it should not make a difference
             final List<CategoryExtractSpec> categoryExtractSpecList = batchConfig.getCategoryExtractSpec(site);
             final MultirootTree<CategoryExtract> categoryExtracts = siteScraper.extractCategories(site.url,
                 categoryExtractSpecList);

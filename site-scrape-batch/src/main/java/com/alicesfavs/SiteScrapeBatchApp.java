@@ -13,15 +13,9 @@ public class SiteScrapeBatchApp
 {
     public static void main(String[] args) throws Exception
     {
-         testSiteScrapeJob();
-    }
-
-    private static void testSiteScrapeJob() throws Exception
-    {
-        @SuppressWarnings("resource")
         ApplicationContext context = new ClassPathXmlApplicationContext("site-scrape-batch.xml");
         SiteScrapeJob job = context.getBean(SiteScrapeJob.class);
-        job.execute("jcrew");
+        job.execute(args[0]);
     }
 
 }

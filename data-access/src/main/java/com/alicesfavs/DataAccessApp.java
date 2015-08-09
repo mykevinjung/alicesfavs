@@ -19,16 +19,16 @@ public class DataAccessApp
     public static void main(String[] args) throws Exception
     {
         // testCategoryDao();
-        // testProductDao();
+         testProductDao();
         // testPriceHistory();
-        testSiteDao();
+        //testSiteDao();
     }
 
     private static void testSiteDao() throws Exception
     {
         ApplicationContext context = new ClassPathXmlApplicationContext("data-access.xml");
         SiteDao siteDao = context.getBean(SiteDao.class);
-        Site site = siteDao.insertSite("www.jcrew.com", Country.US, "", "https://www.jcrew.com", false, 4,
+        Site site = siteDao.insertSite("anthropologie.com", Country.US, "", "http://www.anthropologie.com", false, 4,
             true, "");
         System.out.println(site);
 
@@ -36,13 +36,13 @@ public class DataAccessApp
 
         site.display = true;
         site.displayWeight = 5;
-        site.displayName = "J.Crew";
+        site.displayName = "Anthropologie";
         site.useStoredImage = false;
         site.currency = "$";
         siteDao.updateSite(site);
         System.out.println(site);
 
-        System.out.println(siteDao.selectSiteByStringId("www.jcrew.com"));
+        System.out.println(siteDao.selectSiteByStringId("anthropologie.com"));
     }
 
     private static void testProductDao() throws Exception

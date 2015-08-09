@@ -42,6 +42,7 @@ public class SiteScrapeJob
         {
             productExtractor.extractProduct(job, site);
             jobService.completeJob(job);
+            LOGGER.info(job.toString());
         }
         catch (ExtractException e)
         {
@@ -53,26 +54,6 @@ public class SiteScrapeJob
             LOGGER.error("Unknown exception in productExtractor", e);
             jobService.failJob(job);
         }
-
-
-        // create new job record
-        // extract category structure
-        // siteScraper.extractLeafCategories(site, categoryExtractSpecList);
-        // save category structure
-
-        // extract products
-
-        // save products
-
-        // mark not found category
-
-        // mark not found category-product
-
-        // mark not found product
-
-        // update onsale table
-
-        // end job
     }
 
 }

@@ -24,13 +24,11 @@ import com.alicesfavs.datamodel.ProductExtract;
 public class ProductDaoImpl implements ProductDao
 {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductDaoImpl.class);
-
     private static final String INSERT_PRODUCT =
         "INSERT INTO PRODUCT (SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
             + "WAS_PRICE_EXTRACT, BRAND_NAME_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, REGULAR_PRICE, "
             + "PRICE_CHANGED_DATE, SALE_START_DATE, STORED_IMAGE_PATH, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String UPDATE_PRODUCT = "UPDATE PRODUCT SET SITE_ID = ?, ID_EXTRACT = ?, NAME_EXTRACT = ?, "
         + "PRICE_EXTRACT = ?, WAS_PRICE_EXTRACT = ?, BRAND_NAME_EXTRACT = ?, URL_EXTRACT = ?, IMAGE_URL_EXTRACT = ?, "

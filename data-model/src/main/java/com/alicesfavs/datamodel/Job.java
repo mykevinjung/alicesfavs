@@ -9,10 +9,10 @@ public class Job extends ModelBase
     public Status status;
     public LocalDateTime startTime;
     public LocalDateTime endTime;
-    public int foundCategory = 0;
-    public int foundProduct = 0;
-    public int notFoundCategory = 0;
-    public int notFoundProduct = 0;
+    public Integer foundCategory = 0;
+    public Integer foundProduct = 0;
+    public Integer notFoundCategory = 0;
+    public Integer notFoundProduct = 0;
 
     public Job(long id, LocalDateTime createdDate, long siteId, Mode mode)
     {
@@ -86,6 +86,14 @@ public class Job extends ModelBase
 
             throw new IllegalArgumentException("Unknown job status code " + code);
         }
+    }
+
+    public String toString()
+    {
+        return "Job[" + super.toString() + ", siteId=" + siteId + ", mode=" + mode
+            + ", status=" + status + ", startTime=" + startTime + ", endTime=" + endTime
+            + ", foundCategory=" + foundCategory + ", foundProduct=" + foundProduct
+            + ", notFoundCategory=" + notFoundCategory + ", notFoundProduct=" + notFoundProduct + "]";
     }
 
 }

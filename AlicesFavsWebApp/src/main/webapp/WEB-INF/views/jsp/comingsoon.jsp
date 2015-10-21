@@ -1,7 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <header><title>Alice's Favs</title></header>
-<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png" />
-<link rel="icon" type="image/x-icon" href="/images/favicon.png" />
+<link rel="shortcut icon" type="image/x-icon" href="/resources/images/favicon.png" />
+<link rel="icon" type="image/x-icon" href="/resources/images/favicon.png" />
 <body>
 <center>
     <br/><br/><br/>

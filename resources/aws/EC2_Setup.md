@@ -19,6 +19,7 @@ sudo alternatives --remove java /usr/lib/jvm/jre-1.7.0-openjdk.x86_64/bin/java
 Apache HTTPD
 --------
 http://www.cyberciti.biz/faq/linux-install-and-start-apache-httpd/<br/>
+https://alextheedom.wordpress.com/microservices/set-up-tomcat-apache-and-mod_jk-cluster/<br/>
 yum install httpd<br/>
 and then copy httpd.conf and mod_jk.conf into /etc/httpd/conf directory
 

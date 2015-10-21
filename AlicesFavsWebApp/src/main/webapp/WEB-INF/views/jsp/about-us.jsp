@@ -30,7 +30,7 @@
 
 
 
-        <p class="lead text-center">Collecting all Alice's Favs, sharing with shoppers</p>
+        <p class="lead text-center">Collecting all Alice's Favs, sharing with shoppers and more ...</p>
         <hr />
         <div  class="row container ">
 

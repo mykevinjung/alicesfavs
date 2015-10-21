@@ -62,12 +62,12 @@
                     <configuration>
                         <webApp>
                             <contextPath>/</contextPath>
-                            <war>${basedir}/target/AlicesFavsWebApp</war>
                         </webApp>
+                        <webAppSourceDirectory>${basedir}/src/main/webapp</webAppSourceDirectory>
                         <contextHandlers>
                             <contextHandler implementation="org.eclipse.jetty.server.handler.ContextHandler">
                                 <contextPath>/resources</contextPath>
-                                <resourceBase>${basedir}/target/AlicesFavsWebApp/resources</resourceBase>
+                                <resourceBase>${basedir}/src/main/webapp/resources</resourceBase>
                                 <handler implementation="org.eclipse.jetty.server.handler.ResourceHandler" />
                             </contextHandler>
                         </contextHandlers>

@@ -91,12 +91,14 @@
     <div class="row">
       <div class="large-12 columns">
         <div class="left">
-          <div class="menu-top-nav-and-footer-nav-container"><ul id="menu-top-nav-and-footer-nav-1" class="footer-nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-556"><a href="/about-us">About us</a></li>
-            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-555"><a href="/contact-us">Contact us</a></li>
-            <li class="icon-envelop menu-item menu-item-type-custom menu-item-object-custom menu-item-3111"><a href="#newsletter-signup">Newsletter Signup</a></li>
-          </ul></div>
           <div class="copyright-footer">Copyright 2015 © <strong>Alice's Favs, Inc.</strong></div>
         </div><!-- .left -->
+        <div class="right">
+          <div class="menu-top-nav-and-footer-nav-container"><ul id="menu-top-nav-and-footer-nav-1" class="footer-nav">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/about-us">About us</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/contact-us">Contact us</a></li>
+          </ul></div>
+        </div><!-- .right -->
       </div><!-- .large-12 -->
     </div><!-- .row-->
   </div><!-- .absolute-footer -->

@@ -35,8 +35,6 @@
         <div  class="row container ">
 
           <div class="small-12    large-3  columns   "  ><div class="column-inner"  >
-
-
             <div class="ux-box team-member ux-text-circle  text-center">
               <div class="inner">
                 <div class="inner-wrap">
@@ -57,13 +55,9 @@
                 </div>
               </div>
             </div>
-
-
           </div></div>
 
           <div class="small-12    large-3  columns   "  ><div class="column-inner"  >
-
-
             <div class="ux-box team-member ux-text-circle  text-center">
               <div class="inner">
                 <div class="inner-wrap">
@@ -84,10 +78,7 @@
                 </div>
               </div>
             </div>
-
-
           </div></div>
-
 
         </div>
       </div><!-- #content -->

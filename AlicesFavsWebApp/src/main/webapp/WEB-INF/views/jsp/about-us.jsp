@@ -49,7 +49,7 @@
                     <div class="show-next">
                       <div class="tx-div small"></div>
                     </div>
-                    <p><p> Shopping shopping shopping, but mostly eye-shopping. </p>
+                    <p><p> Shopping shopping shopping all the time. </p>
                     </p>
                   </div><!-- .ux-box-text-overlay -->
                 </div>
@@ -72,7 +72,7 @@
                     <div class="show-next">
                       <div class="tx-div small"></div>
                     </div>
-                    <p><p> Thinking making working to make The Shopper happy. </p>
+                    <p><p> Thinking, making and working to make The Shopper happy. </p>
                     </p>
                   </div><!-- .ux-box-text-overlay -->
                 </div>

@@ -33,6 +33,12 @@ public class BaseController
         return VIEW_INDEX;
     }
 
+    @RequestMapping(value = "/sale", method = RequestMethod.GET)
+    public String saleRedirect(ModelMap model)
+    {
+        return VIEW_INDEX;
+    }
+
     @RequestMapping(value = "/sale/{siteId}", method = RequestMethod.GET)
     public String sale(@PathVariable String siteId, ModelMap model)
     {

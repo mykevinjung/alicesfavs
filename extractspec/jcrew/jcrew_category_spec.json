@@ -31,7 +31,7 @@
             },
             "dataSpec":{
                 "attributeKey":"$nested_text",
-                "valuePattern":null,
+                "valuePattern":"Women|Men|Girls|Boys|Wedding|Petite",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
@@ -54,7 +54,7 @@
             "dataSpec":{
                 "attributeKey":"abs:href",
                 "valuePattern":".*\\.jsp",
-                "valueExcludePattern":"(.*/sale\\.jsp)|(.*/discovered\\.jsp)",
+                "valueExcludePattern":null,
                 "substringPattern":null
             }
         },
@@ -62,7 +62,7 @@
             "containerSpec":{
                 "id":null,
                 "tagName":"ul",
-                "className":"leftnav_sub",
+                "className":"navsection",
                 "attributeKey":null,
                 "valuePattern":null
             },
@@ -112,7 +112,7 @@
                 },
                 "dataSpec":{
                     "attributeKey":"abs:href",
-                    "valuePattern":".*\\.jsp",
+                    "valuePattern":null,
                     "valueExcludePattern":null,
                     "substringPattern":null
                 }
@@ -152,7 +152,7 @@
             },
             "dataSpec":{
                 "attributeKey":"$nested_text",
-                "valuePattern":null,
+                "valuePattern":"Shoes|Jewelry",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
@@ -174,30 +174,91 @@
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":".*/sale\\.jsp",
+                "valuePattern":".*\\.jsp",
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        },
+        "subcategorySpec":null
+    },
+    {
+        "containerSpec":{
+            "id":"globalHeaderNavContainer",
+            "tagName":"nav",
+            "className":null,
+            "attributeKey":null,
+            "valuePattern":null
+        },
+        "categorySpec":{
+            "id":null,
+            "tagName":"li",
+            "className":null,
+            "attributeKey":null,
+            "valuePattern":null
+        },
+        "nameSpec":{
+            "containerSpec":{
+                "id":null,
+                "tagName":"li",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":"name",
+                "valuePattern":".*lpos=top_nav.*"
+            },
+            "dataSpec":{
+                "attributeKey":"$nested_text",
+                "valuePattern":"sale",
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        },
+        "urlSpec":{
+            "containerSpec":{
+                "id":null,
+                "tagName":"li",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":"name",
+                "valuePattern":".*lpos=top_nav.*"
+            },
+            "dataSpec":{
+                "attributeKey":"abs:href",
+                "valuePattern":".*\\.jsp",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
         },
         "subcategorySpec":{
             "containerSpec":{
-                "id":null,
-                "tagName":null,
+                "id":"selectCategory",
+                "tagName":"nav",
                 "className":null,
                 "attributeKey":null,
                 "valuePattern":null
             },
             "categorySpec":{
-                "id":"saleLandingContainer",
-                "tagName":"section",
+                "id":null,
+                "tagName":"a",
                 "className":null,
                 "attributeKey":null,
                 "valuePattern":null
             },
             "nameSpec":{
                 "containerSpec":{
-                    "id":"selectCategory",
-                    "tagName":"nav",
+                    "id":null,
+                    "tagName":"a",
                     "className":null,
                     "attributeKey":null,
                     "valuePattern":null
@@ -219,8 +280,8 @@
             "urlSpec":{
                 "containerSpec":{
                     "id":null,
-                    "tagName":"p",
-                    "className":"leftNavCat",
+                    "tagName":"a",
+                    "className":null,
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -228,12 +289,12 @@
                     "id":null,
                     "tagName":"a",
                     "className":null,
-                    "attributeKey":"name",
-                    "valuePattern":".*lpos=left_nav.*"
+                    "attributeKey":null,
+                    "valuePattern":null
                 },
                 "dataSpec":{
                     "attributeKey":"abs:href",
-                    "valuePattern":".*\\.jsp",
+                    "valuePattern":".*/search.*",
                     "valueExcludePattern":null,
                     "substringPattern":null
                 }

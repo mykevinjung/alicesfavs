@@ -4,16 +4,16 @@
 	<parent>
 		<groupId>com.alicesfavs</groupId>
 		<artifactId>alicesfavs-root</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
-	<artifactId>site-scraper</artifactId>
+	<artifactId>af-site-scraper</artifactId>
 	<packaging>jar</packaging>
 	<name>Site Scraper</name>
 	<dependencies>
 		<dependency>
 			<groupId>com.alicesfavs</groupId>
-			<artifactId>data-model</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<artifactId>af-data-model</artifactId>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jsoup</groupId>

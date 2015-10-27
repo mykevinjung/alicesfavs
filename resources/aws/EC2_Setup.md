@@ -6,6 +6,7 @@ EC2 Instance Setup
 | JRE | 1.8.0_60 | /usr/lib/jvm/jdk1.8.0_60 |
 | Apache HTTPD | 2.2.31-1.6.amzn1 | /etc/httpd |
 | Tomcat | 8.0.28 | /opt/apache-tomcat-8.0.28 |
+| Alice's Favs - site scraper | | /opt/alicesfavs/site-scrape-batch |
 
 JRE
 --------

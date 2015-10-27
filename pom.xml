@@ -6,7 +6,7 @@
     <groupId>com.alicesfavs</groupId>
     <artifactId>alicesfavs-root</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>Alice's Favs Root</name>
     <url>http://maven.apache.org</url>
 

@@ -36,8 +36,8 @@
                 "id":null,
                 "tagName":"a",
                 "className":null,
-                "attributeKey":null,
-                "valuePattern":null
+                "attributeKey":"data-pagination",
+                "valuePattern":".*Npge=.*"
             },
             "dataSpec":{
                 "attributeKey":"abs:href",

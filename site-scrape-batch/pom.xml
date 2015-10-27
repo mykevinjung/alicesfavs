@@ -4,31 +4,46 @@
 	<parent>
 		<groupId>com.alicesfavs</groupId>
 		<artifactId>alicesfavs-root</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
-	<artifactId>site-scrape-batch</artifactId>
+	<artifactId>af-site-scrape-batch</artifactId>
 	<packaging>jar</packaging>
 	<name>Site Scrape Batch</name>
 	<dependencies>
 		<dependency>
 			<groupId>com.alicesfavs</groupId>
-			<artifactId>data-model</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<artifactId>af-data-model</artifactId>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alicesfavs</groupId>
-			<artifactId>data-access</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<artifactId>af-data-access</artifactId>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alicesfavs</groupId>
-			<artifactId>site-scraper</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<artifactId>af-site-scraper</artifactId>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alicesfavs</groupId>
-			<artifactId>service</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<artifactId>af-service</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<configuration>
+						<outputDirectory>
+							${project.build.directory}/lib
+						</outputDirectory>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>

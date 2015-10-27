@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.time.LocalDateTime;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
@@ -36,7 +34,7 @@ public class ProductDaoImpl implements ProductDao
         + "STORED_IMAGE_PATH = ?, EXTRACT_STATUS = ?, EXTRACT_JOB_ID = ?, EXTRACTED_DATE = ? WHERE ID = ?";
 
     private static final String UPDATE_EXTRACT_STATUS = "UPDATE PRODUCT SET EXTRACT_STATUS = ? "
-        + "WHERE SITE_ID = ? AND EXTRACT_STATUS = ? AND EXTRACT_JOB_ID <> ?";
+        + "WHERE SITE_ID = ? AND EXTRACT_STATUS <> ? AND EXTRACT_JOB_ID <> ?";
 
     private static final String SELECT_PRODUCT_BY_IDS = "SELECT ID, SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
         + "WAS_PRICE_EXTRACT, BRAND_NAME_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, REGULAR_PRICE, "
@@ -124,11 +122,10 @@ public class ProductDaoImpl implements ProductDao
         }
     }
 
-    public int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus currentStatus,
-        ExtractStatus newStatus)
+    public int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus newStatus)
     {
         final Object[] params =
-            { newStatus.getCode(), siteId, currentStatus.getCode(), excludingJobId };
+            { newStatus.getCode(), siteId, newStatus.getCode(), excludingJobId };
 
         return daoSupport.updateMultiple(UPDATE_EXTRACT_STATUS, UPDATE_EXTRACT_STATUS_PARAM_TYPES, params);
     }

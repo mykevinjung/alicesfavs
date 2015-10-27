@@ -31,9 +31,7 @@ public class SiteScrapeJob
     // job can run for sale category only
     public void execute(String siteId)
     {
-        // select site by id
         final Site site = siteService.findSiteById(siteId);
-        Assert.notNull(site, "Site not found with ID " + siteId);
 
         final Job job = jobService.createJob(site.id, Job.Mode.FULL_EXTRACT);
         LOGGER.info("Job is created: " + job.id);
@@ -44,15 +42,13 @@ public class SiteScrapeJob
             jobService.completeJob(job);
             LOGGER.info(job.toString());
         }
-        catch (ExtractException e)
-        {
-            LOGGER.error("Error in productExtractor", e);
-            jobService.failJob(job);
-        }
         catch (Exception e)
         {
-            LOGGER.error("Unknown exception in productExtractor", e);
-            jobService.failJob(job);
+            LOGGER.error("Exception in extracting products", e);
+            if (job != null)
+            {
+                jobService.failJob(job);
+            }
         }
     }
 

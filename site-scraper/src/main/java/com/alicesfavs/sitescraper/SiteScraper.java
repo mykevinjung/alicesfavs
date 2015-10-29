@@ -14,18 +14,6 @@ public interface SiteScraper
 {
 
     /**
-     * Extract all leaf categories of a site using category extract spec<br>
-     * Category can have sub-categories.
-     * 
-     * @param site
-     * @param categoryExtractSpecList
-     * @return
-     * @throws SiteScrapeException
-     */
-    List<CategoryExtract> extractLeafCategories(Site site, List<CategoryExtractSpec> categoryExtractSpecList)
-            throws SiteScrapeException;
-
-    /**
      * 
      * @param homeUrl
      * @param categoryExtractSpecList

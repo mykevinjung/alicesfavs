@@ -2,53 +2,47 @@
     {
         "containerSpec":{
             "id":null,
-            "tagName":"div",
-            "className":"category-items",
+            "tagName":"ul",
+            "className":"product-list",
             "attributeKey":null,
             "valuePattern":null
         },
         "productSpec":{
             "id":null,
-            "tagName":"div",
-            "className":"category-item",
-            "attributeKey":null,
+            "tagName":"li",
+            "className":"product-cell",
+            "attributeKey":"data-product",
             "valuePattern":null
         },
         "idSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"div",
-                "className":"item-quickshop",
-                "attributeKey":"title",
-                "valuePattern":null
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":"data-quickshop-id",
+                "tagName":"li",
+                "className":"product-cell",
+                "attributeKey":"data-product",
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"data-quickshop-id",
+                "attributeKey":"data-product",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":null
+                "substringPattern":"\\{productSku:'([0-9]+?)'.*"
             }
         },
         "nameSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"div",
-                "className":"item-description",
+                "tagName":"a",
+                "className":"product-name",
                 "attributeKey":null,
                 "valuePattern":null
             },
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":null,
-                "attributeKey":"title",
+                "className":"product-name",
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
@@ -61,21 +55,21 @@
         "urlSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"div",
-                "className":"item-description",
+                "tagName":"a",
+                "className":"product-name",
                 "attributeKey":null,
                 "valuePattern":null
             },
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":null,
-                "attributeKey":"title",
+                "className":"product-name",
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":".*/anthro/product/.*",
+                "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
@@ -83,8 +77,8 @@
         "imageUrlSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"div",
-                "className":"item-image",
+                "tagName":"span",
+                "className":"product-thumb-casing",
                 "attributeKey":null,
                 "valuePattern":null
             },
@@ -92,11 +86,11 @@
                 "id":null,
                 "tagName":"img",
                 "className":null,
-                "attributeKey":null,
+                "attributeKey":"src",
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"data-original",
+                "attributeKey":"src",
                 "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
@@ -106,45 +100,45 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":"div",
-                    "className":"item-description",
+                    "tagName":"span",
+                    "className":"price-sale",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"PriceAlertText",
+                    "className":"currency",
                     "attributeKey":null,
-                    "valuePattern":null
-                },
-                "dataSpec":{
-                    "attributeKey":"$own_text",
-                    "valuePattern":null,
-                    "valueExcludePattern":null,
-                    "substringPattern":null
-                }
-            },
-            {
-                "containerSpec":{
-                    "id":null,
-                    "tagName":"div",
-                    "className":"item-description",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"span",
-                    "className":"price",
-                    "attributeKey":"id",
                     "valuePattern":null
                 },
                 "dataSpec":{
                     "attributeKey":"$nested_text",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":null
+                    "substringPattern":".*(\\$[0-9]+?\\.[0-9][0-9]).*"
+                }
+            },
+            {
+                "containerSpec":{
+                    "id":null,
+                    "tagName":"span",
+                    "className":"price-standard",
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "elementSpec":{
+                    "id":null,
+                    "tagName":"span",
+                    "className":"currency",
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "dataSpec":{
+                    "attributeKey":"$nested_text",
+                    "valuePattern":null,
+                    "valueExcludePattern":null,
+                    "substringPattern":".*(\\$[0-9]+?\\.[0-9][0-9]).*"
                 }
             }
         ],
@@ -152,15 +146,15 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":"div",
-                    "className":"item-description",
+                    "tagName":"span",
+                    "className":"price-strike-sale",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"was-price",
+                    "className":"currency",
                     "attributeKey":null,
                     "valuePattern":null
                 },

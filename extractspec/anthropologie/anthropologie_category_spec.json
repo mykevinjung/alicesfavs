@@ -2,62 +2,101 @@
     {
         "containerSpec":{
             "id":null,
-            "tagName":"div",
-            "className":"sn-container",
+            "tagName":"header",
+            "className":null,
             "attributeKey":null,
             "valuePattern":null
         },
         "categorySpec":{
             "id":null,
-            "tagName":"li",
-            "className":"sn-link",
-            "attributeKey":"id",
+            "tagName":"h4",
+            "className":null,
+            "attributeKey":null,
             "valuePattern":null
         },
         "nameSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"li",
-                "className":"sn-link",
-                "attributeKey":"id",
+                "tagName":"h4",
+                "className":null,
+                "attributeKey":null,
                 "valuePattern":null
             },
             "elementSpec":{
                 "id":null,
-                "tagName":"a",
+                "tagName":"h4",
                 "className":null,
                 "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"$nested_text",
-                "valuePattern":null,
+                "valuePattern":"Clothing",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
         },
-        "urlSpec":{
+        "urlSpec":null,
+        "subcategorySpec":    {
             "containerSpec":{
                 "id":null,
-                "tagName":"li",
-                "className":"sn-link",
-                "attributeKey":"id",
+                "tagName":"header",
+                "className":null,
+                "attributeKey":null,
                 "valuePattern":null
             },
-            "elementSpec":{
+            "categorySpec":{
                 "id":null,
                 "tagName":"a",
                 "className":null,
                 "attributeKey":null,
                 "valuePattern":null
             },
-            "dataSpec":{
-                "attributeKey":"abs:href",
-                "valuePattern":".*/anthro/category/.*\\.jsp",
-                "valueExcludePattern":".*/help-.+\\.jsp",
-                "substringPattern":null
-            }
-        },
-        "subcategorySpec":null
+            "nameSpec":{
+                "containerSpec":{
+                    "id":null,
+                    "tagName":"a",
+                    "className":null,
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "elementSpec":{
+                    "id":null,
+                    "tagName":"a",
+                    "className":null,
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "dataSpec":{
+                    "attributeKey":"$nested_text",
+                    "valuePattern":null,
+                    "valueExcludePattern":null,
+                    "substringPattern":null
+                }
+            },
+            "urlSpec":{
+                "containerSpec":{
+                    "id":null,
+                    "tagName":"a",
+                    "className":null,
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "elementSpec":{
+                    "id":null,
+                    "tagName":"a",
+                    "className":null,
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "dataSpec":{
+                    "attributeKey":"abs:href",
+                    "valuePattern":".*/anthro/catalog/category\\.jsp?.*",
+                    "valueExcludePattern":null,
+                    "substringPattern":null
+                }
+            },
+            "subcategorySpec":null
+        }
     }
 ]

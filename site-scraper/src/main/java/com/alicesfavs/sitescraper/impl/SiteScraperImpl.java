@@ -30,26 +30,6 @@ public class SiteScraperImpl implements SiteScraper
     private DataExtractor dataExtractor = new DataExtractor();
 
     @Override
-    public List<CategoryExtract> extractLeafCategories(Site site, List<CategoryExtractSpec> categoryExtractSpecList)
-            throws SiteScrapeException
-    {
-        List<CategoryExtract> categories = new ArrayList<CategoryExtract>();
-        for (CategoryExtractSpec categoryExtractSpec : categoryExtractSpecList)
-        {
-            try
-            {
-                categories.addAll(extractLeafCategories(site, categoryExtractSpec));
-            }
-            catch (ElementNotFoundException | DataNotFoundException e)
-            {
-                // if not found, then try next
-            }
-        }
-
-        return categories;
-    }
-
-    @Override
     public MultirootTree<CategoryExtract> extractCategories(String homeUrl,
             List<CategoryExtractSpec> categoryExtractSpecList) throws SiteScrapeException
     {
@@ -79,11 +59,10 @@ public class SiteScraperImpl implements SiteScraper
         final List<Node<CategoryExtract>> leafNodes = toNodeList(leafCategories, null);
         categoryTree.roots.addAll(leafNodes);
 
-        List<Node<CategoryExtract>> parentNodes = null;
         while (leafCategorySpec.subcategorySpec != null)
         {
             leafCategorySpec = leafCategorySpec.subcategorySpec;
-            parentNodes = leafNodes;
+            final List<Node<CategoryExtract>> parentNodes = categoryTree.getLeafNodes();
             for (Node<CategoryExtract> parentNode : parentNodes)
             {
                 final List<CategoryExtract> extracts = extractCategories(parentNode.data.url, leafCategorySpec);

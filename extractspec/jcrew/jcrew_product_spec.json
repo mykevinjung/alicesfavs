@@ -12,13 +12,13 @@
             "containerSpec":null,
             "elementSpec":{
                 "id":null,
-                "tagName":"td",
-                "className":"arrayProdCell",
-                "attributeKey":"data-productid",
+                "tagName":"button",
+                "className":"get-quickshop",
+                "attributeKey":"data-productcode",
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"data-productid",
+                "attributeKey":"data-productcode",
                 "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
@@ -149,7 +149,7 @@
             "id":null,
             "tagName":"div",
             "className":"plus_product",
-            "attributeKey":"data-productid",
+            "attributeKey":"data-productcode",
             "valuePattern":null
         },
         "idSpec":{
@@ -158,11 +158,11 @@
                 "id":null,
                 "tagName":"div",
                 "className":"plus_product",
-                "attributeKey":"data-productid",
+                "attributeKey":"data-productcode",
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"data-productid",
+                "attributeKey":"data-productcode",
                 "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
@@ -284,11 +284,11 @@
                 "id":null,
                 "tagName":"button",
                 "className":"get-quickshop",
-                "attributeKey":"data-productid",
+                "attributeKey":"data-productcode",
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"data-productid",
+                "attributeKey":"data-productcode",
                 "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
@@ -364,8 +364,8 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":null,
-                    "className":null,
+                    "tagName":"div",
+                    "className":"product-price-now",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -388,8 +388,8 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":null,
-                    "className":null,
+                    "tagName":"div",
+                    "className":"product-price-was",
                     "attributeKey":null,
                     "valuePattern":null
                 },

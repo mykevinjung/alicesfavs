@@ -38,10 +38,16 @@ public class DataExtractor
         {
             try
             {
-                String name = extractData(element, categoryExtractSpec.nameSpec);
-                String url = extractData(element, categoryExtractSpec.urlSpec);
+                final String name = extractData(element, categoryExtractSpec.nameSpec);
                 CategoryExtract categoryExtract = new CategoryExtract(name);
-                categoryExtract.url = url;
+                if (categoryExtractSpec.urlSpec == null)
+                {
+                    categoryExtract.url = rootElement.baseUri();
+                }
+                else
+                {
+                    categoryExtract.url = extractData(element, categoryExtractSpec.urlSpec);
+                }
                 categoryList.add(categoryExtract);
                 //System.out.println(categoryExtract);
             }

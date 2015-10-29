@@ -3,22 +3,22 @@
         "nextPageSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"a",
-                "className":"arrow-right",
+                "tagName":"li",
+                "className":"next-page",
                 "attributeKey":null,
                 "valuePattern":null
             },
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"enabled",
+                "className":null,
                 "attributeKey":null,
-                "valuePattern":"next"
+                "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":".*indexStart=.*",
-                "valueExcludePattern":"#",
+                "valuePattern":".*page=.*",
+                "valueExcludePattern":null,
                 "substringPattern":null
             }
         }

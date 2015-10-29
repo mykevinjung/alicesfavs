@@ -31,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService
 
     public List<Category> saveCategoryExtract(long jobId, long siteId, MultirootTree<CategoryExtract> categoryExtracts)
     {
-        final List<Node<CategoryExtract>> leafCategories = categoryExtracts.getLeafNodes();
+        final List<Node<CategoryExtract>> leafCategories = categoryExtracts.getAllLeafNodes();
         final LocalDateTime now = LocalDateTime.now();
         final List<Category> categories = new ArrayList<>();
         for (int index = 0; index < leafCategories.size(); index++)

@@ -56,13 +56,14 @@ public class SiteScraperImpl implements SiteScraper
     {
         CategoryExtractSpec leafCategorySpec = categoryExtractSpec;
         final List<CategoryExtract> leafCategories = extractCategories(siteUrl, leafCategorySpec);
-        final List<Node<CategoryExtract>> leafNodes = toNodeList(leafCategories, null);
+        List<Node<CategoryExtract>> leafNodes = toNodeList(leafCategories, null);
         categoryTree.roots.addAll(leafNodes);
 
         while (leafCategorySpec.subcategorySpec != null)
         {
             leafCategorySpec = leafCategorySpec.subcategorySpec;
-            final List<Node<CategoryExtract>> parentNodes = categoryTree.getLeafNodes();
+            final List<Node<CategoryExtract>> parentNodes = categoryTree.getLeafNodesOf(leafNodes);
+            leafNodes = parentNodes;
             for (Node<CategoryExtract> parentNode : parentNodes)
             {
                 final List<CategoryExtract> extracts = extractCategories(parentNode.data.url, leafCategorySpec);
@@ -76,7 +77,7 @@ public class SiteScraperImpl implements SiteScraper
         final List<Node<CategoryExtract>> nodeList = new ArrayList<Node<CategoryExtract>>();
         for (CategoryExtract c : extractList)
         {
-            nodeList.add(new Node<CategoryExtract>(c, parent));
+            nodeList.add(new Node<>(c, parent));
         }
 
         return nodeList;
@@ -87,7 +88,7 @@ public class SiteScraperImpl implements SiteScraper
     {
         for (CategoryExtract c : extractList)
         {
-            nodeList.add(new Node<CategoryExtract>(c, parent));
+            nodeList.add(new Node<>(c, parent));
         }
     }
 

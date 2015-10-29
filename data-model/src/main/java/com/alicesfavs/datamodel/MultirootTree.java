@@ -55,12 +55,17 @@ public class MultirootTree<T>
         }
     }
 
-    public List<Node<T>> getLeafNodes()
+    public List<Node<T>> getAllLeafNodes()
+    {
+        return getLeafNodesOf(roots);
+    }
+
+    public List<Node<T>> getLeafNodesOf(List<Node<T>> nodes)
     {
         List<Node<T>> leafNodes = new ArrayList<Node<T>>();
-        for (int index = 0; index < roots.size(); index++)
+        for (int index = 0; index < nodes.size(); index++)
         {
-            collectLeafNodes(leafNodes, roots.get(index));
+            collectLeafNodes(leafNodes, nodes.get(index));
         }
 
         return leafNodes;

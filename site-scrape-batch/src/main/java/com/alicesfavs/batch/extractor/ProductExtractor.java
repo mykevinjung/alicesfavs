@@ -97,7 +97,7 @@ public class ProductExtractor
         List<Category> existingCategories) throws ExtractException
     {
         final int existingCount = existingCategories.size();
-        final int newCount = newCategoryExtracts.getLeafNodes().size();
+        final int newCount = newCategoryExtracts.getAllLeafNodes().size();
         LOGGER.info("Existing categories: " + existingCount);
         LOGGER.info("New categories: " + newCount);
 

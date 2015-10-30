@@ -39,6 +39,33 @@ public class ProductExtractor
     @Autowired
     private ProductService productService;
 
+    public void extractProduct2(Job job, Site site) throws ExtractException
+    {
+        final MultirootTree<CategoryExtract> categoryExtracts = extractCategory2(job, site);
+        final List<MultirootTree.Node<CategoryExtract>> leafCategories = categoryExtracts.getAllLeafNodes();
+
+
+        // same product is displayed in many categories
+        // let's group them and save as one product and link
+        final Map<String, List<ProductExtract>> productExtractMap = new HashMap<>();
+        categoryExtracts.getAllLeafNodes();
+        for (final MultirootTree.Node<CategoryExtract> category : leafCategories)
+        {
+            final List<ProductExtract> peList = extractCategoryProducts2(job.id, site, category);
+            buildProductExtractMap(productExtractMap, peList);
+        }
+
+        LOGGER.info("Saving product map...");
+        final ExtractStatus extractStatus = site.display ? ExtractStatus.EXTRACTED : ExtractStatus.HIDDEN;
+        final Map<String, Product> productMap = productService
+            .saveProduct(job.id, site.id, extractStatus, productExtractMap);
+        job.foundProduct = productMap.size();
+        job.notFoundProduct = productService.markNotFoundProduct(job.id, site.id);
+
+        //createSearchableProduct(categoryMap, productMap);
+        //final SearchableProductCreator creator = new SearchableProductCreator(batchConfig);
+    }
+
     public void extractProduct(Job job, Site site) throws ExtractException
     {
         List<Category> categories = extractCategory(job, site);
@@ -93,6 +120,19 @@ public class ProductExtractor
         }
     }
 
+    private MultirootTree<CategoryExtract> extractCategory2(Job job, Site site) throws ExtractException
+    {
+        try
+        {
+            final List<CategoryExtractSpec> categoryExtractSpecList = batchConfig.getCategoryExtractSpec(site);
+            return siteScraper.extractCategories(site.url, categoryExtractSpecList);
+        }
+        catch (Exception e)
+        {
+            throw new ExtractException("Error in extracting categories", e);
+        }
+    }
+
     private void testCategoryExtracts(MultirootTree<CategoryExtract> newCategoryExtracts,
         List<Category> existingCategories) throws ExtractException
     {
@@ -137,6 +177,25 @@ public class ProductExtractor
         {
             LOGGER.info("Extracting products for category " + category.id);
             return siteScraper.extractProducts(category.getLeafExtract(), batchConfig.getProductExtractSpec(site),
+                batchConfig.getNextPageExtractSpec(site));
+        }
+        catch (IOException e)
+        {
+            throw new ExtractException("Error in getting category extract spec", e);
+        }
+        catch (SiteScrapeException e)
+        {
+            throw new ExtractException("Error in extracting categories", e);
+        }
+    }
+
+    private List<ProductExtract> extractCategoryProducts2(long jobId, Site site, MultirootTree.Node<CategoryExtract> category)
+        throws ExtractException
+    {
+        try
+        {
+            LOGGER.info("Extracting products for category " + category.data.url);
+            return siteScraper.extractProducts(category.data, batchConfig.getProductExtractSpec(site),
                 batchConfig.getNextPageExtractSpec(site));
         }
         catch (IOException e)

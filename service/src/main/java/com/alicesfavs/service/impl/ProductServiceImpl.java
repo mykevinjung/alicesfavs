@@ -1,5 +1,7 @@
 package com.alicesfavs.service.impl;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -39,15 +41,15 @@ public class ProductServiceImpl implements ProductService
         final Map<String, Product> productMap = new HashMap<>();
         for (String extractId : peMap.keySet())
         {
+            final List<ProductExtract> peList = peMap.get(extractId);
             try
             {
-                final List<ProductExtract> peList = peMap.get(extractId);
                 final Product product = saveProduct(jobId, siteId, extractStatus, peList);
                 productMap.put(extractId, product);
             }
             catch (Exception e)
             {
-                LOGGER.error("Error saving product", e);
+                LOGGER.error("Error saving product " + peList.get(0), e);
             }
         }
 
@@ -195,17 +197,11 @@ public class ProductServiceImpl implements ProductService
         try
         {
             // TODO use site.currency
-            int lastCurrencyIndex = price.lastIndexOf("$");
-            if (lastCurrencyIndex == -1)
-            {
-                return Double.parseDouble(price);
-            }
-            else
-            {
-                return Double.parseDouble(price.substring(lastCurrencyIndex + 1));
-            }
+            final int lastCurrencyIndex = price.lastIndexOf("$");
+            final String priceWithoutCurrency = (lastCurrencyIndex == -1) ? price : price.substring(lastCurrencyIndex + 1);
+            return NumberFormat.getInstance().parse(priceWithoutCurrency).doubleValue();
         }
-        catch (NullPointerException | NumberFormatException e)
+        catch (NullPointerException | ParseException e)
         {
             return null;
         }

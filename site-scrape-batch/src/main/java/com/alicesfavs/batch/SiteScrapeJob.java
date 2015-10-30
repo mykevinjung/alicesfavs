@@ -38,7 +38,7 @@ public class SiteScrapeJob
 
         try
         {
-            productExtractor.extractProduct(job, site);
+            productExtractor.extractProduct2(job, site);
             jobService.completeJob(job);
             LOGGER.info(job.toString());
         }

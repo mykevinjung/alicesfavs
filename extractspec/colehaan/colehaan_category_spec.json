@@ -1,0 +1,123 @@
+[
+    {
+        "containerSpec":{
+            "id":null,
+            "tagName":"div",
+            "className":"header-tabs",
+            "attributeKey":null,
+            "valuePattern":null
+        },
+        "categorySpec":{
+            "id":null,
+            "tagName":"a",
+            "className":null,
+            "attributeKey":"alt",
+            "valuePattern":"ColeHaan.*"
+        },
+        "nameSpec":{
+            "containerSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":"alt",
+                "valuePattern":"ColeHaan.*"
+            },
+            "dataSpec":{
+                "attributeKey":"alt",
+                "valuePattern":null,
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        },
+        "urlSpec":{
+            "containerSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":"alt",
+                "valuePattern":null
+            },
+            "dataSpec":{
+                "attributeKey":"abs:href",
+                "valuePattern":null,
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        },
+        "subcategorySpec": {
+            "containerSpec": {
+                "id": null,
+                "tagName": "div",
+                "className": "menu-wrapper",
+                "attributeKey": null,
+                "valuePattern": null
+            },
+            "categorySpec": {
+                "id": null,
+                "tagName": "li",
+                "className": null,
+                "attributeKey": null,
+                "valuePattern": null
+            },
+            "nameSpec": {
+                "containerSpec": {
+                    "id": null,
+                    "tagName": "a",
+                    "className": null,
+                    "attributeKey": null,
+                    "valuePattern": null
+                },
+                "elementSpec": {
+                    "id": null,
+                    "tagName": "a",
+                    "className": null,
+                    "attributeKey": null,
+                    "valuePattern": null
+                },
+                "dataSpec": {
+                    "attributeKey": "$nested_text",
+                    "valuePattern": null,
+                    "valueExcludePattern": null,
+                    "substringPattern": null
+                }
+            },
+            "urlSpec": {
+                "containerSpec": {
+                    "id": null,
+                    "tagName": "a",
+                    "className": null,
+                    "attributeKey": null,
+                    "valuePattern": null
+                },
+                "elementSpec": {
+                    "id": null,
+                    "tagName": "a",
+                    "className": null,
+                    "attributeKey": null,
+                    "valuePattern": null
+                },
+                "dataSpec": {
+                    "attributeKey": "abs:href",
+                    "valuePattern": null,
+                    "valueExcludePattern": null,
+                    "substringPattern": null
+                }
+            },
+            "subcategorySpec": null
+        }
+    }
+]

@@ -29,7 +29,9 @@ sudo service httpd stop/start
 Tomcat
 --------
 https://www.mulesoft.com/tcat/tomcat-linux<br/>
-sudo wget http://supergsego.com/apache/tomcat/tomcat-8/v8.0.28/bin/apache-tomcat-8.0.28.tar.gz
+sudo wget http://supergsego.com/apache/tomcat/tomcat-8/v8.0.28/bin/apache-tomcat-8.0.28.tar.gz<br>
+<br>
+Then set JAVA_OPTS="$JAVA_OPTS -DEXECUTION_ENV=prod" in bin/catalina.sh
 
 Apache - Tomcat
 --------

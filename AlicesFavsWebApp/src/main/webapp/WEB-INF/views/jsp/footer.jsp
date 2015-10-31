@@ -32,22 +32,30 @@
     <ul class="mobile-main-menu">
       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#">Clothing</a>
         <ul class="sub-menu">
-          <li class="label-new menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/jcrew">Coming soon</a></li>
+          <c:forEach items="${clothing}" var="site">
+            <li class="label-new menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
+          </c:forEach>
         </ul>
       </li>
       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#">Shoes</a>
         <ul class="sub-menu">
-          <li class="label-new menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Coming soon</a></li>
+          <c:forEach items="${shoes}" var="site">
+            <li class="label-new menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
+          </c:forEach>
         </ul>
       </li>
       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#">Accessories</a>
         <ul class="sub-menu">
-          <li class="label-new menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Coming soon</a></li>
+          <c:forEach items="${accessories}" var="site">
+            <li class="label-new menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
+          </c:forEach>
         </ul>
       </li>
       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#">Home</a>
         <ul class="sub-menu">
-          <li class="label-new menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Coming soon</a></li>
+          <c:forEach items="${home}" var="site">
+            <li class="label-new menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
+          </c:forEach>
         </ul>
       </li>
       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#">New Arrivals</a>

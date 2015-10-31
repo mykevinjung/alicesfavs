@@ -32,7 +32,7 @@ public class AliceCategoryDaoImpl implements AliceCategoryDao
     public List<AliceCategory> selectAliceCategoriesByDisplay(boolean display)
     {
         final Object[] params =
-            { display };
+            { display ? '1' : '0' };
         return daoSupport.selectObjectList(SELECT_ALL, SELECT_PARAM_TYPES, params,
             new AliceCategoryRowMapper());
     }

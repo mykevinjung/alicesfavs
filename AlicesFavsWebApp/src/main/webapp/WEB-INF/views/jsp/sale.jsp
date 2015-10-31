@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="header.jsp" />
 
@@ -81,11 +82,11 @@
         <div class="large-12 columns">
             <div class="breadcrumb-row">
                 <div class="left">
-                    <h3 class="breadcrumb" itemscope="breadcrumb"><a href="http://flatsome.uxthemes.com">Home</a><span>/</span>Women</h3>    </div><!-- .left -->
+                    <h3 class="breadcrumb" itemscope="breadcrumb">${site.displayName}</h3>    </div><!-- .left -->
 
                 <div class="right">
                     <p class="woocommerce-result-count">
-                        Showing 1&ndash;12 of 25 results</p>
+                        Showing ${startIndex}&ndash;${endIndex} of ${productTotalCount} results</p>
                     <form class="woocommerce-ordering custom" method="get">
                         <div class="select-wrapper"><select name="orderby" class="orderby">
                             <option value="menu_order"  selected='selected'>Default sorting</option><option value="popularity" >Sort by popularity</option><option value="rating" >Sort by average rating</option><option value="date" >Sort by newness</option><option value="price" >Sort by price: low to high</option><option value="price-desc" >Sort by price: high to low</option>	</select></div>
@@ -108,13 +109,13 @@
 
 
 
+                        <c:forEach items="${productList}" var="product">
 
                         <li class="product-small  grid1 grid-normal">
                             <div class="inner-wrap">
-                                <a href="#">
-                                    <div class="product-image hover_fade_in_back">
-                                        <div class="front-image"><img width="247" height="300" src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/480264-2085_1-247x300.jpeg" class="attachment-shop_catalog wp-post-image" alt="480264-2085_1" /></div>
-                                        <div class="back-image back"><img width="247" height="300" src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/480264-2085_2-247x300.jpeg" class="attachment-shop_catalog" alt="480264-2085_2" /></div>
+                                <a target="_blank" href="${product.productExtract.url}">
+                                    <div class="product-image">
+                                        <div class="front-image"><img width="247" height="300" src="${product.productExtract.imageUrl}" class="attachment-shop_catalog wp-post-image" alt="${product.productExtract.name}" /></div>
 
 
                                     </div><!-- end product-image -->
@@ -125,43 +126,14 @@
 
                                     <div class="text-center">
                                         <h5 class="category">
-                                            <a href="/sale/${siteId}" rel="tag">${siteId}</a>          </h5>
+                                            <a href="/sale/${site.stringId}" rel="tag">${site.displayName}</a>          </h5>
                                         <div class="tx-div small"></div>
-                                        <a href="#"><p class="name">Asdi T-shirt</p></a>
+                                        <a target="_blank" href="${product.productExtract.url}"><p class="name">${product.productExtract.name}</p></a>
 
 
-                                        <span class="price"><span class="amount">&#36;19.00</span></span>
+                                        <span class="price"><del><span class="amount">${product.productExtract.wasPrice}</span></del> <ins><span class="amount">${product.productExtract.price}</span></ins></span>
 
                                     </div><!-- text-center -->
-
-
-
-
-                                    <div class="yith-wcwl-add-to-wishlist add-to-wishlist-99">
-                                        <div class="yith-wcwl-add-button show" style="display:block">
-
-
-                                            <a href="/product-category/women/?no_sidebar&#038;add_to_wishlist=99" rel="nofollow" data-product-id="99" data-product-type="variable" class="add_to_wishlist" >
-                                                Add to Wishlist</a>
-                                            <img src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/plugins/yith-woocommerce-wishlist/assets/images/wpspin_light.gif" class="ajax-loading" alt="loading" width="16" height="16" style="visibility:hidden" />
-                                        </div>
-
-                                        <div class="yith-wcwl-wishlistaddedbrowse hide" style="display:none;">
-                                            <span class="feedback">Product added!</span>
-                                            <a href="http://flatsome.uxthemes.com/wishlist/view/" >
-                                                Browse Wishlist	        </a>
-                                        </div>
-
-                                        <div class="yith-wcwl-wishlistexistsbrowse hide" style="display:none">
-                                            <span class="feedback">The product is already in the wishlist!</span>
-                                            <a href="http://flatsome.uxthemes.com/wishlist/view/">
-                                                Browse Wishlist	        </a>
-                                        </div>
-
-                                        <div style="clear:both"></div>
-                                        <div class="yith-wcwl-wishlistaddresponse"></div>
-
-                                    </div>
 
                                     <div class="clear"></div>	</div><!-- end info -->
 
@@ -172,209 +144,7 @@
                             </div> <!-- .inner-wrap -->
                         </li><!-- li.product-small -->
 
-                        <li class="product-small  grid1 grid-normal">
-                            <div class="inner-wrap">
-                                <a href="#">
-                                    <div class="product-image hover_fade_in_back">
-                                        <div class="front-image"><img width="247" height="300" src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/917542-0001_1-247x300.jpeg" class="attachment-shop_catalog wp-post-image" alt="917542-0001_1" /></div>
-                                        <div class="back-image back"><img width="247" height="300" src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/917542-0001_2-247x300.jpeg" class="attachment-shop_catalog" alt="917542-0001_2" /></div>
-
-
-                                    </div><!-- end product-image -->
-                                </a>
-
-                                <div class="info style-grid1">
-
-
-                                    <div class="text-center">
-                                        <h5 class="category">
-                                            <a href="/sale/${siteId}" rel="tag">${siteId}</a>          </h5>
-                                        <div class="tx-div small"></div>
-                                        <a href="#"><p class="name">Beyond Top NLY Trend</p></a>
-
-                                        <div class="star-rating" title="Rated 3.00 out of 5"><span style="width:60%"><strong class="rating">3.00</strong> out of 5</span></div>
-                                        <span class="price"><span class="amount">&#36;9.90</span></span>
-
-                                    </div><!-- text-center -->
-
-
-
-
-                                    <div class="yith-wcwl-add-to-wishlist add-to-wishlist-149">
-                                        <div class="yith-wcwl-add-button show" style="display:block">
-
-
-                                            <a href="/product-category/women/?no_sidebar&#038;add_to_wishlist=149" rel="nofollow" data-product-id="149" data-product-type="simple" class="add_to_wishlist" >
-                                                Add to Wishlist</a>
-                                            <img src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/plugins/yith-woocommerce-wishlist/assets/images/wpspin_light.gif" class="ajax-loading" alt="loading" width="16" height="16" style="visibility:hidden" />
-                                        </div>
-
-                                        <div class="yith-wcwl-wishlistaddedbrowse hide" style="display:none;">
-                                            <span class="feedback">Product added!</span>
-                                            <a href="http://flatsome.uxthemes.com/wishlist/view/" >
-                                                Browse Wishlist	        </a>
-                                        </div>
-
-                                        <div class="yith-wcwl-wishlistexistsbrowse hide" style="display:none">
-                                            <span class="feedback">The product is already in the wishlist!</span>
-                                            <a href="http://flatsome.uxthemes.com/wishlist/view/">
-                                                Browse Wishlist	        </a>
-                                        </div>
-
-                                        <div style="clear:both"></div>
-                                        <div class="yith-wcwl-wishlistaddresponse"></div>
-
-                                    </div>
-
-                                    <div class="clear"></div>	</div><!-- end info -->
-
-
-
-
-
-                            </div> <!-- .inner-wrap -->
-                        </li><!-- li.product-small -->
-
-                        <li class="product-small  grid1 grid-normal">
-                            <div class="inner-wrap">
-                                <a href="#">
-                                    <div class="product-image hover_fade_in_back">
-                                        <div class="front-image"><img width="247" height="300" src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/247251-0080_1-247x300.jpeg" class="attachment-shop_catalog wp-post-image" alt="247251-0080_1" /></div>
-                                        <div class="back-image back"><img width="247" height="300" src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/247251-0080_2-247x300.jpeg" class="attachment-shop_catalog" alt="247251-0080_2" /></div>
-
-
-                                    </div><!-- end product-image -->
-                                </a>
-
-                                <div class="info style-grid1">
-
-
-                                    <div class="text-center">
-                                        <h5 class="category">
-                                            <a href="/sale/${siteId}" rel="tag">${siteId}</a>          </h5>
-                                        <div class="tx-div small"></div>
-                                        <a href="#"><p class="name">Brooklyn Long Sleeve Sweater</p></a>
-
-                                        <div class="star-rating" title="Rated 4.00 out of 5"><span style="width:80%"><strong class="rating">4.00</strong> out of 5</span></div>
-                                        <span class="price"><span class="amount">&#36;12.00</span></span>
-
-                                    </div><!-- text-center -->
-
-
-
-
-                                    <div class="yith-wcwl-add-to-wishlist add-to-wishlist-187">
-                                        <div class="yith-wcwl-add-button show" style="display:block">
-
-
-                                            <a href="/product-category/women/?no_sidebar&#038;add_to_wishlist=187" rel="nofollow" data-product-id="187" data-product-type="simple" class="add_to_wishlist" >
-                                                Add to Wishlist</a>
-                                            <img src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/plugins/yith-woocommerce-wishlist/assets/images/wpspin_light.gif" class="ajax-loading" alt="loading" width="16" height="16" style="visibility:hidden" />
-                                        </div>
-
-                                        <div class="yith-wcwl-wishlistaddedbrowse hide" style="display:none;">
-                                            <span class="feedback">Product added!</span>
-                                            <a href="http://flatsome.uxthemes.com/wishlist/view/" >
-                                                Browse Wishlist	        </a>
-                                        </div>
-
-                                        <div class="yith-wcwl-wishlistexistsbrowse hide" style="display:none">
-                                            <span class="feedback">The product is already in the wishlist!</span>
-                                            <a href="http://flatsome.uxthemes.com/wishlist/view/">
-                                                Browse Wishlist	        </a>
-                                        </div>
-
-                                        <div style="clear:both"></div>
-                                        <div class="yith-wcwl-wishlistaddresponse"></div>
-
-                                    </div>
-
-                                    <div class="clear"></div>	</div><!-- end info -->
-
-
-
-
-
-                            </div> <!-- .inner-wrap -->
-                        </li><!-- li.product-small -->
-
-                        <li class="product-small  grid1 grid-normal">
-                            <div class="inner-wrap">
-                                <a href="#">
-                                    <div class="product-image hover_fade_in_back">
-                                        <div class="front-image"><img width="247" height="300" src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/745534-5275_1-247x300.jpeg" class="attachment-shop_catalog wp-post-image" alt="745534-5275_1" /></div>
-                                        <div class="back-image back"><img width="247" height="300" src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/745534-5275_2-247x300.jpeg" class="attachment-shop_catalog" alt="745534-5275_2" /></div>
-                                        <div class="quick-view" data-prod="212">Quick View</div>
-
-
-                                    </div><!-- end product-image -->
-                                </a>
-
-                                <div class="info style-grid1">
-
-
-                                    <div class="text-center">
-                                        <h5 class="category">
-                                            <a href="/sale/${siteId}" rel="tag">${siteId}</a>          </h5>
-                                        <div class="tx-div small"></div>
-                                        <a href="#"><p class="name">Contour Skinny G-star</p></a>
-
-
-                                        <span class="price"><del><span class="amount">&#36;49.00</span></del> <ins><span class="amount">&#36;22.00</span></ins></span>
-
-                                    </div><!-- text-center -->
-
-
-
-
-                                    <div class="yith-wcwl-add-to-wishlist add-to-wishlist-212">
-                                        <div class="yith-wcwl-add-button show" style="display:block">
-
-
-                                            <a href="/product-category/women/?no_sidebar&#038;add_to_wishlist=212" rel="nofollow" data-product-id="212" data-product-type="simple" class="add_to_wishlist" >
-                                                Add to Wishlist</a>
-                                            <img src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/plugins/yith-woocommerce-wishlist/assets/images/wpspin_light.gif" class="ajax-loading" alt="loading" width="16" height="16" style="visibility:hidden" />
-                                        </div>
-
-                                        <div class="yith-wcwl-wishlistaddedbrowse hide" style="display:none;">
-                                            <span class="feedback">Product added!</span>
-                                            <a href="http://flatsome.uxthemes.com/wishlist/view/" >
-                                                Browse Wishlist	        </a>
-                                        </div>
-
-                                        <div class="yith-wcwl-wishlistexistsbrowse hide" style="display:none">
-                                            <span class="feedback">The product is already in the wishlist!</span>
-                                            <a href="http://flatsome.uxthemes.com/wishlist/view/">
-                                                Browse Wishlist	        </a>
-                                        </div>
-
-                                        <div style="clear:both"></div>
-                                        <div class="yith-wcwl-wishlistaddresponse"></div>
-
-                                    </div>
-
-                                    <div class="clear"></div>	</div><!-- end info -->
-
-
-
-
-                                <div class="callout has-sale style1">
-                                    <div class="inner callout-new-bg">
-                                        <div class="inner-text ">
-                                            New              </div>
-                                    </div>
-                                </div><!-- end callout -->
-
-                                <div class="callout style1">
-                                    <div class="inner">
-                                        <div class="inner-text">Sale!</div>
-                                    </div>
-                                </div><!-- end callout -->
-
-                            </div> <!-- .inner-wrap -->
-                        </li><!-- li.product-small -->
-
-
+                        </c:forEach>
                     </ul>
                 </div>
             </div><!-- .large-12 -->

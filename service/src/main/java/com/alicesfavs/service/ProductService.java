@@ -21,4 +21,6 @@ public interface ProductService
 
     int markNotFoundProduct(long jobId, long siteId);
 
+    List<Product> selectSaleProducts(long siteId);
+
 }

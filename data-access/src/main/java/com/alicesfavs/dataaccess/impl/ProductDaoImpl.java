@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
@@ -41,6 +42,12 @@ public class ProductDaoImpl implements ProductDao
         + "PRICE_CHANGED_DATE, SALE_START_DATE, STORED_IMAGE_PATH, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
         + "CREATED_DATE, UPDATED_DATE FROM PRODUCT WHERE SITE_ID = ? AND ID_EXTRACT = ?";
 
+    private static final String SELECT_SALE_PRODUCTS_BY_SITE =
+        "SELECT ID, SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
+            + "WAS_PRICE_EXTRACT, BRAND_NAME_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, REGULAR_PRICE, "
+            + "PRICE_CHANGED_DATE, SALE_START_DATE, STORED_IMAGE_PATH, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
+            + "CREATED_DATE, UPDATED_DATE FROM PRODUCT WHERE SALE_START_DATE IS NOT NULL AND SITE_ID = ? AND EXTRACT_STATUS = ?";
+
     private static final int[] INSERT_PARAM_TYPES =
         { Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
             Types.VARCHAR, Types.DECIMAL, Types.DECIMAL, Types.DECIMAL, Types.TIMESTAMP, Types.TIMESTAMP, Types.VARCHAR,
@@ -50,6 +57,9 @@ public class ProductDaoImpl implements ProductDao
         { Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
             Types.VARCHAR, Types.DECIMAL, Types.DECIMAL, Types.DECIMAL, Types.TIMESTAMP, Types.TIMESTAMP, Types.VARCHAR,
             Types.INTEGER, Types.BIGINT, Types.TIMESTAMP, Types.BIGINT };
+
+    private static final int[] SELECT_SALE_PRODUCTS_BY_SITE_PARAM_TYPES =
+        { Types.BIGINT, Types.INTEGER };
 
     private static final int[] SELECT_BY_IDS_PARAM_TYPES =
         { Types.BIGINT, Types.VARCHAR };
@@ -100,10 +110,9 @@ public class ProductDaoImpl implements ProductDao
         return product;
     }
 
-    public Product selectProductById(Long siteId, String productId)
+    public Product selectProductById(Long siteId, String productExtractId)
     {
-        final Object[] params =
-            { siteId, productId };
+        final Object[] params = { siteId, productExtractId };
 
         try
         {
@@ -115,7 +124,7 @@ public class ProductDaoImpl implements ProductDao
             if (e.getActualSize() > 1)
             {
                 throw new DaoException("Schema Alert - more than one record found: selectProductById [" + siteId + ", "
-                    + productId + "]", e);
+                    + productExtractId + "]", e);
             }
 
             return null;
@@ -124,10 +133,19 @@ public class ProductDaoImpl implements ProductDao
 
     public int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus newStatus)
     {
-        final Object[] params =
-            { newStatus.getCode(), siteId, newStatus.getCode(), excludingJobId };
+        final Object[] params = { newStatus.getCode(), siteId, newStatus.getCode(), excludingJobId };
 
         return daoSupport.updateMultiple(UPDATE_EXTRACT_STATUS, UPDATE_EXTRACT_STATUS_PARAM_TYPES, params);
+    }
+
+    @Override
+    public List<Product> selectSaleProducts(long siteId, ExtractStatus status)
+    {
+        final Object[] params = { siteId, status.getCode() };
+
+        return daoSupport
+            .selectObjectList(SELECT_SALE_PRODUCTS_BY_SITE, SELECT_SALE_PRODUCTS_BY_SITE_PARAM_TYPES, params,
+                new ProductRowMapper());
     }
 
     private class ProductRowMapper implements RowMapper<Product>

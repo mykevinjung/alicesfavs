@@ -1,2 +1,26 @@
 [
+  {
+    "nextPageSpec":{
+      "containerSpec":{
+        "id":null,
+        "tagName":"li",
+        "className":"pagination_label",
+        "attributeKey":null,
+        "valuePattern":null
+      },
+      "elementSpec":{
+        "id":null,
+        "tagName":"a",
+        "className":"page-next",
+        "attributeKey":null,
+        "valuePattern":null
+      },
+      "dataSpec":{
+        "attributeKey":"abs:href",
+        "valuePattern":null,
+        "valueExcludePattern":null,
+        "substringPattern":null
+      }
+    }
+  }
 ]

@@ -28,11 +28,10 @@ public class SiteDaoImpl implements SiteDao
             + "WHERE STRING_ID = ?";
 
     private static final String SELECT_BY_ALICE_CATEGORY_ID =
-        "SELECT ID, STRING_ID, COUNTRY_CODE, DISPLAY_NAME, URL, DISPLAY, "
-            + "DISPLAY_WEIGHT, USE_STORED_IMAGE, CURRENCY, CREATED_DATE, UPDATED_DATE FROM SITE "
-            + "INNER JOIN ALICE_CATEGORY_SITE "
-            + "ON SITE.ID = ALICE_CATEGORY_SITE.SITE_ID "
-            + "WHERE ALICE_CATEGORY_SITE.ALICE_CATEGORY_ID = ?";
+        "SELECT S.ID, S.STRING_ID, S.COUNTRY_CODE, S.DISPLAY_NAME, S.URL, S.DISPLAY, "
+            + "S.DISPLAY_WEIGHT, S.USE_STORED_IMAGE, S.CURRENCY, S.CREATED_DATE, S.UPDATED_DATE FROM SITE S "
+            + "INNER JOIN ALICE_CATEGORY_SITE A ON S.ID = A.SITE_ID "
+            + "WHERE S.DISPLAY = '1' AND A.ALICE_CATEGORY_ID = ? ORDER BY S.DISPLAY_NAME";
 
     private static final int[] INSERT_PARAM_TYPES =
         { Types.VARCHAR, Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.CHAR, Types.INTEGER, Types.CHAR,
@@ -55,8 +54,8 @@ public class SiteDaoImpl implements SiteDao
         Integer displayWeight, boolean useStoredImage, String currency)
     {
         final Object[] params =
-            { stringId, country.getCode(), displayName, url, display ? 1 : 0, displayWeight,
-                useStoredImage ? 1 : 0, currency };
+            { stringId, country.getCode(), displayName, url, display ? '1' : '0', displayWeight,
+                useStoredImage ? '1' : '0', currency };
         final ModelBase modelBase = daoSupport.insert(INSERT_SITE, INSERT_PARAM_TYPES, params);
 
         final Site site = new Site(modelBase, stringId);
@@ -74,8 +73,8 @@ public class SiteDaoImpl implements SiteDao
     public Site updateSite(Site site)
     {
         final Object[] params =
-            { site.stringId, site.country.getCode(), site.displayName, site.url, site.display ? 1 : 0,
-                site.displayWeight, site.useStoredImage ? 1 : 0, site.currency, site.id };
+            { site.stringId, site.country.getCode(), site.displayName, site.url, site.display ? '1' : '0',
+                site.displayWeight, site.useStoredImage ? '1' : '0', site.currency, site.id };
         site.updatedDate = daoSupport.update(UPDATE_SITE, UPDATE_PARAM_TYPES, params);
 
         return site;

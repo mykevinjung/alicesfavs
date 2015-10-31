@@ -31,18 +31,18 @@
             <version>1.2</version>
         </dependency>
         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.alicesfavs</groupId>
-            <artifactId>data-model</artifactId>
+            <artifactId>af-data-model</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>com.alicesfavs</groupId>
-            <artifactId>data-access</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alicesfavs</groupId>
-            <artifactId>service</artifactId>
+            <artifactId>af-service</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>

@@ -1,12 +1,19 @@
 package com.alicesfavs.webapp.controller;
 
-import org.springframework.http.HttpStatus;
+import com.alicesfavs.datamodel.Product;
+import com.alicesfavs.datamodel.Site;
+import com.alicesfavs.service.ProductService;
+import com.alicesfavs.service.SiteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kjung on 10/19/15.
@@ -20,6 +27,14 @@ public class BaseController
     private static final String VIEW_ABOUT_US = "about-us";
     private static final String VIEW_CONTACT_US = "contact-us";
     private static final String VIEW_NOT_FOUND = "error404";
+
+    private static final int MAX_COUNT = 100;
+
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private SiteService siteService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap model)
@@ -40,9 +55,20 @@ public class BaseController
     }
 
     @RequestMapping(value = "/sale/{siteId}", method = RequestMethod.GET)
-    public String sale(@PathVariable String siteId, ModelMap model)
+    public String sale(@PathVariable String siteId, HttpServletRequest request, ModelMap model)
     {
-        model.addAttribute("siteId", siteId);
+        final Site site = siteService.findSiteById(siteId);
+        final List<Product> productList = productService.selectSaleProducts(site.id);
+
+        final String pageNo = request.getParameter("pageNo");
+
+        int startIndex = 0;
+        int endIndex = Math.min(MAX_COUNT, productList.size());
+        model.addAttribute("site", site);
+        model.addAttribute("productList", productList.subList(startIndex, endIndex));
+        model.addAttribute("startIndex", startIndex + 1);
+        model.addAttribute("endIndex", endIndex);
+        model.addAttribute("productTotalCount", productList.size());
         return VIEW_SALE;
     }
 

@@ -89,6 +89,11 @@ public class ProductServiceImpl implements ProductService
         return productDao.updateExtractStatus(siteId, jobId, ExtractStatus.NOT_FOUND);
     }
 
+    @Override public List<Product> selectSaleProducts(long siteId)
+    {
+        return productDao.selectSaleProducts(siteId, ExtractStatus.EXTRACTED);
+    }
+
     private ProductExtract findBestExtract(List<ProductExtract> productExtractList)
     {
         ProductExtract bestExtract = null;

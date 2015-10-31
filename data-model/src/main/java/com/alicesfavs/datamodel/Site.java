@@ -42,4 +42,79 @@ public class Site extends ModelBase
             + ", useStoredImage=" + useStoredImage + ", currency=" + currency + "]";
     }
 
+    public Country getCountry()
+    {
+        return country;
+    }
+
+    public void setCountry(Country country)
+    {
+        this.country = country;
+    }
+
+    public String getStringId()
+    {
+        return stringId;
+    }
+
+    public String getDisplayName()
+    {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName)
+    {
+        this.displayName = displayName;
+    }
+
+    public String getUrl()
+    {
+        return url;
+    }
+
+    public void setUrl(String url)
+    {
+        this.url = url;
+    }
+
+    public boolean isDisplay()
+    {
+        return display;
+    }
+
+    public void setDisplay(boolean display)
+    {
+        this.display = display;
+    }
+
+    public Integer getDisplayWeight()
+    {
+        return displayWeight;
+    }
+
+    public void setDisplayWeight(Integer displayWeight)
+    {
+        this.displayWeight = displayWeight;
+    }
+
+    public boolean isUseStoredImage()
+    {
+        return useStoredImage;
+    }
+
+    public void setUseStoredImage(boolean useStoredImage)
+    {
+        this.useStoredImage = useStoredImage;
+    }
+
+    public String getCurrency()
+    {
+        return currency;
+    }
+
+    public void setCurrency(String currency)
+    {
+        this.currency = currency;
+    }
+
 }

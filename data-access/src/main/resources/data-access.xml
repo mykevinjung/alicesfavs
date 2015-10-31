@@ -20,6 +20,6 @@
 	</bean>
 
 	<context:property-placeholder
-		location="/env/${EXECUTION_ENV:dev}/jdbc.properties" />
+		location="classpath:/env/${EXECUTION_ENV:dev}/jdbc.properties" />
 
 </beans>

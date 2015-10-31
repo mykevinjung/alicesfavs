@@ -43,7 +43,7 @@ public class UserVerificationDaoImpl implements UserVerificationDao
         String verificationCode, boolean verified, LocalDateTime expirationDate, LocalDateTime emailSentDate)
     {
         final Object[] params =
-            { userId, emailAddressHash, verificationCode, verified ? 1 : 0, DateTimeUtils.toTimestamp(expirationDate),
+            { userId, emailAddressHash, verificationCode, verified ? '1' : '0', DateTimeUtils.toTimestamp(expirationDate),
                 DateTimeUtils.toTimestamp(emailSentDate) };
         final ModelBase modelBase = daoSupport.insert(INSERT, INSERT_PARAM_TYPES, params);
 

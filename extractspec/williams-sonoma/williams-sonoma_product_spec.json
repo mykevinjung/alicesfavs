@@ -92,7 +92,7 @@
             "dataSpec":{
                 "attributeKey":"src",
                 "valuePattern":null,
-                "valueExcludePattern":null,
+                "valueExcludePattern":".*/blank.gif",
                 "substringPattern":null
             }
         },

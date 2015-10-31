@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <!--[if lte IE 9 ]><html class="ie lt-ie9" lang="en-US"> <![endif]-->
@@ -72,22 +73,30 @@
 
               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#" class="nav-top-link">Clothing</a>
                 <div class=nav-dropdown><ul>
-                  <li class="label-new menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/jcrew">Coming soon</a></li>
+                  <c:forEach items="${clothing}" var="site">
+                  <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
+                  </c:forEach>
                 </ul></div>
               </li>
               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#" class="nav-top-link">Shoes</a>
                 <div class=nav-dropdown><ul>
-                  <li class="label-new menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Coming soon</a></li>
+                  <c:forEach items="${shoes}" var="site">
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
+                  </c:forEach>
                 </ul></div>
               </li>
               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#" class="nav-top-link">Accessories</a>
                 <div class=nav-dropdown><ul>
-                  <li class="label-new menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Coming soon</a></li>
+                  <c:forEach items="${accessories}" var="site">
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
+                  </c:forEach>
                 </ul></div>
               </li>
               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#" class="nav-top-link">Home</a>
                 <div class=nav-dropdown><ul>
-                  <li class="label-new menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Coming soon</a></li>
+                  <c:forEach items="${home}" var="site">
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
+                  </c:forEach>
                 </ul></div>
               </li>
               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#" class="nav-top-link">New Arrivals</a>

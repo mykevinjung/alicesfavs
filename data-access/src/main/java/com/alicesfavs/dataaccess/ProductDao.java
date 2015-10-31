@@ -1,6 +1,7 @@
 package com.alicesfavs.dataaccess;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.alicesfavs.datamodel.ExtractStatus;
 import com.alicesfavs.datamodel.Product;
@@ -15,8 +16,10 @@ public interface ProductDao
 
     Product updateProduct(Product product);
 
-    Product selectProductById(Long siteId, String productId);
+    Product selectProductById(Long siteId, String productExtractId);
 
     int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus newStatus);
+
+    List<Product> selectSaleProducts(long siteId, ExtractStatus status);
 
 }

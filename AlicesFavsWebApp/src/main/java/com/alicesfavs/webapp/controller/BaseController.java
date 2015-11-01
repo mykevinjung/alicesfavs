@@ -4,6 +4,9 @@ import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.ProductService;
 import com.alicesfavs.service.SiteService;
+import com.alicesfavs.webapp.comparator.SaleDateComparator;
+import com.alicesfavs.webapp.service.ProductSortType;
+import com.alicesfavs.webapp.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,10 +34,10 @@ public class BaseController
     private static final int MAX_COUNT = 100;
 
     @Autowired
-    private ProductService productService;
+    private SiteService siteService;
 
     @Autowired
-    private SiteService siteService;
+    private SaleService saleService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap model)
@@ -51,10 +54,12 @@ public class BaseController
     @RequestMapping(value = "/sale/{siteId}", method = RequestMethod.GET)
     public String sale(@PathVariable String siteId, HttpServletRequest request, ModelMap model)
     {
-        final Site site = siteService.findSiteById(siteId);
-        final List<Product> productList = productService.selectSaleProducts(site.id);
-
         final String pageNo = request.getParameter("pageNo");
+        final String sortBy = request.getParameter("sortBy");
+        final ProductSortType productSortType = ProductSortType.fromCode(sortBy);
+
+        final Site site = siteService.findSiteById(siteId);
+        final List<Product> productList = saleService.getSaleProducts(site, productSortType);
 
         int startIndex = 0;
         int endIndex = Math.min(MAX_COUNT, productList.size());

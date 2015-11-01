@@ -89,7 +89,7 @@
                         Showing ${startIndex}&ndash;${endIndex} of ${productTotalCount} results</p>
                     <form class="woocommerce-ordering custom" method="get">
                         <div class="select-wrapper"><select name="orderby" class="orderby">
-                            <option value="menu_order"  selected='selected'>Default sorting</option><option value="popularity" >Sort by popularity</option><option value="rating" >Sort by average rating</option><option value="date" >Sort by newness</option><option value="price" >Sort by price: low to high</option><option value="price-desc" >Sort by price: high to low</option>	</select></div>
+                            <option value="date"  selected='selected'>Sort by newness</option><option value="price" >Sort by discount amount</option><option value="percentage" >Sort by discount percentage</option>	</select></div>
                         <input type="hidden" name="no_sidebar" value="" /></form>
                 </div><!-- .right -->
             </div><!-- .breadcrumb-row -->

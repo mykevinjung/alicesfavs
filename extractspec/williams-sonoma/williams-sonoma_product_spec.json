@@ -74,28 +74,52 @@
                 "substringPattern":null
             }
         },
-        "imageUrlSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"span",
-                "className":"product-thumb-casing",
-                "attributeKey":null,
-                "valuePattern":null
+        "imageUrlSpecList":[
+            {
+                "containerSpec":{
+                    "id":null,
+                    "tagName":"span",
+                    "className":"product-thumb-casing",
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "elementSpec":{
+                    "id":null,
+                    "tagName":"img",
+                    "className":null,
+                    "attributeKey":"src",
+                    "valuePattern":null
+                },
+                "dataSpec":{
+                    "attributeKey":"src",
+                    "valuePattern":null,
+                    "valueExcludePattern":".*/blank.gif",
+                    "substringPattern":null
+                }
             },
-            "elementSpec":{
-                "id":null,
-                "tagName":"img",
-                "className":null,
-                "attributeKey":"src",
-                "valuePattern":null
-            },
-            "dataSpec":{
-                "attributeKey":"src",
-                "valuePattern":null,
-                "valueExcludePattern":".*/blank.gif",
-                "substringPattern":null
+            {
+                "containerSpec":{
+                    "id":null,
+                    "tagName":"span",
+                    "className":"product-thumb-casing",
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "elementSpec":{
+                    "id":null,
+                    "tagName":"img",
+                    "className":null,
+                    "attributeKey":"data-async-src",
+                    "valuePattern":null
+                },
+                "dataSpec":{
+                    "attributeKey":"data-async-src",
+                    "valuePattern":null,
+                    "valueExcludePattern":null,
+                    "substringPattern":null
+                }
             }
-        },
+        ],
         "priceSpecList":[
             {
                 "containerSpec":{

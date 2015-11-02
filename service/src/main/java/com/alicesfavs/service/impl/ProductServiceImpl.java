@@ -59,7 +59,7 @@ public class ProductServiceImpl implements ProductService
     public Product saveProduct(long jobId, long siteId, ExtractStatus extractStatus,
         List<ProductExtract> productExtractList)
     {
-        final ProductExtract bestProduct = findBestExtract(productExtractList);
+        final ProductExtract bestProduct = findBestPriceExtract(productExtractList);
         return saveProduct(jobId, siteId, extractStatus, bestProduct);
     }
 
@@ -94,7 +94,7 @@ public class ProductServiceImpl implements ProductService
         return productDao.selectSaleProducts(siteId, ExtractStatus.EXTRACTED);
     }
 
-    private ProductExtract findBestExtract(List<ProductExtract> productExtractList)
+    private ProductExtract findBestPriceExtract(List<ProductExtract> productExtractList)
     {
         ProductExtract bestExtract = null;
         for (ProductExtract pe : productExtractList)

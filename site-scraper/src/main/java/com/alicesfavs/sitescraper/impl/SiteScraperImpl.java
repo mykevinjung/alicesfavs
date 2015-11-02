@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
@@ -101,7 +102,11 @@ public class SiteScraperImpl implements SiteScraper
         final List<ProductExtract> productList = new ArrayList<ProductExtract>();
         while (StringUtils.hasText(url))
         {
-            Document doc = openUrl(url);
+            final Document doc = openUrl(url);
+            if (doc == null)
+            {
+                break;
+            }
             productList.addAll(extractProducts(doc, productExtractSpecList));
             url = extractNextPageUrl(doc, nextPageExtractSpecList);
         }
@@ -113,8 +118,15 @@ public class SiteScraperImpl implements SiteScraper
     public List<ProductExtract> extractProducts(String pageUrl, List<ProductExtractSpec> productExtractSpecList)
             throws SiteScrapeException
     {
-        Document doc = openUrl(pageUrl);
-        return extractProducts(doc, productExtractSpecList);
+        final Document doc = openUrl(pageUrl);
+        if (doc != null)
+        {
+            return extractProducts(doc, productExtractSpecList);
+        }
+        else
+        {
+            return new ArrayList<>();
+        }
     }
 
     private List<CategoryExtract> extractLeafCategories(Site site, CategoryExtractSpec categoryExtractSpec)
@@ -129,7 +141,7 @@ public class SiteScraperImpl implements SiteScraper
         {
             leafCategorySpec = leafCategorySpec.subcategorySpec;
             parentCategories = leafCategories;
-            leafCategories = new ArrayList<CategoryExtract>();
+            leafCategories = new ArrayList<>();
             for (CategoryExtract category : parentCategories)
             {
                 leafCategories.addAll(extractCategories(category.url, leafCategorySpec));
@@ -143,7 +155,14 @@ public class SiteScraperImpl implements SiteScraper
             throws SiteScrapeException, ElementNotFoundException, DataNotFoundException
     {
         final Document doc = openUrl(pageUrl);
-        return dataExtractor.extractCategories(doc, categoryExtractSpec);
+        if (doc != null)
+        {
+            return dataExtractor.extractCategories(doc, categoryExtractSpec);
+        }
+        else
+        {
+            return new ArrayList<>();
+        }
     }
 
     private List<ProductExtract> extractProducts(Document document, List<ProductExtractSpec> productExtractSpecList)
@@ -187,6 +206,12 @@ public class SiteScraperImpl implements SiteScraper
             // System.out.println("Opening " + url);
             LOGGER.debug("Opening {}", url);
             return Jsoup.connect(url).timeout(90 * 1000).get();
+        }
+        catch (HttpStatusException e)
+        {
+            // ignore and move forward to next
+            LOGGER.error("Error in opening " + url, e);
+            return null;
         }
         catch (IOException e)
         {

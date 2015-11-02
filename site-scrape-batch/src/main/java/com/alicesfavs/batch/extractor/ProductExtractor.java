@@ -61,6 +61,8 @@ public class ProductExtractor
             .saveProduct(job.id, site.id, extractStatus, productExtractMap);
         job.foundProduct = productMap.size();
         job.notFoundProduct = productService.markNotFoundProduct(job.id, site.id);
+        LOGGER.info("Extracted product: {}, Saved product: {}, Not found product: {}",
+            productExtractMap.size(), job.foundProduct, job.notFoundProduct);
 
         //createSearchableProduct(categoryMap, productMap);
         //final SearchableProductCreator creator = new SearchableProductCreator(batchConfig);

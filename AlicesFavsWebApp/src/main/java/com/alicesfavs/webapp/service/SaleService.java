@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -36,11 +35,11 @@ public class SaleService
     public List<Product> getSaleProducts(Site site, ProductSortType productSortType)
     {
         final List<Product> sortBySaleDate = getSaleProductsFromCache(site);
-        if (productSortType == ProductSortType.PRICE)
+        if (productSortType == ProductSortType.AMOUNT)
         {
-            final List<Product> sortByPrice = new ArrayList<>(sortBySaleDate);
-            sortByPrice.sort(new DiscountAmountComparator());
-            return sortByPrice;
+            final List<Product> sortByAmount = new ArrayList<>(sortBySaleDate);
+            sortByAmount.sort(new DiscountAmountComparator());
+            return sortByAmount;
         }
         else if (productSortType == ProductSortType.PERCENTAGE)
         {

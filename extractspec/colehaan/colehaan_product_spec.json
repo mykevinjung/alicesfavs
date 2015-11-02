@@ -68,28 +68,30 @@
                 "substringPattern":null
             }
         },
-        "imageUrlSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":"thumb-link",
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "elementSpec":{
-                "id":null,
-                "tagName":"img",
-                "className":"srcImage",
-                "attributeKey":"src",
-                "valuePattern":null
-            },
-            "dataSpec":{
-                "attributeKey":"src",
-                "valuePattern":null,
-                "valueExcludePattern":null,
-                "substringPattern":null
+        "imageUrlSpecList":[
+            {
+                "containerSpec":{
+                    "id":null,
+                    "tagName":"a",
+                    "className":"thumb-link",
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "elementSpec":{
+                    "id":null,
+                    "tagName":"img",
+                    "className":"srcImage",
+                    "attributeKey":"src",
+                    "valuePattern":null
+                },
+                "dataSpec":{
+                    "attributeKey":"src",
+                    "valuePattern":null,
+                    "valueExcludePattern":null,
+                    "substringPattern":null
+                }
             }
-        },
+        ],
         "priceSpecList":[
             {
                 "containerSpec":{

@@ -80,28 +80,30 @@
                 "substringPattern":null
             }
         },
-        "imageUrlSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"div",
-                "className":"productimage",
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "elementSpec":{
-                "id":null,
-                "tagName":"img",
-                "className":"product-image-primary",
-                "attributeKey":"src",
-                "valuePattern":null
-            },
-            "dataSpec":{
-                "attributeKey":"src",
-                "valuePattern":null,
-                "valueExcludePattern":null,
-                "substringPattern":null
+        "imageUrlSpecList":[
+            {
+                "containerSpec":{
+                    "id":null,
+                    "tagName":"div",
+                    "className":"productimage",
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "elementSpec":{
+                    "id":null,
+                    "tagName":"img",
+                    "className":"product-image-primary",
+                    "attributeKey":"src",
+                    "valuePattern":null
+                },
+                "dataSpec":{
+                    "attributeKey":"src",
+                    "valuePattern":null,
+                    "valueExcludePattern":null,
+                    "substringPattern":null
+                }
             }
-        },
+        ],
         "priceSpecList":[
             {
                 "containerSpec":{

@@ -6,7 +6,15 @@ public class Extractable extends ModelBase
 {
 
     public ExtractStatus extractStatus;
+
+    /**
+     * The job id by which this model was extracted last
+     */
     public Long extractJobId;
+
+    /**
+     * The date when this model was extracted last
+     */
     public LocalDateTime extractedDate;
 
     public Extractable(long id, LocalDateTime createdDate)

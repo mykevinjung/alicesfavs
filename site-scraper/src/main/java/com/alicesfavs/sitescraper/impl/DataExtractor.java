@@ -76,7 +76,7 @@ public class DataExtractor
                 ProductExtract productExtract = new ProductExtract(id);
                 productExtract.name = extractData(element, productExtractSpec.nameSpec);
                 productExtract.url = extractData(element, productExtractSpec.urlSpec);
-                productExtract.imageUrl = extractData(element, productExtractSpec.imageUrlSpec);
+                productExtract.imageUrl = extractData(element, productExtractSpec.imageUrlSpecList);
                 productExtract.price = extractData(element, productExtractSpec.priceSpecList);
                 try
                 {

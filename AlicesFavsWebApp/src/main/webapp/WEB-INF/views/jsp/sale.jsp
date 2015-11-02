@@ -88,13 +88,15 @@
                     <p class="woocommerce-result-count">
                         Showing ${startIndex}&ndash;${endIndex} of ${productTotalCount} results</p>
                     <form class="woocommerce-ordering custom" method="get">
-                        <div class="select-wrapper"><select name="orderby" class="orderby">
-                            <option value="date"  selected='selected'>Sort by newness</option><option value="price" >Sort by discount amount</option><option value="percentage" >Sort by discount percentage</option>	</select></div>
-                        <input type="hidden" name="no_sidebar" value="" /></form>
+                        <div class="select-wrapper">
+                            <select name="sortBy" class="orderby">
+                            <option value="date"  selected='selected'>Sort by newness</option><option value="amount" >Sort by discount $</option><option value="percentage" >Sort by discount %</option>
+                            </select>
+                        </div>
+                        <input type="hidden" name="no_sidebar" value="" />
+                    </form>
                 </div><!-- .right -->
             </div><!-- .breadcrumb-row -->
-
-
         </div><!-- .large-12 breadcrumb -->
 
 
@@ -136,9 +138,6 @@
                                     </div><!-- text-center -->
 
                                     <div class="clear"></div>	</div><!-- end info -->
-
-
-
 
 
                             </div> <!-- .inner-wrap -->

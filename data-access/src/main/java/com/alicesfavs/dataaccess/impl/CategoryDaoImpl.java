@@ -111,19 +111,7 @@ public class CategoryDaoImpl implements CategoryDao
             types[index] = Types.VARCHAR;
         }
 
-        try
-        {
-            return daoSupport.selectObject(sql.toString(), types, paramList.toArray(), new CategoryRowMapper());
-        }
-        catch (IncorrectResultSizeDataAccessException e)
-        {
-            if (e.getActualSize() > 1)
-            {
-                throw new DaoException("Schema Alert - more than one record found: selectCategoryByName [" + siteId
-                    + ", " + categoryName1 + ", " + categoryName2 + ", " + categoryName3 + "]", e);
-            }
-            return null;
-        }
+        return daoSupport.selectObject(sql.toString(), types, paramList.toArray(), new CategoryRowMapper());
     }
 
     public List<Category> selectCategoryBySiteId(long siteId, ExtractStatus extractStatus)

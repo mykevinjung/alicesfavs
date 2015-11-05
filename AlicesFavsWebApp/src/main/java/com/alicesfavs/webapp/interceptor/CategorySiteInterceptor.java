@@ -1,9 +1,7 @@
 package com.alicesfavs.webapp.interceptor;
 
-import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Site;
-import com.alicesfavs.service.AliceCategoryService;
-import com.alicesfavs.service.SiteService;
+import com.alicesfavs.webapp.service.SiteManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,7 +9,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,40 +20,18 @@ public class CategorySiteInterceptor extends HandlerInterceptorAdapter
 {
 
     @Autowired
-    private AliceCategoryService aliceCategoryService;
+    private SiteManager siteManager;
 
-    @Autowired
-    private SiteService siteService;
-
-    private Map<String, List<Site>> categorySiteMap;
-
+    /**
+     * Add category-site map into ModelAndView so that the map can be used for things like top menu
+     */
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
         ModelAndView modelAndView) throws Exception
     {
-        for (Map.Entry<String, List<Site>> categorySite : getCategorySiteMap().entrySet())
+        for (Map.Entry<String, List<Site>> categorySite : siteManager.getCategorySiteMap().entrySet())
         {
             modelAndView.addObject(categorySite.getKey().toLowerCase(), categorySite.getValue());
         }
     }
 
-    private synchronized Map<String, List<Site>> getCategorySiteMap()
-    {
-        if (refreshCategorySiteMap())
-        {
-            categorySiteMap = new HashMap<>();
-            List<AliceCategory> aliceCategories = aliceCategoryService.findAllAliceCategories();
-            for (AliceCategory aliceCategory : aliceCategories)
-            {
-                final List<Site> sites = siteService.findSitesByAliceCategory(aliceCategory.id);
-                categorySiteMap.put(aliceCategory.name, sites);
-            }
-        }
-
-        return categorySiteMap;
-    }
-
-    private boolean refreshCategorySiteMap()
-    {
-        return categorySiteMap == null;
-    }
 }

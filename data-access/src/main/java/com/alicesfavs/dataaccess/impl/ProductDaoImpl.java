@@ -114,21 +114,8 @@ public class ProductDaoImpl implements ProductDao
     {
         final Object[] params = { siteId, productExtractId };
 
-        try
-        {
-            return daoSupport.selectObject(SELECT_PRODUCT_BY_IDS, SELECT_BY_IDS_PARAM_TYPES, params,
-                new ProductRowMapper());
-        }
-        catch (IncorrectResultSizeDataAccessException e)
-        {
-            if (e.getActualSize() > 1)
-            {
-                throw new DaoException("Schema Alert - more than one record found: selectProductById [" + siteId + ", "
-                    + productExtractId + "]", e);
-            }
-
-            return null;
-        }
+        return daoSupport.selectObject(SELECT_PRODUCT_BY_IDS, SELECT_BY_IDS_PARAM_TYPES, params,
+            new ProductRowMapper());
     }
 
     public int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus newStatus)

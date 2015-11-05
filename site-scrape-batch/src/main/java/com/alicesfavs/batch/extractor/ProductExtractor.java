@@ -56,9 +56,8 @@ public class ProductExtractor
         }
 
         LOGGER.info("Saving product map...");
-        final ExtractStatus extractStatus = site.display ? ExtractStatus.EXTRACTED : ExtractStatus.HIDDEN;
-        final Map<String, Product> productMap = productService
-            .saveProduct(job.id, site.id, extractStatus, productExtractMap);
+        final Map<String, Product> productMap =
+            productService.saveProduct(job.id, site.id, ExtractStatus.EXTRACTED, productExtractMap);
         job.foundProduct = productMap.size();
         job.notFoundProduct = productService.markNotFoundProduct(job.id, site.id);
         LOGGER.info("Extracted product: {}, Saved product: {}, Not found product: {}",

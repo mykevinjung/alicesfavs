@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
 import org.springframework.jdbc.core.RowMapper;
@@ -79,7 +80,19 @@ public class DaoSupport<T> extends JdbcDaoSupport
 
     final T selectObject(String sql, int[] types, Object[] params, RowMapper<T> rowMapper)
     {
-        return getJdbcTemplate(DEFAULT_QUERY_TIMEOUT).queryForObject(sql, params, types, rowMapper);
+        try
+        {
+            return getJdbcTemplate(DEFAULT_QUERY_TIMEOUT).queryForObject(sql, params, types, rowMapper);
+        }
+        catch (IncorrectResultSizeDataAccessException e)
+        {
+            if (e.getActualSize() > 1)
+            {
+                throw new DaoException("Schema Alert - more than one record found", e);
+            }
+
+            return null;
+        }
     }
 
     final List<T> selectObjectList(String sql, int[] types, Object[] params, RowMapper<T> rowMapper)

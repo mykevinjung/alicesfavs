@@ -87,19 +87,7 @@ public class CategoryProductDaoImpl implements CategoryProductDao
         final Object[] params =
             { categoryId, productId };
 
-        try
-        {
-            return daoSupport.selectObject(SELECT_BY_IDS, SELECT_PARAM_TYPES, params, new CategoryProductRowMapper());
-        }
-        catch (IncorrectResultSizeDataAccessException e)
-        {
-            if (e.getActualSize() > 1)
-            {
-                throw new DaoException("Schema Alert - more than one record found: selectCategoryProduct ["
-                    + categoryId + ", " + productId + "]", e);
-            }
-            return null;
-        }
+        return daoSupport.selectObject(SELECT_BY_IDS, SELECT_PARAM_TYPES, params, new CategoryProductRowMapper());
     }
 
     public int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus currentStatus,

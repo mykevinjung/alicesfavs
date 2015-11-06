@@ -82,7 +82,7 @@
         <div class="large-12 columns">
             <div class="breadcrumb-row">
                 <div class="left">
-                    <h3 class="breadcrumb" itemscope="breadcrumb">${site.displayName}</h3>    </div><!-- .left -->
+                    <h3 class="breadcrumb" itemscope="breadcrumb"><a href="">Sale</a><span>/</span>${site.displayName}</h3>    </div><!-- .left -->
 
                 <div class="right">
                     <p class="woocommerce-result-count">
@@ -116,9 +116,9 @@
 
                         <li class="product-small  grid1 grid-normal">
                             <div class="inner-wrap">
-                                <a target="_blank" href="${product.productExtract.url}">
+                                <a target="_blank" href="${product.url}">
                                     <div class="product-image">
-                                        <div class="front-image"><img width="247" height="300" src="${product.productExtract.imageUrl}" class="attachment-shop_catalog wp-post-image" alt="${product.productExtract.name}" /></div>
+                                        <div class="front-image"><img width="247" height="300" src="${product.imageUrl}" class="attachment-shop_catalog wp-post-image" alt="${product.name}" /></div>
 
 
                                     </div><!-- end product-image -->
@@ -129,12 +129,12 @@
 
                                     <div class="text-center">
                                         <h5 class="category">
-                                            <a href="/sale/${site.stringId}" rel="tag">${site.displayName}</a>          </h5>
+                                            <a href="/sale/${product.siteStringId}" rel="tag">${product.siteName}</a>          </h5>
                                         <div class="tx-div small"></div>
-                                        <a target="_blank" href="${product.productExtract.url}"><p class="name">${product.productExtract.name}</p></a>
+                                        <a target="_blank" href="${product.url}"><p class="name">${product.name}</p></a>
 
 
-                                        <span class="price"><del><span class="amount">${product.productExtract.wasPrice}</span></del> <ins><span class="amount">${product.productExtract.price}</span></ins></span>
+                                        <span class="price"><del><span class="amount">${product.wasPrice}</span></del> <ins><span class="amount">${product.price}</span></ins></span>
 
                                     </div><!-- text-center -->
 

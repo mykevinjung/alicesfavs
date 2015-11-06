@@ -24,13 +24,13 @@ public class User extends ModelBase
         super(modelBase);
     }
 
-    public static enum Status
+    public enum Status
     {
         REGISTERED(1), ACTIVATED(2), DELETED(3), INVALID_EMAIL(4);
 
         private final int code;
 
-        private Status(int code)
+        Status(int code)
         {
             this.code = code;
         }

@@ -1,110 +1,96 @@
 package com.alicesfavs.webapp.controller;
 
+import com.alicesfavs.datamodel.Product;
+import com.alicesfavs.datamodel.Site;
+import com.alicesfavs.webapp.config.WebAppConfig;
+import com.alicesfavs.webapp.service.ProductSortType;
+import com.alicesfavs.webapp.service.SaleProductService;
+import com.alicesfavs.webapp.service.SiteManager;
 import com.alicesfavs.webapp.uimodel.Page;
+import com.alicesfavs.webapp.util.ModelConverter;
+import com.alicesfavs.webapp.util.Pagination;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by kjung on 11/4/15.
  */
-public abstract class ProductController
+@Controller
+public class ProductController
 {
 
-    protected static final String PAGE_NUMBER = "pageNo";
+    private static final String PAGE_NUMBER = "pageNo";
+    private static final String PRODUCT_LIST = "productList";
+    private static final String START_INDEX = "startIndex";
+    private static final String END_INDEX = "endIndex";
+    private static final String TOTAL_PAGE_NO = "totalPageNo";
+    private static final String TOTAL_COUNT = "totalCount";
+    private static final String PAGE_LIST = "pageList";
+    private static final String NEXT_PAGE = "nextPage";
+    private static final String PREV_PAGE = "prevPage";
+    private static final String SORT_BY = "sortBy";
+    private static final String SITE = "site";
 
-    protected static final int DEFAULT_PAGE_SIZE = 60;
+    private static final String VIEW_SALE = "sale";
 
-    protected int getPageSize()
+    @Autowired
+    private SiteManager siteManager;
+
+    @Autowired
+    private SaleProductService saleProductService;
+
+    @Autowired
+    private WebAppConfig webAppConfig;
+
+    @RequestMapping(value = "/sale/{siteId}", method = RequestMethod.GET)
+    public String sale(@PathVariable String siteId, HttpServletRequest request, ModelMap model)
     {
-        return DEFAULT_PAGE_SIZE;
+        final Site site = siteManager.getSiteByStringId(siteId);
+        if (site == null)
+        {
+            throw new ResourceNotFoundException("Site '" + siteId + "' not found");
+        }
+
+        final ProductSortType productSortType = ProductSortType.fromCode(request.getParameter(SORT_BY));
+        final List<Product> productList = saleProductService.getSaleProducts(site, productSortType);
+        addProductAttributes(request, model, site, productList, webAppConfig.getSaleProductPageSize());
+
+        model.addAttribute(SITE, ModelConverter.convertSite(site));
+        model.addAttribute(SORT_BY,
+            productSortType == null ? ProductSortType.DATE.getCode() : productSortType.getCode());
+
+        return VIEW_SALE;
     }
 
-    protected List<Page> getPageList(HttpServletRequest request, int totalPageNo, int currentPageNo)
+    private void addProductAttributes(HttpServletRequest request, ModelMap model, Site site, List<Product> productList,
+        int pageSize)
     {
-        final List<Page> pages = new ArrayList<>();
-        for (int index = currentPageNo - 2 ; index <= currentPageNo + 2 ; index++)
-        {
-            if (1 <= index && index <= totalPageNo)
-            {
-                pages.add(new Page(index, getUrlWithPageNo(request, index)));
-            }
-        }
+        final int totalCount = productList.size();
+        final Pagination pagination = new Pagination(pageSize, totalCount, request,
+            PAGE_NUMBER);
+        final int totalPageNo = pagination.getTotalPageNo();
+        final int pageNo = pagination.getActualPageNo(NumberUtils.toInt(request.getParameter(PAGE_NUMBER), 1));
+        final int startIndex = pagination.getStartIndex(pageNo);
+        final int endIndex = pagination.getEndIndex(pageNo);
+        final List<Page> pageList = pagination.getPageList(pageNo);
 
-        return pages;
-    }
-
-    protected String getUrlWithPageNo(HttpServletRequest request, int newPageNo)
-    {
-        final String oldPageNo = request.getParameter(PAGE_NUMBER);
-        if (oldPageNo == null)
-        {
-            return getUrl(request) + "&" + PAGE_NUMBER + "=" + String.valueOf(newPageNo);
-        }
-        else
-        {
-            return getUrl(request).replace(PAGE_NUMBER + "=" + oldPageNo, PAGE_NUMBER + "=" + newPageNo);
-        }
-    }
-
-    protected String getUrl(HttpServletRequest request)
-    {
-        final StringBuffer url = request.getRequestURL().append("?");
-        final String queryString = request.getQueryString();
-        if (queryString != null)
-        {
-            url.append(queryString);
-        }
-
-        return url.toString();
-    }
-
-    protected int getTotalPageNo(int totalSize)
-    {
-        return (totalSize + getPageSize() - 1) / getPageSize();
-    }
-
-    protected int getActualPageNo(int requestPageNo, int totalPageNo)
-    {
-        if (1 <= requestPageNo && requestPageNo <= totalPageNo)
-        {
-            return requestPageNo;
-        }
-        else if (requestPageNo > totalPageNo)
-        {
-            return totalPageNo;
-        }
-        else
-        {
-            return 1;
-        }
-    }
-
-    protected Page getNextPage(List<Page> pageList, int pageNo)
-    {
-        for (int index = 0 ; index < pageList.size() - 1 ; index++)
-        {
-            if (pageList.get(index).getPageNo() == pageNo)
-            {
-                return pageList.get(index + 1);
-            }
-        }
-
-        return null;
-    }
-
-    protected Page getPrevPage(List<Page> pageList, int pageNo)
-    {
-        for (int index = 1 ; index < pageList.size() ; index++)
-        {
-            if (pageList.get(index).getPageNo() == pageNo)
-            {
-                return pageList.get(index - 1);
-            }
-        }
-
-        return null;
+        model.addAttribute(PRODUCT_LIST, ModelConverter.convertProductList(site, productList, startIndex, endIndex));
+        model.addAttribute(START_INDEX, startIndex + 1);
+        model.addAttribute(END_INDEX, endIndex);
+        model.addAttribute(PAGE_NUMBER, pageNo);
+        model.addAttribute(TOTAL_PAGE_NO, totalPageNo);
+        model.addAttribute(TOTAL_COUNT, totalCount);
+        model.addAttribute(PAGE_LIST, pageList);
+        model.addAttribute(NEXT_PAGE, pagination.getNextPage(pageList, pageNo));
+        model.addAttribute(PREV_PAGE, pagination.getPrevPage(pageList, pageNo));
     }
 
 }

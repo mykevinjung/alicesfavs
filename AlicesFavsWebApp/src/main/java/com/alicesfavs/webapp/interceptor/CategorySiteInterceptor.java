@@ -1,7 +1,9 @@
 package com.alicesfavs.webapp.interceptor;
 
+import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.webapp.service.SiteManager;
+import com.alicesfavs.webapp.util.ModelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,9 +30,9 @@ public class CategorySiteInterceptor extends HandlerInterceptorAdapter
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
         ModelAndView modelAndView) throws Exception
     {
-        for (Map.Entry<String, List<Site>> categorySite : siteManager.getCategorySiteMap().entrySet())
+        for (Map.Entry<AliceCategory, List<Site>> categorySite : siteManager.getCategorySiteMap().entrySet())
         {
-            modelAndView.addObject(categorySite.getKey().toLowerCase(), categorySite.getValue());
+            modelAndView.addObject(categorySite.getKey().name, ModelConverter.convertSiteList(categorySite.getValue()));
         }
     }
 

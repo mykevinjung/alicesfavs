@@ -5,9 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
-import com.alicesfavs.batch.extractor.ExtractException;
 import com.alicesfavs.datamodel.Job;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.JobService;

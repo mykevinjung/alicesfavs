@@ -4,6 +4,7 @@ import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.AliceCategoryService;
 import com.alicesfavs.service.SiteService;
+import com.alicesfavs.webapp.config.WebAppConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,19 +22,20 @@ import java.util.Map;
 public class SiteManager
 {
 
-    private static final int CACHE_TIMEOUT_SECONDS = 60 * 60;
-
     @Autowired
     private AliceCategoryService aliceCategoryService;
 
     @Autowired
     private SiteService siteService;
 
-    private Map<String, List<Site>> categorySiteMap = new HashMap<>();
+    @Autowired
+    private WebAppConfig webAppConfig;
+
+    private Map<AliceCategory, List<Site>> categorySiteMap = new HashMap<>();
 
     private LocalDateTime cachedTime;
 
-    public Map<String, List<Site>> getCategorySiteMap()
+    public Map<AliceCategory, List<Site>> getCategorySiteMap()
     {
         if (shouldRefresh())
         {
@@ -44,7 +46,7 @@ public class SiteManager
         return categorySiteMap;
     }
 
-    public Site getSite(String stringId)
+    public Site getSiteByStringId(String stringId)
     {
         for (final Site site : getSites())
         {
@@ -57,6 +59,20 @@ public class SiteManager
         return null;
     }
 
+    public Site getSiteById(long id)
+    {
+        for (final Site site : getSites())
+        {
+            if (site.id == id)
+            {
+                return site;
+            }
+        }
+
+        return null;
+    }
+
+    // TODO refactor this with Set instead of List
     public List<Site> getSites()
     {
         final List<Site> sites = new ArrayList<>();
@@ -68,14 +84,14 @@ public class SiteManager
         return sites;
     }
 
-    private Map<String, List<Site>> getCategorySiteMapFromDatabase()
+    private Map<AliceCategory, List<Site>> getCategorySiteMapFromDatabase()
     {
-        final Map<String, List<Site>> categorySiteMapFromDB = new HashMap<>();
+        final Map<AliceCategory, List<Site>> categorySiteMapFromDB = new HashMap<>();
         final List<AliceCategory> aliceCategories = aliceCategoryService.findAllAliceCategories();
         for (final AliceCategory aliceCategory : aliceCategories)
         {
             final List<Site> sites = siteService.findSitesByAliceCategory(aliceCategory.id);
-            categorySiteMapFromDB.put(aliceCategory.name, sites);
+            categorySiteMapFromDB.put(aliceCategory, sites);
         }
 
         return categorySiteMapFromDB;
@@ -84,7 +100,7 @@ public class SiteManager
     private boolean shouldRefresh()
     {
         return categorySiteMap == null || cachedTime == null ||
-            cachedTime.until(LocalDateTime.now(), ChronoUnit.SECONDS) > CACHE_TIMEOUT_SECONDS;
+            cachedTime.until(LocalDateTime.now(), ChronoUnit.SECONDS) > webAppConfig.getSiteCacheTimeoutSeconds();
     }
 
 }

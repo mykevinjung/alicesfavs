@@ -1,8 +1,10 @@
 package com.alicesfavs.webapp.service;
 
+import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.ProductService;
+import com.alicesfavs.webapp.comparator.CreationDateComparator;
 import com.alicesfavs.webapp.comparator.DiscountAmountComparator;
 import com.alicesfavs.webapp.comparator.DiscountPercentageComparator;
 import com.alicesfavs.webapp.comparator.SaleDateComparator;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -21,46 +24,50 @@ import java.util.Map;
  * Created by kjung on 10/30/15.
  */
 @Component
-public class SaleProductService
+public class NewProductService
 {
 
     @Autowired
     private ProductService productService;
 
     @Autowired
+    private SiteManager siteManager;
+
+    @Autowired
     private WebAppConfig webAppConfig;
 
     private Map<Long, CachedList<Product>> siteProductMap = new Hashtable<>();
 
-    public List<Product> getSaleProducts(Site site, ProductSortType productSortType)
+    public List<Product> getNewProducts(AliceCategory category)
     {
-        final List<Product> sortBySaleDate = getSaleProductsFromCache(site);
-        if (productSortType == ProductSortType.AMOUNT)
-        {
-            final List<Product> sortByAmount = new ArrayList<>(sortBySaleDate);
-            sortByAmount.sort(new DiscountAmountComparator());
-            return sortByAmount;
-        }
-        else if (productSortType == ProductSortType.PERCENTAGE)
-        {
-            final List<Product> sortByPercentage = new ArrayList<>(sortBySaleDate);
-            sortByPercentage.sort(new DiscountPercentageComparator());
-            return sortByPercentage;
-        }
+        final List<Site> siteList = siteManager.getSites(category);
+        final List<Product> sortBySaleDate = getNewProducts(siteList);
 
         return sortBySaleDate;
+    }
+
+    private List<Product> getNewProducts(List<Site> siteList)
+    {
+        final List<Product> productList = new ArrayList<>();
+        for (Site site : siteList)
+        {
+            productList.addAll(getNewProductsFromCache(site));
+        }
+        productList.sort(new CreationDateComparator());
+
+        return productList;
     }
 
     /**
      * Returns sale products sorted by sale date descending, i.e. newest first
      */
-    private List<Product> getSaleProductsFromCache(Site site)
+    private List<Product> getNewProductsFromCache(Site site)
     {
         CachedList<Product> cachedProductList = siteProductMap.get(site.id);
         if (shouldRefresh(cachedProductList))
         {
             final CachedList<Product> newProductList = new CachedList<>();
-            newProductList.list = getSaleProductsFromDatabase(site);
+            newProductList.list = getNewProductsFromDatabase(site);
             newProductList.cachedTime = LocalDateTime.now();
             siteProductMap.put(site.id, newProductList);
             cachedProductList = newProductList;
@@ -70,15 +77,16 @@ public class SaleProductService
     }
 
     /**
-     * Returns sale products sorted by sale date descending, i.e. newest first
+     * Returns new products sorted by creation date descending, i.e. newest first
      */
-    private List<Product> getSaleProductsFromDatabase(Site site)
+    private List<Product> getNewProductsFromDatabase(Site site)
     {
-        final List<Product> productList = productService.searchSaleProducts(site.id);
-        productList.sort(new SaleDateComparator());
-        if (productList.size() > webAppConfig.getSaleProductCacheCount())
+        final List<Product> productList = productService.searchNewProducts(site.id,
+            LocalDateTime.now().minus(webAppConfig.getNewProductDateAfter(), ChronoUnit.DAYS));
+        productList.sort(new CreationDateComparator());
+        if (productList.size() > webAppConfig.getNewProductCacheCount())
         {
-            return productList.subList(0, webAppConfig.getSaleProductCacheCount());
+            return productList.subList(0, webAppConfig.getNewProductCacheCount());
         }
 
         return productList;
@@ -88,7 +96,7 @@ public class SaleProductService
     {
         return cachedProductList == null
             || cachedProductList.cachedTime.until(LocalDateTime.now(), ChronoUnit.SECONDS) > webAppConfig
-            .getSaleProductCacheTimeoutSeconds();
+            .getNewProductCacheTimeoutSeconds();
     }
 
 }

@@ -39,8 +39,12 @@ public class SiteManager
     {
         if (shouldRefresh())
         {
-            categorySiteMap = getCategorySiteMapFromDatabase();
-            cachedTime = LocalDateTime.now();
+            final Map<AliceCategory, List<Site>> mapFromDb = getCategorySiteMapFromDatabase();
+            if (mapFromDb != null && mapFromDb.size() > 0)
+            {
+                categorySiteMap = getCategorySiteMapFromDatabase();
+                cachedTime = LocalDateTime.now();
+            }
         }
 
         return categorySiteMap;
@@ -70,6 +74,24 @@ public class SiteManager
         }
 
         return null;
+    }
+
+    public AliceCategory getAliceCatgory(String categoryName)
+    {
+        for (AliceCategory category : getCategorySiteMap().keySet())
+        {
+            if (category.name.equalsIgnoreCase(categoryName))
+            {
+                return category;
+            }
+        }
+
+        return null;
+    }
+
+    public List<Site> getSites(AliceCategory aliceCategory)
+    {
+        return getCategorySiteMap().get(aliceCategory);
     }
 
     // TODO refactor this with Set instead of List

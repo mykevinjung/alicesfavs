@@ -101,10 +101,10 @@
               </li>
               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#" class="nav-top-link">New Arrivals</a>
                 <div class=nav-dropdown><ul>
-                  <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Clothing</a></li>
-                  <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Shoes</a></li>
-                  <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Accessories</a></li>
-                  <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Home</a></li>
+                  <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/clothing">Clothing</a></li>
+                  <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/shoes">Shoes</a></li>
+                  <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/accessories">Accessories</a></li>
+                  <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/home">Home</a></li>
                 </ul></div>
               </li>
             </ul>

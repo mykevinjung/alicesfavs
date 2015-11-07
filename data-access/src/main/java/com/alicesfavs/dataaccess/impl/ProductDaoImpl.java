@@ -48,6 +48,12 @@ public class ProductDaoImpl implements ProductDao
             + "PRICE_CHANGED_DATE, SALE_START_DATE, STORED_IMAGE_PATH, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
             + "CREATED_DATE, UPDATED_DATE FROM PRODUCT WHERE SALE_START_DATE IS NOT NULL AND SITE_ID = ? AND EXTRACT_STATUS = ?";
 
+    private static final String SELECT_NEW_PRODUCTS_BY_SITE =
+        "SELECT ID, SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
+            + "WAS_PRICE_EXTRACT, BRAND_NAME_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, REGULAR_PRICE, "
+            + "PRICE_CHANGED_DATE, SALE_START_DATE, STORED_IMAGE_PATH, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
+            + "CREATED_DATE, UPDATED_DATE FROM PRODUCT WHERE SITE_ID = ? AND EXTRACT_STATUS = ? AND CREATED_DATE >= ?";
+
     private static final int[] INSERT_PARAM_TYPES =
         { Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
             Types.VARCHAR, Types.DECIMAL, Types.DECIMAL, Types.DECIMAL, Types.TIMESTAMP, Types.TIMESTAMP, Types.VARCHAR,
@@ -60,6 +66,9 @@ public class ProductDaoImpl implements ProductDao
 
     private static final int[] SELECT_SALE_PRODUCTS_BY_SITE_PARAM_TYPES =
         { Types.BIGINT, Types.INTEGER };
+
+    private static final int[] SELECT_NEW_PRODUCTS_BY_SITE_PARAM_TYPES =
+        { Types.BIGINT, Types.INTEGER, Types.TIMESTAMP };
 
     private static final int[] SELECT_BY_IDS_PARAM_TYPES =
         { Types.BIGINT, Types.VARCHAR };
@@ -132,6 +141,15 @@ public class ProductDaoImpl implements ProductDao
 
         return daoSupport
             .selectObjectList(SELECT_SALE_PRODUCTS_BY_SITE, SELECT_SALE_PRODUCTS_BY_SITE_PARAM_TYPES, params,
+                new ProductRowMapper());
+    }
+
+    @Override public List<Product> selectNewProducts(long siteId, ExtractStatus status, LocalDateTime afterCreatedDate)
+    {
+        final Object[] params = { siteId, status.getCode(), DateTimeUtils.toTimestamp(afterCreatedDate) };
+
+        return daoSupport
+            .selectObjectList(SELECT_NEW_PRODUCTS_BY_SITE, SELECT_NEW_PRODUCTS_BY_SITE_PARAM_TYPES, params,
                 new ProductRowMapper());
     }
 

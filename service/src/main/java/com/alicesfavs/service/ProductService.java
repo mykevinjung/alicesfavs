@@ -1,5 +1,6 @@
 package com.alicesfavs.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,8 @@ public interface ProductService
 
     int markNotFoundProduct(long jobId, long siteId);
 
-    List<Product> selectSaleProducts(long siteId);
+    List<Product> searchSaleProducts(long siteId);
+
+    List<Product> searchNewProducts(long siteId, LocalDateTime afterCreatedDate);
 
 }

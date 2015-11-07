@@ -34,11 +34,19 @@ public class ModelConverter
         return uiSiteList;
     }
 
+    // TODO fix this
     public static  UiProduct convertProduct(Site site, Product product)
     {
         final UiProduct uiProduct = new UiProduct();
         uiProduct.setName(product.productExtract.name);
-        uiProduct.setSiteName(site.displayName);
+        if (site != null)
+        {
+            uiProduct.setSiteName(site.displayName);
+        }
+        else
+        {
+            uiProduct.setSiteName("Alice's Favs");
+        }
         uiProduct.setUrl(product.productExtract.url);
         uiProduct.setImageUrl(product.productExtract.imageUrl);
         uiProduct.setPrice(product.productExtract.price);

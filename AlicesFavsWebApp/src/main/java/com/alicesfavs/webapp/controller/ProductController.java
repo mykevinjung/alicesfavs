@@ -1,8 +1,10 @@
 package com.alicesfavs.webapp.controller;
 
+import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.webapp.config.WebAppConfig;
+import com.alicesfavs.webapp.service.NewProductService;
 import com.alicesfavs.webapp.service.ProductSortType;
 import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
@@ -38,14 +40,19 @@ public class ProductController
     private static final String PREV_PAGE = "prevPage";
     private static final String SORT_BY = "sortBy";
     private static final String SITE = "site";
+    private static final String CATEGORY_NAME = "categoryName";
 
     private static final String VIEW_SALE = "sale";
+    private static final String VIEW_NEW_ARRIVALS = "new-arrivals";
 
     @Autowired
     private SiteManager siteManager;
 
     @Autowired
     private SaleProductService saleProductService;
+
+    @Autowired
+    private NewProductService newProductService;
 
     @Autowired
     private WebAppConfig webAppConfig;
@@ -68,6 +75,23 @@ public class ProductController
             productSortType == null ? ProductSortType.DATE.getCode() : productSortType.getCode());
 
         return VIEW_SALE;
+    }
+
+    @RequestMapping(value = "/new-arrivals/{categoryName}", method = RequestMethod.GET)
+    public String newArrivals(@PathVariable String categoryName, HttpServletRequest request, ModelMap model)
+    {
+        final AliceCategory aliceCategory = siteManager.getAliceCatgory(categoryName);
+        if (aliceCategory == null)
+        {
+            throw new ResourceNotFoundException("Category '" + categoryName + "' not found");
+        }
+
+        final List<Product> productList = newProductService.getNewProducts(aliceCategory);
+        addProductAttributes(request, model, null, productList, webAppConfig.getNewProductPageSize());
+
+        model.addAttribute(CATEGORY_NAME, categoryName);
+
+        return VIEW_NEW_ARRIVALS;
     }
 
     private void addProductAttributes(HttpServletRequest request, ModelMap model, Site site, List<Product> productList,

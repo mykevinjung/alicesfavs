@@ -33,6 +33,9 @@ public class WebAppConfig
     @Value(value = "${newproduct.cache.maxcount}")
     private int newProductCacheCount;
 
+    @Value(value = "${newproduct.dateafter}")
+    private int newProductDateAfter;
+
     public int getSiteCacheTimeoutSeconds()
     {
         return siteCacheTimeoutSeconds;
@@ -101,5 +104,15 @@ public class WebAppConfig
     public void setNewProductCacheCount(int newProductCacheCount)
     {
         this.newProductCacheCount = newProductCacheCount;
+    }
+
+    public int getNewProductDateAfter()
+    {
+        return newProductDateAfter;
+    }
+
+    public void setNewProductDateAfter(int newProductDateAfter)
+    {
+        this.newProductDateAfter = newProductDateAfter;
     }
 }

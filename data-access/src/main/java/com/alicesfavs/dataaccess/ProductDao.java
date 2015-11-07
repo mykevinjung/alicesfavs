@@ -22,4 +22,6 @@ public interface ProductDao
 
     List<Product> selectSaleProducts(long siteId, ExtractStatus status);
 
+    List<Product> selectNewProducts(long siteId, ExtractStatus status, LocalDateTime afterCreatedDate);
+
 }

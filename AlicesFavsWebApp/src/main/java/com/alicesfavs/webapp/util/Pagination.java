@@ -14,7 +14,6 @@ public class Pagination
 
     private final int pageSize;
     private final int totalCount;
-    private final int totalPageNo;
     private final String pageNoParam;
     private final HttpServletRequest request;
 
@@ -23,7 +22,6 @@ public class Pagination
         this.pageSize = pageSize;
         this.totalCount = totalCount;
         this.pageNoParam = pageNoParam;
-        totalPageNo = (totalCount + pageSize - 1) / pageSize;
         this.request = request;
     }
 
@@ -32,6 +30,7 @@ public class Pagination
         final List<Page> pages = new ArrayList<>();
         final String url = getUrl();
         final String oldPageNo = request.getParameter(pageNoParam);
+        final int totalPageNo = getTotalPageNo();
         for (int index = currentPageNo - 2 ; index <= currentPageNo + 2 ; index++)
         {
             if (1 <= index && index <= totalPageNo)
@@ -45,11 +44,14 @@ public class Pagination
 
     public int getTotalPageNo()
     {
-        return totalPageNo;
+        // should have at least one page
+        final int totalPageNo = (totalCount + pageSize - 1) / pageSize;
+        return (totalPageNo > 0) ? totalPageNo : 1;
     }
 
     public int getActualPageNo(int requestPageNo)
     {
+        final int totalPageNo = getTotalPageNo();
         if (1 <= requestPageNo && requestPageNo <= totalPageNo)
         {
             return requestPageNo;

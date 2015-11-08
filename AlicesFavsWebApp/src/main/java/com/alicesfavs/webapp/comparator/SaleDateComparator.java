@@ -1,5 +1,6 @@
 package com.alicesfavs.webapp.comparator;
 
+
 import com.alicesfavs.datamodel.Product;
 
 import java.time.temporal.ChronoUnit;
@@ -10,7 +11,8 @@ import java.util.Comparator;
  */
 public class SaleDateComparator implements Comparator<Product>
 {
-    @Override public int compare(Product p1, Product p2)
+    @Override 
+    public int compare(Product p1, Product p2)
     {
         if (p1.saleStartDate != null && p2.saleStartDate != null)
         {

@@ -26,7 +26,6 @@ public class SiteScrapeJob
     @Autowired
     private ProductExtractor productExtractor;
 
-    // job can run for sale category only
     public void execute(String siteId)
     {
         final Site site = siteService.findSiteById(siteId);
@@ -36,7 +35,7 @@ public class SiteScrapeJob
 
         try
         {
-            productExtractor.extractProduct2(job, site);
+            productExtractor.extractProduct(job, site);
             jobService.completeJob(job);
             LOGGER.info(job.toString());
         }

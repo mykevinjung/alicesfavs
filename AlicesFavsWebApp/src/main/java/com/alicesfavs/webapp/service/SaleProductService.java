@@ -7,6 +7,8 @@ import com.alicesfavs.webapp.comparator.DiscountAmountComparator;
 import com.alicesfavs.webapp.comparator.DiscountPercentageComparator;
 import com.alicesfavs.webapp.comparator.SaleDateComparator;
 import com.alicesfavs.webapp.config.WebAppConfig;
+import com.alicesfavs.webapp.uimodel.UiProduct;
+import com.alicesfavs.webapp.util.ModelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,20 +32,20 @@ public class SaleProductService
     @Autowired
     private WebAppConfig webAppConfig;
 
-    private Map<Long, CachedList<Product>> siteProductMap = new Hashtable<>();
+    private Map<Long, CachedList<UiProduct>> siteProductMap = new Hashtable<>();
 
-    public List<Product> getSaleProducts(Site site, ProductSortType productSortType)
+    public List<UiProduct> getSaleProducts(Site site, ProductSortType productSortType)
     {
-        final List<Product> sortBySaleDate = getSaleProductsFromCache(site);
+        final List<UiProduct> sortBySaleDate = getSaleProductsFromCache(site);
         if (productSortType == ProductSortType.AMOUNT)
         {
-            final List<Product> sortByAmount = new ArrayList<>(sortBySaleDate);
+            final List<UiProduct> sortByAmount = new ArrayList<>(sortBySaleDate);
             sortByAmount.sort(new DiscountAmountComparator());
             return sortByAmount;
         }
         else if (productSortType == ProductSortType.PERCENTAGE)
         {
-            final List<Product> sortByPercentage = new ArrayList<>(sortBySaleDate);
+            final List<UiProduct> sortByPercentage = new ArrayList<>(sortBySaleDate);
             sortByPercentage.sort(new DiscountPercentageComparator());
             return sortByPercentage;
         }
@@ -54,12 +56,12 @@ public class SaleProductService
     /**
      * Returns sale products sorted by sale date descending, i.e. newest first
      */
-    private List<Product> getSaleProductsFromCache(Site site)
+    private List<UiProduct> getSaleProductsFromCache(Site site)
     {
-        CachedList<Product> cachedProductList = siteProductMap.get(site.id);
+        CachedList<UiProduct> cachedProductList = siteProductMap.get(site.id);
         if (shouldRefresh(cachedProductList))
         {
-            final CachedList<Product> newProductList = new CachedList<>();
+            final CachedList<UiProduct> newProductList = new CachedList<>();
             newProductList.list = getSaleProductsFromDatabase(site);
             newProductList.cachedTime = LocalDateTime.now();
             siteProductMap.put(site.id, newProductList);
@@ -72,19 +74,16 @@ public class SaleProductService
     /**
      * Returns sale products sorted by sale date descending, i.e. newest first
      */
-    private List<Product> getSaleProductsFromDatabase(Site site)
+    private List<UiProduct> getSaleProductsFromDatabase(Site site)
     {
         final List<Product> productList = productService.searchSaleProducts(site.id);
         productList.sort(new SaleDateComparator());
-        if (productList.size() > webAppConfig.getSaleProductCacheCount())
-        {
-            return productList.subList(0, webAppConfig.getSaleProductCacheCount());
-        }
+        final int endIndex = Math.min(productList.size(), webAppConfig.getNewProductCacheCount());
 
-        return productList;
+        return ModelConverter.convertProductList(site, productList, 0, endIndex);
     }
 
-    private boolean shouldRefresh(CachedList<Product> cachedProductList)
+    private boolean shouldRefresh(CachedList<UiProduct> cachedProductList)
     {
         return cachedProductList == null
             || cachedProductList.cachedTime.until(LocalDateTime.now(), ChronoUnit.SECONDS) > webAppConfig

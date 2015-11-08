@@ -134,7 +134,7 @@
                                         <a target="_blank" href="${product.url}"><p class="name">${product.name}</p></a>
 
 
-                                        <span class="price"><del><span class="amount">${product.wasPrice}</span></del> <ins><span class="amount">${product.price}</span></ins></span>
+                                        <span class="price"><del><span class="amount">${product.extractedWasPrice}</span></del> <ins><span class="amount">${product.extractedPrice}</span></ins></span>
 
                                     </div><!-- text-center -->
 

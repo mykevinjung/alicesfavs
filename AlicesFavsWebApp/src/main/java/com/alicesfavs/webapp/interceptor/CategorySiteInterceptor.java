@@ -32,7 +32,8 @@ public class CategorySiteInterceptor extends HandlerInterceptorAdapter
     {
         for (Map.Entry<AliceCategory, List<Site>> categorySite : siteManager.getCategorySiteMap().entrySet())
         {
-            modelAndView.addObject(categorySite.getKey().name, ModelConverter.convertSiteList(categorySite.getValue()));
+            modelAndView.addObject(categorySite.getKey().name.toLowerCase(),
+                ModelConverter.convertSiteList(categorySite.getValue()));
         }
     }
 

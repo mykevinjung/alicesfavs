@@ -34,23 +34,19 @@ public class ModelConverter
         return uiSiteList;
     }
 
-    // TODO fix this
     public static  UiProduct convertProduct(Site site, Product product)
     {
         final UiProduct uiProduct = new UiProduct();
         uiProduct.setName(product.productExtract.name);
-        if (site != null)
-        {
-            uiProduct.setSiteName(site.displayName);
-        }
-        else
-        {
-            uiProduct.setSiteName("Alice's Favs");
-        }
         uiProduct.setUrl(product.productExtract.url);
         uiProduct.setImageUrl(product.productExtract.imageUrl);
-        uiProduct.setPrice(product.productExtract.price);
-        uiProduct.setWasPrice(product.productExtract.wasPrice);
+        uiProduct.setPrice(product.price);
+        uiProduct.setWasPrice(product.wasPrice);
+        uiProduct.setExtractedPrice(product.productExtract.price);
+        uiProduct.setExtractedWasPrice(product.productExtract.wasPrice);
+        uiProduct.setSiteName(site.displayName);
+        uiProduct.setSiteStringId(site.stringId);
+        uiProduct.setSiteDisplayWeight(site.displayWeight);
 
         return uiProduct;
     }

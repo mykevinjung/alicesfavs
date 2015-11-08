@@ -1,18 +1,28 @@
 package com.alicesfavs.webapp.uimodel;
 
+import java.time.LocalDateTime;
+
 /**
  * Created by kjung on 11/6/15.
  */
 public class UiProduct
 {
 
+    // product info
     private String name;
     private String url;
     private String imageUrl;
-    private String price;
-    private String wasPrice;
+    private String extractedPrice;
+    private String extractedWasPrice;
+    private Double price;
+    private Double wasPrice;
+    private LocalDateTime createdDate;
+    private LocalDateTime saleStartDate;
+
+    // site info
     private String siteName;
     private String siteStringId;
+    private Integer siteDisplayWeight;
 
     public String getName()
     {
@@ -44,22 +54,42 @@ public class UiProduct
         this.imageUrl = imageUrl;
     }
 
-    public String getPrice()
+    public String getExtractedPrice()
+    {
+        return extractedPrice;
+    }
+
+    public void setExtractedPrice(String extractedPrice)
+    {
+        this.extractedPrice = extractedPrice;
+    }
+
+    public String getExtractedWasPrice()
+    {
+        return extractedWasPrice;
+    }
+
+    public void setExtractedWasPrice(String extractedWasPrice)
+    {
+        this.extractedWasPrice = extractedWasPrice;
+    }
+
+    public Double getPrice()
     {
         return price;
     }
 
-    public void setPrice(String price)
+    public void setPrice(Double price)
     {
         this.price = price;
     }
 
-    public String getWasPrice()
+    public Double getWasPrice()
     {
         return wasPrice;
     }
 
-    public void setWasPrice(String wasPrice)
+    public void setWasPrice(Double wasPrice)
     {
         this.wasPrice = wasPrice;
     }
@@ -82,6 +112,36 @@ public class UiProduct
     public void setSiteStringId(String siteStringId)
     {
         this.siteStringId = siteStringId;
+    }
+
+    public Integer getSiteDisplayWeight()
+    {
+        return siteDisplayWeight;
+    }
+
+    public void setSiteDisplayWeight(Integer siteDisplayWeight)
+    {
+        this.siteDisplayWeight = siteDisplayWeight;
+    }
+
+    public LocalDateTime getCreatedDate()
+    {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate)
+    {
+        this.createdDate = createdDate;
+    }
+
+    public LocalDateTime getSaleStartDate()
+    {
+        return saleStartDate;
+    }
+
+    public void setSaleStartDate(LocalDateTime saleStartDate)
+    {
+        this.saleStartDate = saleStartDate;
     }
 
 }

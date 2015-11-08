@@ -1,7 +1,6 @@
 package com.alicesfavs.webapp.controller;
 
 import com.alicesfavs.datamodel.AliceCategory;
-import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.webapp.config.WebAppConfig;
 import com.alicesfavs.webapp.service.NewProductService;
@@ -9,6 +8,7 @@ import com.alicesfavs.webapp.service.ProductSortType;
 import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
 import com.alicesfavs.webapp.uimodel.Page;
+import com.alicesfavs.webapp.uimodel.UiProduct;
 import com.alicesfavs.webapp.util.ModelConverter;
 import com.alicesfavs.webapp.util.Pagination;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -67,8 +67,8 @@ public class ProductController
         }
 
         final ProductSortType productSortType = ProductSortType.fromCode(request.getParameter(SORT_BY));
-        final List<Product> productList = saleProductService.getSaleProducts(site, productSortType);
-        addProductAttributes(request, model, site, productList, webAppConfig.getSaleProductPageSize());
+        final List<UiProduct> productList = saleProductService.getSaleProducts(site, productSortType);
+        addProductAttributes(request, model, productList, webAppConfig.getSaleProductPageSize());
 
         model.addAttribute(SITE, ModelConverter.convertSite(site));
         model.addAttribute(SORT_BY,
@@ -86,15 +86,32 @@ public class ProductController
             throw new ResourceNotFoundException("Category '" + categoryName + "' not found");
         }
 
-        final List<Product> productList = newProductService.getNewProducts(aliceCategory);
-        addProductAttributes(request, model, null, productList, webAppConfig.getNewProductPageSize());
+        final List<UiProduct> productList = newProductService.getNewProducts(aliceCategory);
+        addProductAttributes(request, model, productList, webAppConfig.getNewProductPageSize());
 
         model.addAttribute(CATEGORY_NAME, categoryName);
 
         return VIEW_NEW_ARRIVALS;
     }
 
-    private void addProductAttributes(HttpServletRequest request, ModelMap model, Site site, List<Product> productList,
+    @RequestMapping(value = "/new-arrivals/brand/{siteId}", method = RequestMethod.GET)
+    public String newArrivalsByBrand(@PathVariable String siteId, HttpServletRequest request, ModelMap model)
+    {
+        final Site site = siteManager.getSiteByStringId(siteId);
+        if (site == null)
+        {
+            throw new ResourceNotFoundException("Site '" + siteId + "' not found");
+        }
+
+        final List<UiProduct> productList = newProductService.getNewProducts(site);
+        addProductAttributes(request, model, productList, webAppConfig.getNewProductPageSize());
+
+        model.addAttribute(CATEGORY_NAME, site.displayName);
+
+        return VIEW_NEW_ARRIVALS;
+    }
+
+    private void addProductAttributes(HttpServletRequest request, ModelMap model, List<UiProduct> productList,
         int pageSize)
     {
         final int totalCount = productList.size();
@@ -106,7 +123,7 @@ public class ProductController
         final int endIndex = pagination.getEndIndex(pageNo);
         final List<Page> pageList = pagination.getPageList(pageNo);
 
-        model.addAttribute(PRODUCT_LIST, ModelConverter.convertProductList(site, productList, startIndex, endIndex));
+        model.addAttribute(PRODUCT_LIST, productList.subList(startIndex, endIndex));
         model.addAttribute(START_INDEX, startIndex + 1);
         model.addAttribute(END_INDEX, endIndex);
         model.addAttribute(PAGE_NUMBER, pageNo);

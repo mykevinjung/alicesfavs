@@ -120,12 +120,12 @@
 
                                     <div class="text-center">
                                         <h5 class="category">
-                                            <a href="/sale/${product.siteStringId}" rel="tag">${product.siteName}</a>          </h5>
+                                            <a href="/new-arrivals/brand/${product.siteStringId}" rel="tag">${product.siteName}</a>          </h5>
                                         <div class="tx-div small"></div>
                                         <a target="_blank" href="${product.url}"><p class="name">${product.name}</p></a>
 
 
-                                        <span class="price"><del><span class="amount">${product.wasPrice}</span></del> <ins><span class="amount">${product.price}</span></ins></span>
+                                        <span class="price"><del><span class="amount">${product.extractedWasPrice}</span></del> <ins><span class="amount">${product.extractedPrice}</span></ins></span>
 
                                     </div><!-- text-center -->
 

@@ -25,8 +25,6 @@ public class ProductExtractor
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductExtractor.class);
 
-    private static final int THRESHOLD_PERCENTAGE = 10;
-
     @Autowired
     private BatchConfig batchConfig;
 
@@ -34,14 +32,11 @@ public class ProductExtractor
     private SiteScraper siteScraper;
 
     @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
     private ProductService productService;
 
-    public void extractProduct2(Job job, Site site) throws ExtractException
+    public void extractProduct(Job job, Site site) throws ExtractException
     {
-        final MultirootTree<CategoryExtract> categoryExtracts = extractCategory2(job, site);
+        final MultirootTree<CategoryExtract> categoryExtracts = extractCategory(job, site);
         final List<MultirootTree.Node<CategoryExtract>> leafCategories = categoryExtracts.getAllLeafNodes();
 
 
@@ -51,7 +46,7 @@ public class ProductExtractor
         categoryExtracts.getAllLeafNodes();
         for (final MultirootTree.Node<CategoryExtract> category : leafCategories)
         {
-            final List<ProductExtract> peList = extractCategoryProducts2(job.id, site, category);
+            final List<ProductExtract> peList = extractCategoryProducts(job.id, site, category);
             buildProductExtractMap(productExtractMap, peList);
         }
 
@@ -60,6 +55,8 @@ public class ProductExtractor
             productService.saveProduct(job.id, site.id, ExtractStatus.EXTRACTED, productExtractMap);
         job.foundProduct = productMap.size();
         job.notFoundProduct = productService.markNotFoundProduct(job.id, site.id);
+
+        // TODO print the count of sale products and new arrivals
         LOGGER.info("Extracted product: {}, Saved product: {}, Not found product: {}",
             productExtractMap.size(), job.foundProduct, job.notFoundProduct);
 
@@ -67,61 +64,7 @@ public class ProductExtractor
         //final SearchableProductCreator creator = new SearchableProductCreator(batchConfig);
     }
 
-    public void extractProduct(Job job, Site site) throws ExtractException
-    {
-        List<Category> categories = extractCategory(job, site);
-
-        // same product is displayed in many categories
-        // let's group them and save as one product and link
-        final Map<String, List<ProductExtract>> productExtractMap = new HashMap<>();
-        final Map<Category, List<ProductExtract>> categoryMap = new HashMap<>();
-        for (final Category category : categories)
-        {
-            final List<ProductExtract> peList = extractCategoryProducts(job.id, site, category);
-            buildProductExtractMap(productExtractMap, peList);
-            categoryMap.put(category, peList);
-        }
-
-        LOGGER.info("Saving product map...");
-        final ExtractStatus extractStatus = site.display ? ExtractStatus.EXTRACTED : ExtractStatus.HIDDEN;
-        final Map<String, Product> productMap = productService
-            .saveProduct(job.id, site.id, extractStatus, productExtractMap);
-        job.foundProduct = productMap.size();
-        job.notFoundProduct = productService.markNotFoundProduct(job.id, site.id);
-
-        saveCategoryProduct(job, site, categoryMap, productMap);
-
-        //createSearchableProduct(categoryMap, productMap);
-        //final SearchableProductCreator creator = new SearchableProductCreator(batchConfig);
-    }
-
-    private List<Category> extractCategory(Job job, Site site) throws ExtractException
-    {
-        try
-        {
-            final List<CategoryExtractSpec> categoryExtractSpecList = batchConfig.getCategoryExtractSpec(site);
-            final MultirootTree<CategoryExtract> categoryExtracts = siteScraper.extractCategories(site.url,
-                categoryExtractSpecList);
-            final List<Category> categories = categoryService.findSiteCategories(site.id);
-            testCategoryExtracts(categoryExtracts, categories);
-            final List<Category> categoryList = categoryService.saveCategoryExtract(job.id, site.id, categoryExtracts);
-            job.foundCategory = categoryList.size();
-            job.notFoundCategory = categoryService.markNotFoundCategory(job.id, site.id);
-            LOGGER.info("Number of not found category: " + job.notFoundCategory);
-
-            return categoryList;
-        }
-        catch (ExtractException e)
-        {
-            throw e;
-        }
-        catch (Exception e)
-        {
-            throw new ExtractException("Error in extracting categories", e);
-        }
-    }
-
-    private MultirootTree<CategoryExtract> extractCategory2(Job job, Site site) throws ExtractException
+    private MultirootTree<CategoryExtract> extractCategory(Job job, Site site) throws ExtractException
     {
         try
         {
@@ -134,63 +77,7 @@ public class ProductExtractor
         }
     }
 
-    private void testCategoryExtracts(MultirootTree<CategoryExtract> newCategoryExtracts,
-        List<Category> existingCategories) throws ExtractException
-    {
-        final int existingCount = existingCategories.size();
-        final int newCount = newCategoryExtracts.getAllLeafNodes().size();
-        LOGGER.info("Existing categories: " + existingCount);
-        LOGGER.info("New categories: " + newCount);
-
-        if (existingCount > 0 && (((existingCount - newCount) * 100) / existingCount > THRESHOLD_PERCENTAGE))
-        {
-            throw new ExtractException("Too many categories not found");
-        }
-    }
-
-    private void saveCategoryProduct(Job job, Site site, Map<Category, List<ProductExtract>> categoryMap,
-        Map<String, Product> productMap)
-    {
-        LOGGER.info("Saving category-product map...");
-        int count = 0;
-        for (final Category category : categoryMap.keySet())
-        {
-            int displayOrder = 0;
-            for (ProductExtract pe : categoryMap.get(category))
-            {
-                final Product product = productMap.get(pe.id);
-                if (product != null)
-                {
-                    categoryService.saveCategoryProduct(category, product, ++displayOrder, job.id);
-                    count++;
-                }
-            }
-        }
-        LOGGER.info("Saved category-product map count: " + count);
-        final int countNotFoundCategoryProduct = categoryService.markNotFoundCategoryProduct(job.id, site.id);
-        LOGGER.info("Number of not found category-product: " + countNotFoundCategoryProduct);
-    }
-
-    private List<ProductExtract> extractCategoryProducts(long jobId, Site site, Category category)
-        throws ExtractException
-    {
-        try
-        {
-            LOGGER.info("Extracting products for category " + category.id);
-            return siteScraper.extractProducts(category.getLeafExtract(), batchConfig.getProductExtractSpec(site),
-                batchConfig.getNextPageExtractSpec(site));
-        }
-        catch (IOException e)
-        {
-            throw new ExtractException("Error in getting category extract spec", e);
-        }
-        catch (SiteScrapeException e)
-        {
-            throw new ExtractException("Error in extracting categories", e);
-        }
-    }
-
-    private List<ProductExtract> extractCategoryProducts2(long jobId, Site site, MultirootTree.Node<CategoryExtract> category)
+    private List<ProductExtract> extractCategoryProducts(long jobId, Site site, MultirootTree.Node<CategoryExtract> category)
         throws ExtractException
     {
         try

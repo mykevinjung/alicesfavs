@@ -209,7 +209,7 @@ public class ProductServiceImpl implements ProductService
 
     private boolean hasSaleExpired(LocalDateTime saleStartDate)
     {
-        return saleStartDate.isBefore(LocalDateTime.now().minusDays(MAX_SALE_DATE));
+        return saleStartDate != null && saleStartDate.isBefore(LocalDateTime.now().minusDays(MAX_SALE_DATE));
     }
 
     private boolean hasPriceReduced(Double oldPrice, Double newPrice, double minimumPercentage)

@@ -13,12 +13,20 @@
 
     <context:component-scan base-package="com.alicesfavs.webapp"/>
 
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean class="org.springframework.mobile.device.DeviceWebArgumentResolver" />
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+
     <mvc:interceptors>
         <bean class="com.alicesfavs.webapp.interceptor.CategorySiteInterceptor"></bean>
+
+        <!-- Resolve the device which has generated the request -->
+        <bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor" />
     </mvc:interceptors>
 
-    <bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
             <value>/WEB-INF/views/jsp/</value>
         </property>

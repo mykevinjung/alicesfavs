@@ -13,6 +13,7 @@ import com.alicesfavs.webapp.util.ModelConverter;
 import com.alicesfavs.webapp.util.Pagination;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,8 +58,9 @@ public class ProductController
     @Autowired
     private WebAppConfig webAppConfig;
 
+    // TODO should do same thing as new arrival?  Clothing all
     @RequestMapping(value = "/sale/{siteId}", method = RequestMethod.GET)
-    public String sale(@PathVariable String siteId, HttpServletRequest request, ModelMap model)
+    public String sale(@PathVariable String siteId, HttpServletRequest request, ModelMap model, Device device)
     {
         final Site site = siteManager.getSiteByStringId(siteId);
         if (site == null)
@@ -73,40 +75,36 @@ public class ProductController
         model.addAttribute(SITE, ModelConverter.convertSite(site));
         model.addAttribute(SORT_BY,
             productSortType == null ? ProductSortType.DATE.getCode() : productSortType.getCode());
+        model.addAttribute("mobile", device.isMobile());
 
         return VIEW_SALE;
     }
 
     @RequestMapping(value = "/new-arrivals/{categoryName}", method = RequestMethod.GET)
-    public String newArrivals(@PathVariable String categoryName, HttpServletRequest request, ModelMap model)
+    public String newArrivals(@PathVariable String categoryName, HttpServletRequest request, ModelMap model,
+        Device device)
     {
+        final List<UiProduct> productList;
         final AliceCategory aliceCategory = siteManager.getAliceCatgory(categoryName);
-        if (aliceCategory == null)
+        if (aliceCategory != null)
         {
-            throw new ResourceNotFoundException("Category '" + categoryName + "' not found");
+            productList = newProductService.getNewProducts(aliceCategory);
+            model.addAttribute(CATEGORY_NAME, categoryName);
         }
-
-        final List<UiProduct> productList = newProductService.getNewProducts(aliceCategory);
-        addProductAttributes(request, model, productList, webAppConfig.getNewProductPageSize());
-
-        model.addAttribute(CATEGORY_NAME, categoryName);
-
-        return VIEW_NEW_ARRIVALS;
-    }
-
-    @RequestMapping(value = "/new-arrivals/brand/{siteId}", method = RequestMethod.GET)
-    public String newArrivalsByBrand(@PathVariable String siteId, HttpServletRequest request, ModelMap model)
-    {
-        final Site site = siteManager.getSiteByStringId(siteId);
-        if (site == null)
+        else
         {
-            throw new ResourceNotFoundException("Site '" + siteId + "' not found");
+            final Site site = siteManager.getSiteByStringId(categoryName);
+            if (site == null)
+            {
+                throw new ResourceNotFoundException("Category/Site '" + categoryName + "' not found");
+            }
+
+            productList = newProductService.getNewProducts(site);
+            model.addAttribute(CATEGORY_NAME, site.displayName);
         }
-
-        final List<UiProduct> productList = newProductService.getNewProducts(site);
         addProductAttributes(request, model, productList, webAppConfig.getNewProductPageSize());
-
-        model.addAttribute(CATEGORY_NAME, site.displayName);
+        model.addAttribute("logo", "/resources/images/logo2.png");
+        model.addAttribute("mobile", device.isMobile());
 
         return VIEW_NEW_ARRIVALS;
     }

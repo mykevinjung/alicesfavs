@@ -6,77 +6,6 @@
 <div id="main-content" class="site-main hfeed light">
     <div class="row"><div class="large-12 columns"><div class="top-divider"></div></div></div>
 
-    <div class="cat-header">
-
-        <div class="ux-slider-wrapper relative">
-            <div class="ux-slider iosSlider  slider-style-normal  slider-nav-dark slider-nav-inside slider-nav-circle js-flickity"
-                 data-flickity-options='{
-            "cellAlign": "center",
-            "imagesLoaded": true,
-            "lazyLoad": 1,
-            "freeScroll": false,
-            "wrapAround": true,
-            "autoPlay": 6000,
-            "prevNextButtons": true,
-            "contain" : true,
-            "percentPosition": true,
-            "pageDots": true,
-            "selectedAttraction" : 0.1,
-            "friction": 0.6,
-            "rightToLeft": false,
-            "draggable": true        }'
-                 style=""
-                    >
-                <div id="banner_1753316751" class="ux_banner dark    "  style="height:300px; " data-height="300px" role="banner">
-                    <div class="banner-bg "  style="background-image:url('http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/slide3.jpg'); "><img src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/slide3.jpg"  alt="" style="visibility:hidden;" /></div>
-                    <div class="row" >
-                        <div class="inner center text-center "  style="width:80%;">
-                            <div class="inner-wrap animated flipInX" style=" ">
-                                <h3 class="alt-font">An amazing...</h3>
-                                <h1>CUSTOM CATEGORY SLIDER</h1>
-                                <div class="tx-div medium"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- end .ux_banner -->
-
-                <div id="banner_1704027142" class="ux_banner dark    "  style="height:300px; " data-height="300px" role="banner">
-                    <div class="banner-bg "  style="background-image:url('http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/slide2.jpg'); "><img src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/slide2.jpg"  alt="" style="visibility:hidden;" /></div>
-                    <div class="row" >
-                        <div class="inner right center text-center "  style="width:40%;">
-                            <div class="inner-wrap animated fadeInLeft" style=" ">
-                                <h3 class="alt-font">Easy to customize...</h3>
-                                <div class="tx-div medium"></div>
-                                <h1 class="animated fadeInLeft">THIS TEXT IS</h1>
-                                <h2 class="animated fadeInRight">EASY TO CHANGE</h2>
-                                <div class="tx-div medium"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- end .ux_banner -->
-
-                <div id="banner_255853670" class="ux_banner dark    "  style="height:300px; " data-height="300px" role="banner">
-                    <div class="banner-bg "  style="background-image:url('http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/for_men.jpg'); "><img src="http://41hmj38vkl98fqzebjp1112g.wpengine.netdna-cdn.com/wp-content/uploads/sites/2/2013/08/for_men.jpg"  alt="" style="visibility:hidden;" /></div>
-                    <div class="banner-effect effect-snow"></div>
-                    <div class="row" >
-                        <div class="inner center text-center "  style="width:80%;">
-                            <div class="inner-wrap animated flipInX" style=" ">
-                                <h3 class="alt-font">Banner with CSS Snow effect...</h3>
-                                <h1 class="h-large">BIG FALL SALE</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- end .ux_banner -->
-
-            </div>
-            <div class="ux-loading dark"></div>
-        </div><!-- .ux-slider-wrapper -->
-
-    </div>
-
-
-
-
     <div class="row category-page">
 
         <div class="large-12 columns">
@@ -116,7 +45,7 @@
 
                         <li class="product-small  grid1 grid-normal">
                             <div class="inner-wrap">
-                                <a target="_blank" href="${product.url}">
+                                <a <c:if test="${mobile != true}">target="_blank"</c:if> href="${product.url}">
                                     <div class="product-image">
                                         <div class="front-image"><img width="247" height="300" src="${product.imageUrl}" class="attachment-shop_catalog wp-post-image" alt="${product.name}" /></div>
 

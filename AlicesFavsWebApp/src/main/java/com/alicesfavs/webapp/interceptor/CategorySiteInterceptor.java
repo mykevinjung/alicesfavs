@@ -35,6 +35,11 @@ public class CategorySiteInterceptor extends HandlerInterceptorAdapter
             modelAndView.addObject(categorySite.getKey().name.toLowerCase(),
                 ModelConverter.convertSiteList(categorySite.getValue()));
         }
+
+        if (!modelAndView.getModelMap().containsKey("logo"))
+        {
+            modelAndView.addObject("logo", "/resources/images/logo1.png");
+        }
     }
 
 }

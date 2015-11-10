@@ -18,6 +18,7 @@ import com.alicesfavs.datamodel.ExtractStatus;
 import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.ProductExtract;
 import com.alicesfavs.service.ProductService;
+import org.springframework.util.StringUtils;
 
 @Component("productService")
 public class ProductServiceImpl implements ProductService
@@ -26,7 +27,7 @@ public class ProductServiceImpl implements ProductService
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     private static final double MIN_CHANGE_PERCENTAGE = 1D;
-    private static final int MAX_SALE_DATE = 90;
+    private static final int MAX_SALE_DATE = 30;
 
     @Autowired
     private ProductDao productDao;
@@ -143,10 +144,8 @@ public class ProductServiceImpl implements ProductService
     {
         final String newPriceExtract = newExtract.price;
         final Double newPrice = stringPriceToDouble(newPriceExtract);
-        final Double newWasPrice = stringPriceToDouble(newExtract.wasPrice);
-        final Double oldPrice = existingProduct.price;
-        final Double oldWasPrice = existingProduct.wasPrice;
         final String oldPriceExtract = existingProduct.productExtract.price;
+        final Double oldPrice = existingProduct.price;
 
         existingProduct.price = newPrice;
         existingProduct.productExtract.brandName = newExtract.brandName;
@@ -155,32 +154,48 @@ public class ProductServiceImpl implements ProductService
         existingProduct.productExtract.price = newExtract.price;
         existingProduct.productExtract.url = newExtract.url;
         existingProduct.productExtract.wasPrice = newExtract.wasPrice;
+
+        // set was price
+        if (StringUtils.hasText(newExtract.wasPrice))
+        {
+            existingProduct.wasPrice = stringPriceToDouble(newExtract.wasPrice);
+            existingProduct.productExtract.wasPrice = newExtract.wasPrice;
+        }
+        else if (existingProduct.wasPrice == null)
+        {
+            if (hasPriceReduced(oldPrice, newPrice, MIN_CHANGE_PERCENTAGE))
+            {
+                existingProduct.wasPrice = oldPrice;
+                existingProduct.productExtract.wasPrice = oldPriceExtract;
+            }
+        }
+        else if (hasSaleExpired(existingProduct.saleStartDate) ||
+            hasPriceIncreased(oldPrice, newPrice, MIN_CHANGE_PERCENTAGE))
+        {
+            existingProduct.wasPrice = null;
+            existingProduct.productExtract.wasPrice = null;
+        }
+
+        // set sale date
+        if (existingProduct.wasPrice == null)
+        {
+            existingProduct.saleStartDate = null;
+        }
+        else if (existingProduct.saleStartDate == null)
+        {
+            existingProduct.saleStartDate = LocalDateTime.now();
+        }
+
+        // TODO: regular price redefine
+        existingProduct.regularPrice = (existingProduct.wasPrice != null) ? existingProduct.wasPrice : newPrice;
+        existingProduct.extractJobId = jobId;
+        existingProduct.extractedDate = LocalDateTime.now();
+        existingProduct.extractStatus = extractStatus;
         final boolean hasPriceChanged = !newPrice.equals(oldPrice);
         if (hasPriceChanged)
         {
             existingProduct.priceChangedDate = LocalDateTime.now();
         }
-        if (existingProduct.saleStartDate == null)
-        {
-            if ((newWasPrice != null) || hasPriceDecreased(oldPrice, newPrice, MIN_CHANGE_PERCENTAGE))
-            {
-                existingProduct.saleStartDate = LocalDateTime.now();
-            }
-        }
-        else if (newWasPrice == null)
-        {
-            if ((oldWasPrice != null) || (hasPriceIncreased(oldPrice, newPrice, MIN_CHANGE_PERCENTAGE))
-                || (existingProduct.saleStartDate.isBefore(LocalDateTime.now().minusDays(MAX_SALE_DATE))))
-            {
-                existingProduct.saleStartDate = null;
-            }
-        }
-        // TODO: regular price redefine
-        existingProduct.regularPrice = (newWasPrice != null) ? newWasPrice : newPrice;
-        existingProduct.wasPrice = newWasPrice;
-        existingProduct.extractJobId = jobId;
-        existingProduct.extractedDate = LocalDateTime.now();
-        existingProduct.extractStatus = extractStatus;
 
         final Product product = productDao.updateProduct(existingProduct);
         if (hasPriceChanged)
@@ -192,7 +207,12 @@ public class ProductServiceImpl implements ProductService
         return product;
     }
 
-    private boolean hasPriceDecreased(Double oldPrice, Double newPrice, double minimumPercentage)
+    private boolean hasSaleExpired(LocalDateTime saleStartDate)
+    {
+        return saleStartDate.isBefore(LocalDateTime.now().minusDays(MAX_SALE_DATE));
+    }
+
+    private boolean hasPriceReduced(Double oldPrice, Double newPrice, double minimumPercentage)
     {
         return (100D * (oldPrice.doubleValue() - newPrice.doubleValue()) / oldPrice.doubleValue()) > minimumPercentage;
     }
@@ -208,7 +228,9 @@ public class ProductServiceImpl implements ProductService
         {
             // TODO use site.currency
             final int lastCurrencyIndex = price.lastIndexOf("$");
-            final String priceWithoutCurrency = (lastCurrencyIndex == -1) ? price : price.substring(lastCurrencyIndex + 1);
+            final String priceWithoutCurrency = (lastCurrencyIndex == -1) ?
+                price :
+                price.substring(lastCurrencyIndex + 1);
             return NumberFormat.getInstance().parse(priceWithoutCurrency).doubleValue();
         }
         catch (NullPointerException | ParseException e)

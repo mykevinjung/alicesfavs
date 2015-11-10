@@ -10,10 +10,10 @@
   <link rel="profile" href="http://gmpg.org/xfn/11" />
 
   <script type="text/javascript">document.documentElement.className = document.documentElement.className + ' yes-js js_active js'</script>
-  <link rel="shortcut icon" href="/resources/images/favicon.png" />
+  <link rel="shortcut icon" href="/resources/images/favicon.png" type="image/x-icon" />
 
   <!-- Retina/iOS favicon -->
-  <link rel="apple-touch-icon-precomposed" href="/resources/images/apple-touch-icon-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" href="/resources/images/logo_touch.png" />
   <title>Alice's Favs</title>
   <link rel='stylesheet' id='flatsome-css-minified-css'  href='/resources/css/flatsome.min.css' type='text/css' media='all' />
   <link rel='stylesheet' id='flatsome-style-css'  href='/resources/css/style.css' type='text/css' media='all' />
@@ -65,7 +65,7 @@
 
           <div id="logo" class="logo-left">
             <a href="/" title="Alice's Favs" rel="home">
-              <img src="/resources/images/logo_5-1_128x128.jpg" class="header_logo " alt="Alice's Favs"/>						</a>
+              <img src="${logo}" class="header_logo " alt="Alice's Favs"/>						</a>
           </div><!-- .logo -->
 
           <div class="left-links">

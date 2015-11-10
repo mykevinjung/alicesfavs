@@ -61,7 +61,10 @@
       </li>
       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#">New Arrivals</a>
         <ul class="sub-menu">
-          <li class="label-new menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Coming soon</a></li>
+          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/clothing">Clothing</a></li>
+          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/shoes">Shoes</a></li>
+          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/accessories">Accessories</a></li>
+          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/home">Home</a></li>
         </ul>
       </li>
     </ul>

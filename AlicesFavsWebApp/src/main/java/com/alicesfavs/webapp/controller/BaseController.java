@@ -32,12 +32,16 @@ public class BaseController
     @RequestMapping(value = "/about-us", method = RequestMethod.GET)
     public String aboutUs(ModelMap model)
     {
+        model.addAttribute("logo", "/resources/images/logo3.png");
+
         return VIEW_ABOUT_US;
     }
 
     @RequestMapping(value = "/contact-us", method = RequestMethod.GET)
     public String contactUs(ModelMap model)
     {
+        model.addAttribute("logo", "/resources/images/logo3.png");
+
         return VIEW_CONTACT_US;
     }
 

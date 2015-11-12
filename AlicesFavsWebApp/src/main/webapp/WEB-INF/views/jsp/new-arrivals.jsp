@@ -36,7 +36,7 @@
 
                         <li class="product-small  grid1 grid-normal">
                             <div class="inner-wrap">
-                                <a target="_blank" href="${product.url}">
+                                <a <c:if test="${mobile != true}">target="_blank"</c:if> href="${product.url}">
                                     <div class="product-image">
                                         <div class="front-image"><img width="247" height="300" src="${product.imageUrl}" class="attachment-shop_catalog wp-post-image" alt="${product.name}" /></div>
 
@@ -51,7 +51,7 @@
                                         <h5 class="category">
                                             <a href="/new-arrivals/${product.siteStringId}" rel="tag">${product.siteName}</a>          </h5>
                                         <div class="tx-div small"></div>
-                                        <a target="_blank" href="${product.url}"><p class="name">${product.name}</p></a>
+                                        <a <c:if test="${mobile != true}">target="_blank"</c:if> href="${product.url}"><p class="name">${product.name}</p></a>
 
 
                                         <span class="price"><del><span class="amount">${product.extractedWasPrice}</span></del> <ins><span class="amount">${product.extractedPrice}</span></ins></span>

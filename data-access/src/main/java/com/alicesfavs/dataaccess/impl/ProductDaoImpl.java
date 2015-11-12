@@ -6,6 +6,7 @@ import java.sql.Types;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.alicesfavs.dataaccess.util.ResultSetUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
@@ -169,9 +170,9 @@ public class ProductDaoImpl implements ProductDao
             productExtract.imageUrl = rs.getString("IMAGE_URL_EXTRACT");
 
             final Product product = new Product(extractable, rs.getLong("SITE_ID"), productExtract);
-            product.price = rs.getDouble("PRICE");
-            product.wasPrice = rs.getDouble("WAS_PRICE");
-            product.regularPrice = rs.getDouble("REGULAR_PRICE");
+            product.price = ResultSetUtils.getDouble(rs, "PRICE");
+            product.wasPrice = ResultSetUtils.getDouble(rs, "WAS_PRICE");
+            product.regularPrice = ResultSetUtils.getDouble(rs, "REGULAR_PRICE");
             product.priceChangedDate = DateTimeUtils.toLocalDateTime(rs.getTimestamp("PRICE_CHANGED_DATE"));
             product.saleStartDate = DateTimeUtils.toLocalDateTime(rs.getTimestamp("SALE_START_DATE"));
             product.storedImagePath = rs.getString("STORED_IMAGE_PATH");

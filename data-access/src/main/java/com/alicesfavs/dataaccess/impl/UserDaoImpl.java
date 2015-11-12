@@ -1,6 +1,7 @@
 package com.alicesfavs.dataaccess.impl;
 
 import com.alicesfavs.dataaccess.UserDao;
+import com.alicesfavs.dataaccess.util.ResultSetUtils;
 import com.alicesfavs.datamodel.Country;
 import com.alicesfavs.datamodel.ModelBase;
 import com.alicesfavs.datamodel.User;
@@ -97,9 +98,9 @@ public class UserDaoImpl implements UserDao
             user.emailAddress = rs.getString("EMAIL_ADDRESS");
             user.password = rs.getString("PASSWORD");
             user.name = rs.getString("NAME");
-            user.favLimit = rs.getInt("FAV_LIMIT");
-            user.status = User.Status.fromCode(rs.getInt("STATUS"));
-            user.registrationCountry = Country.fromCode(rs.getInt("REGISTRATION_COUNTRY"));
+            user.favLimit = ResultSetUtils.getInt(rs, "FAV_LIMIT");
+            user.status = User.Status.fromCode(ResultSetUtils.getInt(rs, "STATUS"));
+            user.registrationCountry = Country.fromCode(ResultSetUtils.getInt(rs, "REGISTRATION_COUNTRY"));
 
             return user;
         }

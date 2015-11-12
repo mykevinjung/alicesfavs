@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 
+import com.alicesfavs.dataaccess.util.ResultSetUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -58,8 +59,8 @@ public class PriceHistoryDaoImpl implements PriceHistoryDao
             final long productId = rs.getLong("PRODUCT_ID");
             final String oldPriceExtract = rs.getString("OLD_PRICE_EXTRACT");
             final String newPriceExtract = rs.getString("NEW_PRICE_EXTRACT");
-            final Double oldPrice = rs.getDouble("OLD_PRICE");
-            final Double newPrice = rs.getDouble("NEW_PRICE");
+            final Double oldPrice = ResultSetUtils.getDouble(rs, "OLD_PRICE");
+            final Double newPrice = ResultSetUtils.getDouble(rs, "NEW_PRICE");
 
             return new PriceHistory(modelBase, productId, oldPriceExtract, newPriceExtract, oldPrice, newPrice);
         }

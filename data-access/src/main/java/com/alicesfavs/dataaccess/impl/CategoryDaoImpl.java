@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alicesfavs.dataaccess.util.ResultSetUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -26,8 +26,6 @@ import com.alicesfavs.datamodel.ModelBase;
 @Repository
 public class CategoryDaoImpl implements CategoryDao
 {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(CategoryDaoImpl.class);
 
     private static final String INSERT_CATEGORY = "INSERT INTO CATEGORY (SITE_ID, NAME_EXTRACT1, URL_EXTRACT1, "
         + "NAME_EXTRACT2, URL_EXTRACT2, NAME_EXTRACT3, URL_EXTRACT3, DISPLAY_ORDER, EXTRACT_STATUS, EXTRACT_JOB_ID, "
@@ -169,7 +167,7 @@ public class CategoryDaoImpl implements CategoryDao
             final CategoryExtract categoryExtract3 = getCategoryExtract(rs, 3);
             final Category category = new Category(extractable, siteId, categoryExtract1, categoryExtract2,
                 categoryExtract3);
-            category.displayOrder = rs.getInt("DISPLAY_ORDER");
+            category.displayOrder = ResultSetUtils.getInt(rs, "DISPLAY_ORDER");
 
             return category;
         }

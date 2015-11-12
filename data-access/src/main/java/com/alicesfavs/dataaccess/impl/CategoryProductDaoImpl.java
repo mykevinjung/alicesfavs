@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.time.LocalDateTime;
 
+import com.alicesfavs.dataaccess.util.ResultSetUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,7 +107,7 @@ public class CategoryProductDaoImpl implements CategoryProductDao
             final Extractable extractable = RowMapperUtils.mapRowToExtractable(rs, rowNum);
             final long categoryId = rs.getLong("CATEGORY_ID");
             final long productId = rs.getLong("PRODUCT_ID");
-            final Integer displayOrder = rs.getInt("DISPLAY_ORDER");
+            final Integer displayOrder = ResultSetUtils.getInt(rs, "DISPLAY_ORDER");
 
             return new CategoryProduct(extractable, categoryId, productId, displayOrder);
         }

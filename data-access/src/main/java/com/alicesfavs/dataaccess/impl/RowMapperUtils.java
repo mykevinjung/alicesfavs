@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.alicesfavs.dataaccess.util.DateTimeUtils;
+import com.alicesfavs.dataaccess.util.ResultSetUtils;
 import com.alicesfavs.datamodel.ExtractStatus;
 import com.alicesfavs.datamodel.Extractable;
 import com.alicesfavs.datamodel.ModelBase;
@@ -32,8 +33,8 @@ class RowMapperUtils
     static Extractable mapRowToExtractable(ResultSet rs, int rowNum, String tableName) throws SQLException
     {
         return new Extractable(mapRowToModelBase(rs, rowNum, tableName),
-            ExtractStatus.fromCode(rs.getInt(getColumnName(tableName, "EXTRACT_STATUS"))),
-            rs.getLong(getColumnName(tableName, "EXTRACT_JOB_ID")),
+            ExtractStatus.fromCode(ResultSetUtils.getInt(rs, getColumnName(tableName, "EXTRACT_STATUS"))),
+            ResultSetUtils.getLong(rs, getColumnName(tableName, "EXTRACT_JOB_ID")),
             DateTimeUtils.toLocalDateTime(rs.getTimestamp(getColumnName(tableName, "EXTRACTED_DATE"))));
     }
 

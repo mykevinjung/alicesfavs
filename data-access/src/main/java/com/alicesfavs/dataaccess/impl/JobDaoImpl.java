@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.time.LocalDateTime;
 
+import com.alicesfavs.dataaccess.util.ResultSetUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -99,10 +100,10 @@ public class JobDaoImpl implements JobDao
             job.status = Status.fromCode(rs.getInt("STATUS"));
             job.startTime = DateTimeUtils.toLocalDateTime(rs.getTimestamp("START_TIME"));
             job.endTime = DateTimeUtils.toLocalDateTime(rs.getTimestamp("END_TIME"));
-            job.foundCategory = rs.getInt("FOUND_CATEGORY");
-            job.foundProduct = rs.getInt("FOUND_PRODUCT");
-            job.notFoundCategory = rs.getInt("NOT_FOUND_CATEGORY");
-            job.notFoundProduct = rs.getInt("NOT_FOUND_PRODUCT");
+            job.foundCategory = ResultSetUtils.getInt(rs, "FOUND_CATEGORY");
+            job.foundProduct = ResultSetUtils.getInt(rs, "FOUND_PRODUCT");
+            job.notFoundCategory = ResultSetUtils.getInt(rs, "NOT_FOUND_CATEGORY");
+            job.notFoundProduct = ResultSetUtils.getInt(rs, "NOT_FOUND_PRODUCT");
 
             return job;
         }

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 
+import com.alicesfavs.dataaccess.util.ResultSetUtils;
 import com.alicesfavs.datamodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -102,11 +103,11 @@ public class SiteDaoImpl implements SiteDao
         {
             final ModelBase modelBase = RowMapperUtils.mapRowToModelBase(rs, rowNum);
             final String stringId = rs.getString("STRING_ID");
-            final Country country = Country.fromCode(rs.getInt("COUNTRY_CODE"));
+            final Country country = Country.fromCode(ResultSetUtils.getInt(rs, "COUNTRY_CODE"));
             final String displayName = rs.getString("DISPLAY_NAME");
             final String url = rs.getString("URL");
             final boolean display = rs.getInt("DISPLAY") == 1 ? true : false;
-            final Integer displayWeight = rs.getInt("DISPLAY_WEIGHT");
+            final Integer displayWeight = ResultSetUtils.getInt(rs, "DISPLAY_WEIGHT");
             final boolean useStoredImage = rs.getInt("USE_STORED_IMAGE") == 1 ? true : false;
             final String currency = rs.getString("CURRENCY");
 

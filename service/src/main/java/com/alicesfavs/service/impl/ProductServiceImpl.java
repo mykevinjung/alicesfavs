@@ -153,7 +153,6 @@ public class ProductServiceImpl implements ProductService
         existingProduct.productExtract.name = newExtract.name;
         existingProduct.productExtract.price = newExtract.price;
         existingProduct.productExtract.url = newExtract.url;
-        existingProduct.productExtract.wasPrice = newExtract.wasPrice;
 
         // set was price
         if (StringUtils.hasText(newExtract.wasPrice))

@@ -2,6 +2,7 @@ package com.alicesfavs.dataaccess.impl;
 
 import com.alicesfavs.dataaccess.UserFavDao;
 import com.alicesfavs.dataaccess.util.DateTimeUtils;
+import com.alicesfavs.dataaccess.util.ResultSetUtils;
 import com.alicesfavs.datamodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -88,7 +89,7 @@ public class UserFavDaoImpl implements UserFavDao
             final UserFav userFav = new UserFav(modelBase);
             userFav.userId = rs.getLong("UF.USER_ID");
             userFav.addOnName = rs.getString("UF.ADD_ON_NAME");
-            userFav.addOnPrice = rs.getDouble("UF.ADD_ON_PRICE");
+            userFav.addOnPrice = ResultSetUtils.getDouble(rs, "UF.ADD_ON_PRICE");
             userFav.product = mapRowProduct(rs, rowNum);
 
             return userFav;
@@ -107,9 +108,9 @@ public class UserFavDaoImpl implements UserFavDao
             productExtract.imageUrl = rs.getString("P.IMAGE_URL_EXTRACT");
 
             final Product product = new Product(extractable, rs.getLong("P.SITE_ID"), productExtract);
-            product.price = rs.getDouble("P.PRICE");
-            product.wasPrice = rs.getDouble("P.WAS_PRICE");
-            product.regularPrice = rs.getDouble("P.REGULAR_PRICE");
+            product.price = ResultSetUtils.getDouble(rs, "P.PRICE");
+            product.wasPrice = ResultSetUtils.getDouble(rs, "P.WAS_PRICE");
+            product.regularPrice = ResultSetUtils.getDouble(rs, "P.REGULAR_PRICE");
             product.priceChangedDate = DateTimeUtils.toLocalDateTime(rs.getTimestamp("P.PRICE_CHANGED_DATE"));
             product.saleStartDate = DateTimeUtils.toLocalDateTime(rs.getTimestamp("P.SALE_START_DATE"));
             product.storedImagePath = rs.getString("P.STORED_IMAGE_PATH");

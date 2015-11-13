@@ -22,23 +22,25 @@ public class JobDaoImpl implements JobDao
 {
 
     private static final String INSERT_JOB = "INSERT INTO JOB (SITE_ID, MODE, STATUS, START_TIME, END_TIME, "
-        + "FOUND_CATEGORY, FOUND_PRODUCT, NOT_FOUND_CATEGORY, NOT_FOUND_PRODUCT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        + "FOUND_CATEGORY, FOUND_PRODUCT, NOT_FOUND_CATEGORY, NOT_FOUND_PRODUCT, TOTAL_SALE_PRODUCT, "
+        + "NEW_SALE_PRODUCT, NEW_NEW_ARRIVALS_PRODUCT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String UPDATE_JOB = "UPDATE JOB SET SITE_ID = ?, MODE = ?, STATUS = ?, START_TIME = ?, "
         + "END_TIME = ?, FOUND_CATEGORY = ?, FOUND_PRODUCT = ?, NOT_FOUND_CATEGORY = ?, "
-        + "NOT_FOUND_PRODUCT = ? WHERE ID = ?";
+        + "NOT_FOUND_PRODUCT = ?, TOTAL_SALE_PRODUCT = ?, NEW_SALE_PRODUCT = ?, NEW_NEW_ARRIVALS_PRODUCT = ? "
+        + "WHERE ID = ?";
 
     private static final String SELECT_JOB_BY_ID = "SELECT SITE_ID, MODE, STATUS, START_TIME, END_TIME, "
-        + "FOUND_CATEGORY, FOUND_PRODUCT, NOT_FOUND_CATEGORY, NOT_FOUND_PRODUCT, CREATED_DATE, "
-        + "UPDATED_DATE FROM JOB WHERE ID = ?";
+        + "FOUND_CATEGORY, FOUND_PRODUCT, NOT_FOUND_CATEGORY, NOT_FOUND_PRODUCT, TOTAL_SALE_PRODUCT, "
+        + "NEW_SALE_PRODUCT, NEW_NEW_ARRIVALS_PRODUCT, CREATED_DATE, UPDATED_DATE FROM JOB WHERE ID = ?";
 
     private static final int[] INSERT_PARAM_TYPES =
         { Types.BIGINT, Types.INTEGER, Types.INTEGER, Types.TIMESTAMP, Types.TIMESTAMP, Types.INTEGER, Types.INTEGER,
-            Types.INTEGER, Types.INTEGER };
+            Types.INTEGER, Types.INTEGER, Types.INTEGER, Types.INTEGER, Types.INTEGER };
 
     private static final int[] UPDATE_PARAM_TYPES =
         { Types.BIGINT, Types.INTEGER, Types.INTEGER, Types.TIMESTAMP, Types.TIMESTAMP, Types.INTEGER, Types.INTEGER,
-            Types.INTEGER, Types.INTEGER, Types.BIGINT };
+            Types.INTEGER, Types.INTEGER, Types.INTEGER, Types.INTEGER, Types.INTEGER, Types.BIGINT };
 
     private static final int[] SELECT_PARAM_TYPES =
         { Types.BIGINT };
@@ -47,12 +49,13 @@ public class JobDaoImpl implements JobDao
     private DaoSupport<Job> daoSupport;
 
     public Job insertJob(long siteId, Mode jobMode, Status jobStatus, LocalDateTime startTime, LocalDateTime endTime,
-        Integer foundCategoryNo, Integer foundProductNo, Integer notFoundCategoryNo, Integer notFoundProductNo)
+        Integer foundCategoryNo, Integer foundProductNo, Integer notFoundCategoryNo, Integer notFoundProductNo,
+        Integer totalSaleProduct, Integer newSaleProduct, Integer newNewArrivalsProduct)
     {
         final Object[] params =
             { siteId, jobMode.getCode(), jobStatus.getCode(), DateTimeUtils.toTimestamp(startTime),
                 DateTimeUtils.toTimestamp(endTime), foundCategoryNo, foundProductNo, notFoundCategoryNo,
-                notFoundProductNo };
+                notFoundProductNo, totalSaleProduct, newSaleProduct, newNewArrivalsProduct };
         final ModelBase modelBase = daoSupport.insert(INSERT_JOB, INSERT_PARAM_TYPES, params);
 
         final Job job = new Job(modelBase, siteId, jobMode);
@@ -63,6 +66,9 @@ public class JobDaoImpl implements JobDao
         job.foundProduct = foundProductNo;
         job.notFoundCategory = notFoundCategoryNo;
         job.notFoundProduct = notFoundProductNo;
+        job.totalSaleProduct = totalSaleProduct;
+        job.newSaleProduct = newSaleProduct;
+        job.newNewArrivalsProduct = newNewArrivalsProduct;
 
         return job;
     }
@@ -72,7 +78,7 @@ public class JobDaoImpl implements JobDao
         final Object[] params =
             { job.siteId, job.mode.getCode(), job.status.getCode(), DateTimeUtils.toTimestamp(job.startTime),
                 DateTimeUtils.toTimestamp(job.endTime), job.foundCategory, job.foundProduct, job.notFoundCategory,
-                job.notFoundProduct, job.id };
+                job.notFoundProduct, job.totalSaleProduct, job.newSaleProduct, job.newNewArrivalsProduct, job.id };
         job.updatedDate = daoSupport.update(UPDATE_JOB, UPDATE_PARAM_TYPES, params);
 
         return job;
@@ -88,7 +94,7 @@ public class JobDaoImpl implements JobDao
     @Override
     public Job selectLastCompletedJob(long siteId)
     {
-        throw  new RuntimeException("not implemented");
+        throw new RuntimeException("not implemented");
     }
 
     private class JobRowMapper implements RowMapper<Job>
@@ -104,6 +110,9 @@ public class JobDaoImpl implements JobDao
             job.foundProduct = ResultSetUtils.getInt(rs, "FOUND_PRODUCT");
             job.notFoundCategory = ResultSetUtils.getInt(rs, "NOT_FOUND_CATEGORY");
             job.notFoundProduct = ResultSetUtils.getInt(rs, "NOT_FOUND_PRODUCT");
+            job.totalSaleProduct = ResultSetUtils.getInt(rs, "TOTAL_SALE_PRODUCT");
+            job.newSaleProduct = ResultSetUtils.getInt(rs, "NEW_SALE_PRODUCT");
+            job.newNewArrivalsProduct = ResultSetUtils.getInt(rs, "NEW_NEW_ARRIVALS_PRODUCT");
 
             return job;
         }

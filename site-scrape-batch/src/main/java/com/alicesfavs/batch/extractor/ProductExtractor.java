@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.alicesfavs.service.CategoryService;
 import com.alicesfavs.service.ProductService;
 import com.alicesfavs.sitescraper.SiteScrapeException;
 import com.alicesfavs.sitescraper.SiteScraper;
@@ -52,16 +51,27 @@ public class ProductExtractor
 
         LOGGER.info("Saving product map...");
         final Map<String, Product> productMap =
-            productService.saveProduct(job.id, site.id, ExtractStatus.EXTRACTED, productExtractMap);
+            productService.saveProduct(job, site, ExtractStatus.EXTRACTED, productExtractMap);
         job.foundProduct = productMap.size();
-        job.notFoundProduct = productService.markNotFoundProduct(job.id, site.id);
-
-        // TODO print the count of sale products and new arrivals
-        LOGGER.info("Extracted product: {}, Saved product: {}, Not found product: {}",
-            productExtractMap.size(), job.foundProduct, job.notFoundProduct);
+        job.notFoundProduct = productService.markNotFoundProduct(job, site);
+        job.totalSaleProduct = getTotalSaleProductCount(productMap);
 
         //createSearchableProduct(categoryMap, productMap);
         //final SearchableProductCreator creator = new SearchableProductCreator(batchConfig);
+    }
+
+    private int getTotalSaleProductCount(Map<String, Product> productMap)
+    {
+        int totalSaleProduct = 0;
+        for(Product product : productMap.values())
+        {
+            if (product.saleStartDate != null)
+            {
+                totalSaleProduct++;
+            }
+        }
+
+        return totalSaleProduct;
     }
 
     private MultirootTree<CategoryExtract> extractCategory(Job job, Site site) throws ExtractException

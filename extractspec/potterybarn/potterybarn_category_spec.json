@@ -1,0 +1,183 @@
+[
+    {
+        "containerSpec":{
+            "id":"pb-family",
+            "tagName":"ul",
+            "className":null,
+            "attributeKey":null,
+            "valuePattern":null
+        },
+        "categorySpec":{
+            "id":null,
+            "tagName":"a",
+            "className":null,
+            "attributeKey":null,
+            "valuePattern":null
+        },
+        "nameSpec":{
+            "containerSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "elementSpec":{
+                "id":null,
+                "tagName":"img",
+                "className":null,
+                "attributeKey":"src",
+                "valuePattern":null
+            },
+            "dataSpec":{
+                "attributeKey":"alt",
+                "valuePattern":null,
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        },
+        "urlSpec":{
+            "containerSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "dataSpec":{
+                "attributeKey":"abs:href",
+                "valuePattern":null,
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        },
+        "subcategorySpec": {
+            "containerSpec": {
+                "id": "topnav-container",
+                "tagName": "nav",
+                "className": null,
+                "attributeKey": null,
+                "valuePattern": null
+            },
+            "categorySpec": {
+                "id": null,
+                "tagName": "a",
+                "className": null,
+                "attributeKey": null,
+                "valuePattern": null
+            },
+            "nameSpec": {
+                "containerSpec": {
+                    "id": null,
+                    "tagName": "a",
+                    "className": null,
+                    "attributeKey": null,
+                    "valuePattern": null
+                },
+                "elementSpec": {
+                    "id": null,
+                    "tagName": "a",
+                    "className": null,
+                    "attributeKey": "class",
+                    "valuePattern": "topnav-.*"
+                },
+                "dataSpec": {
+                    "attributeKey": "$nested_text",
+                    "valuePattern": null,
+                    "valueExcludePattern": ".*Williams-Sonoma.*",
+                    "substringPattern": null
+                }
+            },
+            "urlSpec": {
+                "containerSpec": {
+                    "id": null,
+                    "tagName": "a",
+                    "className": null,
+                    "attributeKey": null,
+                    "valuePattern": null
+                },
+                "elementSpec": {
+                    "id": null,
+                    "tagName": "a",
+                    "className": null,
+                    "attributeKey": "class",
+                    "valuePattern": "topnav-.*"
+                },
+                "dataSpec": {
+                    "attributeKey": "abs:href",
+                    "valuePattern": ".*cm_type=gnav",
+                    "valueExcludePattern": null,
+                    "substringPattern": null
+                }
+            },
+            "subcategorySpec": {
+                "containerSpec": {
+                    "id": null,
+                    "tagName": "div",
+                    "className": "side-nav",
+                    "attributeKey": null,
+                    "valuePattern": null
+                },
+                "categorySpec": {
+                    "id": null,
+                    "tagName": "li",
+                    "className": "navLink",
+                    "attributeKey": null,
+                    "valuePattern": null
+                },
+                "nameSpec": {
+                    "containerSpec": {
+                        "id": null,
+                        "tagName": "a",
+                        "className": null,
+                        "attributeKey": null,
+                        "valuePattern": null
+                    },
+                    "elementSpec": {
+                        "id": null,
+                        "tagName": "a",
+                        "className": null,
+                        "attributeKey": null,
+                        "valuePattern": null
+                    },
+                    "dataSpec": {
+                        "attributeKey": "$nested_text",
+                        "valuePattern": null,
+                        "valueExcludePattern": null,
+                        "substringPattern": null
+                    }
+                },
+                "urlSpec": {
+                    "containerSpec": {
+                        "id": null,
+                        "tagName": "a",
+                        "className": null,
+                        "attributeKey": null,
+                        "valuePattern": null
+                    },
+                    "elementSpec": {
+                        "id": null,
+                        "tagName": "a",
+                        "className": null,
+                        "attributeKey": null,
+                        "valuePattern": null
+                    },
+                    "dataSpec": {
+                        "attributeKey": "abs:href",
+                        "valuePattern": ".*cm_type=lnav",
+                        "valueExcludePattern": null,
+                        "substringPattern": null
+                    }
+                },
+                "subcategorySpec": null
+            }
+        }
+    }
+]

@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alicesfavs.datamodel.Job;
+import com.alicesfavs.datamodel.Site;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,8 @@ public class ProductServiceImpl implements ProductService
     @Autowired
     private PriceHistoryDao priceHistoryDao;
 
-    public Map<String, Product> saveProduct(long jobId, long siteId, ExtractStatus extractStatus,
+    @Override
+    public Map<String, Product> saveProduct(Job job, Site site, ExtractStatus extractStatus,
         Map<String, List<ProductExtract>> peMap)
     {
         LOGGER.info("Size of Product Extract map: " + peMap.size());
@@ -45,7 +48,7 @@ public class ProductServiceImpl implements ProductService
             final List<ProductExtract> peList = peMap.get(extractId);
             try
             {
-                final Product product = saveProduct(jobId, siteId, extractStatus, peList);
+                final Product product = saveProduct(job, site, extractStatus, peList);
                 productMap.put(extractId, product);
             }
             catch (Exception e)
@@ -57,50 +60,67 @@ public class ProductServiceImpl implements ProductService
         return productMap;
     }
 
-    public Product saveProduct(long jobId, long siteId, ExtractStatus extractStatus,
+    @Override
+    public Product saveProduct(Job job, Site site, ExtractStatus extractStatus,
         List<ProductExtract> productExtractList)
     {
-        final ProductExtract bestProduct = findBestPriceExtract(productExtractList);
-        return saveProduct(jobId, siteId, extractStatus, bestProduct);
+        final ProductExtract bestProduct = findBestPriceExtract(site, productExtractList);
+        return saveProduct(job, site, extractStatus, bestProduct);
     }
 
+    @Override
     public Product findProduct(long siteId, String siteProductId)
     {
         return productDao.selectProductById(siteId, siteProductId);
     }
 
-    public Product saveProduct(long jobId, long siteId, ExtractStatus extractStatus, ProductExtract productExtract)
+    @Override
+    public int markNotFoundProduct(Job job, Site site)
     {
-        Product product = findProduct(siteId, productExtract.id);
+        return productDao.updateExtractStatus(site.id, job.id, ExtractStatus.NOT_FOUND);
+    }
+
+    @Override
+    public List<Product> searchSaleProducts(long siteId)
+    {
+        return productDao.selectSaleProducts(siteId, ExtractStatus.EXTRACTED);
+    }
+
+    @Override
+    public List<Product> searchNewProducts(long siteId, LocalDateTime afterCreatedDate)
+    {
+        return productDao.selectNewProducts(siteId, ExtractStatus.EXTRACTED, afterCreatedDate);
+    }
+
+    private Product saveProduct(Job job, Site site, ExtractStatus extractStatus, ProductExtract productExtract)
+    {
+        Product product = findProduct(site.id, productExtract.id);
         if (product == null)
         {
-            product = createProduct(jobId, siteId, extractStatus, productExtract);
+            product = createProduct(job, site, extractStatus, productExtract);
+            if (product.saleStartDate != null)
+            {
+                job.newSaleProduct++;
+            }
+            else
+            {
+                job.newNewArrivalsProduct++;
+            }
         }
         else
         {
-            product = updateProduct(jobId, product, extractStatus, productExtract);
+            final LocalDateTime oldSaleStartDate = product.saleStartDate;
+            product = updateProduct(job, site, product, extractStatus, productExtract);
+            if (oldSaleStartDate == null && product.saleStartDate != null)
+            {
+                job.newSaleProduct++;
+            }
         }
 
         return product;
     }
 
-    @Override
-    public int markNotFoundProduct(long jobId, long siteId)
-    {
-        return productDao.updateExtractStatus(siteId, jobId, ExtractStatus.NOT_FOUND);
-    }
-
-    @Override public List<Product> searchSaleProducts(long siteId)
-    {
-        return productDao.selectSaleProducts(siteId, ExtractStatus.EXTRACTED);
-    }
-
-    @Override public List<Product> searchNewProducts(long siteId, LocalDateTime afterCreatedDate)
-    {
-        return productDao.selectNewProducts(siteId, ExtractStatus.EXTRACTED, afterCreatedDate);
-    }
-
-    private ProductExtract findBestPriceExtract(List<ProductExtract> productExtractList)
+    private ProductExtract findBestPriceExtract(Site site, List<ProductExtract> productExtractList)
     {
         ProductExtract bestExtract = null;
         for (ProductExtract pe : productExtractList)
@@ -111,8 +131,8 @@ public class ProductServiceImpl implements ProductService
             }
             else
             {
-                final Double pePrice = stringPriceToDouble(pe.price);
-                final Double bestPrice = stringPriceToDouble(bestExtract.price);
+                final Double pePrice = stringPriceToDouble(site, pe.price);
+                final Double bestPrice = stringPriceToDouble(site, bestExtract.price);
                 if (pePrice < bestPrice)
                 {
                     bestExtract = pe;
@@ -127,23 +147,23 @@ public class ProductServiceImpl implements ProductService
         return bestExtract;
     }
 
-    private Product createProduct(long jobId, long siteId, ExtractStatus extractStatus, ProductExtract productExtract)
+    private Product createProduct(Job job, Site site, ExtractStatus extractStatus, ProductExtract productExtract)
     {
-        final Double price = stringPriceToDouble(productExtract.price);
-        final Double wasPrice = stringPriceToDouble(productExtract.wasPrice);
+        final Double price = stringPriceToDouble(site, productExtract.price);
+        final Double wasPrice = stringPriceToDouble(site, productExtract.wasPrice);
         final LocalDateTime priceChangedDate = LocalDateTime.now();
         final LocalDateTime saleStartDate = (wasPrice != null) ? LocalDateTime.now() : null;
         final Double regularPrice = (wasPrice != null) ? wasPrice : price;
 
-        return productDao.insertProduct(siteId, productExtract, price, wasPrice, regularPrice, priceChangedDate,
-            saleStartDate, null, extractStatus, jobId, LocalDateTime.now());
+        return productDao.insertProduct(site.id, productExtract, price, wasPrice, regularPrice, priceChangedDate,
+            saleStartDate, null, extractStatus, job.id, LocalDateTime.now());
     }
 
-    private Product updateProduct(long jobId, Product existingProduct, ExtractStatus extractStatus,
+    private Product updateProduct(Job job, Site site, Product existingProduct, ExtractStatus extractStatus,
         ProductExtract newExtract)
     {
         final String newPriceExtract = newExtract.price;
-        final Double newPrice = stringPriceToDouble(newPriceExtract);
+        final Double newPrice = stringPriceToDouble(site, newPriceExtract);
         final String oldPriceExtract = existingProduct.productExtract.price;
         final Double oldPrice = existingProduct.price;
 
@@ -157,7 +177,7 @@ public class ProductServiceImpl implements ProductService
         // set was price
         if (StringUtils.hasText(newExtract.wasPrice))
         {
-            existingProduct.wasPrice = stringPriceToDouble(newExtract.wasPrice);
+            existingProduct.wasPrice = stringPriceToDouble(site, newExtract.wasPrice);
             existingProduct.productExtract.wasPrice = newExtract.wasPrice;
         }
         else if (existingProduct.wasPrice == null)
@@ -175,7 +195,7 @@ public class ProductServiceImpl implements ProductService
             existingProduct.productExtract.wasPrice = null;
         }
 
-        // set sale date
+        // set sale start date
         if (existingProduct.wasPrice == null)
         {
             existingProduct.saleStartDate = null;
@@ -187,7 +207,7 @@ public class ProductServiceImpl implements ProductService
 
         // TODO: regular price redefine
         existingProduct.regularPrice = (existingProduct.wasPrice != null) ? existingProduct.wasPrice : newPrice;
-        existingProduct.extractJobId = jobId;
+        existingProduct.extractJobId = job.id;
         existingProduct.extractedDate = LocalDateTime.now();
         existingProduct.extractStatus = extractStatus;
         final boolean hasPriceChanged = !newPrice.equals(oldPrice);
@@ -221,12 +241,11 @@ public class ProductServiceImpl implements ProductService
         return (100D * (newPrice.doubleValue() - oldPrice.doubleValue()) / oldPrice.doubleValue()) > minimumPercentage;
     }
 
-    private Double stringPriceToDouble(String price)
+    private Double stringPriceToDouble(Site site, String price)
     {
         try
         {
-            // TODO use site.currency
-            final int lastCurrencyIndex = price.lastIndexOf("$");
+            final int lastCurrencyIndex = price.lastIndexOf(site.currency);
             final String priceWithoutCurrency = (lastCurrencyIndex == -1) ?
                 price :
                 price.substring(lastCurrencyIndex + 1);

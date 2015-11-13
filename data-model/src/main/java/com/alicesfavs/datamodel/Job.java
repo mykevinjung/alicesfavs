@@ -10,9 +10,12 @@ public class Job extends ModelBase
     public LocalDateTime startTime;
     public LocalDateTime endTime;
     public Integer foundCategory = 0;
-    public Integer foundProduct = 0;
     public Integer notFoundCategory = 0;
+    public Integer foundProduct = 0;
     public Integer notFoundProduct = 0;
+    public Integer totalSaleProduct = 0;
+    public Integer newSaleProduct = 0;
+    public Integer newNewArrivalsProduct = 0;
 
     public Job(long id, LocalDateTime createdDate, long siteId, Mode mode)
     {
@@ -28,7 +31,7 @@ public class Job extends ModelBase
         this.mode = mode;
     }
 
-    public static enum Mode
+    public enum Mode
     {
         FULL_EXTRACT(1), CATEGORY_EXTRACT(2), PRODUCT_EXTRACT(3);
 
@@ -58,7 +61,7 @@ public class Job extends ModelBase
         }
     }
 
-    public static enum Status
+    public enum Status
     {
         STARTED(1), COMPLETED(2), FAILED(3);
 
@@ -92,8 +95,10 @@ public class Job extends ModelBase
     {
         return "Job[" + super.toString() + ", siteId=" + siteId + ", mode=" + mode
             + ", status=" + status + ", startTime=" + startTime + ", endTime=" + endTime
-            + ", foundCategory=" + foundCategory + ", foundProduct=" + foundProduct
-            + ", notFoundCategory=" + notFoundCategory + ", notFoundProduct=" + notFoundProduct + "]";
+            + ", foundCategory=" + foundCategory + ", notFoundCategory=" + notFoundCategory
+            + ", foundProduct=" + foundProduct + ", notFoundProduct=" + notFoundProduct
+            + ", totalSaleProduct=" + totalSaleProduct + ", newSaleProduct=" + newSaleProduct
+            + ", newNewArrivalsProduct=" + newNewArrivalsProduct + "]";
     }
 
 }

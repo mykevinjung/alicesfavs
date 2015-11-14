@@ -210,7 +210,7 @@ public class SiteScraperImpl implements SiteScraper
         catch (HttpStatusException e)
         {
             // ignore and move forward to next
-            LOGGER.error("Error in opening " + url, e);
+            LOGGER.error("Http Status Code " + e.getStatusCode() + " in opening " + url, e);
             return null;
         }
         catch (IOException e)

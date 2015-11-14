@@ -170,7 +170,7 @@
                     "attributeKey":"$nested_text",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":null
+                    "substringPattern":".*\\((.*)\\).*"
                 }
             }
         ]

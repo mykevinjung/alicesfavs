@@ -11,23 +11,29 @@
             "id":null,
             "tagName":"li",
             "className":"product-cell",
-            "attributeKey":"data-product",
+            "attributeKey":null,
             "valuePattern":null
         },
         "idSpec":{
-            "containerSpec":null,
+            "containerSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":"product-name",
+                "attributeKey":null,
+                "valuePattern":null
+            },
             "elementSpec":{
                 "id":null,
-                "tagName":"li",
-                "className":"product-cell",
-                "attributeKey":"data-product",
+                "tagName":"a",
+                "className":"product-name",
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"data-product",
+                "attributeKey":"href",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":"\\{productSku:'([0-9]+?)'.*"
+                "substringPattern":".*\\.com/products/([0-9a-zA-Z\\-]+?)/\\?.*"
             }
         },
         "nameSpec":{
@@ -78,15 +84,15 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":"span",
-                    "className":"product-thumb-casing",
+                    "tagName":"div",
+                    "className":"product-thumb",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"img",
-                    "className":null,
+                    "className":"product-thumb",
                     "attributeKey":"src",
                     "valuePattern":null
                 },
@@ -100,8 +106,8 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":"span",
-                    "className":"product-thumb-casing",
+                    "tagName":"div",
+                    "className":"product-thumb",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -125,7 +131,7 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"price-sale",
+                    "className":"price-special",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -171,7 +177,7 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"price-strike-sale",
+                    "className":"price-strike-special",
                     "attributeKey":null,
                     "valuePattern":null
                 },

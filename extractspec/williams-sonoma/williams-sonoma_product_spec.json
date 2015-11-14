@@ -27,7 +27,7 @@
                 "attributeKey":"data-product",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":"\\{productSku:'([0-9]+?)'.*"
+                "substringPattern":"\\{productSku:'([a-zA-Z0-9]+?)'.*"
             }
         },
         "nameSpec":{

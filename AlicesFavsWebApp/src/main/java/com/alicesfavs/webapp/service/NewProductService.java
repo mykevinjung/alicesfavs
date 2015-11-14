@@ -6,6 +6,8 @@ import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.ProductService;
 import com.alicesfavs.webapp.comparator.CreationDateComparator1;
 import com.alicesfavs.webapp.comparator.CreationDateComparator2;
+import com.alicesfavs.webapp.comparator.SiteNameAtozComparator;
+import com.alicesfavs.webapp.comparator.SiteNameZtoaComparator;
 import com.alicesfavs.webapp.config.WebAppConfig;
 import com.alicesfavs.webapp.uimodel.UiProduct;
 import com.alicesfavs.webapp.util.ModelConverter;
@@ -37,10 +39,22 @@ public class NewProductService
 
     private Map<Long, CachedList<UiProduct>> siteProductMap = new Hashtable<>();
 
-    public List<UiProduct> getNewProducts(AliceCategory category)
+    public List<UiProduct> getNewProducts(AliceCategory category, ProductSortType productSortType)
     {
         final List<Site> siteList = siteManager.getSites(category);
         final List<UiProduct> sortByCreationDate = getNewProducts(siteList);
+        if (productSortType == ProductSortType.BRAND_ATOZ)
+        {
+            final List<UiProduct> sortByBrandAtoz = new ArrayList<>(sortByCreationDate);
+            sortByBrandAtoz.sort(new SiteNameAtozComparator());
+            return sortByBrandAtoz;
+        }
+        else if (productSortType == ProductSortType.BRAND_ZTOA)
+        {
+            final List<UiProduct> sortByBrandZtoa = new ArrayList<>(sortByCreationDate);
+            sortByBrandZtoa.sort(new SiteNameZtoaComparator());
+            return sortByBrandZtoa;
+        }
 
         return sortByCreationDate;
     }

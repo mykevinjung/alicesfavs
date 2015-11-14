@@ -88,8 +88,11 @@ public class ProductController
         final AliceCategory aliceCategory = siteManager.getAliceCatgory(categoryName);
         if (aliceCategory != null)
         {
-            productList = newProductService.getNewProducts(aliceCategory);
+            final ProductSortType productSortType = ProductSortType.fromCode(request.getParameter(SORT_BY));
+            productList = newProductService.getNewProducts(aliceCategory, productSortType);
             model.addAttribute(CATEGORY_NAME, categoryName);
+            model.addAttribute(SORT_BY,
+                productSortType == null ? ProductSortType.DATE.getCode() : productSortType.getCode());
         }
         else
         {

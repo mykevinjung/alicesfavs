@@ -5,7 +5,7 @@ package com.alicesfavs.webapp.service;
  */
 public enum ProductSortType
 {
-    DATE("date"), AMOUNT("amount"), PERCENTAGE("percentage");
+    DATE("date"), AMOUNT("amount"), PERCENTAGE("percentage"), BRAND_ATOZ("brand-atoz"), BRAND_ZTOA("brand-ztoa");
 
     private final String code;
 

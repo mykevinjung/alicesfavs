@@ -16,6 +16,17 @@
                 <div class="right">
                     <p class="woocommerce-result-count">
                         Showing ${startIndex}&ndash;${endIndex} of ${totalCount} results</p>
+                    <c:if test="${not empty sortBy}">
+                        <form class="woocommerce-ordering custom" method="get" action="">
+                            <div class="select-wrapper">
+                                <select name="sortBy" class="orderby" onchange="this.form.submit()">
+                                    <option value="date" <c:if test="${sortBy == 'date'}">selected='selected'</c:if>>Sort by newness</option>
+                                    <option value="brand-atoz" <c:if test="${sortBy == 'brand-atoz'}">selected='selected'</c:if>>Sort by brand A to Z</option>
+                                    <option value="brand-ztoa" <c:if test="${sortBy == 'brand-ztoa'}">selected='selected'</c:if>>Sort by brand Z to A</option>
+                                </select>
+                            </div>
+                        </form>
+                    </c:if>
                 </div><!-- .right -->
             </div><!-- .breadcrumb-row -->
         </div><!-- .large-12 breadcrumb -->

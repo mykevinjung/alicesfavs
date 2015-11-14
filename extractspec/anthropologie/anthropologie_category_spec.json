@@ -9,7 +9,7 @@
         },
         "categorySpec":{
             "id":null,
-            "tagName":"h4",
+            "tagName":"a",
             "className":null,
             "attributeKey":null,
             "valuePattern":null
@@ -17,86 +17,47 @@
         "nameSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"h4",
+                "tagName":"a",
                 "className":null,
                 "attributeKey":null,
                 "valuePattern":null
             },
             "elementSpec":{
                 "id":null,
-                "tagName":"h4",
+                "tagName":"a",
                 "className":null,
                 "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"$nested_text",
-                "valuePattern":"Clothing",
+                "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
         },
-        "urlSpec":null,
-        "subcategorySpec":    {
+        "urlSpec":{
             "containerSpec":{
-                "id":null,
-                "tagName":"header",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "categorySpec":{
                 "id":null,
                 "tagName":"a",
                 "className":null,
                 "attributeKey":null,
                 "valuePattern":null
             },
-            "nameSpec":{
-                "containerSpec":{
-                    "id":null,
-                    "tagName":"a",
-                    "className":null,
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"a",
-                    "className":null,
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "dataSpec":{
-                    "attributeKey":"$nested_text",
-                    "valuePattern":null,
-                    "valueExcludePattern":null,
-                    "substringPattern":null
-                }
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
             },
-            "urlSpec":{
-                "containerSpec":{
-                    "id":null,
-                    "tagName":"a",
-                    "className":null,
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"a",
-                    "className":null,
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "dataSpec":{
-                    "attributeKey":"abs:href",
-                    "valuePattern":".*/anthro/catalog/category\\.jsp?.*",
-                    "valueExcludePattern":null,
-                    "substringPattern":null
-                }
-            },
-            "subcategorySpec":null
-        }
+            "dataSpec":{
+                "attributeKey":"abs:href",
+                "valuePattern":".*/anthro/catalog/category\\.jsp.*",
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        },
+        "subcategorySpec":null
     }
 ]

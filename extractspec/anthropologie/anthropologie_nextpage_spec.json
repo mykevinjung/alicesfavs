@@ -13,7 +13,7 @@
                 "tagName":"a",
                 "className":"enabled",
                 "attributeKey":null,
-                "valuePattern":"next"
+                "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"abs:href",

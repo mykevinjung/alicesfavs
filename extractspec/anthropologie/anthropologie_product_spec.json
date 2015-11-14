@@ -109,7 +109,7 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"div",
-                    "className":"item-description",
+                    "className":"item-price",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -131,7 +131,7 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"div",
-                    "className":"item-description",
+                    "className":"item-price",
                     "attributeKey":null,
                     "valuePattern":null
                 },

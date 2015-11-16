@@ -2,7 +2,7 @@ package com.alicesfavs.webapp.comparator;
 
 import com.alicesfavs.webapp.uimodel.UiProduct;
 
-import java.time.temporal.ChronoUnit;
+import java.time.temporal.ChronoField;
 import java.util.Comparator;
 
 /**
@@ -13,27 +13,24 @@ public class CreationDateComparator1 implements Comparator<UiProduct>
     @Override
     public int compare(UiProduct p1, UiProduct p2)
     {
-        if (p1.getCreatedDate() != null && p2.getCreatedDate() != null)
+        final long dayDiff =
+            p2.getCreatedDate().getLong(ChronoField.EPOCH_DAY) - p1.getCreatedDate().getLong(ChronoField.EPOCH_DAY);
+        if (dayDiff == 0)
         {
-            final long diff = p2.getCreatedDate().until(p1.getCreatedDate(), ChronoUnit.DAYS);
-            if (diff == 0)
+            // TODO verify this
+            final int displayWeightDiff = p2.getSiteDisplayWeight() - p1.getSiteDisplayWeight();
+            if (displayWeightDiff == 0)
             {
-                return p2.getSiteDisplayWeight() - p1.getSiteDisplayWeight();
+                return p1.getSiteName().compareTo(p2.getSiteName());
             }
             else
             {
-                return (int) diff;
+                return displayWeightDiff;
             }
         }
-        else if (p2.getCreatedDate() != null)
+        else
         {
-            return 1;
+            return (int) dayDiff;
         }
-        else if (p1.getCreatedDate() != null)
-        {
-            return -1;
-        }
-
-        return 0;
     }
 }

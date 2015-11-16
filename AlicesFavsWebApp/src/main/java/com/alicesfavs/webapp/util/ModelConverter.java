@@ -47,6 +47,8 @@ public class ModelConverter
         uiProduct.setSiteName(site.displayName);
         uiProduct.setSiteStringId(site.stringId);
         uiProduct.setSiteDisplayWeight(site.displayWeight);
+        uiProduct.setCreatedDate(product.createdDate);
+        uiProduct.setSaleStartDate(product.saleStartDate);
 
         return uiProduct;
     }

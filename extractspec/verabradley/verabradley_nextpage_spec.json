@@ -1,0 +1,26 @@
+[
+    {
+        "nextPageSpec":{
+            "containerSpec":{
+                "id":null,
+                "tagName":"div",
+                "className":"pagination",
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":"title",
+                "valuePattern":"Next"
+            },
+            "dataSpec":{
+                "attributeKey":"abs:href",
+                "valuePattern":null,
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        }
+    }
+]

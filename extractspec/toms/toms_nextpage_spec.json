@@ -1,0 +1,26 @@
+[
+    {
+        "nextPageSpec":{
+            "containerSpec":{
+                "id":null,
+                "tagName":"ul",
+                "className":"pagination",
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":"prevNextClickOmni",
+                "attributeKey":"$nested_text",
+                "valuePattern":">"
+            },
+            "dataSpec":{
+                "attributeKey":"abs:href",
+                "valuePattern":null,
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        }
+    }
+]

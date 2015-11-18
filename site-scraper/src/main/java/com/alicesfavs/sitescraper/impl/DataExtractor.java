@@ -158,20 +158,7 @@ public class DataExtractor
     {
         Assert.hasText(dataSpec.attributeKey, "DataExtractSpec should have attributeKey");
 
-        String data = null;
-        if (DataExtractSpec.ATTRIBUTE_KEY_TEXT.equalsIgnoreCase(dataSpec.attributeKey))
-        {
-            data = element.text();
-        }
-        else if (DataExtractSpec.ATTRIBUTE_KEY_OWNTEXT.equalsIgnoreCase(dataSpec.attributeKey))
-        {
-            data = element.ownText();
-        }
-        else
-        {
-            data = element.attr(dataSpec.attributeKey);
-        }
-
+        String data = getElementAttribute(element, dataSpec.attributeKey);
         if (StringUtils.hasText(data)
                 && (!StringUtils.hasText(dataSpec.valuePattern) || data.matches(dataSpec.valuePattern))
                 && (!StringUtils.hasText(dataSpec.valueExcludePattern) || !data.matches(dataSpec.valueExcludePattern)))
@@ -350,17 +337,30 @@ public class DataExtractor
         final Elements filteredElements = new Elements();
         for (Element element : elements)
         {
-            if (element.hasAttr(attributeKey))
+            String value = getElementAttribute(element, attributeKey);
+            if (!StringUtils.hasText(valuePattern) || (value != null && value.matches(valuePattern)))
             {
-                String value = element.attr(attributeKey);
-                if (!StringUtils.hasText(valuePattern) || (value != null && value.matches(valuePattern)))
-                {
-                    filteredElements.add(element);
-                }
+                filteredElements.add(element);
             }
         }
 
         return filteredElements;
+    }
+
+    private String getElementAttribute(Element element, String attributeKey)
+    {
+        if (DataExtractSpec.ATTRIBUTE_KEY_TEXT.equalsIgnoreCase(attributeKey))
+        {
+            return element.text();
+        }
+        else if (DataExtractSpec.ATTRIBUTE_KEY_OWNTEXT.equalsIgnoreCase(attributeKey))
+        {
+            return element.ownText();
+        }
+        else
+        {
+            return element.attr(attributeKey);
+        }
     }
 
     /**

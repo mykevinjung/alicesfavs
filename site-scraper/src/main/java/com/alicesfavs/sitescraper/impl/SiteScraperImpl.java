@@ -205,7 +205,7 @@ public class SiteScraperImpl implements SiteScraper
         {
             // System.out.println("Opening " + url);
             LOGGER.debug("Opening {}", url);
-            return Jsoup.connect(url).timeout(90 * 1000).get();
+            return Jsoup.connect(url).timeout(90 * 1000).data().get();
         }
         catch (HttpStatusException e)
         {

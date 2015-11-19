@@ -64,6 +64,14 @@ public class NewProductService
         return getNewProductsFromCache(site);
     }
 
+    public synchronized void refresh(Site site)
+    {
+        final CachedList<UiProduct> newCachedList = new CachedList<>();
+        newCachedList.list = getNewProductsFromDatabase(site);
+        newCachedList.cachedTime = LocalDateTime.now();
+        siteProductMap.put(site.id, newCachedList);
+    }
+
     private List<UiProduct> getNewProducts(List<Site> siteList)
     {
         final List<UiProduct> productList = new ArrayList<>();
@@ -84,11 +92,8 @@ public class NewProductService
         CachedList<UiProduct> cachedProductList = siteProductMap.get(site.id);
         if (shouldRefresh(cachedProductList))
         {
-            final CachedList<UiProduct> newProductList = new CachedList<>();
-            newProductList.list = getNewProductsFromDatabase(site);
-            newProductList.cachedTime = LocalDateTime.now();
-            siteProductMap.put(site.id, newProductList);
-            cachedProductList = newProductList;
+            refresh(site);
+            cachedProductList = siteProductMap.get(site.id);
         }
 
         return cachedProductList.list;

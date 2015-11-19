@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,12 +39,7 @@ public class SiteManager
     {
         if (shouldRefresh())
         {
-            final Map<AliceCategory, List<Site>> mapFromDb = getCategorySiteMapFromDatabase();
-            if (mapFromDb != null && mapFromDb.size() > 0)
-            {
-                categorySiteMap = getCategorySiteMapFromDatabase();
-                cachedTime = LocalDateTime.now();
-            }
+            refresh();
         }
 
         return categorySiteMap;
@@ -55,19 +50,6 @@ public class SiteManager
         for (final Site site : getSites())
         {
             if (site.stringId.equals(stringId))
-            {
-                return site;
-            }
-        }
-
-        return null;
-    }
-
-    public Site getSiteById(long id)
-    {
-        for (final Site site : getSites())
-        {
-            if (site.id == id)
             {
                 return site;
             }
@@ -94,16 +76,31 @@ public class SiteManager
         return getCategorySiteMap().get(aliceCategory);
     }
 
-    // TODO refactor this with Set instead of List
-    public List<Site> getSites()
+    public Collection<Site> getSites()
     {
-        final List<Site> sites = new ArrayList<>();
+        final Map<Long, Site> siteMap = new HashMap<>();
         for (List<Site> categorySites : getCategorySiteMap().values())
         {
-            sites.addAll(categorySites);
+            for (Site site : categorySites)
+            {
+                if (!siteMap.containsKey(site.id))
+                {
+                    siteMap.put(site.id, site);
+                }
+            }
         }
 
-        return sites;
+        return siteMap.values();
+    }
+
+    public synchronized void refresh()
+    {
+        final Map<AliceCategory, List<Site>> mapFromDb = getCategorySiteMapFromDatabase();
+        if (mapFromDb != null && mapFromDb.size() > 0)
+        {
+            categorySiteMap = mapFromDb;
+            cachedTime = LocalDateTime.now();
+        }
     }
 
     private Map<AliceCategory, List<Site>> getCategorySiteMapFromDatabase()

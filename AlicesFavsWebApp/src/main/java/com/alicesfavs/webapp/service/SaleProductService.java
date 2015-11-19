@@ -53,6 +53,14 @@ public class SaleProductService
         return sortBySaleDate;
     }
 
+    public synchronized void refresh(Site site)
+    {
+        final CachedList<UiProduct> newCachedList = new CachedList<>();
+        newCachedList.list = getSaleProductsFromDatabase(site);
+        newCachedList.cachedTime = LocalDateTime.now();
+        siteProductMap.put(site.id, newCachedList);
+    }
+
     /**
      * Returns sale products sorted by sale date descending, i.e. newest first
      */
@@ -61,11 +69,8 @@ public class SaleProductService
         CachedList<UiProduct> cachedProductList = siteProductMap.get(site.id);
         if (shouldRefresh(cachedProductList))
         {
-            final CachedList<UiProduct> newProductList = new CachedList<>();
-            newProductList.list = getSaleProductsFromDatabase(site);
-            newProductList.cachedTime = LocalDateTime.now();
-            siteProductMap.put(site.id, newProductList);
-            cachedProductList = newProductList;
+            refresh(site);
+            cachedProductList = siteProductMap.get(site.id);
         }
 
         return cachedProductList.list;

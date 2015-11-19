@@ -5,6 +5,8 @@ import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.AliceCategoryService;
 import com.alicesfavs.service.SiteService;
 import com.alicesfavs.webapp.config.WebAppConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +23,8 @@ import java.util.Map;
 @Component
 public class SiteManager
 {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SiteManager.class);
 
     @Autowired
     private AliceCategoryService aliceCategoryService;
@@ -95,11 +99,16 @@ public class SiteManager
 
     public synchronized void refresh()
     {
+        LOGGER.info("Refreshing site map...");
         final Map<AliceCategory, List<Site>> mapFromDb = getCategorySiteMapFromDatabase();
         if (mapFromDb != null && mapFromDb.size() > 0)
         {
             categorySiteMap = mapFromDb;
             cachedTime = LocalDateTime.now();
+        }
+        else
+        {
+            throw new RuntimeException("Category-Site map is empty!");
         }
     }
 

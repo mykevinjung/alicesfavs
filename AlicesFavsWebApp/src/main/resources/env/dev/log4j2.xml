@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO">
-	<Appenders>
-		<Console name="Console" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{1} - %msg%n" />
-		</Console>
-		<File name="FileLog" fileName="logs/alicesfavs-webapp.log" immediateFlush="true" append="true">
-			<PatternLayout
-				pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{1} - %msg%n" />
-		</File>
-	</Appenders>
-	<Loggers>
-		<Root level="DEBUG">
-			<AppenderRef ref="Console" />
-			<AppenderRef ref="FileLog" />
-		</Root>
-	</Loggers>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="log-path">logs</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="RollingFile" fileName="${log-path}/alicesfavs-webapp.log"
+                     filePattern="${log-path}/alicesfavs-webapp-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{1} - %msg%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{1} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="root" level="INFO" additivity="false">
+            <appender-ref ref="RollingFile" level="INFO"/>
+            <appender-ref ref="Console" level="INFO"/>
+        </Logger>
+        <Root level="INFO" additivity="false">
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
 </Configuration>

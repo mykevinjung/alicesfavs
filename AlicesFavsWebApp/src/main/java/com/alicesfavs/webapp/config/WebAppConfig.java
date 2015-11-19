@@ -36,6 +36,9 @@ public class WebAppConfig
     @Value(value = "${newproduct.dateafter}")
     private int newProductDateAfter;
 
+    @Value(value = "${refresh.allowedaddr}")
+    private String refreshAllowedAddr;
+
     public int getSiteCacheTimeoutSeconds()
     {
         return siteCacheTimeoutSeconds;
@@ -115,4 +118,20 @@ public class WebAppConfig
     {
         this.newProductDateAfter = newProductDateAfter;
     }
+
+    public String getRefreshAllowedAddr()
+    {
+        return refreshAllowedAddr;
+    }
+
+    public String[] getRefreshAllowedAddrArray()
+    {
+        return refreshAllowedAddr != null ? refreshAllowedAddr.split(",") : new String[0];
+    }
+
+    public void setRefreshAllowedAddr(String refreshAllowedAddr)
+    {
+        this.refreshAllowedAddr = refreshAllowedAddr;
+    }
+
 }

@@ -11,6 +11,8 @@ import com.alicesfavs.webapp.comparator.SiteNameZtoaComparator;
 import com.alicesfavs.webapp.config.WebAppConfig;
 import com.alicesfavs.webapp.uimodel.UiProduct;
 import com.alicesfavs.webapp.util.ModelConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +29,8 @@ import java.util.Map;
 @Component
 public class NewProductService
 {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(NewProductService.class);
 
     @Autowired
     private ProductService productService;
@@ -66,6 +70,7 @@ public class NewProductService
 
     public synchronized void refresh(Site site)
     {
+        LOGGER.info("Refreshing new product list for " + site.stringId);
         final CachedList<UiProduct> newCachedList = new CachedList<>();
         newCachedList.list = getNewProductsFromDatabase(site);
         newCachedList.cachedTime = LocalDateTime.now();

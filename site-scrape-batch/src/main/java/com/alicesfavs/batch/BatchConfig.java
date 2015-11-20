@@ -26,6 +26,9 @@ public class BatchConfig
     @Value(value = "${batch.siteextract.root}")
     private String extractSpecRoot;
 
+    @Value(value = "${batch.refreshaddr}")
+    private String refreshAddr;
+
     public List<CategoryExtractSpec> getCategoryExtractSpec(Site site) throws IOException
     {
         return getExtractSpec(site, CATEGORY_SPEC_SUFFIX, CategoryExtractSpec.class);
@@ -39,6 +42,21 @@ public class BatchConfig
     public List<NextPageExtractSpec> getNextPageExtractSpec(Site site) throws IOException
     {
         return getExtractSpec(site, NEXTPAGE_SPEC_SUFFIX, NextPageExtractSpec.class);
+    }
+
+    public String getRefreshAddr()
+    {
+        return refreshAddr;
+    }
+
+    public String[] getRefreshAddrArray()
+    {
+        return refreshAddr != null ? refreshAddr.split(",") : new String[0];
+    }
+
+    public void setRefreshAddr(String refreshAddr)
+    {
+        this.refreshAddr = refreshAddr;
     }
 
     private List getExtractSpec(Site site, String suffix, Class<?> clazz) throws IOException

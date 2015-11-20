@@ -33,8 +33,8 @@ public class WebAppConfig
     @Value(value = "${newproduct.cache.maxcount}")
     private int newProductCacheCount;
 
-    @Value(value = "${newproduct.dateafter}")
-    private int newProductDateAfter;
+    @Value(value = "${newproduct.dayafter}")
+    private int newProductDayAfter;
 
     @Value(value = "${refresh.allowedaddr}")
     private String refreshAllowedAddr;
@@ -44,19 +44,9 @@ public class WebAppConfig
         return siteCacheTimeoutSeconds;
     }
 
-    public void setSiteCacheTimeoutSeconds(int siteCacheTimeoutSeconds)
-    {
-        this.siteCacheTimeoutSeconds = siteCacheTimeoutSeconds;
-    }
-
     public int getSaleProductCacheTimeoutSeconds()
     {
         return saleProductCacheTimeoutSeconds;
-    }
-
-    public void setSaleProductCacheTimeoutSeconds(int saleProductCacheTimeoutSeconds)
-    {
-        this.saleProductCacheTimeoutSeconds = saleProductCacheTimeoutSeconds;
     }
 
     public int getNewProductCacheTimeoutSeconds()
@@ -64,19 +54,9 @@ public class WebAppConfig
         return newProductCacheTimeoutSeconds;
     }
 
-    public void setNewProductCacheTimeoutSeconds(int newProductCacheTimeoutSeconds)
-    {
-        this.newProductCacheTimeoutSeconds = newProductCacheTimeoutSeconds;
-    }
-
     public int getSaleProductPageSize()
     {
         return saleProductPageSize;
-    }
-
-    public void setSaleProductPageSize(int saleProductPageSize)
-    {
-        this.saleProductPageSize = saleProductPageSize;
     }
 
     public int getNewProductPageSize()
@@ -84,19 +64,9 @@ public class WebAppConfig
         return newProductPageSize;
     }
 
-    public void setNewProductPageSize(int newProductPageSize)
-    {
-        this.newProductPageSize = newProductPageSize;
-    }
-
     public int getSaleProductCacheCount()
     {
         return saleProductCacheCount;
-    }
-
-    public void setSaleProductCacheCount(int saleProductCacheCount)
-    {
-        this.saleProductCacheCount = saleProductCacheCount;
     }
 
     public int getNewProductCacheCount()
@@ -104,19 +74,9 @@ public class WebAppConfig
         return newProductCacheCount;
     }
 
-    public void setNewProductCacheCount(int newProductCacheCount)
+    public int getNewProductDayAfter()
     {
-        this.newProductCacheCount = newProductCacheCount;
-    }
-
-    public int getNewProductDateAfter()
-    {
-        return newProductDateAfter;
-    }
-
-    public void setNewProductDateAfter(int newProductDateAfter)
-    {
-        this.newProductDateAfter = newProductDateAfter;
+        return newProductDayAfter;
     }
 
     public String getRefreshAllowedAddr()
@@ -127,11 +87,6 @@ public class WebAppConfig
     public String[] getRefreshAllowedAddrArray()
     {
         return refreshAllowedAddr != null ? refreshAllowedAddr.split(",") : new String[0];
-    }
-
-    public void setRefreshAllowedAddr(String refreshAllowedAddr)
-    {
-        this.refreshAllowedAddr = refreshAllowedAddr;
     }
 
 }

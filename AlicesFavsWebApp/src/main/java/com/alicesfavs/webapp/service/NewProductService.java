@@ -110,7 +110,7 @@ public class NewProductService
     private List<UiProduct> getNewProductsFromDatabase(Site site)
     {
         final List<Product> productList = productService.searchNewProducts(site.id,
-            LocalDateTime.now().minus(webAppConfig.getNewProductDateAfter(), ChronoUnit.DAYS));
+            LocalDateTime.now().minus(webAppConfig.getNewProductDayAfter(), ChronoUnit.DAYS));
         productList.sort(new CreationDateComparator2());
         final int endIndex = Math.min(productList.size(), webAppConfig.getNewProductCacheCount());
 

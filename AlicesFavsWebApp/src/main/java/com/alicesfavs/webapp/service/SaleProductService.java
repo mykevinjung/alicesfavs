@@ -88,7 +88,7 @@ public class SaleProductService
     {
         final List<Product> productList = productService.searchSaleProducts(site.id);
         productList.sort(new SaleDateComparator());
-        final int endIndex = Math.min(productList.size(), webAppConfig.getNewProductCacheCount());
+        final int endIndex = Math.min(productList.size(), webAppConfig.getSaleProductCacheCount());
 
         return ModelConverter.convertProductList(site, productList, 0, endIndex);
     }

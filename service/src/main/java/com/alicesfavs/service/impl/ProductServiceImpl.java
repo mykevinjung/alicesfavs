@@ -133,7 +133,7 @@ public class ProductServiceImpl implements ProductService
             {
                 final Double pePrice = stringPriceToDouble(site, pe.price);
                 final Double bestPrice = stringPriceToDouble(site, bestExtract.price);
-                if (pePrice < bestPrice)
+                if (pePrice != null && bestPrice != null && pePrice < bestPrice)
                 {
                     bestExtract = pe;
                 }
@@ -253,6 +253,7 @@ public class ProductServiceImpl implements ProductService
         }
         catch (NullPointerException | ParseException e)
         {
+            LOGGER.error("Invalid price format: " + price, e);
             return null;
         }
     }

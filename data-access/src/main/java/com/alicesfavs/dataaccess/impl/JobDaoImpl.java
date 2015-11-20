@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.alicesfavs.dataaccess.util.ResultSetUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,14 @@ public class JobDaoImpl implements JobDao
         + "NOT_FOUND_PRODUCT = ?, TOTAL_SALE_PRODUCT = ?, NEW_SALE_PRODUCT = ?, NEW_NEW_ARRIVALS_PRODUCT = ? "
         + "WHERE ID = ?";
 
-    private static final String SELECT_JOB_BY_ID = "SELECT SITE_ID, MODE, STATUS, START_TIME, END_TIME, "
+    private static final String SELECT_JOB_BY_ID = "SELECT ID, SITE_ID, MODE, STATUS, START_TIME, END_TIME, "
         + "FOUND_CATEGORY, FOUND_PRODUCT, NOT_FOUND_CATEGORY, NOT_FOUND_PRODUCT, TOTAL_SALE_PRODUCT, "
         + "NEW_SALE_PRODUCT, NEW_NEW_ARRIVALS_PRODUCT, CREATED_DATE, UPDATED_DATE FROM JOB WHERE ID = ?";
+
+    private static final String SELECT_JOBS_BY_SITE_ID = "SELECT ID, SITE_ID, MODE, STATUS, START_TIME, END_TIME, "
+        + "FOUND_CATEGORY, FOUND_PRODUCT, NOT_FOUND_CATEGORY, NOT_FOUND_PRODUCT, TOTAL_SALE_PRODUCT, "
+        + "NEW_SALE_PRODUCT, NEW_NEW_ARRIVALS_PRODUCT, CREATED_DATE, UPDATED_DATE FROM JOB "
+        + "WHERE SITE_ID = ? AND CREATED_DATE >= ? ORDER BY CREATED_DATE ASC";
 
     private static final int[] INSERT_PARAM_TYPES =
         { Types.BIGINT, Types.INTEGER, Types.INTEGER, Types.TIMESTAMP, Types.TIMESTAMP, Types.INTEGER, Types.INTEGER,
@@ -44,6 +50,9 @@ public class JobDaoImpl implements JobDao
 
     private static final int[] SELECT_PARAM_TYPES =
         { Types.BIGINT };
+
+    private static final int[] SELECT_JOBS_BY_SITE_PARAM_TYPES =
+        { Types.BIGINT, Types.TIMESTAMP };
 
     @Autowired
     private DaoSupport<Job> daoSupport;
@@ -92,9 +101,13 @@ public class JobDaoImpl implements JobDao
     }
 
     @Override
-    public Job selectLastCompletedJob(long siteId)
+    public List<Job> selectJobs(long siteId, LocalDateTime afterCreatedDate)
     {
-        throw new RuntimeException("not implemented");
+        final Object[] params = { siteId, DateTimeUtils.toTimestamp(afterCreatedDate) };
+
+        return daoSupport
+            .selectObjectList(SELECT_JOBS_BY_SITE_ID, SELECT_JOBS_BY_SITE_PARAM_TYPES, params,
+                new JobRowMapper());
     }
 
     private class JobRowMapper implements RowMapper<Job>

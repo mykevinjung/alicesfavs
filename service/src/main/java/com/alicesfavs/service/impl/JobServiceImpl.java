@@ -1,6 +1,7 @@
 package com.alicesfavs.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,9 +40,9 @@ public class JobServiceImpl implements JobService
         return jobDao.updateJob(job);
     }
 
-    public Job findJobById(long jobId)
+    public List<Job> selectJobs(long siteId, LocalDateTime afterCreatedDate)
     {
-        return jobDao.selectJobById(jobId);
+        return jobDao.selectJobs(siteId, afterCreatedDate);
     }
 
 }

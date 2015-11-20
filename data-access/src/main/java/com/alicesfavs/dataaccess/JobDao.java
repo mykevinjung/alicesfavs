@@ -1,6 +1,7 @@
 package com.alicesfavs.dataaccess;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.alicesfavs.datamodel.Job;
 
@@ -15,6 +16,10 @@ public interface JobDao
 
     Job selectJobById(long jobId);
 
-    Job selectLastCompletedJob(long siteId);
+    /**
+     * This returns a list of jobs for given siteId that were executed afterCreatedDate
+     * order by createdDate ascending
+     */
+    List<Job> selectJobs(long siteId, LocalDateTime afterCreatedDate);
 
 }

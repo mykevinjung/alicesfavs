@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.alicesfavs.service.ProductService;
 import com.alicesfavs.sitescraper.SiteScrapeException;
 import com.alicesfavs.sitescraper.SiteScraper;
 
@@ -30,14 +29,10 @@ public class ProductExtractor
     @Autowired
     private SiteScraper siteScraper;
 
-    @Autowired
-    private ProductService productService;
-
-    public void extractProduct(Job job, Site site) throws ExtractException
+    public Map<String, List<ProductExtract>> extractProduct(Job job, Site site) throws ExtractException
     {
-        final MultirootTree<CategoryExtract> categoryExtracts = extractCategory(job, site);
+        final MultirootTree<CategoryExtract> categoryExtracts = extractCategory(site);
         final List<MultirootTree.Node<CategoryExtract>> leafCategories = categoryExtracts.getAllLeafNodes();
-
 
         // same product is displayed in many categories
         // let's group them and save as one product and link
@@ -45,36 +40,14 @@ public class ProductExtractor
         categoryExtracts.getAllLeafNodes();
         for (final MultirootTree.Node<CategoryExtract> category : leafCategories)
         {
-            final List<ProductExtract> peList = extractCategoryProducts(job.id, site, category);
+            final List<ProductExtract> peList = extractCategoryProducts(site, category);
             buildProductExtractMap(productExtractMap, peList);
         }
 
-        LOGGER.info("Saving product map...");
-        final Map<String, Product> productMap =
-            productService.saveProduct(job, site, ExtractStatus.EXTRACTED, productExtractMap);
-        job.foundProduct = productMap.size();
-        job.notFoundProduct = productService.markNotFoundProduct(job, site);
-        job.totalSaleProduct = getTotalSaleProductCount(productMap);
-
-        //createSearchableProduct(categoryMap, productMap);
-        //final SearchableProductCreator creator = new SearchableProductCreator(batchConfig);
+        return productExtractMap;
     }
 
-    private int getTotalSaleProductCount(Map<String, Product> productMap)
-    {
-        int totalSaleProduct = 0;
-        for(Product product : productMap.values())
-        {
-            if (product.saleStartDate != null)
-            {
-                totalSaleProduct++;
-            }
-        }
-
-        return totalSaleProduct;
-    }
-
-    private MultirootTree<CategoryExtract> extractCategory(Job job, Site site) throws ExtractException
+    private MultirootTree<CategoryExtract> extractCategory(Site site) throws ExtractException
     {
         try
         {
@@ -87,7 +60,8 @@ public class ProductExtractor
         }
     }
 
-    private List<ProductExtract> extractCategoryProducts(long jobId, Site site, MultirootTree.Node<CategoryExtract> category)
+    private List<ProductExtract> extractCategoryProducts(Site site,
+        MultirootTree.Node<CategoryExtract> category)
         throws ExtractException
     {
         try

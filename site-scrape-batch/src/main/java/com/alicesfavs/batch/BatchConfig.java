@@ -29,6 +29,9 @@ public class BatchConfig
     @Value(value = "${batch.refreshaddr}")
     private String refreshAddr;
 
+    @Value(value = "${batch.checkjob.dayafter}")
+    private int checkJobDayAfter;
+
     public List<CategoryExtractSpec> getCategoryExtractSpec(Site site) throws IOException
     {
         return getExtractSpec(site, CATEGORY_SPEC_SUFFIX, CategoryExtractSpec.class);
@@ -54,9 +57,9 @@ public class BatchConfig
         return refreshAddr != null ? refreshAddr.split(",") : new String[0];
     }
 
-    public void setRefreshAddr(String refreshAddr)
+    public int getCheckJobDayAfter()
     {
-        this.refreshAddr = refreshAddr;
+        return checkJobDayAfter;
     }
 
     private List getExtractSpec(Site site, String suffix, Class<?> clazz) throws IOException

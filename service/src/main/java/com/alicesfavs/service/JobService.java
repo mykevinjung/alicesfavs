@@ -2,6 +2,9 @@ package com.alicesfavs.service;
 
 import com.alicesfavs.datamodel.Job;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 public interface JobService
 {
 
@@ -11,6 +14,6 @@ public interface JobService
 
     Job failJob(Job job);
 
-    Job findJobById(long jobId);
+    List<Job> selectJobs(long siteId, LocalDateTime afterCreatedDate);
 
 }

@@ -253,7 +253,6 @@ public class ProductServiceImpl implements ProductService
         }
         catch (NullPointerException | ParseException e)
         {
-            LOGGER.error("Invalid price format: " + price, e);
             return null;
         }
     }

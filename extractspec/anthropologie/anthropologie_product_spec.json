@@ -75,7 +75,7 @@
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":".*/anthro/product/.*",
+                "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
             }

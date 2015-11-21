@@ -108,6 +108,7 @@ public class ProductController
         addProductAttributes(request, model, productList, webAppConfig.getNewProductPageSize());
         model.addAttribute("logo", "/resources/images/logo2.png");
         model.addAttribute("mobile", device.isMobile());
+        model.addAttribute("newArrivalsTitle", "Newly found from the past 7 days");
 
         return VIEW_NEW_ARRIVALS;
     }

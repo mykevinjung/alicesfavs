@@ -1,31 +1,25 @@
 [
     {
         "containerSpec":{
-            "id":"nav-site",
+            "id":null,
             "tagName":"div",
-            "className":null,
+            "className":"wrapper-l2",
             "attributeKey":null,
             "valuePattern":null
         },
         "categorySpec":{
             "id":null,
-            "tagName":"div",
-            "className":"changeCategorys",
-            "attributeKey":null,
-            "valuePattern":null
+            "tagName":"a",
+            "className":"label-l2",
+            "attributeKey":"rev",
+            "valuePattern":"header-nav"
         },
         "nameSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":"rev",
-                "valuePattern":"header-nav"
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":null,
+                "className":"label-l2",
                 "attributeKey":"rev",
                 "valuePattern":"header-nav"
             },
@@ -37,17 +31,11 @@
             }
         },
         "urlSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":"rev",
-                "valuePattern":"header-nav"
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":null,
+                "className":"label-l2",
                 "attributeKey":"rev",
                 "valuePattern":"header-nav"
             },
@@ -58,66 +46,6 @@
                 "substringPattern":null
             }
         },
-        "subcategorySpec": {
-            "containerSpec": {
-                "id": "cat0",
-                "tagName": "nav",
-                "className": "active",
-                "attributeKey": null,
-                "valuePattern": null
-            },
-            "categorySpec": {
-                "id": null,
-                "tagName": "a",
-                "className": null,
-                "attributeKey": "data-catid",
-                "valuePattern": null
-            },
-            "nameSpec": {
-                "containerSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": "data-catid",
-                    "valuePattern": null
-                },
-                "elementSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": "data-catid",
-                    "valuePattern": null
-                },
-                "dataSpec": {
-                    "attributeKey": "$nested_text",
-                    "valuePattern": null,
-                    "valueExcludePattern": null,
-                    "substringPattern": null
-                }
-            },
-            "urlSpec": {
-                "containerSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": "data-catid",
-                    "valuePattern": null
-                },
-                "elementSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": "data-catid",
-                    "valuePattern": null
-                },
-                "dataSpec": {
-                    "attributeKey": "abs:href",
-                    "valuePattern": null,
-                    "valueExcludePattern": null,
-                    "substringPattern": null
-                }
-            },
-            "subcategorySpec": null
-        }
+        "subcategorySpec": null
     }
 ]

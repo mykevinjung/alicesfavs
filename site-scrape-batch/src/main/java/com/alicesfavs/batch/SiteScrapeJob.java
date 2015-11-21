@@ -17,6 +17,7 @@ import com.alicesfavs.datamodel.Job;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.JobService;
 import com.alicesfavs.service.SiteService;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -31,7 +32,7 @@ public class SiteScrapeJob
 
     private static final String REFRESH_SALE_URI = "/refresh/sale/";
     private static final String REFRESH_NEW_ARRIVAL_URI = "/refresh/new-arrivals/";
-    private static final int FOUND_PRODUCT_MAX_VARIATION_PCT = 15;
+    private static final int FOUND_PRODUCT_MAX_VARIATION_PCT = 20;
     private static final int TOTAL_SALE_PRODUCT_MAX_VARIATION_PCT = 40;
 
     @Autowired
@@ -61,8 +62,8 @@ public class SiteScrapeJob
 
         try
         {
-            final Map<String, List<ProductExtract>> productExtractMap = productExtractor.extractProduct(job, site);
-            LOGGER.info("Number of products found: " + productExtractMap.size());
+            final Map<String, List<ProductExtract>> productExtractMap = productExtractor.extractProduct(site);
+            LOGGER.info("Number of products found for site {}: {}", site.stringId, productExtractMap.size());
 
             if (!forceSave)
             {
@@ -198,8 +199,11 @@ public class SiteScrapeJob
     {
         for (String refreshAddr : batchConfig.getRefreshAddrArray())
         {
-            refreshSite(refreshAddr, REFRESH_SALE_URI, site);
-            refreshSite(refreshAddr, REFRESH_NEW_ARRIVAL_URI, site);
+            if (StringUtils.hasText(refreshAddr))
+            {
+                refreshSite(refreshAddr, REFRESH_SALE_URI, site);
+                refreshSite(refreshAddr, REFRESH_NEW_ARRIVAL_URI, site);
+            }
         }
     }
 

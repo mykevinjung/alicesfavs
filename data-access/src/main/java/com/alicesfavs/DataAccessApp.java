@@ -29,7 +29,7 @@ public class DataAccessApp
         ApplicationContext context = new ClassPathXmlApplicationContext("data-access.xml");
         SiteDao siteDao = context.getBean(SiteDao.class);
         Site site = siteDao.insertSite("anthropologie.com", Country.US, "", "http://www.anthropologie.com", false, 4,
-            true, "");
+            true, "", "");
         System.out.println(site);
 
         Thread.sleep(1000);

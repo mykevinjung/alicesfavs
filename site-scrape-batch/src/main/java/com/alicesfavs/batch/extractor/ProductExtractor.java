@@ -29,7 +29,7 @@ public class ProductExtractor
     @Autowired
     private SiteScraper siteScraper;
 
-    public Map<String, List<ProductExtract>> extractProduct(Job job, Site site) throws ExtractException
+    public Map<String, List<ProductExtract>> extractProduct(Site site) throws ExtractException
     {
         final MultirootTree<CategoryExtract> categoryExtracts = extractCategory(site);
         final List<MultirootTree.Node<CategoryExtract>> leafCategories = categoryExtracts.getAllLeafNodes();
@@ -52,7 +52,7 @@ public class ProductExtractor
         try
         {
             final List<CategoryExtractSpec> categoryExtractSpecList = batchConfig.getCategoryExtractSpec(site);
-            return siteScraper.extractCategories(site.url, categoryExtractSpecList);
+            return siteScraper.extractCategories(site, categoryExtractSpecList);
         }
         catch (Exception e)
         {
@@ -67,7 +67,7 @@ public class ProductExtractor
         try
         {
             LOGGER.info("Extracting products for category " + category.data.url);
-            return siteScraper.extractProducts(category.data, batchConfig.getProductExtractSpec(site),
+            return siteScraper.extractProducts(site, category.data, batchConfig.getProductExtractSpec(site),
                 batchConfig.getNextPageExtractSpec(site));
         }
         catch (IOException e)

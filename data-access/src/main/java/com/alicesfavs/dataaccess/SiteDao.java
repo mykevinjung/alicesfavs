@@ -9,7 +9,7 @@ public interface SiteDao
 {
 
     Site insertSite(String stringId, Country country, String displayName, String url, boolean display,
-        Integer displayWeight, boolean useStoredImage, String currency);
+        Integer displayWeight, boolean useStoredImage, String currency, String cookies);
 
     Site updateSite(Site site);
 

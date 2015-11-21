@@ -13,39 +13,15 @@ import com.alicesfavs.sitescraper.extractspec.ProductExtractSpec;
 public interface SiteScraper
 {
 
-    /**
-     * 
-     * @param homeUrl
-     * @param categoryExtractSpecList
-     * @return
-     * @throws SiteScrapeException
-     */
-    MultirootTree<CategoryExtract> extractCategories(String homeUrl, List<CategoryExtractSpec> categoryExtractSpecList)
-            throws SiteScrapeException;
+    MultirootTree<CategoryExtract> extractCategories(Site site, List<CategoryExtractSpec> categoryExtractSpecList)
+        throws SiteScrapeException;
 
     /**
      * Extract all products of a given category using product extract spec list in all pages of the category by
      * navigating next page in the category using next page extract spec
-     * 
-     * @param categoryExtract
-     * @param productExtractSpecList
-     * @param nextPageExtractSpecList
-     * @return
-     * @throws SiteScrapeException
      */
-    List<ProductExtract> extractProducts(CategoryExtract categoryExtract,
-            List<ProductExtractSpec> productExtractSpecList, List<NextPageExtractSpec> nextPageExtractSpecList)
-            throws SiteScrapeException;
-
-    /**
-     * Extract all products on a page using product extract spec list
-     * 
-     * @param pageUrl
-     * @param productExtractSpecList
-     * @return
-     * @throws SiteScrapeException
-     */
-    List<ProductExtract> extractProducts(String pageUrl, List<ProductExtractSpec> productExtractSpecList)
-            throws SiteScrapeException;
+    List<ProductExtract> extractProducts(Site site, CategoryExtract categoryExtract,
+        List<ProductExtractSpec> productExtractSpecList, List<NextPageExtractSpec> nextPageExtractSpecList)
+        throws SiteScrapeException;
 
 }

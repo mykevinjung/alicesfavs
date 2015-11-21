@@ -90,7 +90,7 @@ public class SiteScraperApp
     {
         int count = 0;
         SiteScraper siteScraper = new SiteScraperImpl();
-        final MultirootTree<CategoryExtract> categoryTree = siteScraper.extractCategories(site.url,
+        final MultirootTree<CategoryExtract> categoryTree = siteScraper.extractCategories(site,
                 categoryExtractSpecList);
         printCategoryTree(categoryTree.roots);
         System.out.println("Total Category: " + categoryCount);
@@ -145,17 +145,6 @@ public class SiteScraperApp
         return extracts;
     }
 
-    private static void extractProducts(Site site, String pageUrl) throws Exception
-    {
-        String productSpecPath = getSpecPath(site, "product_spec.json");
-        ObjectMapper mapper = new ObjectMapper();
-        List<ProductExtractSpec> productExtractSpecList = mapper.readValue(new File(productSpecPath), mapper
-                .getTypeFactory().constructCollectionType(List.class, ProductExtractSpec.class));
-        SiteScraper siteScraper = new SiteScraperImpl();
-        List<ProductExtract> productExtractList = siteScraper.extractProducts(pageUrl, productExtractSpecList);
-        System.out.println("Total Found: " + productExtractList.size());
-    }
-
     public static void readNordStrom() throws Exception
     {
         // System.out
@@ -190,23 +179,6 @@ public class SiteScraperApp
         // categoryExtractInfoList.add(categoryExtractInfo);
         //
         // readSite(site, categoryExtractInfoList, null, productExtractInfo);
-    }
-
-    private static void readPage(Site site, String url) throws Exception
-    {
-        System.out.println("-------------------------------------------------------------");
-        long start = System.currentTimeMillis();
-        String productSpecPath = getSpecPath(site, "product_spec.json");
-        ObjectMapper mapper = new ObjectMapper();
-
-        List<ProductExtractSpec> productExtractSpecList = mapper.readValue(new File(productSpecPath), mapper
-                .getTypeFactory().constructCollectionType(List.class, ProductExtractSpec.class));
-
-        SiteScraper siteScraper = new SiteScraperImpl();
-        List<ProductExtract> products = siteScraper.extractProducts(url, productExtractSpecList);
-        System.out.println("Total Found: " + products.size());
-
-        System.out.println("total time: " + (System.currentTimeMillis() - start));
     }
 
     private static String getSpecPath(Site site, String fileName)

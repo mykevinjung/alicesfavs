@@ -2,8 +2,11 @@ package com.alicesfavs.sitescraper.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.jsoup.Connection;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,15 +34,15 @@ public class SiteScraperImpl implements SiteScraper
     private DataExtractor dataExtractor = new DataExtractor();
 
     @Override
-    public MultirootTree<CategoryExtract> extractCategories(String homeUrl,
+    public MultirootTree<CategoryExtract> extractCategories(Site site,
             List<CategoryExtractSpec> categoryExtractSpecList) throws SiteScrapeException
     {
-        final MultirootTree<CategoryExtract> categoryTree = new MultirootTree<CategoryExtract>();
+        final MultirootTree<CategoryExtract> categoryTree = new MultirootTree<>();
         for (CategoryExtractSpec categorySpec : categoryExtractSpecList)
         {
             try
             {
-                extractCategories(homeUrl, categorySpec, categoryTree);
+                extractCategories(site, categorySpec, categoryTree);
             }
             catch (ElementNotFoundException | DataNotFoundException e)
             {
@@ -51,12 +54,12 @@ public class SiteScraperImpl implements SiteScraper
         return categoryTree;
     }
 
-    private void extractCategories(String siteUrl, CategoryExtractSpec categoryExtractSpec,
+    private void extractCategories(Site site, CategoryExtractSpec categoryExtractSpec,
             MultirootTree<CategoryExtract> categoryTree) throws SiteScrapeException, ElementNotFoundException,
             DataNotFoundException
     {
         CategoryExtractSpec leafCategorySpec = categoryExtractSpec;
-        final List<CategoryExtract> leafCategories = extractCategories(siteUrl, leafCategorySpec);
+        final List<CategoryExtract> leafCategories = extractCategories(site, site.url, leafCategorySpec);
         List<Node<CategoryExtract>> leafNodes = toNodeList(leafCategories, null);
         categoryTree.roots.addAll(leafNodes);
 
@@ -67,7 +70,7 @@ public class SiteScraperImpl implements SiteScraper
             leafNodes = parentNodes;
             for (Node<CategoryExtract> parentNode : parentNodes)
             {
-                final List<CategoryExtract> extracts = extractCategories(parentNode.data.url, leafCategorySpec);
+                final List<CategoryExtract> extracts = extractCategories(site, parentNode.data.url, leafCategorySpec);
                 addAll(parentNode.children, extracts, parentNode);
             }
         }
@@ -75,7 +78,7 @@ public class SiteScraperImpl implements SiteScraper
 
     private List<Node<CategoryExtract>> toNodeList(List<CategoryExtract> extractList, Node<CategoryExtract> parent)
     {
-        final List<Node<CategoryExtract>> nodeList = new ArrayList<Node<CategoryExtract>>();
+        final List<Node<CategoryExtract>> nodeList = new ArrayList<>();
         for (CategoryExtract c : extractList)
         {
             nodeList.add(new Node<>(c, parent));
@@ -94,15 +97,15 @@ public class SiteScraperImpl implements SiteScraper
     }
 
     @Override
-    public List<ProductExtract> extractProducts(CategoryExtract categoryExtract,
+    public List<ProductExtract> extractProducts(Site site, CategoryExtract categoryExtract,
             List<ProductExtractSpec> productExtractSpecList, List<NextPageExtractSpec> nextPageExtractSpecList)
             throws SiteScrapeException
     {
         String url = categoryExtract.url;
-        final List<ProductExtract> productList = new ArrayList<ProductExtract>();
+        final List<ProductExtract> productList = new ArrayList<>();
         while (StringUtils.hasText(url))
         {
-            final Document doc = openUrl(url);
+            final Document doc = openUrl(site, url);
             if (doc == null)
             {
                 break;
@@ -114,47 +117,10 @@ public class SiteScraperImpl implements SiteScraper
         return productList;
     }
 
-    @Override
-    public List<ProductExtract> extractProducts(String pageUrl, List<ProductExtractSpec> productExtractSpecList)
-            throws SiteScrapeException
-    {
-        final Document doc = openUrl(pageUrl);
-        if (doc != null)
-        {
-            return extractProducts(doc, productExtractSpecList);
-        }
-        else
-        {
-            return new ArrayList<>();
-        }
-    }
-
-    private List<CategoryExtract> extractLeafCategories(Site site, CategoryExtractSpec categoryExtractSpec)
+    private List<CategoryExtract> extractCategories(Site site, String pageUrl, CategoryExtractSpec categoryExtractSpec)
             throws SiteScrapeException, ElementNotFoundException, DataNotFoundException
     {
-        // TODO use Set to avoid duplicate categories!!!!!!!!!
-        CategoryExtractSpec leafCategorySpec = categoryExtractSpec;
-        List<CategoryExtract> leafCategories = extractCategories(site.url, categoryExtractSpec);
-
-        List<CategoryExtract> parentCategories = null;
-        while (leafCategorySpec.subcategorySpec != null)
-        {
-            leafCategorySpec = leafCategorySpec.subcategorySpec;
-            parentCategories = leafCategories;
-            leafCategories = new ArrayList<>();
-            for (CategoryExtract category : parentCategories)
-            {
-                leafCategories.addAll(extractCategories(category.url, leafCategorySpec));
-            }
-        }
-
-        return leafCategories;
-    }
-
-    private List<CategoryExtract> extractCategories(String pageUrl, CategoryExtractSpec categoryExtractSpec)
-            throws SiteScrapeException, ElementNotFoundException, DataNotFoundException
-    {
-        final Document doc = openUrl(pageUrl);
+        final Document doc = openUrl(site, pageUrl);
         if (doc != null)
         {
             return dataExtractor.extractCategories(doc, categoryExtractSpec);
@@ -167,7 +133,7 @@ public class SiteScraperImpl implements SiteScraper
 
     private List<ProductExtract> extractProducts(Document document, List<ProductExtractSpec> productExtractSpecList)
     {
-        final List<ProductExtract> productList = new ArrayList<ProductExtract>();
+        final List<ProductExtract> productList = new ArrayList<>();
         for (ProductExtractSpec productExtractSpec : productExtractSpecList)
         {
             try
@@ -199,13 +165,18 @@ public class SiteScraperImpl implements SiteScraper
         return null;
     }
 
-    private Document openUrl(String url) throws SiteScrapeException
+    private Document openUrl(Site site, String url) throws SiteScrapeException
     {
         try
         {
-            // System.out.println("Opening " + url);
-            LOGGER.debug("Opening {}", url);
-            return Jsoup.connect(url).timeout(90 * 1000).userAgent("Alice's Favs SmartCrawler").get();
+            LOGGER.debug("Opening " + url);
+            Connection conn = Jsoup.connect(url).timeout(90 * 1000).userAgent("Alice's Favs SmartCrawler");
+            if (StringUtils.hasText(site.cookies))
+            {
+                conn.cookies(getCookieMap(site.cookies));
+            }
+
+            return conn.get();
         }
         catch (HttpStatusException e)
         {
@@ -219,4 +190,15 @@ public class SiteScraperImpl implements SiteScraper
         }
     }
 
+    private Map<String, String> getCookieMap(String cookies)
+    {
+        final Map<String, String> cookieMap = new HashMap<>();
+        for (String cookie : cookies.split(";"))
+        {
+            final String[] keyValue = cookie.split("=", 2);
+            cookieMap.put(keyValue[0].trim(), keyValue[1].trim());
+        }
+
+        return cookieMap;
+    }
 }

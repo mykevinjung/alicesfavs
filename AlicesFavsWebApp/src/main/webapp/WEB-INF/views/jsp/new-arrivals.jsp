@@ -11,7 +11,7 @@
         <div class="large-12 columns">
             <div class="breadcrumb-row">
                 <div class="left">
-                    <h3 class="breadcrumb" itemscope="breadcrumb"><a href="">New Arrivals</a><span>/</span>${categoryName}</h3>    </div><!-- .left -->
+                    <h3 class="breadcrumb" itemscope="breadcrumb"><a href="" title="New products from the past week">New Arrivals</a><span>/</span>${categoryName}</h3>    </div><!-- .left -->
 
                 <div class="right">
                     <p class="woocommerce-result-count">

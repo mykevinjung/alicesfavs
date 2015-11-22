@@ -15,6 +15,7 @@ public class BaseController
     private static final String VIEW_INDEX = "index";
     private static final String VIEW_ABOUT_US = "about-us";
     private static final String VIEW_CONTACT_US = "contact-us";
+    private static final String VIEW_DISCLAIMER = "disclaimer";
     private static final String VIEW_NOT_FOUND = "error404";
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -43,6 +44,14 @@ public class BaseController
         model.addAttribute("logo", "/resources/images/logo3.png");
 
         return VIEW_CONTACT_US;
+    }
+
+    @RequestMapping(value = "/disclaimer", method = RequestMethod.GET)
+    public String disclaimer(ModelMap model)
+    {
+        model.addAttribute("logo", "/resources/images/logo3.png");
+        
+        return VIEW_DISCLAIMER;
     }
 
     @RequestMapping(value = "/error404", method = RequestMethod.GET)

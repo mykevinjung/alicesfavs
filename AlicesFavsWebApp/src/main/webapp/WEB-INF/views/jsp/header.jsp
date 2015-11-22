@@ -39,6 +39,7 @@
             <ul id="menu-top-bar-menu" class="top-bar-nav">
               <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/about-us" class="nav-top-link">About us</a></li>
               <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/contact-us" class="nav-top-link">Contact us</a></li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/disclaimer" class="nav-top-link">Disclaimer</a></li>
 
 
 <!--

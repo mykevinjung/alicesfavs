@@ -14,6 +14,7 @@
           <div class="menu-top-nav-and-footer-nav-container"><ul id="menu-top-nav-and-footer-nav-1" class="footer-nav">
             <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/about-us">About us</a></li>
             <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/contact-us">Contact us</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/disclaimer">Disclaimer</a></li>
           </ul></div>
         </div><!-- .right -->
       </div><!-- .large-12 -->
@@ -72,6 +73,7 @@
     <ul class="top-bar-mob">
       <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/about-us">About us</a></li>
       <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/contact-us">Contact us</a></li>
+      <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/disclaimer">Disclaimer</a></li>
 
 <!--
       <li class="html-block">

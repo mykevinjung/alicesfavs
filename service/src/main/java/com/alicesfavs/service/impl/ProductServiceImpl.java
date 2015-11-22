@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     private static final double MIN_CHANGE_PERCENTAGE = 1D;
-    private static final int MAX_SALE_DATE = 30;
+    private static final int MAX_SALE_DATE = 14;
 
     @Autowired
     private ProductDao productDao;
@@ -166,6 +166,7 @@ public class ProductServiceImpl implements ProductService
         final Double newPrice = stringPriceToDouble(site, newPriceExtract);
         final String oldPriceExtract = existingProduct.productExtract.price;
         final Double oldPrice = existingProduct.price;
+        final String oldWasPriceExtract = existingProduct.productExtract.wasPrice;
 
         existingProduct.price = newPrice;
         existingProduct.productExtract.brandName = newExtract.brandName;
@@ -173,26 +174,31 @@ public class ProductServiceImpl implements ProductService
         existingProduct.productExtract.name = newExtract.name;
         existingProduct.productExtract.price = newExtract.price;
         existingProduct.productExtract.url = newExtract.url;
+        existingProduct.productExtract.wasPrice = newExtract.wasPrice;
 
         // set was price
+        // if new wasPrice exists, use it
         if (StringUtils.hasText(newExtract.wasPrice))
         {
             existingProduct.wasPrice = stringPriceToDouble(site, newExtract.wasPrice);
-            existingProduct.productExtract.wasPrice = newExtract.wasPrice;
         }
+        // if there was wasPrice extracted before but not any more, then set wasPrice null
+        else if (oldWasPriceExtract != null)
+        {
+            existingProduct.wasPrice = null;
+        }
+        // no wasPrice has existed ever, but price has reduced
         else if (existingProduct.wasPrice == null)
         {
             if (hasPriceReduced(oldPrice, newPrice, MIN_CHANGE_PERCENTAGE))
             {
                 existingProduct.wasPrice = oldPrice;
-                existingProduct.productExtract.wasPrice = oldPriceExtract;
             }
         }
         else if (hasSaleExpired(existingProduct.saleStartDate) ||
             hasPriceIncreased(oldPrice, newPrice, MIN_CHANGE_PERCENTAGE))
         {
             existingProduct.wasPrice = null;
-            existingProduct.productExtract.wasPrice = null;
         }
 
         // set sale start date

@@ -150,7 +150,7 @@
                 },
                 "dataSpec":{
                     "attributeKey":"$own_text",
-                    "valuePattern":".*(sugg|reg).*",
+                    "valuePattern":".*reg.*",
                     "valueExcludePattern":null,
                     "substringPattern":"[a-zA-Z\\. ]*(\\$[0-9,\\.]+.*)"
                 }
@@ -308,7 +308,7 @@
                 },
                 "dataSpec":{
                     "attributeKey":"$own_text",
-                    "valuePattern":".*(sugg|reg).*",
+                    "valuePattern":".*reg.*",
                     "valueExcludePattern":null,
                     "substringPattern":"[a-zA-Z\\. ]*(\\$[0-9,\\.]+.*)"
                 }

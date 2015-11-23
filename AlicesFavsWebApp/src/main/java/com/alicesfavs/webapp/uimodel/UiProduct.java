@@ -12,8 +12,8 @@ public class UiProduct
     private String name;
     private String url;
     private String imageUrl;
-    private String extractedPrice;
-    private String extractedWasPrice;
+    private String priceWithCurrency;
+    private String wasPriceWithCurrency;
     private Double price;
     private Double wasPrice;
     private LocalDateTime createdDate;
@@ -54,24 +54,24 @@ public class UiProduct
         this.imageUrl = imageUrl;
     }
 
-    public String getExtractedPrice()
+    public String getPriceWithCurrency()
     {
-        return extractedPrice;
+        return priceWithCurrency;
     }
 
-    public void setExtractedPrice(String extractedPrice)
+    public void setPriceWithCurrency(String priceWithCurrency)
     {
-        this.extractedPrice = extractedPrice;
+        this.priceWithCurrency = priceWithCurrency;
     }
 
-    public String getExtractedWasPrice()
+    public String getWasPriceWithCurrency()
     {
-        return extractedWasPrice;
+        return wasPriceWithCurrency;
     }
 
-    public void setExtractedWasPrice(String extractedWasPrice)
+    public void setWasPriceWithCurrency(String wasPriceWithCurrency)
     {
-        this.extractedWasPrice = extractedWasPrice;
+        this.wasPriceWithCurrency = wasPriceWithCurrency;
     }
 
     public Double getPrice()

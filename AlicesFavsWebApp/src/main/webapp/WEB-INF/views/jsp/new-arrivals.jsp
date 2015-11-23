@@ -11,7 +11,7 @@
         <div class="large-12 columns">
             <div class="breadcrumb-row">
                 <div class="left">
-                    <h3 class="breadcrumb" itemscope="breadcrumb"><a href="" title="New products from the past week">New Arrivals</a><span>/</span>${categoryName}</h3>    </div><!-- .left -->
+                    <h3 class="breadcrumb" itemscope="breadcrumb"><a href="" title="Newly found from the past week">New Arrivals</a><span>/</span>${categoryName}</h3>    </div><!-- .left -->
 
                 <div class="right">
                     <p class="woocommerce-result-count">
@@ -65,7 +65,7 @@
                                         <a <c:if test="${mobile != true}">target="_blank"</c:if> href="${product.url}"><p class="name">${product.name}</p></a>
 
 
-                                        <span class="price"><del><span class="amount">${product.extractedWasPrice}</span></del> <ins><span class="amount">${product.extractedPrice}</span></ins></span>
+                                        <span class="price"><ins><span class="amount">${product.priceWithCurrency}</span></ins></span>
 
                                     </div><!-- text-center -->
 

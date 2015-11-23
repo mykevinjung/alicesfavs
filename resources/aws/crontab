@@ -36,6 +36,11 @@
 25 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh verabradley >> /dev/null 2>&1
 25 23 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh verabradley >> /dev/null 2>&1
 
+# sorel
+30 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh sorel >> /dev/null 2>&1
+30 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh sorel >> /dev/null 2>&1
+30 23 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh sorel >> /dev/null 2>&1
+
 # colehaan
 35 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh colehaan >> /dev/null 2>&1
 35 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh colehaan >> /dev/null 2>&1

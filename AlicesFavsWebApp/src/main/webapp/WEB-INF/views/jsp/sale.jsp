@@ -63,7 +63,7 @@
                                         <a <c:if test="${mobile != true}">target="_blank"</c:if> href="${product.url}"><p class="name">${product.name}</p></a>
 
 
-                                        <span class="price"><del><span class="amount">${product.extractedWasPrice}</span></del> <ins><span class="amount">${product.extractedPrice}</span></ins></span>
+                                        <span class="price"><del><span class="amount">${product.wasPriceWithCurrency}</span></del> <ins><span class="amount">${product.priceWithCurrency}</span></ins></span>
 
                                     </div><!-- text-center -->
 

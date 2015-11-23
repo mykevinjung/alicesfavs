@@ -1,11 +1,15 @@
 package com.alicesfavs.webapp.util;
 
+import com.alicesfavs.datamodel.Country;
 import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.webapp.uimodel.UiProduct;
 import com.alicesfavs.webapp.uimodel.UiSite;
+import org.springframework.util.StringUtils;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 
 /**
@@ -42,8 +46,15 @@ public class ModelConverter
         uiProduct.setImageUrl(product.productExtract.imageUrl);
         uiProduct.setPrice(product.price);
         uiProduct.setWasPrice(product.wasPrice);
-        uiProduct.setExtractedPrice(product.productExtract.price);
-        uiProduct.setExtractedWasPrice(product.productExtract.wasPrice);
+        uiProduct.setPriceWithCurrency(product.productExtract.price);
+        if (StringUtils.hasText(product.productExtract.wasPrice))
+        {
+            uiProduct.setWasPriceWithCurrency(product.productExtract.wasPrice);
+        }
+        else if (product.wasPrice != null)
+        {
+            uiProduct.setWasPriceWithCurrency(formatWithCurrency(product.wasPrice, site));
+        }
         uiProduct.setSiteName(site.displayName);
         uiProduct.setSiteStringId(site.stringId);
         uiProduct.setSiteDisplayWeight(site.displayWeight);
@@ -62,6 +73,21 @@ public class ModelConverter
         }
 
         return uiProductList;
+    }
+
+    private static String formatWithCurrency(double price, Site site)
+    {
+        if (site.country == Country.US)
+        {
+            Currency usd = Currency.getInstance("USD");
+            NumberFormat format = NumberFormat.getCurrencyInstance(java.util.Locale.US);
+            format.setCurrency(usd);
+            return format.format(price);
+        }
+        else
+        {
+            throw new UnsupportedOperationException("Non-US site is not supported");
+        }
     }
 
 }

@@ -106,6 +106,10 @@ public class SiteScrapeJob
         throws ExtractException
     {
         final int lastFoundProduct = getLastFoundProduct(jobList);
+        if (lastFoundProduct == 0)
+        {
+            return;
+        }
         final int curFoundProduct = productExtractMap.size();
         final int variationFoundProduct = ((lastFoundProduct - curFoundProduct) * 100) / lastFoundProduct;
         if (variationFoundProduct > FOUND_PRODUCT_MAX_VARIATION_PCT)
@@ -119,21 +123,27 @@ public class SiteScrapeJob
     private void checkResult(List<Job> jobList, Job job, Site site)
     {
         final int avgFoundProduct = getAverageFoundProduct(jobList);
-        final int variationFoundProduct =
-            ((avgFoundProduct - job.foundProduct) * 100) / avgFoundProduct;
-        if (variationFoundProduct > FOUND_PRODUCT_MAX_VARIATION_PCT)
+        if (avgFoundProduct != 0)
         {
-            LOGGER.warn("Too many products missing in average for site {}. Average count {} vs Current count {}.",
-                site.stringId, avgFoundProduct, job.foundProduct);
+            final int variationFoundProduct =
+                ((avgFoundProduct - job.foundProduct) * 100) / avgFoundProduct;
+            if (variationFoundProduct > FOUND_PRODUCT_MAX_VARIATION_PCT)
+            {
+                LOGGER.warn("Too many products missing in average for site {}. Average count {} vs Current count {}.",
+                    site.stringId, avgFoundProduct, job.foundProduct);
+            }
         }
 
         final int avgTotalSaleProduct = getAverageTotalSaleProduct(jobList);
-        final int variationTotalSaleProduct =
-            ((avgTotalSaleProduct - job.totalSaleProduct) * 100) / avgTotalSaleProduct;
-        if (variationTotalSaleProduct > TOTAL_SALE_PRODUCT_MAX_VARIATION_PCT)
+        if (avgTotalSaleProduct != 0)
         {
-            LOGGER.warn("Too small number of sale products found for site {}. Average count {} vs Current count {}.",
-                site.stringId, avgTotalSaleProduct, job.totalSaleProduct);
+            final int variationTotalSaleProduct =
+                ((avgTotalSaleProduct - job.totalSaleProduct) * 100) / avgTotalSaleProduct;
+            if (variationTotalSaleProduct > TOTAL_SALE_PRODUCT_MAX_VARIATION_PCT)
+            {
+                LOGGER.warn("Too small number of sale products found for site {}. Average count {} vs Current count {}.",
+                    site.stringId, avgTotalSaleProduct, job.totalSaleProduct);
+            }
         }
     }
 
@@ -164,11 +174,16 @@ public class SiteScrapeJob
             }
         }
 
-        return (sumFoundProduct / completedJobCount);
+        return completedJobCount != 0 ? (sumFoundProduct / completedJobCount) : 0;
     }
 
     private int getAverageTotalSaleProduct(List<Job> jobList)
     {
+        if (jobList.size() == 0)
+        {
+            return 0;
+        }
+
         int sumTotalSaleProduct = 0;
         for (Job job : jobList)
         {

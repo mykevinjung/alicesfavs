@@ -66,7 +66,7 @@ public class DataExtractor
         final Elements elements = extractElements(rootElement, productExtractSpec.containerSpec,
                 productExtractSpec.productSpec);
 
-        final List<ProductExtract> productList = new ArrayList<ProductExtract>();
+        final List<ProductExtract> productList = new ArrayList<>();
         for (final Element element : elements)
         {
             try
@@ -349,18 +349,22 @@ public class DataExtractor
 
     private String getElementAttribute(Element element, String attributeKey)
     {
+        String value;
         if (DataExtractSpec.ATTRIBUTE_KEY_TEXT.equalsIgnoreCase(attributeKey))
         {
-            return element.text();
+            value = element.text();
         }
         else if (DataExtractSpec.ATTRIBUTE_KEY_OWNTEXT.equalsIgnoreCase(attributeKey))
         {
-            return element.ownText();
+            value = element.ownText();
         }
         else
         {
-            return element.attr(attributeKey);
+            value = element.attr(attributeKey);
         }
+
+        // replace &nbsp; with a space
+        return value.replace("\u00a0", " ").trim();
     }
 
     /**

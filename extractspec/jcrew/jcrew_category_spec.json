@@ -61,8 +61,8 @@
         "subcategorySpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"ul",
-                "className":"navsection",
+                "tagName":"div",
+                "className":"leftnav",
                 "attributeKey":null,
                 "valuePattern":null
             },

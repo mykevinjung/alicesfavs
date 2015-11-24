@@ -16,6 +16,11 @@
 50 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anntaylor >> /dev/null 2>&1
 50 22 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anntaylor >> /dev/null 2>&1
 
+# madewell
+55 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh madewell >> /dev/null 2>&1
+55 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh madewell >> /dev/null 2>&1
+55 22 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh madewell >> /dev/null 2>&1
+
 # jcrew
 01 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh jcrew >> /dev/null 2>&1
 01 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh jcrew >> /dev/null 2>&1
@@ -40,6 +45,11 @@
 30 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh sorel >> /dev/null 2>&1
 30 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh sorel >> /dev/null 2>&1
 30 23 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh sorel >> /dev/null 2>&1
+
+# ugg
+32 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh ugg >> /dev/null 2>&1
+32 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh ugg >> /dev/null 2>&1
+32 23 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh ugg >> /dev/null 2>&1
 
 # colehaan
 35 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh colehaan >> /dev/null 2>&1

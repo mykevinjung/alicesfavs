@@ -1,6 +1,7 @@
 package com.alicesfavs.sitescraper.impl;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -167,13 +168,49 @@ public class SiteScraperImpl implements SiteScraper
 
     private Document openUrl(Site site, String url) throws SiteScrapeException
     {
+        int tryCount = 0;
+        while (true)
+        {
+            try
+            {
+                return openUrl(url, 90 * 1000, "Alice's Favs SmartCrawler", site.cookies);
+            }
+            catch (SocketTimeoutException e)
+            {
+                tryCount++;
+                LOGGER.error("Timeout error on " + url, e);
+
+                // retry on timeout exception
+                if (tryCount >= 3)
+                {
+                    throw new SiteScrapeException("Failed to connect: " + url, e);
+                }
+                try
+                {
+                    Thread.sleep(10 * 1000);
+                }
+                catch (InterruptedException e1)
+                {
+                    // ignore
+                }
+                continue;
+            }
+            catch (IOException e)
+            {
+                throw new SiteScrapeException("Failed to connect: " + url, e);
+            }
+        }
+    }
+
+    private Document openUrl(String url, int timeout, String userAgent, String cookies) throws IOException
+    {
         try
         {
             LOGGER.debug("Opening " + url);
-            Connection conn = Jsoup.connect(url).timeout(90 * 1000).userAgent("Alice's Favs SmartCrawler");
-            if (StringUtils.hasText(site.cookies))
+            Connection conn = Jsoup.connect(url).timeout(timeout).userAgent(userAgent);
+            if (StringUtils.hasText(cookies))
             {
-                conn.cookies(getCookieMap(site.cookies));
+                conn.cookies(getCookieMap(cookies));
             }
 
             return conn.get();
@@ -183,10 +220,6 @@ public class SiteScraperImpl implements SiteScraper
             // ignore and move forward to next
             LOGGER.error("Http Status Code " + e.getStatusCode() + " in opening " + url, e);
             return null;
-        }
-        catch (IOException e)
-        {
-            throw new SiteScrapeException("Failed to connect: " + url, e);
         }
     }
 

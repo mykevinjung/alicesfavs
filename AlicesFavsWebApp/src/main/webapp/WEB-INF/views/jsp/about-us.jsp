@@ -5,8 +5,6 @@
 <div id="main-content" class="site-main hfeed light">
   <div class="row"><div class="large-12 columns"><div class="top-divider"></div></div></div>
 
-  <!-- woocommerce message -->
-
   <div  class="page-wrapper">
     <div class="row">
       <div id="content" class="large-12 columns" role="main">

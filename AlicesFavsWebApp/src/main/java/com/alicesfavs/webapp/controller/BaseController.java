@@ -1,9 +1,17 @@
 package com.alicesfavs.webapp.controller;
 
+import org.apache.commons.validator.routines.EmailValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kjung on 10/19/15.
@@ -12,11 +20,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BaseController
 {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
+
     private static final String VIEW_INDEX = "index";
     private static final String VIEW_ABOUT_US = "about-us";
     private static final String VIEW_CONTACT_US = "contact-us";
     private static final String VIEW_DISCLAIMER = "disclaimer";
     private static final String VIEW_NOT_FOUND = "error404";
+
+    private static final String PARAM_EMAIL_SENT = "emailSent";
+    private static final String PARAM_NAME = "name";
+    private static final String PARAM_EMAIL = "email";
+    private static final String PARAM_MESSAGE = "message";
+    private static final String PARAM_RESPONSE_MSG_LIST = "responseMsgList";
+    private static final String PARAM_DEFAULT_NAME = "defaultName";
+    private static final String PARAM_DEFAULT_EMAIL = "defaultEmail";
+    private static final String PARAM_DEFAULT_MESSAGE = "defaultMessage";
+    private static final String DEFAULT_NAME = "Your name";
+    private static final String DEFAULT_EMAIL = "Your email";
+    private static final String DEFAULT_MESSAGE = "Your message";
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap model)
@@ -41,9 +63,59 @@ public class BaseController
     @RequestMapping(value = "/contact-us", method = RequestMethod.GET)
     public String contactUs(ModelMap model)
     {
-        model.addAttribute("logo", "/resources/images/logo3.png");
+        model.putIfAbsent(PARAM_EMAIL_SENT, false);
+        model.putIfAbsent(PARAM_NAME, DEFAULT_NAME);
+        model.putIfAbsent(PARAM_EMAIL, DEFAULT_EMAIL);
+        model.putIfAbsent(PARAM_MESSAGE, DEFAULT_MESSAGE);
+        model.addAttribute(PARAM_DEFAULT_NAME, DEFAULT_NAME);
+        model.addAttribute(PARAM_DEFAULT_EMAIL, DEFAULT_EMAIL);
+        model.addAttribute(PARAM_DEFAULT_MESSAGE, DEFAULT_MESSAGE);
 
         return VIEW_CONTACT_US;
+    }
+
+    @RequestMapping(value = "/contact-us", method = RequestMethod.POST)
+    public String sendUsEmail(HttpServletRequest request, ModelMap model)
+    {
+        final String name = request.getParameter(PARAM_NAME);
+        final String email = request.getParameter(PARAM_EMAIL);
+        final String message = request.getParameter(PARAM_MESSAGE);
+        final List<String> responseMsgList = new ArrayList<>();
+
+        model.addAttribute(PARAM_NAME, name);
+        model.addAttribute(PARAM_EMAIL, email);
+        model.addAttribute(PARAM_MESSAGE, message);
+        model.addAttribute(PARAM_RESPONSE_MSG_LIST, responseMsgList);
+
+        if (!StringUtils.hasText(name) || DEFAULT_NAME.equals(name))
+        {
+            responseMsgList.add("Please enter your name.");
+        }
+        if (!StringUtils.hasText(email) || DEFAULT_EMAIL.equals(email) || !EmailValidator.getInstance().isValid(email))
+        {
+            responseMsgList.add("Please enter a valid email address.");
+        }
+        if (!StringUtils.hasText(message) || DEFAULT_MESSAGE.equals(message))
+        {
+            responseMsgList.add("Please enter a message.");
+        }
+
+        if (responseMsgList.size() == 0)
+        {
+            // then let's send an email
+            if ("mykevinjung@gmail.com".equals(email))
+            {
+                model.addAttribute(PARAM_EMAIL_SENT, true);
+                responseMsgList.add("Thank you for your email.");
+            }
+            else
+            {
+                model.addAttribute(PARAM_EMAIL_SENT, false);
+                responseMsgList.add("There was an error in sending an email. Please try later again.");
+            }
+        }
+
+        return contactUs(model);
     }
 
     @RequestMapping(value = "/disclaimer", method = RequestMethod.GET)

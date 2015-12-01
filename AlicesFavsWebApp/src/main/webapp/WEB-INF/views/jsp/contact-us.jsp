@@ -14,17 +14,9 @@
 
       <div class="small-12    large-6  columns   "  ><div class="column-inner"  >
         <h3 class="section-title clearfix  "><span>Frequently Asked Questions</span>  </h3><!-- end section_title -->
-        <div class="accordion" rel="0"><div class="accordion-title"><a href="#">What are the delivery charges for orders from the Online Shop?</a></div><div class="accordion-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id convallis tellus. Nulla aliquam in mi et convallis. Pellentesque rutrum feugiat ante ut imperdiet. Vivamus et dolor nec nisl consectetur vulputate id non ante.</p>
+        <div class="accordion" rel="0"><div class="accordion-title"><a href="#">Some product information is not correct.</a></div><div class="accordion-inner"><p>Product information on our site does not reflect the actual information at real time. So there might be some product with out-dated information. Please see <a href="/disclaimer">Disclaimer</a>.</p>
         </div>
-          <div class="accordion-title"><a href="#">Which payment methods are accepted in the Online Shop?</a></div><div class="accordion-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id convallis tellus. Nulla aliquam in mi et convallis. Pellentesque rutrum feugiat ante ut imperdiet. Vivamus et dolor nec nisl consectetur vulputate id non ante.</p>
-          </div>
-          <div class="accordion-title"><a href="#">How long will delivery take? </a></div><div class="accordion-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id convallis tellus. Nulla aliquam in mi et convallis. Pellentesque rutrum feugiat ante ut imperdiet. Vivamus et dolor nec nisl consectetur vulputate id non ante. </p>
-          </div>
-          <div class="accordion-title"><a href="#">How secure is shopping in the Online Shop? Is my data protected?</a></div><div class="accordion-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id convallis tellus. Nulla aliquam in mi et convallis. Pellentesque rutrum feugiat ante ut imperdiet. Vivamus et dolor nec nisl consectetur vulputate id non ante.</p>
-          </div>
-          <div class="accordion-title"><a href="#">What exactly happens after ordering? </a></div><div class="accordion-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id convallis tellus. Nulla aliquam in mi et convallis. Pellentesque rutrum feugiat ante ut imperdiet. Vivamus et dolor nec nisl consectetur vulputate id non ante. </p>
-          </div>
-          <div class="accordion-title"><a href="#">Do I receive an invoice for my order? </a></div><div class="accordion-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id convallis tellus. Nulla aliquam in mi et convallis. Pellentesque rutrum feugiat ante ut imperdiet. Vivamus et dolor nec nisl consectetur vulputate id non ante. </p>
+          <div class="accordion-title"><a href="#">I have a brand that I like to see on this site</a></div><div class="accordion-inner"><p>Sure let us know what brand you like to see. We will review and see if we can add.</p>
           </div>
         </div>
       </div>
@@ -42,10 +34,10 @@
                 <c:if test="${emailSent != true}">
                   <form id="ninja_forms_form_2" method="post" name="send_us_email_form" action="" class="ninja-forms-form">
                     <div id="ninja_forms_form_2_all_fields_wrap" class="ninja-forms-all-fields-wrap">
-                      <div class="field-wrap text-wrap label-inside"  id="send_us_email_name_div_wrap" data-visible="1">
-                        <input type="hidden" id="send_us_email_name_type" value="text">
-                        <input id="send_us_email_name" name="name" type="text" placeholder="" class="ninja-forms-field" value="${name}" rel="1"   />
-                        <input type="hidden" id="send_us_email_name_label_hidden" value="${defaultName}">
+                      <div class="field-wrap text-wrap label-inside"  id="send_us_email_subject_div_wrap" data-visible="1">
+                        <input type="hidden" id="send_us_email_subject_type" value="text">
+                        <input id="send_us_email_subject" name="subject" type="text" placeholder="" class="ninja-forms-field" value="${subject}" rel="1"   />
+                        <input type="hidden" id="send_us_email_subject_label_hidden" value="${defaultSubject}">
                       </div>
                       <div class="field-wrap text-wrap label-inside"  id="send_us_email_email_div_wrap" data-visible="1">
                         <input type="hidden" id="send_us_email_email_type" value="text">

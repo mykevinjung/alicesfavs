@@ -14,7 +14,7 @@
 
   <!-- Retina/iOS favicon -->
   <link rel="apple-touch-icon-precomposed" href="/resources/images/logo_touch.png" />
-  <title>Alice's Favs</title>
+  <title><c:if test="${not empty subtitle}">${subtitle} | </c:if>Alice's Favs</title>
   <link rel='stylesheet' id='flatsome-css-minified-css'  href='/resources/css/flatsome.min.css' type='text/css' media='all' />
   <link rel='stylesheet' id='flatsome-style-css'  href='/resources/css/style.css' type='text/css' media='all' />
   <link rel='stylesheet' id='flatsome-googlefonts-css'  href='//fonts.googleapis.com/css?family=Dancing+Script%3A300%2C400%2C700%2C900%7CLato%3A300%2C400%2C700%2C900%7CLato%3A300%2C400%2C700%2C900%7CLato%3A300%2C400%2C700%2C900&#038;subset=latin&#038;ver=4.3.1' type='text/css' media='all' />
@@ -65,8 +65,11 @@
 
 
           <div id="logo" class="logo-left">
-            <a href="/" title="Alice's Favs" rel="home">
-              <img src="${logo}" class="header_logo " alt="Alice's Favs"/>						</a>
+            <h1>
+              <a href="http://www.alicesfavs.com" title="Alice's Favs" rel="home">
+                <img src="${logo}" class="header_logo " alt="Alice's Favs"/>
+              </a>
+            </h1>
           </div><!-- .logo -->
 
           <div class="left-links">

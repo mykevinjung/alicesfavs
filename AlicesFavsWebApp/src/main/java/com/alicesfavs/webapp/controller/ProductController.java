@@ -42,6 +42,7 @@ public class ProductController
     private static final String SORT_BY = "sortBy";
     private static final String SITE = "site";
     private static final String CATEGORY_NAME = "categoryName";
+    private static final String SUBTITLE = "subtitle";
 
     private static final String VIEW_SALE = "sale";
     private static final String VIEW_NEW_ARRIVALS = "new-arrivals";
@@ -76,6 +77,7 @@ public class ProductController
         model.addAttribute(SORT_BY,
             productSortType == null ? ProductSortType.DATE.getCode() : productSortType.getCode());
         model.addAttribute("mobile", device.isMobile());
+        model.addAttribute(SUBTITLE, "Sale - " + site.displayName);
 
         return VIEW_SALE;
     }
@@ -93,6 +95,7 @@ public class ProductController
             model.addAttribute(CATEGORY_NAME, categoryName);
             model.addAttribute(SORT_BY,
                 productSortType == null ? ProductSortType.DATE.getCode() : productSortType.getCode());
+            model.addAttribute(SUBTITLE, "New Arrivals - " + aliceCategory.name);
         }
         else
         {
@@ -104,6 +107,7 @@ public class ProductController
 
             productList = newProductService.getNewProducts(site);
             model.addAttribute(CATEGORY_NAME, site.displayName);
+            model.addAttribute(SUBTITLE, "New Arrivals - " + site.displayName);
         }
         addProductAttributes(request, model, productList, webAppConfig.getNewProductPageSize());
         model.addAttribute("logo", "/resources/images/logo2.png");

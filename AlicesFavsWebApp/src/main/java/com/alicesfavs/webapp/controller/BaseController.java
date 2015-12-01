@@ -28,17 +28,18 @@ public class BaseController
     private static final String VIEW_DISCLAIMER = "disclaimer";
     private static final String VIEW_NOT_FOUND = "error404";
 
+    private static final String SUBTITLE = "subtitle";
     private static final String PARAM_EMAIL_SENT = "emailSent";
-    private static final String PARAM_NAME = "name";
+    private static final String PARAM_SUBJECT = "subject";
     private static final String PARAM_EMAIL = "email";
     private static final String PARAM_MESSAGE = "message";
     private static final String PARAM_RESPONSE_MSG_LIST = "responseMsgList";
-    private static final String PARAM_DEFAULT_NAME = "defaultName";
+    private static final String PARAM_DEFAULT_SUBJECT = "defaultSubject";
     private static final String PARAM_DEFAULT_EMAIL = "defaultEmail";
     private static final String PARAM_DEFAULT_MESSAGE = "defaultMessage";
-    private static final String DEFAULT_NAME = "Your name";
+    private static final String DEFAULT_SUBJECT = "Subject";
     private static final String DEFAULT_EMAIL = "Your email";
-    private static final String DEFAULT_MESSAGE = "Your message";
+    private static final String DEFAULT_MESSAGE = "Your message and name";
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap model)
@@ -56,6 +57,7 @@ public class BaseController
     public String aboutUs(ModelMap model)
     {
         model.addAttribute("logo", "/resources/images/logo3.png");
+        model.addAttribute(SUBTITLE, "About Us");
 
         return VIEW_ABOUT_US;
     }
@@ -64,12 +66,13 @@ public class BaseController
     public String contactUs(ModelMap model)
     {
         model.putIfAbsent(PARAM_EMAIL_SENT, false);
-        model.putIfAbsent(PARAM_NAME, DEFAULT_NAME);
+        model.putIfAbsent(PARAM_SUBJECT, DEFAULT_SUBJECT);
         model.putIfAbsent(PARAM_EMAIL, DEFAULT_EMAIL);
         model.putIfAbsent(PARAM_MESSAGE, DEFAULT_MESSAGE);
-        model.addAttribute(PARAM_DEFAULT_NAME, DEFAULT_NAME);
+        model.addAttribute(PARAM_DEFAULT_SUBJECT, DEFAULT_SUBJECT);
         model.addAttribute(PARAM_DEFAULT_EMAIL, DEFAULT_EMAIL);
         model.addAttribute(PARAM_DEFAULT_MESSAGE, DEFAULT_MESSAGE);
+        model.addAttribute(SUBTITLE, "Contact Us");
 
         return VIEW_CONTACT_US;
     }
@@ -77,19 +80,19 @@ public class BaseController
     @RequestMapping(value = "/contact-us", method = RequestMethod.POST)
     public String sendUsEmail(HttpServletRequest request, ModelMap model)
     {
-        final String name = request.getParameter(PARAM_NAME);
+        final String name = request.getParameter(PARAM_SUBJECT);
         final String email = request.getParameter(PARAM_EMAIL);
         final String message = request.getParameter(PARAM_MESSAGE);
         final List<String> responseMsgList = new ArrayList<>();
 
-        model.addAttribute(PARAM_NAME, name);
+        model.addAttribute(PARAM_SUBJECT, name);
         model.addAttribute(PARAM_EMAIL, email);
         model.addAttribute(PARAM_MESSAGE, message);
         model.addAttribute(PARAM_RESPONSE_MSG_LIST, responseMsgList);
 
-        if (!StringUtils.hasText(name) || DEFAULT_NAME.equals(name))
+        if (!StringUtils.hasText(name) || DEFAULT_SUBJECT.equals(name))
         {
-            responseMsgList.add("Please enter your name.");
+            responseMsgList.add("Please enter a subject.");
         }
         if (!StringUtils.hasText(email) || DEFAULT_EMAIL.equals(email) || !EmailValidator.getInstance().isValid(email))
         {
@@ -122,6 +125,7 @@ public class BaseController
     public String disclaimer(ModelMap model)
     {
         model.addAttribute("logo", "/resources/images/logo3.png");
+        model.addAttribute(SUBTITLE, "Disclaimer");
         
         return VIEW_DISCLAIMER;
     }
@@ -129,6 +133,8 @@ public class BaseController
     @RequestMapping(value = "/error404", method = RequestMethod.GET)
     public String error404(ModelMap model)
     {
+        model.addAttribute(SUBTITLE, "Page Not Found");
+
         return VIEW_NOT_FOUND;
     }
 

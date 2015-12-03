@@ -28,6 +28,7 @@ public class BaseController
     private static final String VIEW_DISCLAIMER = "disclaimer";
     private static final String VIEW_NOT_FOUND = "error404";
 
+    private static final String TITLE = "title";
     private static final String SUBTITLE = "subtitle";
     private static final String PARAM_EMAIL_SENT = "emailSent";
     private static final String PARAM_SUBJECT = "subject";
@@ -44,6 +45,8 @@ public class BaseController
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap model)
     {
+        model.addAttribute(TITLE, "Alice's Favs - Sale and New Arrivals from the best brands");
+
         return "comingsoon";
     }
 
@@ -109,7 +112,7 @@ public class BaseController
             if ("mykevinjung@gmail.com".equals(email))
             {
                 model.addAttribute(PARAM_EMAIL_SENT, true);
-                responseMsgList.add("Thank you for your email.");
+                responseMsgList.add("Thank you. Your message has been sent.");
             }
             else
             {

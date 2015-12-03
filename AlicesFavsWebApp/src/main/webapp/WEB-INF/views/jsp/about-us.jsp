@@ -5,6 +5,29 @@
 <div id="main-content" class="site-main hfeed light">
   <div class="row"><div class="large-12 columns"><div class="top-divider"></div></div></div>
 
+  <div class="page-header">
+    <div id="banner_about_us" class="ux_banner dark    "  style="height:300px; " data-height="300px" role="banner">
+      <div class="banner-bg "  style="background-image:url('/resources/images/sky-and-cloud.jpg'); "><img src="/resources/images/sky-and-cloud.jpg"  alt="" style="visibility:hidden;" /></div>
+      <div class="row" >
+        <div class="inner center text-center "  style="width:60%;">
+          <div class="inner-wrap animated flipInX" style=" ">
+            <h1>ABOUT US</h1>
+            <div class="tx-div small"></div>
+            <p>
+
+            <div class="social-icons share-row">
+            <a href="http://www.facebook.com/sharer.php?u=http://www.alicesfavs.com/" onclick="window.open(this.href,this.title,'width=500,height=500,top=300px,left=300px');  return false;"  rel="nofollow" target="_blank" class="icon icon_facebook tip-top" title="Share on Facebook"><span class="icon-facebook"></span></a>
+            <a href="https://twitter.com/share?url=http://www.alicesfavs.com/" onclick="window.open(this.href,this.title,'width=500,height=500,top=300px,left=300px');  return false;"  rel="nofollow" target="_blank" class="icon icon_twitter tip-top" title="Share on Twitter"><span class="icon-twitter"></span></a>
+            <a href="//pinterest.com/pin/create/button/?url=http://www.alicesfavs.com/&amp;media=&amp;description=Alice's%20Favs" onclick="window.open(this.href,this.title,'width=500,height=500,top=300px,left=300px');  return false;"  rel="nofollow" target="_blank" class="icon icon_pintrest tip-top" title="Pin on Pinterest"><span class="icon-pinterest"></span></a>
+            <a href="//plus.google.com/share?url=http://www.alicesfavs.com/" target="_blank" class="icon icon_googleplus tip-top" onclick="window.open(this.href,this.title,'width=500,height=500,top=300px,left=300px');  return false;"  rel="nofollow" title="Share on Google+"><span class="icon-google-plus"></span></a>
+            <a href="//tumblr.com/widgets/share/tool?canonicalUrl=http://www.alicesfavs.com/" target="_blank" class="icon icon_tumblr tip-top" onclick="window.open(this.href,this.title,'width=500,height=500,top=300px,left=300px');  return false;"  rel="nofollow" title="Share on Tumblr"><span class="icon-tumblr"></span></a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end .ux_banner -->
+  </div>
+
   <div  class="page-wrapper">
     <div class="row">
       <div id="content" class="large-12 columns" role="main">
@@ -20,7 +43,7 @@
             <div class="featured-box  pos-center  " title=""  style="">
               <div class="box-inner">
                 <h4>The best from the best brands<span> </span></h4>
-                <p>All the sale and new arrivals from the best brands are in one place!</p>
+                <p>All the sale and new arrivals from the best brands are in one place! Start your shopping here.</p>
               </div>
             </div>
 
@@ -45,7 +68,7 @@
             <div class="featured-box  pos-center  " title=""  style="">
               <div class="box-inner">
                 <h4>More features coming...<span> </span></h4>
-                <p>We are adding more features for the shoppers. Stay tuned!</p>
+                <p>We've just started. We are adding more features for the shoppers. Stay tuned!</p>
               </div>
             </div>
 

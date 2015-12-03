@@ -13,7 +13,7 @@
       <div class="small-12    large-12  columns"  ><div class="column-inner"  >
         <h3 class="section-title clearfix  "><span>Disclaimer</span>  </h3><!-- end section_title -->
 
-        <p>We try to update product information as fast as we can but the information is not real-time and there may be information different from the actual brand site.
+        <p>We try to update product information as soon as possible but the information is not real-time and there may be information different from the actual brand site.
         We also try to collect all the sale and new arrivals but we may miss some products.</p>
       </div></div>
     </div>

@@ -41,7 +41,6 @@ public class SaleProductService
     private WebAppConfig webAppConfig;
 
     private Map<Long, CachedList<UiProduct>> siteProductMap = new Hashtable<>();
-    private Map<Long, CachedList<UiProduct>> categoryNewProductMap = new Hashtable<>();
 
     public List<UiProduct> getSaleProducts(Site site, ProductSortType productSortType)
     {
@@ -98,6 +97,17 @@ public class SaleProductService
         }
     }
 
+    public int getTotalSalesCount()
+    {
+        int count = 0;
+        for (CachedList<UiProduct> cachedList : getSiteProductMap().values())
+        {
+            count += cachedList.list.size();
+        }
+
+        return count;
+    }
+
     public synchronized void refresh(Site site)
     {
         LOGGER.info("Refreshing sale product list for " + site.stringId);
@@ -105,6 +115,11 @@ public class SaleProductService
         newCachedList.list = getSaleProductsFromDatabase(site);
         newCachedList.cachedTime = LocalDateTime.now();
         siteProductMap.put(site.id, newCachedList);
+    }
+
+    private Map<Long, CachedList<UiProduct>> getSiteProductMap()
+    {
+        return siteProductMap;
     }
 
     private int getLatestIndex(List<UiProduct> productList, int day)

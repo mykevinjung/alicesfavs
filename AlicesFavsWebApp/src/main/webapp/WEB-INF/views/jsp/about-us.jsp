@@ -6,8 +6,8 @@
   <div class="row"><div class="large-12 columns"><div class="top-divider"></div></div></div>
 
   <div class="page-header">
-    <div id="banner_about_us" class="ux_banner dark    "  style="height:300px; " data-height="300px" role="banner">
-      <div class="banner-bg "  style="background-image:url('/resources/images/sky-and-cloud.jpg'); "><img src="/resources/images/sky-and-cloud.jpg"  alt="" style="visibility:hidden;" /></div>
+    <div id="banner_about_us" class="ux_banner dark    "  style="height:220px; background-color:#bc9773" data-height="220px" role="banner">
+      <div class="banner-bg "  style=" "></div>
       <div class="row" >
         <div class="inner center text-center "  style="width:60%;">
           <div class="inner-wrap animated flipInX" style=" ">
@@ -28,9 +28,6 @@
   <div  class="page-wrapper">
     <div class="row">
       <div id="content" class="large-12 columns" role="main">
-
-
-
         <p class="lead text-center"><strong>Alice</strong> looks around  shopping all the time, finding all the good stuff from her favorite brands,
           checking if the price of her favorite products have dropped. We wanted to do the work for her and help her shopping.</p>
         <hr>
@@ -43,8 +40,6 @@
                 <p>All the sale and new arrivals from the best brands are in one place! Start your shopping here.</p>
               </div>
             </div>
-
-
           </div></div>
 
           <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
@@ -52,33 +47,62 @@
             <div class="featured-box  pos-center  " title=""  style="">
               <div class="box-inner">
                 <h4>More brands coming...<span> </span></h4>
-                <p>We are adding more brands you love. More brands, more choices, more you happy!</p>
+                <p>We are adding more brands you love. More brands, more choices, more happiness!</p>
               </div>
             </div>
-
-
           </div></div>
-
-
           <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
 
             <div class="featured-box  pos-center  " title=""  style="">
               <div class="box-inner">
                 <h4>More features coming...<span> </span></h4>
-                <p>We've just started. We are adding more features for the shoppers. Stay tuned!</p>
+                <p>We are adding more features for the shoppers. Stay tuned!</p>
               </div>
             </div>
-
-
           </div></div>
 
         </div>
 
+        <h3 class="section-title clearfix title_center "><span>Facts</span>  </h3>
 
+        <div  class="row container ">
+          <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
+
+            <div class="featured-box  pos-center  " title=""  style="">
+              <div class="box-inner">
+                <div class="featured-img  " style=" "><img src="/resources/images/favicon.png" style="width:40%;"></div><!-- end icon -->
+                <h4>Started by Alice & Kevin</h4>
+              </div>
+            </div>
+          </div></div>
+
+          <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
+
+            <div class="featured-box  pos-center  " title=""  style="">
+              <div class="box-inner">
+                <div class="featured-img  " style=" "><img src="/resources/images/favicon.png" style="width:40%;"></div><!-- end icon -->
+                <h4>Based in Greater Seattle</h4>
+              </div>
+            </div>
+          </div></div>
+          <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
+
+            <div class="featured-box  pos-center  " title=""  style="">
+              <div class="box-inner">
+                <div class="featured-img  " style=" "><img src="/resources/images/favicon.png" style="width:40%;"></div><!-- end icon -->
+                <h4>${totalBrandCount} brands</h4>
+                <h4>${totalSalesCount} sales</h4>
+                <h4>${totalNewArrivalsCount} new arrivals</h4>
+              </div>
+            </div>
+          </div></div>
+
+        </div>
 
       </div><!-- #content -->
     </div><!-- .row  -->
   </div><!-- .page-wrapper -->
+
 </div><!-- #main-content -->
 
 <jsp:include page="footer.jsp" />

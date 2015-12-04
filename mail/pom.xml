@@ -10,7 +10,7 @@
 
   <groupId>com.alicesfavs</groupId>
   <artifactId>af-mail</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <name>Mail</name>
   <url>http://maven.apache.org</url>
 
@@ -19,6 +19,11 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-context-support</artifactId>
       <version>${springframework.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-ses</artifactId>
+      <version>1.10.39</version>
     </dependency>
     <dependency>
       <groupId>com.sun.mail</groupId>

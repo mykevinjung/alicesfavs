@@ -12,15 +12,14 @@
 
     <div  class="row container ">
 
-      <div class="small-12    large-6  columns   "  ><div class="column-inner"  >
-        <h3 class="section-title clearfix  "><span>Frequently Asked Questions</span>  </h3><!-- end section_title -->
-        <div class="accordion" rel="0">
-          <div class="accordion-title"><a href="#">Some product information is not correct.</a></div>
-          <div class="accordion-inner"><p>Product information on Alice's Favs does not reflect the actual information at real time. So there might be some product with out-dated information. Please see <a href="/disclaimer">Disclaimer</a>.</p></div>
-          <div class="accordion-title"><a href="#">I have a brand that I like to see on Alice's Favs.</a></div>
-          <div class="accordion-inner"><p>Sure let us know what brand you like to see. We will review and see if we can add.</p></div>
-          <div class="accordion-title"><a href="#">How often is the product information updated?</a></div>
-          <div class="accordion-inner"><p>We try to update the product information everyday, even more than once a day unless there is a technical issue.</p></div>
+      <div class="small-12    large-6  columns" >
+        <div class="column-inner" >
+        <div class="featured-box  pos-center pos-middle " >
+          <div class="box-inner">
+            <p><img src="/resources/images/logo_text_italic.png" class="header_logo " alt="Alice's Favs"/></p>
+            <br>
+            <p><em property="italic">Alice means she knows what she wants, why she wants.</em></p>
+          </div>
         </div>
       </div>
       </div>

@@ -107,7 +107,7 @@ public class DataExtractor
                 productList.add(productExtract);
                 //System.out.println(productExtract);
             }
-            catch (DataNotFoundException e)
+            catch (DataNotFoundException | ElementNotFoundException e)
             {
                 // for those excluded data
             }

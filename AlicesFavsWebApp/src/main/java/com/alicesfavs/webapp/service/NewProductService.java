@@ -83,6 +83,17 @@ public class NewProductService
         return newProductList;
     }
 
+    public int getTotalNewArrivalsCount()
+    {
+        int count = 0;
+        for (CachedList<UiProduct> cachedList : getSiteProductMap().values())
+        {
+            count += cachedList.list.size();
+        }
+
+        return count;
+    }
+
     public synchronized void refresh(Site site)
     {
         LOGGER.info("Refreshing new product list for " + site.stringId);
@@ -90,6 +101,11 @@ public class NewProductService
         newCachedList.list = getNewProductsFromDatabase(site);
         newCachedList.cachedTime = LocalDateTime.now();
         siteProductMap.put(site.id, newCachedList);
+    }
+
+    private Map<Long, CachedList<UiProduct>> getSiteProductMap()
+    {
+        return siteProductMap;
     }
 
     private List<UiProduct> getNewProducts(List<Site> siteList)

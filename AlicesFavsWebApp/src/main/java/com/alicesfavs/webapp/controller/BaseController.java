@@ -23,7 +23,6 @@ public class BaseController
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
 
     private static final String VIEW_INDEX = "index";
-    private static final String VIEW_ABOUT_US = "about-us";
     private static final String VIEW_CONTACT_US = "contact-us";
     private static final String VIEW_DISCLAIMER = "disclaimer";
     private static final String VIEW_NOT_FOUND = "error404";
@@ -54,15 +53,6 @@ public class BaseController
     public String saleRedirect(ModelMap model)
     {
         return VIEW_INDEX;
-    }
-
-    @RequestMapping(value = "/about-us", method = RequestMethod.GET)
-    public String aboutUs(ModelMap model)
-    {
-        model.addAttribute("logo", "/resources/images/logo3.png");
-        model.addAttribute(SUBTITLE, "About Us");
-
-        return VIEW_ABOUT_US;
     }
 
     @RequestMapping(value = "/contact-us", method = RequestMethod.GET)

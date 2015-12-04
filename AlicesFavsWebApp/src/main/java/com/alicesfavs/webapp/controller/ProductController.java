@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,7 @@ public class ProductController
     private static final String VIEW_HOME = "home";
     private static final String VIEW_SALE = "sale";
     private static final String VIEW_NEW_ARRIVALS = "new-arrivals";
+    private static final String VIEW_ABOUT_US = "about-us";
 
     @Autowired
     private SiteManager siteManager;
@@ -134,6 +136,19 @@ public class ProductController
         model.addAttribute("newArrivalsTitle", "Newly found from the past 7 days");
 
         return VIEW_NEW_ARRIVALS;
+    }
+
+    @RequestMapping(value = "/about-us", method = RequestMethod.GET)
+    public String aboutUs(ModelMap model)
+    {
+        model.addAttribute("logo", "/resources/images/logo3.png");
+        model.addAttribute(SUBTITLE, "About Us");
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        model.addAttribute("totalBrandCount", formatter.format(siteManager.getSites().size()));
+        model.addAttribute("totalSalesCount", formatter.format(saleProductService.getTotalSalesCount()));
+        model.addAttribute("totalNewArrivalsCount", formatter.format(newProductService.getTotalNewArrivalsCount()));
+
+        return VIEW_ABOUT_US;
     }
 
     private void addProductAttributes(HttpServletRequest request, ModelMap model, List<UiProduct> productList,

@@ -28,34 +28,19 @@
                 </div><!-- .right -->
             </div><!-- .breadcrumb-row -->
         </div><!-- .large-12 breadcrumb -->
-
-
-
         <div class="large-12 columns">
-
-
-
             <div class="row">
                 <div class="large-12 columns">
                     <ul class="products small-block-grid-2 large-block-grid-4">
-
-
-
                         <c:forEach items="${productList}" var="product">
-
                         <li class="product-small  grid1 grid-normal">
                             <div class="inner-wrap">
                                 <a <c:if test="${mobile != true}">target="_blank"</c:if> href="${product.url}">
                                     <div class="product-image">
-                                        <div class="front-image"><img width="247" height="300" src="${product.imageUrl}" class="attachment-shop_catalog wp-post-image" alt="${product.name}" /></div>
-
-
+                                        <div class="front-image"><img width="247" height="300" src="${product.imageUrl}" class="attachment-shop_catalog wp-post-image aligncenter" alt="${product.name}" /></div>
                                     </div><!-- end product-image -->
                                 </a>
-
                                 <div class="info style-grid1">
-
-
                                     <div class="text-center">
                                         <h5 class="category">
                                             <a href="/sale/${product.siteStringId}" rel="tag">${product.siteName}</a>          </h5>
@@ -68,11 +53,8 @@
                                     </div><!-- text-center -->
 
                                     <div class="clear"></div>	</div><!-- end info -->
-
-
                             </div> <!-- .inner-wrap -->
                         </li><!-- li.product-small -->
-
                         </c:forEach>
                     </ul>
                 </div>

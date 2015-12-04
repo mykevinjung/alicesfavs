@@ -64,6 +64,11 @@ public class ModelConverter
         return uiProduct;
     }
 
+    public static List<UiProduct> convertProductList(Site site, List<Product> productList)
+    {
+        return convertProductList(site, productList, 0, productList.size());
+    }
+
     public static List<UiProduct> convertProductList(Site site, List<Product> productList, int startIndex, int endIndex)
     {
         final List<UiProduct> uiProductList = new ArrayList<>(endIndex - startIndex);

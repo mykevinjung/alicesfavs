@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by kjung on 11/4/15.
@@ -44,6 +46,7 @@ public class ProductController
     private static final String CATEGORY_NAME = "categoryName";
     private static final String SUBTITLE = "subtitle";
 
+    private static final String VIEW_HOME = "home";
     private static final String VIEW_SALE = "sale";
     private static final String VIEW_NEW_ARRIVALS = "new-arrivals";
 
@@ -58,6 +61,22 @@ public class ProductController
 
     @Autowired
     private WebAppConfig webAppConfig;
+
+    @RequestMapping(value = "/home2", method = RequestMethod.GET)
+    public String home(ModelMap model, Device device)
+    {
+        final Map<String, List<UiProduct>> categoryProductMap = new LinkedHashMap<>();
+        for (AliceCategory aliceCategory : siteManager.getCategorySiteMap().keySet())
+        {
+            final List<UiProduct> newSaleList = saleProductService.getNewSaleProducts(aliceCategory);
+            categoryProductMap.put(aliceCategory.name, newSaleList);
+        }
+        model.addAttribute("saleCategoryProductMap", categoryProductMap);
+        model.addAttribute("newProductList", newProductService.getNewProducts());
+        model.addAttribute("mobile", device.isMobile());
+
+        return VIEW_HOME;
+    }
 
     // TODO should do same thing as new arrival?  Clothing all
     @RequestMapping(value = "/sale/{siteId}", method = RequestMethod.GET)

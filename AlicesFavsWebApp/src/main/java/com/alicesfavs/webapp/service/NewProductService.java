@@ -68,6 +68,21 @@ public class NewProductService
         return getNewProductsFromCache(site);
     }
 
+    public List<UiProduct> getNewProducts()
+    {
+        final List<UiProduct> newProductList = new ArrayList<>();
+        for (AliceCategory aliceCategory : siteManager.getCategorySiteMap().keySet())
+        {
+            final List<UiProduct> categoryProductList = getNewProducts(aliceCategory, ProductSortType.DATE);
+            if (categoryProductList.size() > 0)
+            {
+                newProductList.add(categoryProductList.get(0));
+            }
+        }
+
+        return newProductList;
+    }
+
     public synchronized void refresh(Site site)
     {
         LOGGER.info("Refreshing new product list for " + site.stringId);

@@ -20,7 +20,7 @@ public class AliceCategoryDaoImpl implements AliceCategoryDao
 {
 
     private static final String SELECT_ALL = "SELECT ID, NAME, DISPLAY, CREATED_DATE, UPDATED_DATE "
-        + "FROM ALICE_CATEGORY WHERE DISPLAY = ?";
+        + "FROM ALICE_CATEGORY WHERE DISPLAY = ? ORDER BY ID ASC";
 
     private static final int[] SELECT_PARAM_TYPES =
         { Types.CHAR };

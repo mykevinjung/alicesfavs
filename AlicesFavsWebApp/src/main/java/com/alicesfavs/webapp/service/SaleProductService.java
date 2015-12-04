@@ -1,5 +1,6 @@
 package com.alicesfavs.webapp.service;
 
+import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.ProductService;
@@ -34,9 +35,13 @@ public class SaleProductService
     private ProductService productService;
 
     @Autowired
+    private SiteManager siteManager;
+
+    @Autowired
     private WebAppConfig webAppConfig;
 
     private Map<Long, CachedList<UiProduct>> siteProductMap = new Hashtable<>();
+    private Map<Long, CachedList<UiProduct>> categoryNewProductMap = new Hashtable<>();
 
     public List<UiProduct> getSaleProducts(Site site, ProductSortType productSortType)
     {
@@ -57,6 +62,42 @@ public class SaleProductService
         return sortBySaleDate;
     }
 
+    public List<UiProduct> getNewSaleProducts(AliceCategory category)
+    {
+        // collect all sales of the category
+        final List<Site> siteList = siteManager.getSites(category);
+        final List<UiProduct> allProductList = new ArrayList<>();
+        for (Site site : siteList)
+        {
+            allProductList.addAll(getSaleProducts(site, ProductSortType.DATE));
+        }
+
+        // get the latest sales
+        allProductList.sort(new SaleDateComparator());
+        int latestIndex = 0;
+        for (int day = 1 ; day < 15 ; day++)
+        {
+            latestIndex = getLatestIndex(allProductList, day);
+            if (latestIndex >= webAppConfig.getCategoryProductSize())
+            {
+                break;
+            }
+        }
+
+        if (latestIndex >= webAppConfig.getCategoryProductSize())
+        {
+            final List<UiProduct> newProductList = allProductList.subList(0, latestIndex);
+            newProductList.sort(new DiscountPercentageComparator());
+            return newProductList.subList(0, webAppConfig.getCategoryProductSize());
+        }
+        else
+        {
+            allProductList.sort(new DiscountPercentageComparator());
+            final int endIndex = Math.min(allProductList.size(), webAppConfig.getCategoryProductSize());
+            return allProductList.subList(0, endIndex);
+        }
+    }
+
     public synchronized void refresh(Site site)
     {
         LOGGER.info("Refreshing sale product list for " + site.stringId);
@@ -64,6 +105,33 @@ public class SaleProductService
         newCachedList.list = getSaleProductsFromDatabase(site);
         newCachedList.cachedTime = LocalDateTime.now();
         siteProductMap.put(site.id, newCachedList);
+    }
+
+    private int getLatestIndex(List<UiProduct> productList, int day)
+    {
+        for (int index = 0 ; index < productList.size() ; index++)
+        {
+            if (productList.get(index).getSaleStartDate().until(LocalDateTime.now(), ChronoUnit.MINUTES) > 24 * 60 * day)
+            {
+                return index;
+            }
+        }
+
+        return productList.size();
+    }
+
+    private List<UiProduct> filterLatest(List<UiProduct> productList, int day)
+    {
+        final List<UiProduct> latestProductList = new ArrayList<>();
+        for (UiProduct uiProduct : productList)
+        {
+            if (uiProduct.getSaleStartDate().until(LocalDateTime.now(), ChronoUnit.HOURS) <= 24 * day)
+            {
+                latestProductList.add(uiProduct);
+            }
+        }
+
+        return latestProductList;
     }
 
     /**
@@ -86,11 +154,12 @@ public class SaleProductService
      */
     private List<UiProduct> getSaleProductsFromDatabase(Site site)
     {
-        final List<Product> productList = productService.searchSaleProducts(site.id);
-        productList.sort(new SaleDateComparator());
-        final int endIndex = Math.min(productList.size(), webAppConfig.getSaleProductCacheCount());
+        final List<UiProduct> uiProductList = ModelConverter
+            .convertProductList(site, productService.searchSaleProducts(site.id));
+        uiProductList.sort(new SaleDateComparator());
+        final int endIndex = Math.min(uiProductList.size(), webAppConfig.getSaleProductCacheCount());
 
-        return ModelConverter.convertProductList(site, productList, 0, endIndex);
+        return uiProductList.subList(0, endIndex);
     }
 
     private boolean shouldRefresh(CachedList<UiProduct> cachedProductList)

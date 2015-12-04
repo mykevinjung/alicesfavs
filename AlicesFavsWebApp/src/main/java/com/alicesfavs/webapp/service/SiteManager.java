@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +35,8 @@ public class SiteManager
     @Autowired
     private WebAppConfig webAppConfig;
 
-    private Map<AliceCategory, List<Site>> categorySiteMap = new HashMap<>();
+    // using LinkedHashMap to keep the insertion order
+    private Map<AliceCategory, List<Site>> categorySiteMap = new LinkedHashMap<>();
 
     private LocalDateTime cachedTime;
 
@@ -82,7 +83,7 @@ public class SiteManager
 
     public Collection<Site> getSites()
     {
-        final Map<Long, Site> siteMap = new HashMap<>();
+        final Map<Long, Site> siteMap = new LinkedHashMap<>();
         for (List<Site> categorySites : getCategorySiteMap().values())
         {
             for (Site site : categorySites)
@@ -114,7 +115,7 @@ public class SiteManager
 
     private Map<AliceCategory, List<Site>> getCategorySiteMapFromDatabase()
     {
-        final Map<AliceCategory, List<Site>> categorySiteMapFromDB = new HashMap<>();
+        final Map<AliceCategory, List<Site>> categorySiteMapFromDB = new LinkedHashMap<>();
         final List<AliceCategory> aliceCategories = aliceCategoryService.findAllAliceCategories();
         for (final AliceCategory aliceCategory : aliceCategories)
         {

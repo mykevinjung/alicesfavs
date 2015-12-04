@@ -36,6 +36,9 @@ public class WebAppConfig
     @Value(value = "${newproduct.dayafter}")
     private int newProductDayAfter;
 
+    @Value(value = "${home.category.productsize}")
+    private int categoryProductSize;
+
     @Value(value = "${refresh.allowedaddr}")
     private String refreshAllowedAddr;
 
@@ -77,6 +80,11 @@ public class WebAppConfig
     public int getNewProductDayAfter()
     {
         return newProductDayAfter;
+    }
+
+    public int getCategoryProductSize()
+    {
+        return categoryProductSize;
     }
 
     public String getRefreshAllowedAddr()

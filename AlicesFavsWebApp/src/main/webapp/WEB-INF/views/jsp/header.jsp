@@ -15,7 +15,7 @@
   <!-- Retina/iOS favicon -->
   <link rel="apple-touch-icon-precomposed" href="/resources/images/logo_touch.png" />
   <title>
-    <c:if test="${not empty subtitle}">${subtitle} | </c:if><c:choose><c:when test="${not empty title}">${title}</c:when><c:otherwise>Alice's Favs</c:otherwise></c:choose>
+    <c:if test="${not empty subtitle}">${subtitle} | </c:if><c:choose><c:when test="${not empty title}">${title}</c:when><c:otherwise>Alice's Favs - Sales and New Arrivals from the best brands</c:otherwise></c:choose>
   </title>
   <link rel='stylesheet' id='flatsome-css-minified-css'  href='/resources/css/flatsome.min.css' type='text/css' media='all' />
   <link rel='stylesheet' id='flatsome-style-css'  href='/resources/css/style.css' type='text/css' media='all' />

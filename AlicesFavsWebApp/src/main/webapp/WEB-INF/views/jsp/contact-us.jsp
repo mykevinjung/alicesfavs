@@ -10,7 +10,7 @@
   <div id="content" role="main">
 
 
-    <div  class="row container ">
+    <div  class="row container " style="align-items: center; justify-content: center; display: flex">
 
       <div class="small-12    large-6  columns" >
         <div class="column-inner" >
@@ -18,7 +18,8 @@
           <div class="box-inner">
             <p><img src="/resources/images/logo_text_italic.png" class="header_logo " alt="Alice's Favs"/></p>
             <br>
-            <p><em property="italic">Alice means she knows what she wants, why she wants.</em></p>
+            <p><em property="italic">Alice knows what she wants, why she wants.</em></p>
+            <br><br><br><br>
           </div>
         </div>
       </div>

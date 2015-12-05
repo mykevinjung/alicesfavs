@@ -1,8 +1,12 @@
 package com.alicesfavs.webapp.controller;
 
+import com.alicesfavs.webapp.service.NewProductService;
+import com.alicesfavs.webapp.service.SaleProductService;
+import com.alicesfavs.webapp.service.SiteManager;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +28,7 @@ public class BaseController
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
 
     private static final String VIEW_INDEX = "index";
+    private static final String VIEW_ABOUT_US = "about-us";
     private static final String VIEW_CONTACT_US = "contact-us";
     private static final String VIEW_DISCLAIMER = "disclaimer";
     private static final String VIEW_NOT_FOUND = "error404";
@@ -41,11 +47,18 @@ public class BaseController
     private static final String DEFAULT_EMAIL = "Your email";
     private static final String DEFAULT_MESSAGE = "Your message and name";
 
+    @Autowired
+    private SiteManager siteManager;
+
+    @Autowired
+    private SaleProductService saleProductService;
+
+    @Autowired
+    private NewProductService newProductService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap model)
     {
-        model.addAttribute(TITLE, "Alice's Favs - Sale and New Arrivals from the best brands");
-
         return "comingsoon";
     }
 
@@ -112,6 +125,19 @@ public class BaseController
         }
 
         return contactUs(model);
+    }
+
+    @RequestMapping(value = "/about-us", method = RequestMethod.GET)
+    public String aboutUs(ModelMap model)
+    {
+        model.addAttribute("logo", "/resources/images/logo3.png");
+        model.addAttribute(SUBTITLE, "About Us");
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        model.addAttribute("totalBrandCount", formatter.format(siteManager.getSites().size()));
+        model.addAttribute("totalSalesCount", formatter.format(saleProductService.getTotalSalesCount()));
+        model.addAttribute("totalNewArrivalsCount", formatter.format(newProductService.getTotalNewArrivalsCount()));
+
+        return VIEW_ABOUT_US;
     }
 
     @RequestMapping(value = "/disclaimer", method = RequestMethod.GET)

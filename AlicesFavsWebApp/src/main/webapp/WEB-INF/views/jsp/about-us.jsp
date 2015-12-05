@@ -71,7 +71,7 @@
             <div class="featured-box  pos-center  " title=""  style="">
               <div class="box-inner">
                 <div class="featured-img  " style=" "><img src="/resources/images/favicon.png" style="width:40%;"></div><!-- end icon -->
-                <h4>Started by Alice & Kevin</h4>
+                <p><b>Started by Alice & Kevin</b></p>
               </div>
             </div>
           </div></div>
@@ -81,7 +81,7 @@
             <div class="featured-box  pos-center  " title=""  style="">
               <div class="box-inner">
                 <div class="featured-img  " style=" "><img src="/resources/images/favicon.png" style="width:40%;"></div><!-- end icon -->
-                <h4>Based in Greater Seattle</h4>
+                <p><b>Based in Greater Seattle</b></p>
               </div>
             </div>
           </div></div>
@@ -90,9 +90,7 @@
             <div class="featured-box  pos-center  " title=""  style="">
               <div class="box-inner">
                 <div class="featured-img  " style=" "><img src="/resources/images/favicon.png" style="width:40%;"></div><!-- end icon -->
-                <h4>${totalBrandCount} brands</h4>
-                <h4>${totalSalesCount} sales</h4>
-                <h4>${totalNewArrivalsCount} new arrivals</h4>
+                <p><b>${totalBrandCount} brands<br>${totalSalesCount} sales<br>${totalNewArrivalsCount} new arrivals</b></p>
               </div>
             </div>
           </div></div>

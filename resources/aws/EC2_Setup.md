@@ -31,7 +31,7 @@ Tomcat
 https://www.mulesoft.com/tcat/tomcat-linux<br/>
 sudo wget http://supergsego.com/apache/tomcat/tomcat-8/v8.0.28/bin/apache-tomcat-8.0.28.tar.gz<br>
 <br>
-Then set JAVA_OPTS="$JAVA_OPTS -DEXECUTION_ENV=prod -Dlog4j.configurationFile=env/prod/log4j2.xml" in bin/catalina.sh
+Then put setenv.sh under bin
 
 Apache - Tomcat
 --------

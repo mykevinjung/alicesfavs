@@ -33,7 +33,7 @@
                 "attributeKey":"href",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":".*ebSku_([0-9_]+)_catalog.*"
+                "substringPattern":".*ebSku_[0-9]+__([0-9]+)_catalog.*"
             }
         },
         "nameSpec":{

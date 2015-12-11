@@ -131,14 +131,14 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"price-special",
+                    "className":"product-price",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"currency",
+                    "className":"price-special",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -146,21 +146,21 @@
                     "attributeKey":"$nested_text",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":null
+                    "substringPattern":".*special (\\$.*).*"
                 }
             },
             {
                 "containerSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"price-standard",
+                    "className":"product-price",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"currency",
+                    "className":"price-standard",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -177,14 +177,14 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"price-strike-special",
+                    "className":"product-price",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"currency",
+                    "className":"price-strike-special",
                     "attributeKey":null,
                     "valuePattern":null
                 },

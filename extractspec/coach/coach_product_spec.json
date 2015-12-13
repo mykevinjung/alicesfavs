@@ -2,22 +2,22 @@
     {
         "containerSpec":{
             "id":null,
-            "tagName":"ul",
-            "className":"product-list",
+            "tagName":"div",
+            "className":"search-result-content",
             "attributeKey":null,
             "valuePattern":null
         },
         "productSpec":{
             "id":null,
-            "tagName":"li",
-            "className":"product-cell",
-            "attributeKey":null,
-            "valuePattern":null
+            "tagName":"div",
+            "className":null,
+            "attributeKey":"itemprop",
+            "valuePattern":"itemListElement"
         },
         "idSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"a",
+                "tagName":"div",
                 "className":"product-name",
                 "attributeKey":null,
                 "valuePattern":null
@@ -25,7 +25,7 @@
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"product-name",
+                "className":"name-link",
                 "attributeKey":null,
                 "valuePattern":null
             },
@@ -33,13 +33,13 @@
                 "attributeKey":"href",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":".*\\.com/products/([0-9a-zA-Z\\-]+?)/\\?.*"
+                "substringPattern":".*/([a-zA-Z0-9]+)\\.html?"
             }
         },
         "nameSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"a",
+                "tagName":"div",
                 "className":"product-name",
                 "attributeKey":null,
                 "valuePattern":null
@@ -47,7 +47,7 @@
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"product-name",
+                "className":"name-link",
                 "attributeKey":null,
                 "valuePattern":null
             },
@@ -61,7 +61,7 @@
         "urlSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"a",
+                "tagName":"div",
                 "className":"product-name",
                 "attributeKey":null,
                 "valuePattern":null
@@ -69,7 +69,7 @@
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"product-name",
+                "className":"name-link",
                 "attributeKey":null,
                 "valuePattern":null
             },
@@ -85,41 +85,19 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"div",
-                    "className":"product-thumb",
+                    "className":"product-image",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"img",
-                    "className":"product-thumb",
+                    "className":"primary-image",
                     "attributeKey":"src",
                     "valuePattern":null
                 },
                 "dataSpec":{
                     "attributeKey":"src",
-                    "valuePattern":null,
-                    "valueExcludePattern":".*/blank.gif",
-                    "substringPattern":null
-                }
-            },
-            {
-                "containerSpec":{
-                    "id":null,
-                    "tagName":"div",
-                    "className":"product-thumb",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"img",
-                    "className":null,
-                    "attributeKey":"data-async-src",
-                    "valuePattern":null
-                },
-                "dataSpec":{
-                    "attributeKey":"data-async-src",
                     "valuePattern":null,
                     "valueExcludePattern":null,
                     "substringPattern":null
@@ -130,7 +108,7 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":"span",
+                    "tagName":"div",
                     "className":"product-price",
                     "attributeKey":null,
                     "valuePattern":null
@@ -138,7 +116,7 @@
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"price-special",
+                    "className":"salesprice",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -146,13 +124,13 @@
                     "attributeKey":"$nested_text",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":".*special (\\$.*)"
+                    "substringPattern":null
                 }
             },
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":"span",
+                    "tagName":"div",
                     "className":"product-price",
                     "attributeKey":null,
                     "valuePattern":null
@@ -160,29 +138,7 @@
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"price-sale",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "dataSpec":{
-                    "attributeKey":"$nested_text",
-                    "valuePattern":null,
-                    "valueExcludePattern":null,
-                    "substringPattern":".*sale (\\$.*)"
-                }
-            },
-            {
-                "containerSpec":{
-                    "id":null,
-                    "tagName":"span",
-                    "className":"product-price",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"span",
-                    "className":"price-standard",
+                    "className":"price-sales",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -198,7 +154,7 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":"span",
+                    "tagName":"div",
                     "className":"product-price",
                     "attributeKey":null,
                     "valuePattern":null
@@ -206,29 +162,7 @@
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"price-strike-special",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "dataSpec":{
-                    "attributeKey":"$nested_text",
-                    "valuePattern":null,
-                    "valueExcludePattern":null,
-                    "substringPattern":null
-                }
-            },
-            {
-                "containerSpec":{
-                    "id":null,
-                    "tagName":"span",
-                    "className":"product-price",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"span",
-                    "className":"price-strike-sale",
+                    "className":"standardprice",
                     "attributeKey":null,
                     "valuePattern":null
                 },

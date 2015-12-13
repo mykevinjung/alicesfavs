@@ -27,7 +27,7 @@
                 "attributeKey":"href",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":".*/([a-zA-Z0-9]+?)\\?"
+                "substringPattern":".*/([a-zA-Z0-9]+)\\?"
             }
         },
         "nameSpec":{

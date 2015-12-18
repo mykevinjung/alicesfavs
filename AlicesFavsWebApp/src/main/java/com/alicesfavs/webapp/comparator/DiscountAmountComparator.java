@@ -16,22 +16,9 @@ public class DiscountAmountComparator implements Comparator<UiProduct>
         {
             final double p1amount = p1.getWasPrice() - p1.getPrice();
             final double p2amount = p2.getWasPrice() - p2.getPrice();
-            if (p2amount > p1amount)
-            {
-                return 1;
-            }
-            else if (p2amount < p1amount)
-            {
-                return -1;
-            }
-        }
-        else if (p1.getWasPrice() != null)
-        {
-            return -1;
-        }
-        else if (p2.getWasPrice() != null)
-        {
-            return 1;
+
+            // remove decimal (cents)
+            return (int) ((p2amount - p1amount) * 100);
         }
 
         return 0;

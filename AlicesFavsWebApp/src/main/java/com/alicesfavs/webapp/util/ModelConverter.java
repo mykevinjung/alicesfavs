@@ -41,6 +41,7 @@ public class ModelConverter
     public static  UiProduct convertProduct(Site site, Product product)
     {
         final UiProduct uiProduct = new UiProduct();
+        uiProduct.setItemId(product.productExtract.id);
         uiProduct.setName(product.productExtract.name);
         uiProduct.setUrl(product.productExtract.url);
         uiProduct.setImageUrl(product.productExtract.imageUrl);

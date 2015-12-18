@@ -9,6 +9,7 @@ public class UiProduct
 {
 
     // product info
+    private String itemId;
     private String name;
     private String url;
     private String imageUrl;
@@ -23,6 +24,25 @@ public class UiProduct
     private String siteName;
     private String siteStringId;
     private Integer siteDisplayWeight;
+
+    public Integer getDiscountPercentage()
+    {
+        if (price != null && wasPrice != null && wasPrice != 0)
+        {
+            return (int) ((wasPrice - price) * 100 / wasPrice);
+        }
+        return null;
+    }
+
+    public String getItemId()
+    {
+        return itemId;
+    }
+
+    public void setItemId(String itemId)
+    {
+        this.itemId = itemId;
+    }
 
     public String getName()
     {

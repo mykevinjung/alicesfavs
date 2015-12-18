@@ -154,7 +154,7 @@ public class BaseController
     {
         model.addAttribute(SUBTITLE, "Page Not Found");
 
-        return VIEW_NOT_FOUND;
+        return "comingsoon";
     }
 
 }

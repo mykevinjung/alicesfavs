@@ -66,7 +66,7 @@
 
           <div id="logo" class="logo-left">
             <h1>
-              <a href="http://www.alicesfavs.com" title="Alice's Favs" rel="home">
+              <a href="/home2" title="Alice's Favs" rel="home">
                 <img src="${logo}" class="header_logo " alt="Alice's Favs"/>
               </a>
             </h1>

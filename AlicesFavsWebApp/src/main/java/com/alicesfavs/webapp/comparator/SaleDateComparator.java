@@ -3,6 +3,7 @@ package com.alicesfavs.webapp.comparator;
 
 import com.alicesfavs.webapp.uimodel.UiProduct;
 
+import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 
@@ -14,27 +15,25 @@ public class SaleDateComparator implements Comparator<UiProduct>
     @Override 
     public int compare(UiProduct p1, UiProduct p2)
     {
-        // TODO if we add Sale Clothing All, then this should be changed!!!
+        // TODO Fix this to avoid "Comparison method violates its general contract"
+        // Check other comparators too!
         if (p1.getSaleStartDate() != null && p2.getSaleStartDate() != null)
         {
-            // if within an hour, they must be in the same batch. use the order it's saved in this case
-            if (p1.getSaleStartDate().until(p2.getSaleStartDate(), ChronoUnit.HOURS) == 0)
+            long epochDay1 = p1.getSaleStartDate().getLong(ChronoField.EPOCH_DAY);
+            long epochDay2 = p2.getSaleStartDate().getLong(ChronoField.EPOCH_DAY);
+            if (epochDay1 == epochDay2)
             {
-                return p1.getSaleStartDate().compareTo(p2.getSaleStartDate());
+                final Integer p1percentage = p1.getDiscountPercentage();
+                final Integer p2percentage = p2.getDiscountPercentage();
+                if (p1percentage != null && p2percentage != null)
+                {
+                    return p2percentage - p1percentage;
+                }
             }
             else
             {
-                // descending order
-                return p2.getSaleStartDate().compareTo(p1.getSaleStartDate());
+                return (int) (epochDay2 - epochDay1) * 100;
             }
-        }
-        else if (p2.getSaleStartDate() != null)
-        {
-            return 1;
-        }
-        else if (p1.getSaleStartDate() != null)
-        {
-            return -1;
         }
 
         return 0;

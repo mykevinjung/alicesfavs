@@ -13,31 +13,23 @@ public class DiscountPercentageComparator implements Comparator<UiProduct>
     @Override 
     public int compare(UiProduct p1, UiProduct p2)
     {
-        if (p1.getWasPrice() != null && p2.getWasPrice() != null)
+        final Integer p1percentage = p1.getDiscountPercentage();
+        final Integer p2percentage = p2.getDiscountPercentage();
+        if (p1percentage != null && p2percentage != null)
         {
-            if (p1.getPrice() != 0 && p2.getPrice() != 0)
-            {
-                final double p1percentage = (p1.getWasPrice() - p1.getPrice()) / p1.getWasPrice();
-                final double p2percentage = (p2.getWasPrice() - p2.getPrice()) / p2.getWasPrice();
-                if (p2percentage > p1percentage)
-                {
-                    return 1;
-                }
-                else if (p2percentage < p1percentage)
-                {
-                    return -1;
-                }
-            }
+            return p2percentage - p1percentage;
         }
-        else if (p1.getWasPrice() != null)
+        else if (p1percentage != null)
         {
             return -1;
         }
-        else if (p2.getWasPrice() != null)
+        else if (p2percentage != null)
         {
             return 1;
         }
-
-        return 0;
+        else
+        {
+            return 0;
+        }
     }
 }

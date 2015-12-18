@@ -175,31 +175,7 @@ public class ProductServiceImpl implements ProductService
         existingProduct.productExtract.price = newExtract.price;
         existingProduct.productExtract.url = newExtract.url;
         existingProduct.productExtract.wasPrice = newExtract.wasPrice;
-
-        // set was price
-        // if new wasPrice exists, use it
-        if (StringUtils.hasText(newExtract.wasPrice))
-        {
-            existingProduct.wasPrice = stringPriceToDouble(site, newExtract.wasPrice);
-        }
-        // if there was wasPrice extracted before but not any more, then set wasPrice null
-        else if (oldWasPriceExtract != null)
-        {
-            existingProduct.wasPrice = null;
-        }
-        // no wasPrice has existed ever, but price has reduced
-        else if (existingProduct.wasPrice == null)
-        {
-            if (hasPriceReduced(oldPrice, newPrice, MIN_CHANGE_PERCENTAGE))
-            {
-                existingProduct.wasPrice = oldPrice;
-            }
-        }
-        else if (hasSaleExpired(existingProduct.saleStartDate) ||
-            hasPriceIncreased(oldPrice, newPrice, MIN_CHANGE_PERCENTAGE))
-        {
-            existingProduct.wasPrice = null;
-        }
+        existingProduct.wasPrice = stringPriceToDouble(site, newExtract.wasPrice);
 
         // set sale start date
         if (existingProduct.wasPrice == null)

@@ -23,11 +23,6 @@ public class Product extends Extractable
     public Double wasPrice;
 
     /**
-     * The regular price that is not shown as was price on site, but is derived based on our price change history.
-     */
-    public Double regularPrice;
-
-    /**
      * Sale start date. This can be either the date when a product is first found in sale category together with was
      * price and now price, or the date when price has been first dropped meaningfully from the regular price. Sale
      * start date will be nullified either when existing was price is removed (if was price still exists, this date is
@@ -36,12 +31,12 @@ public class Product extends Extractable
      */
     public LocalDateTime saleStartDate;
 
+    public boolean soldOut;
+
     /**
      * The date when this product is first found or the date when the product price was last changed.
      */
     public LocalDateTime priceChangedDate;
-
-    public String storedImagePath;
 
     public Product(long id, LocalDateTime createdDate, long siteId, ProductExtract productExtract)
     {
@@ -70,8 +65,7 @@ public class Product extends Extractable
     public String toString()
     {
         return "Product[" + super.toString() + ", siteId=" + siteId + ", productExtract=" + productExtract + ", price="
-            + price + ", wasPrice=" + wasPrice + ", regularPrice=" + regularPrice + ", saleStartDate="
-            + saleStartDate + ", storedImagePath=" + storedImagePath + "]";
+            + price + ", wasPrice=" + wasPrice + ", saleStartDate=" + saleStartDate + ", priceChangedDate=" + priceChangedDate + "]";
     }
 
 }

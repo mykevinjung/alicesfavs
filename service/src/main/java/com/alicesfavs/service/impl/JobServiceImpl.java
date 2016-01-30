@@ -20,8 +20,7 @@ public class JobServiceImpl implements JobService
 
     public Job createJob(long siteId, Mode jobMode)
     {
-        return jobDao
-            .insertJob(siteId, jobMode, Job.Status.STARTED, LocalDateTime.now(), null, 0, 0, 0, 0, 0, 0, 0);
+        return jobDao.insertJob(siteId, jobMode, Job.Status.STARTED, LocalDateTime.now(), null, 0, 0, 0, 0);
     }
 
     public Job completeJob(Job job)

@@ -24,8 +24,6 @@ import com.alicesfavs.datamodel.ModelBase;
 public class CategoryProductDaoImpl implements CategoryProductDao
 {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CategoryProductDaoImpl.class);
-
     @Autowired
     private DaoSupport<CategoryProduct> daoSupport;
 

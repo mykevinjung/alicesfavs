@@ -9,7 +9,7 @@ public enum ProductSortType
 
     private final String code;
 
-    private ProductSortType(String code)
+    ProductSortType(String code)
     {
         this.code = code;
     }
@@ -21,6 +21,11 @@ public enum ProductSortType
 
     public static ProductSortType fromCode(String code)
     {
+        return fromCode(code, null);
+    }
+
+    public static ProductSortType fromCode(String code, ProductSortType defaultSortType)
+    {
         for (ProductSortType sortType : ProductSortType.values())
         {
             if (sortType.getCode().equals(code))
@@ -29,7 +34,7 @@ public enum ProductSortType
             }
         }
 
-        return null;
+        return defaultSortType;
     }
 
 }

@@ -62,14 +62,12 @@ public class SiteScrapeJob
 
         try
         {
-            final Map<String, List<ProductExtract>> productExtractMap = productExtractor.extractProduct(site);
-            LOGGER.info("Number of products found for site {}: {}", site.stringId, productExtractMap.size());
+            productExtractor.extractProduct(job, site);
 
-            if (!forceSave)
-            {
-                validateScrapeResult(jobList, site, productExtractMap);
-            }
-            saveProduct(job, site, productExtractMap);
+//            if (!forceSave)
+//            {
+//                validateScrapeResult(jobList, site, productExtractMap);
+//            }
 
             //createSearchableProduct(categoryMap, productMap);
             //final SearchableProductCreator creator = new SearchableProductCreator(batchConfig);
@@ -97,7 +95,6 @@ public class SiteScrapeJob
             productService.saveProduct(job, site, ExtractStatus.EXTRACTED, productExtractMap);
         job.foundProduct = productMap.size();
         job.notFoundProduct = productService.markNotFoundProduct(job, site);
-        job.totalSaleProduct = getTotalSaleProductCount(productMap);
 
         return productMap;
     }
@@ -133,18 +130,6 @@ public class SiteScrapeJob
                     site.stringId, avgFoundProduct, job.foundProduct);
             }
         }
-
-        final int avgTotalSaleProduct = getAverageTotalSaleProduct(jobList);
-        if (avgTotalSaleProduct != 0)
-        {
-            final int variationTotalSaleProduct =
-                ((avgTotalSaleProduct - job.totalSaleProduct) * 100) / avgTotalSaleProduct;
-            if (variationTotalSaleProduct > TOTAL_SALE_PRODUCT_MAX_VARIATION_PCT)
-            {
-                LOGGER.warn("Too small number of sale products found for site {}. Average count {} vs Current count {}.",
-                    site.stringId, avgTotalSaleProduct, job.totalSaleProduct);
-            }
-        }
     }
 
     private int getLastFoundProduct(List<Job> jobList)
@@ -175,39 +160,6 @@ public class SiteScrapeJob
         }
 
         return completedJobCount != 0 ? (sumFoundProduct / completedJobCount) : 0;
-    }
-
-    private int getAverageTotalSaleProduct(List<Job> jobList)
-    {
-        if (jobList.size() == 0)
-        {
-            return 0;
-        }
-
-        int sumTotalSaleProduct = 0;
-        for (Job job : jobList)
-        {
-            if (Job.Status.COMPLETED == job.status)
-            {
-                sumTotalSaleProduct += job.totalSaleProduct;
-            }
-        }
-
-        return (sumTotalSaleProduct / jobList.size());
-    }
-
-    private int getTotalSaleProductCount(Map<String, Product> productMap)
-    {
-        int totalSaleProduct = 0;
-        for (Product product : productMap.values())
-        {
-            if (product.saleStartDate != null)
-            {
-                totalSaleProduct++;
-            }
-        }
-
-        return totalSaleProduct;
     }
 
     private void refreshSite(Site site)

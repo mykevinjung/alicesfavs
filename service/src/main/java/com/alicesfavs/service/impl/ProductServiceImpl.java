@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alicesfavs.datamodel.Category;
 import com.alicesfavs.datamodel.Job;
 import com.alicesfavs.datamodel.Site;
 import org.slf4j.Logger;
@@ -20,7 +21,6 @@ import com.alicesfavs.datamodel.ExtractStatus;
 import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.ProductExtract;
 import com.alicesfavs.service.ProductService;
-import org.springframework.util.StringUtils;
 
 @Component("productService")
 public class ProductServiceImpl implements ProductService
@@ -86,6 +86,16 @@ public class ProductServiceImpl implements ProductService
         return productDao.selectSaleProducts(siteId, ExtractStatus.EXTRACTED);
     }
 
+    public List<Product> searchSaleProducts(Site site, Category category)
+    {
+        return null;
+    }
+
+    public Map<Category, List<Product>> searchSaleProducts(List<Category> categoryList)
+    {
+        return productDao.selectSaleProducts(categoryList);
+    }
+
     @Override
     public List<Product> searchNewProducts(long siteId, LocalDateTime afterCreatedDate)
     {
@@ -98,23 +108,11 @@ public class ProductServiceImpl implements ProductService
         if (product == null)
         {
             product = createProduct(job, site, extractStatus, productExtract);
-            if (product.saleStartDate != null)
-            {
-                job.newSaleProduct++;
-            }
-            else
-            {
-                job.newNewArrivalsProduct++;
-            }
         }
         else
         {
             final LocalDateTime oldSaleStartDate = product.saleStartDate;
             product = updateProduct(job, site, product, extractStatus, productExtract);
-            if (oldSaleStartDate == null && product.saleStartDate != null)
-            {
-                job.newSaleProduct++;
-            }
         }
 
         return product;
@@ -153,10 +151,9 @@ public class ProductServiceImpl implements ProductService
         final Double wasPrice = stringPriceToDouble(site, productExtract.wasPrice);
         final LocalDateTime priceChangedDate = LocalDateTime.now();
         final LocalDateTime saleStartDate = (wasPrice != null) ? LocalDateTime.now() : null;
-        final Double regularPrice = (wasPrice != null) ? wasPrice : price;
 
-        return productDao.insertProduct(site.id, productExtract, price, wasPrice, regularPrice, priceChangedDate,
-            saleStartDate, null, extractStatus, job.id, LocalDateTime.now());
+        return productDao.insertProduct(site.id, productExtract, price, wasPrice, priceChangedDate,
+            saleStartDate, extractStatus, job.id, LocalDateTime.now());
     }
 
     private Product updateProduct(Job job, Site site, Product existingProduct, ExtractStatus extractStatus,
@@ -166,10 +163,8 @@ public class ProductServiceImpl implements ProductService
         final Double newPrice = stringPriceToDouble(site, newPriceExtract);
         final String oldPriceExtract = existingProduct.productExtract.price;
         final Double oldPrice = existingProduct.price;
-        final String oldWasPriceExtract = existingProduct.productExtract.wasPrice;
 
         existingProduct.price = newPrice;
-        existingProduct.productExtract.brandName = newExtract.brandName;
         existingProduct.productExtract.imageUrl = newExtract.imageUrl;
         existingProduct.productExtract.name = newExtract.name;
         existingProduct.productExtract.price = newExtract.price;
@@ -188,7 +183,6 @@ public class ProductServiceImpl implements ProductService
         }
 
         // TODO: regular price redefine
-        existingProduct.regularPrice = (existingProduct.wasPrice != null) ? existingProduct.wasPrice : newPrice;
         existingProduct.extractJobId = job.id;
         existingProduct.extractedDate = LocalDateTime.now();
         existingProduct.extractStatus = extractStatus;

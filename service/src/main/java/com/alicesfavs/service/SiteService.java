@@ -12,6 +12,8 @@ public interface SiteService
 
     Site findSiteById(String id);
 
+    List<Site> findAllSites();
+
     List<Site> findSitesByAliceCategory(long aliceCategoryId);
 
 }

@@ -13,9 +13,6 @@ public class Job extends ModelBase
     public Integer notFoundCategory = 0;
     public Integer foundProduct = 0;
     public Integer notFoundProduct = 0;
-    public Integer totalSaleProduct = 0;
-    public Integer newSaleProduct = 0;
-    public Integer newNewArrivalsProduct = 0;
 
     public Job(long id, LocalDateTime createdDate, long siteId, Mode mode)
     {
@@ -96,9 +93,7 @@ public class Job extends ModelBase
         return "Job[" + super.toString() + ", siteId=" + siteId + ", mode=" + mode
             + ", status=" + status + ", startTime=" + startTime + ", endTime=" + endTime
             + ", foundCategory=" + foundCategory + ", notFoundCategory=" + notFoundCategory
-            + ", foundProduct=" + foundProduct + ", notFoundProduct=" + notFoundProduct
-            + ", totalSaleProduct=" + totalSaleProduct + ", newSaleProduct=" + newSaleProduct
-            + ", newNewArrivalsProduct=" + newNewArrivalsProduct + "]";
+            + ", foundProduct=" + foundProduct + ", notFoundProduct=" + notFoundProduct + "]";
     }
 
 }

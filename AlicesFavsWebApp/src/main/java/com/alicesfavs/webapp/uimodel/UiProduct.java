@@ -1,6 +1,6 @@
 package com.alicesfavs.webapp.uimodel;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * Created by kjung on 11/6/15.
@@ -17,21 +17,22 @@ public class UiProduct
     private String wasPriceWithCurrency;
     private Double price;
     private Double wasPrice;
-    private LocalDateTime createdDate;
-    private LocalDateTime saleStartDate;
+    private LocalDate createdDate;
+    private LocalDate saleStartDate;
 
     // site info
     private String siteName;
     private String siteStringId;
     private Integer siteDisplayWeight;
 
-    public Integer getDiscountPercentage()
+    public int getDiscountPercentage()
     {
         if (price != null && wasPrice != null && wasPrice != 0)
         {
             return (int) ((wasPrice - price) * 100 / wasPrice);
         }
-        return null;
+
+        return 0;
     }
 
     public String getItemId()
@@ -144,22 +145,22 @@ public class UiProduct
         this.siteDisplayWeight = siteDisplayWeight;
     }
 
-    public LocalDateTime getCreatedDate()
+    public LocalDate getCreatedDate()
     {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate)
+    public void setCreatedDate(LocalDate createdDate)
     {
         this.createdDate = createdDate;
     }
 
-    public LocalDateTime getSaleStartDate()
+    public LocalDate getSaleStartDate()
     {
         return saleStartDate;
     }
 
-    public void setSaleStartDate(LocalDateTime saleStartDate)
+    public void setSaleStartDate(LocalDate saleStartDate)
     {
         this.saleStartDate = saleStartDate;
     }

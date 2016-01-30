@@ -15,7 +15,7 @@
   <!-- Retina/iOS favicon -->
   <link rel="apple-touch-icon-precomposed" href="/resources/images/logo_touch.png" />
   <title>
-    <c:if test="${not empty subtitle}">${subtitle} | </c:if><c:choose><c:when test="${not empty title}">${title}</c:when><c:otherwise>Alice's Favs - Sales and New Arrivals from the best brands</c:otherwise></c:choose>
+    <c:if test="${not empty subtitle}">${subtitle} | </c:if><c:choose><c:when test="${not empty title}">${title}</c:when><c:otherwise>Alice's Favs - All Sales from the best brands</c:otherwise></c:choose>
   </title>
   <link rel='stylesheet' id='flatsome-css-minified-css'  href='/resources/css/flatsome.min.css' type='text/css' media='all' />
   <link rel='stylesheet' id='flatsome-style-css'  href='/resources/css/style.css' type='text/css' media='all' />
@@ -75,40 +75,59 @@
           <div class="left-links">
             <ul id="site-navigation" class="header-nav">
 
-              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#" class="nav-top-link">Clothing</a>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="/sale/clothing" class="nav-top-link">Clothing</a>
                 <div class=nav-dropdown><ul>
-                  <c:forEach items="${clothing}" var="site">
-                   <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
-                  </c:forEach>
+                  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/clothing">All</a>
+                    <div class=nav-column-links><ul>
+                    <c:forEach items="${clothing}" var="site">
+                     <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=clothing">${site.displayName}</a></li>
+                    </c:forEach>
+                    </ul></div>
+                  </li>
                 </ul></div>
               </li>
-              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#" class="nav-top-link">Shoes</a>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="/sale/shoes" class="nav-top-link">Shoes</a>
                 <div class=nav-dropdown><ul>
-                  <c:forEach items="${shoes}" var="site">
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
-                  </c:forEach>
+                  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/shoes">All</a>
+                    <div class=nav-column-links><ul>
+                    <c:forEach items="${shoes}" var="site">
+                      <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=shoes">${site.displayName}</a></li>
+                    </c:forEach>
+                    </ul></div>
+                  </li>
                 </ul></div>
               </li>
-              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#" class="nav-top-link">Accessories</a>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="/sale/bags" class="nav-top-link">Bags</a>
                 <div class=nav-dropdown><ul>
-                  <c:forEach items="${accessories}" var="site">
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
-                  </c:forEach>
+                  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/bags">All</a>
+                    <div class=nav-column-links><ul>
+                    <c:forEach items="${bags}" var="site">
+                      <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=bags">${site.displayName}</a></li>
+                    </c:forEach>
+                    </ul></div>
+                  </li>
                 </ul></div>
               </li>
-              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#" class="nav-top-link">Home</a>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="/sale/accessories" class="nav-top-link">Accessories</a>
                 <div class=nav-dropdown><ul>
-                  <c:forEach items="${home}" var="site">
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
-                  </c:forEach>
+                  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/accessories">All</a>
+                    <div class=nav-column-links><ul>
+                    <c:forEach items="${accessories}" var="site">
+                      <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=accessories">${site.displayName}</a></li>
+                    </c:forEach>
+                    </ul></div>
+                  </li>
                 </ul></div>
               </li>
-              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#" class="nav-top-link">New Arrivals</a>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="/sale/home" class="nav-top-link">Home</a>
                 <div class=nav-dropdown><ul>
-                  <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/clothing">Clothing</a></li>
-                  <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/shoes">Shoes</a></li>
-                  <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/accessories">Accessories</a></li>
-                  <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/home">Home</a></li>
+                  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/home">All</a>
+                    <div class=nav-column-links><ul>
+                    <c:forEach items="${home}" var="site">
+                      <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=home">${site.displayName}</a></li>
+                    </c:forEach>
+                    </ul></div>
+                  </li>
                 </ul></div>
               </li>
             </ul>

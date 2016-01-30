@@ -17,6 +17,7 @@ public class Category extends Extractable
      * Lower number first, higher number later
      */
     public Integer displayOrder;
+    public Long aliceCategoryId;
 
     public Category(long id, LocalDateTime createdDate, long siteId, CategoryExtract categoryExtract1,
             CategoryExtract categoryExtract2, CategoryExtract categoryExtract3)
@@ -92,6 +93,11 @@ public class Category extends Extractable
             return categoryExtract2;
         }
         return categoryExtract1;
+    }
+
+    public boolean isAliceCategory(AliceCategory aliceCategory)
+    {
+        return aliceCategoryId != null && aliceCategoryId == aliceCategory.id;
     }
 
     public String toString()

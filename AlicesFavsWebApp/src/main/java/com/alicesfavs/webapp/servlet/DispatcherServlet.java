@@ -1,12 +1,11 @@
 package com.alicesfavs.webapp.servlet;
 
+import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Site;
-import com.alicesfavs.webapp.service.NewProductService;
 import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletException;
@@ -31,7 +30,6 @@ public class DispatcherServlet extends org.springframework.web.servlet.Dispatche
         final WebApplicationContext webApplicationContext = getWebApplicationContext();
         final SiteManager siteManager = webApplicationContext.getBean(SiteManager.class);
         final SaleProductService saleProductService = webApplicationContext.getBean(SaleProductService.class);
-        final NewProductService newProductService = webApplicationContext.getBean(NewProductService.class);
 
         LOGGER.info("Loading sites...");
         siteManager.refresh();
@@ -40,7 +38,11 @@ public class DispatcherServlet extends org.springframework.web.servlet.Dispatche
         {
             LOGGER.info("Loading products for {}...", site.stringId);
             saleProductService.refresh(site);
-            newProductService.refresh(site);
+        }
+
+        for (AliceCategory aliceCategory : siteManager.getAliceCategoryList())
+        {
+            saleProductService.getNewSaleProducts(aliceCategory);
         }
     }
 }

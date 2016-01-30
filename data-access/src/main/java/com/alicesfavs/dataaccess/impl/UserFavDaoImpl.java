@@ -24,8 +24,8 @@ public class UserFavDaoImpl implements UserFavDao
 
     private static final String SELECT_BY = "SELECT UF.ID, UF.USER_ID, UF.PRODUCT_ID, UF.ADD_ON_NAME, "
         + "UF.ADD_ON_PRICE, UF.CREATED_DATE, UF.UPDATED_DATE, P.ID, P.SITE_ID, P.ID_EXTRACT, P.NAME_EXTRACT, "
-        + "P.PRICE_EXTRACT, P.WAS_PRICE_EXTRACT, P.BRAND_NAME_EXTRACT, P.URL_EXTRACT, P.IMAGE_URL_EXTRACT, "
-        + "P.PRICE, P.WAS_PRICE, P.REGULAR_PRICE, P.PRICE_CHANGED_DATE, P.SALE_START_DATE, P.STORED_IMAGE_PATH, "
+        + "P.PRICE_EXTRACT, P.WAS_PRICE_EXTRACT, P.URL_EXTRACT, P.IMAGE_URL_EXTRACT, "
+        + "P.PRICE, P.WAS_PRICE, P.PRICE_CHANGED_DATE, P.SALE_START_DATE, "
         + "P.EXTRACT_STATUS, P.EXTRACT_JOB_ID, P.EXTRACTED_DATE, P.CREATED_DATE, P.UPDATED_DATE "
         + "FROM USER_FAV UF INNER JOIN PRODUCT P ON UF.PRODUCT_ID = P.ID ";
 
@@ -103,17 +103,14 @@ public class UserFavDaoImpl implements UserFavDao
             productExtract.name = rs.getString("P.NAME_EXTRACT");
             productExtract.price = rs.getString("P.PRICE_EXTRACT");
             productExtract.wasPrice = rs.getString("P.WAS_PRICE_EXTRACT");
-            productExtract.brandName = rs.getString("P.BRAND_NAME_EXTRACT");
             productExtract.url = rs.getString("P.URL_EXTRACT");
             productExtract.imageUrl = rs.getString("P.IMAGE_URL_EXTRACT");
 
             final Product product = new Product(extractable, rs.getLong("P.SITE_ID"), productExtract);
             product.price = ResultSetUtils.getDouble(rs, "P.PRICE");
             product.wasPrice = ResultSetUtils.getDouble(rs, "P.WAS_PRICE");
-            product.regularPrice = ResultSetUtils.getDouble(rs, "P.REGULAR_PRICE");
             product.priceChangedDate = DateTimeUtils.toLocalDateTime(rs.getTimestamp("P.PRICE_CHANGED_DATE"));
             product.saleStartDate = DateTimeUtils.toLocalDateTime(rs.getTimestamp("P.SALE_START_DATE"));
-            product.storedImagePath = rs.getString("P.STORED_IMAGE_PATH");
 
             return product;
         }

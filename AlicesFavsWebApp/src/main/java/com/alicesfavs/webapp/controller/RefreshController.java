@@ -2,7 +2,6 @@ package com.alicesfavs.webapp.controller;
 
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.webapp.config.WebAppConfig;
-import com.alicesfavs.webapp.service.NewProductService;
 import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
 import org.slf4j.Logger;
@@ -34,12 +33,9 @@ public class RefreshController
     private SaleProductService saleProductService;
 
     @Autowired
-    private NewProductService newProductService;
-
-    @Autowired
     private WebAppConfig webAppConfig;
 
-    @RequestMapping(value = "/refresh/sale/{siteId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/refresh/{siteId}", method = RequestMethod.GET)
     public String refreshSale(@PathVariable String siteId, HttpServletRequest request)
     {
         validateRequest(request);
@@ -52,23 +48,6 @@ public class RefreshController
         }
 
         saleProductService.refresh(site);
-
-        return VIEW_BLANK;
-    }
-
-    @RequestMapping(value = "/refresh/new-arrivals/{siteId}", method = RequestMethod.GET)
-    public String refreshNewArrivals(@PathVariable String siteId, HttpServletRequest request)
-    {
-        validateRequest(request);
-
-        final Site site = siteManager.getSiteByStringId(siteId);
-        if (site == null)
-        {
-            LOGGER.error("Site not found: " + siteId);
-            throw new ResourceNotFoundException("Site '" + siteId + "' not found");
-        }
-
-        newProductService.refresh(site);
 
         return VIEW_BLANK;
     }

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import com.alicesfavs.datamodel.Category;
 import com.alicesfavs.datamodel.ExtractStatus;
 import com.alicesfavs.datamodel.Job;
 import com.alicesfavs.datamodel.Product;
@@ -25,6 +26,8 @@ public interface ProductService
     int markNotFoundProduct(Job job, Site site);
 
     List<Product> searchSaleProducts(long siteId);
+
+    Map<Category, List<Product>> searchSaleProducts(List<Category> categoryList);
 
     List<Product> searchNewProducts(long siteId, LocalDateTime afterCreatedDate);
 

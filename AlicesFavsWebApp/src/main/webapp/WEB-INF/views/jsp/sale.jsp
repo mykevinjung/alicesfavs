@@ -11,21 +11,31 @@
         <div class="large-12 columns">
             <div class="breadcrumb-row">
                 <div class="left">
-                    <h3 class="breadcrumb" itemscope="breadcrumb"><a href="">Sale</a><span>/</span>${site.displayName}</h3>    </div><!-- .left -->
+                    <h3 class="breadcrumb" itemscope="breadcrumb">${breadcrumb1}<c:if test="${not empty breadcrumb2}"><span>/</span>${breadcrumb2}</c:if></h3>    </div><!-- .left -->
 
-                <div class="right">
-                    <p class="woocommerce-result-count">
-                        Showing ${startIndex}&ndash;${endIndex} of ${totalCount} results</p>
-                    <form class="woocommerce-ordering custom" method="get" action="">
-                        <div class="select-wrapper">
-                            <select name="sortBy" class="orderby" onchange="this.form.submit()">
-                                <option value="date" <c:if test="${sortBy == 'date'}">selected='selected'</c:if>>Sort by newness</option>
-                                <option value="amount" <c:if test="${sortBy == 'amount'}">selected='selected'</c:if>>Sort by discount $</option>
-                                <option value="percentage" <c:if test="${sortBy == 'percentage'}">selected='selected'</c:if>>Sort by discount %</option>
-                            </select>
-                        </div>
-                    </form>
-                </div><!-- .right -->
+                <c:if test="${totalCount > 0}">
+                    <div class="right">
+                        <p class="woocommerce-result-count">
+                            Showing ${startIndex}&ndash;${endIndex} of ${totalCount} results</p>
+                        <form class="woocommerce-ordering custom" method="get" action="">
+                            <div class="select-wrapper">
+                                <select name="sortBy" class="orderby" onchange="this.form.submit()">
+                                    <option value="date" <c:if test="${sortBy == 'date'}">selected='selected'</c:if>>Sort by newness</option>
+                                    <option value="amount" <c:if test="${sortBy == 'amount'}">selected='selected'</c:if>>Sort by discount $</option>
+                                    <option value="percentage" <c:if test="${sortBy == 'percentage'}">selected='selected'</c:if>>Sort by discount %</option>
+                                </select>
+                            </div>
+                                <%-- keep the existing parameters except sortBy and pageNo --%>
+                            <c:forEach var='parameter' items='${paramValues}'>
+                                <c:if test="${parameter.key != 'sortBy' && parameter.key != 'pageNo'}">
+                                    <c:forEach var='value' items='${parameter.value}'>
+                                        <input type="hidden" name="${parameter.key}" value="${value}" />
+                                    </c:forEach>
+                                </c:if>
+                            </c:forEach>
+                        </form>
+                    </div><!-- .right -->
+                </c:if>
             </div><!-- .breadcrumb-row -->
         </div><!-- .large-12 breadcrumb -->
         <div class="large-12 columns">

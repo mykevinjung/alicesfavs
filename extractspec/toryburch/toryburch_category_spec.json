@@ -1,123 +1,52 @@
 [
     {
-        "containerSpec":{
-            "id":"navigation",
-            "tagName":"div",
-            "className":null,
-            "attributeKey":null,
-            "valuePattern":null
+        "baseUrl":"http://www.toryburch.com",
+        "containerSpec": {
+            "id": null,
+            "tagName": "li",
+            "className": "sale",
+            "attributeKey": null,
+            "valuePattern": null
         },
-        "categorySpec":{
-            "id":null,
-            "tagName":"a",
-            "className":null,
-            "attributeKey":"omniture-track",
-            "valuePattern":"Clothing|Shoes|Handbags|Accessories|Watches|Beauty|Home"
+        "categorySpec": {
+            "id": null,
+            "tagName": "a",
+            "className": null,
+            "attributeKey": "omniture-track",
+            "valuePattern": "Sale:Categories:.*"
         },
-        "nameSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "elementSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":"omniture-track",
-                "valuePattern":null
-            },
-            "dataSpec":{
-                "attributeKey":"$nested_text",
-                "valuePattern":null,
-                "valueExcludePattern":null,
-                "substringPattern":null
-            }
-        },
-        "urlSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "elementSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":"omniture-track",
-                "valuePattern":null
-            },
-            "dataSpec":{
-                "attributeKey":"abs:href",
-                "valuePattern":null,
-                "valueExcludePattern":null,
-                "substringPattern":null
-            }
-        },
-        "subcategorySpec": {
-            "containerSpec": {
-                "id": "navigation",
-                "tagName": "div",
-                "className": null,
-                "attributeKey": null,
-                "valuePattern": null
-            },
-            "categorySpec": {
+        "nameSpec": {
+            "containerSpec": null,
+            "elementSpec": {
                 "id": null,
                 "tagName": "a",
                 "className": null,
                 "attributeKey": "omniture-track",
-                "valuePattern": ".*:Categories:.*"
+                "valuePattern": "Sale:Categories:.*"
             },
-            "nameSpec": {
-                "containerSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": null,
-                    "valuePattern": null
-                },
-                "elementSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": "omniture-track",
-                    "valuePattern": ".*:Categories:.*"
-                },
-                "dataSpec": {
-                    "attributeKey": "$nested_text",
-                    "valuePattern": null,
-                    "valueExcludePattern": null,
-                    "substringPattern": null
-                }
+            "dataSpec": {
+                "attributeKey": "$nested_text",
+                "valuePattern": "Clothing|Shoes|Handbags|Accessories|Watches|Home",
+                "valueExcludePattern": null,
+                "substringPattern": null
+            }
+        },
+        "urlSpec": {
+            "containerSpec": null,
+            "elementSpec": {
+                "id": null,
+                "tagName": "a",
+                "className": null,
+                "attributeKey": "omniture-track",
+                "valuePattern": "Sale:Categories:.*"
             },
-            "urlSpec": {
-                "containerSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": null,
-                    "valuePattern": null
-                },
-                "elementSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": "omniture-track",
-                    "valuePattern": ".*:Categories:.*"
-                },
-                "dataSpec": {
-                    "attributeKey": "abs:href",
-                    "valuePattern": null,
-                    "valueExcludePattern": null,
-                    "substringPattern": null
-                }
-            },
-            "subcategorySpec": null
-        }
+            "dataSpec": {
+                "attributeKey": "abs:href",
+                "valuePattern": ".*toryburch.com/sale/.*",
+                "valueExcludePattern": null,
+                "substringPattern": null
+            }
+        },
+        "subcategorySpec": null
     }
 ]

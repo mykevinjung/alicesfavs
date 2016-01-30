@@ -12,7 +12,6 @@ public class Site extends ModelBase
     public String url;
     public boolean display;
     public Integer displayWeight;
-    public boolean useStoredImage;
     public String currency;
     public String cookies;
 
@@ -40,7 +39,7 @@ public class Site extends ModelBase
     {
         return "Site[" + super.toString() + ", country=" + country + ", stringId=" + stringId + ", displayName="
             + displayName + ", url=" + url + ", display=" + display + ", displayWeight=" + displayWeight
-            + ", useStoredImage=" + useStoredImage + ", currency=" + currency + ", cookies=" + cookies + "]";
+            + ", currency=" + currency + ", cookies=" + cookies + "]";
     }
 
 }

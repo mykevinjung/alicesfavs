@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alicesfavs.datamodel.Site;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,9 +45,9 @@ public class CategoryServiceImpl implements CategoryService
         return categories;
     }
 
-    public List<Category> findSiteCategories(long siteId)
+    public List<Category> findSiteCategories(Site site)
     {
-        return categoryDao.selectCategoryBySiteId(siteId, ExtractStatus.EXTRACTED);
+        return categoryDao.selectCategoryBySiteId(site.id, ExtractStatus.EXTRACTED);
     }
 
     @Override
@@ -90,7 +91,7 @@ public class CategoryServiceImpl implements CategoryService
                 getCategoryName(categoryHierarchy[1]), getCategoryName(categoryHierarchy[2]));
         if (existingCategory == null)
         {
-            return categoryDao.insertCategory(siteId, categoryHierarchy[0], categoryHierarchy[1], categoryHierarchy[2],
+            return categoryDao.insertCategory(siteId, null, categoryHierarchy[0], categoryHierarchy[1], categoryHierarchy[2],
                     displayOrder, ExtractStatus.EXTRACTED, jobId, extractTime);
         }
         else

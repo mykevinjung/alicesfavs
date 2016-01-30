@@ -19,17 +19,17 @@ public class DataAccessApp
     public static void main(String[] args) throws Exception
     {
         // testCategoryDao();
-         testProductDao();
-        // testPriceHistory();
-        //testSiteDao();
+        // testProductDao();
+         testPriceHistory();
+        // testSiteDao();
     }
 
     private static void testSiteDao() throws Exception
     {
         ApplicationContext context = new ClassPathXmlApplicationContext("data-access.xml");
         SiteDao siteDao = context.getBean(SiteDao.class);
-        Site site = siteDao.insertSite("anthropologie.com", Country.US, "", "http://www.anthropologie.com", false, 4,
-            true, "", "");
+        Site site = siteDao.insertSite("anthropologie", Country.US, "", "http://www.anthropologie.com", false, 4,
+            "", "");
         System.out.println(site);
 
         Thread.sleep(1000);
@@ -37,12 +37,11 @@ public class DataAccessApp
         site.display = true;
         site.displayWeight = 5;
         site.displayName = "Anthropologie";
-        site.useStoredImage = false;
         site.currency = "$";
         siteDao.updateSite(site);
         System.out.println(site);
 
-        System.out.println(siteDao.selectSiteByStringId("anthropologie.com"));
+        System.out.println(siteDao.selectSiteByStringId("anthropologie"));
     }
 
     private static void testProductDao() throws Exception
@@ -54,21 +53,18 @@ public class DataAccessApp
         productExtract.url = "http://www.anthropologie.com/anthro/product/dresses/234123416.jsp";
         productExtract.price = "$134.32";
         productExtract.imageUrl = "http://www.anthropologie.com/anthro/product/image/234123416.jpg";
-        productExtract.brandName = null;
         productExtract.wasPrice = null;
 
-        Product product = productDao.insertProduct(1002L, productExtract, 134.32, null, 150.00, LocalDateTime.now(),
-            null, null, ExtractStatus.EXTRACTED, 1L, LocalDateTime.now());
+        Product product = productDao.insertProduct(1001L, productExtract, 134.32, null, LocalDateTime.now(),
+            null, ExtractStatus.EXTRACTED, 1L, LocalDateTime.now());
         System.out.println(product);
 
         Thread.sleep(1000);
 
         product.productExtract.name = "product dress";
         product.saleStartDate = LocalDateTime.now();
-        product.productExtract.brandName = "Armani";
         product.productExtract.wasPrice = "140.00";
         product.wasPrice = 140.00;
-        product.storedImagePath = "/aafa.jpg";
         product.extractStatus = ExtractStatus.NOT_FOUND;
         product.extractJobId = 2L;
         product.extractedDate = LocalDateTime.now();
@@ -88,7 +84,7 @@ public class DataAccessApp
         categoryExtract2.url = "http://www.anthropologie.com/anthro/category/dresses/clothes-dresses.jsp";
         CategoryExtract categoryExtract3 = new CategoryExtract("test");
         categoryExtract3.url = "test invalid url";
-        Category category = categoryDao.insertCategory(1002L, categoryExtract1, categoryExtract2, categoryExtract3, 1,
+        Category category = categoryDao.insertCategory(1001L, null, categoryExtract1, categoryExtract2, categoryExtract3, 1,
             ExtractStatus.EXTRACTED, 1L, LocalDateTime.now());
         System.out.println(category);
 
@@ -109,7 +105,7 @@ public class DataAccessApp
     {
         ApplicationContext context = new ClassPathXmlApplicationContext("data-access.xml");
         PriceHistoryDao priceHistoryDao = context.getBean(PriceHistoryDao.class);
-        PriceHistory priceHistory = priceHistoryDao.insertPriceHistory(10000002L, "$134.32", "$140.00", 134.32, 140.00);
+        PriceHistory priceHistory = priceHistoryDao.insertPriceHistory(10000003L, "$134.32", "$140.00", 134.32, 140.00);
         System.out.println(priceHistory);
 
         System.out.println("10000002L size: " + priceHistoryDao.selectPriceHistoryByProductId(10000002L).size());

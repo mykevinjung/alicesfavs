@@ -1,13 +1,16 @@
 package com.alicesfavs.webapp.service;
 
 import com.alicesfavs.datamodel.AliceCategory;
+import com.alicesfavs.datamodel.Category;
 import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.Site;
+import com.alicesfavs.service.CategoryService;
 import com.alicesfavs.service.ProductService;
 import com.alicesfavs.webapp.comparator.DiscountAmountComparator;
 import com.alicesfavs.webapp.comparator.DiscountPercentageComparator;
 import com.alicesfavs.webapp.comparator.SaleDateComparator;
 import com.alicesfavs.webapp.config.WebAppConfig;
+import com.alicesfavs.webapp.uimodel.SiteProduct;
 import com.alicesfavs.webapp.uimodel.UiProduct;
 import com.alicesfavs.webapp.util.ModelConverter;
 import org.slf4j.Logger;
@@ -15,10 +18,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +38,9 @@ public class SaleProductService
     private static final Logger LOGGER = LoggerFactory.getLogger(SaleProductService.class);
 
     @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
     private ProductService productService;
 
     @Autowired
@@ -40,41 +49,78 @@ public class SaleProductService
     @Autowired
     private WebAppConfig webAppConfig;
 
-    private Map<Long, CachedList<UiProduct>> siteProductMap = new Hashtable<>();
+    private Map<Site, SiteProduct> siteProductMap = new Hashtable<>();
 
-    public List<UiProduct> getSaleProducts(Site site, ProductSortType productSortType)
+    private Map<AliceCategory, List<UiProduct>> newSaleProductMap = new HashMap<>();
+
+    public List<UiProduct> getSaleProducts(Site site, AliceCategory aliceCategory)
     {
-        final List<UiProduct> sortBySaleDate = getSaleProductsFromCache(site);
-        if (productSortType == ProductSortType.AMOUNT)
+        return getSaleProductsFromCache(site, aliceCategory);
+    }
+
+    public List<UiProduct> getSaleProducts(List<Site> siteList, AliceCategory aliceCategory, ProductSortType productSortType)
+    {
+        final List<UiProduct> sortBySaleDate = new ArrayList<>();
+        for (Site site: siteList)
         {
-            final List<UiProduct> sortByAmount = new ArrayList<>(sortBySaleDate);
-            sortByAmount.sort(new DiscountAmountComparator());
+            sortBySaleDate.addAll(getSaleProducts(site, aliceCategory));
+        }
+
+        return sortSaleProducts(sortBySaleDate, productSortType);
+    }
+
+    private List<UiProduct> sortSaleProducts(List<UiProduct> uiProductList, ProductSortType productSortType)
+    {
+        if (productSortType == ProductSortType.DATE)
+        {
+            final List<UiProduct> sortByDate = new ArrayList<>(uiProductList);
+            sortByDate.sort(new SaleDateComparator(new DiscountPercentageComparator()));
+            return sortByDate;
+        }
+        else if (productSortType == ProductSortType.AMOUNT)
+        {
+            final List<UiProduct> sortByAmount = new ArrayList<>(uiProductList);
+            sortByAmount.sort(new DiscountAmountComparator(new SaleDateComparator()));
             return sortByAmount;
         }
         else if (productSortType == ProductSortType.PERCENTAGE)
         {
-            final List<UiProduct> sortByPercentage = new ArrayList<>(sortBySaleDate);
-            sortByPercentage.sort(new DiscountPercentageComparator());
+            final List<UiProduct> sortByPercentage = new ArrayList<>(uiProductList);
+            sortByPercentage.sort(new DiscountPercentageComparator(new SaleDateComparator()));
             return sortByPercentage;
         }
-
-        return sortBySaleDate;
+        else
+        {
+            return uiProductList;
+        }
     }
 
-    public List<UiProduct> getNewSaleProducts(AliceCategory category)
+    public boolean hasSaleProducts(Site site, AliceCategory aliceCategory)
     {
+        final SiteProduct siteProduct = siteProductMap.get(site);
+        return siteProduct != null && siteProduct.hasProducts(aliceCategory);
+    }
+
+    public List<UiProduct> getNewSaleProducts(AliceCategory aliceCategory)
+    {
+        List<UiProduct> productList = newSaleProductMap.get(aliceCategory);
+        if (productList != null && productList.size() > 0)
+        {
+            return productList;
+        }
+
         // collect all sales of the category
-        final List<Site> siteList = siteManager.getSites(category);
+        final List<Site> siteList = getAliceCategorySites(aliceCategory);
         final List<UiProduct> allProductList = new ArrayList<>();
         for (Site site : siteList)
         {
-            allProductList.addAll(getSaleProducts(site, ProductSortType.DATE));
+            allProductList.addAll(getSaleProducts(site, aliceCategory));
         }
 
         // get the latest sales
         allProductList.sort(new SaleDateComparator());
         int latestIndex = 0;
-        for (int day = 1 ; day < 15 ; day++)
+        for (int day = 0 ; day < 15 ; day++)
         {
             latestIndex = getLatestIndex(allProductList, day);
             if (latestIndex >= webAppConfig.getCategoryProductSize())
@@ -83,50 +129,49 @@ public class SaleProductService
             }
         }
 
-        if (latestIndex >= webAppConfig.getCategoryProductSize())
-        {
-            final List<UiProduct> newProductList = allProductList.subList(0, latestIndex);
-            newProductList.sort(new DiscountPercentageComparator());
-            return newProductList.subList(0, webAppConfig.getCategoryProductSize());
-        }
-        else
-        {
-            allProductList.sort(new DiscountPercentageComparator());
-            final int endIndex = Math.min(allProductList.size(), webAppConfig.getCategoryProductSize());
-            return allProductList.subList(0, endIndex);
-        }
-    }
+        final List<UiProduct> latestList = allProductList.subList(0, latestIndex);
+        latestList.sort(new DiscountPercentageComparator());
+        final int endIndex = Math.min(allProductList.size(), webAppConfig.getCategoryProductSize());
 
-    public int getTotalSalesCount()
-    {
-        int count = 0;
-        for (CachedList<UiProduct> cachedList : getSiteProductMap().values())
-        {
-            count += cachedList.list.size();
-        }
+        productList = latestList.subList(0, endIndex);
+        newSaleProductMap.put(aliceCategory, productList);
 
-        return count;
+        return productList;
     }
 
     public synchronized void refresh(Site site)
     {
         LOGGER.info("Refreshing sale product list for " + site.stringId);
-        final CachedList<UiProduct> newCachedList = new CachedList<>();
-        newCachedList.list = getSaleProductsFromDatabase(site);
-        newCachedList.cachedTime = LocalDateTime.now();
-        siteProductMap.put(site.id, newCachedList);
+        final SiteProduct siteProduct = getSaleProductsFromDatabase(site);
+        siteProductMap.put(site, siteProduct);
+        for (AliceCategory aliceCategory : siteManager.getAliceCategoryList())
+        {
+            if (hasSaleProducts(site, aliceCategory))
+            {
+                newSaleProductMap.remove(aliceCategory);
+            }
+        }
     }
 
-    private Map<Long, CachedList<UiProduct>> getSiteProductMap()
+    private List<Site> getAliceCategorySites(AliceCategory aliceCategory)
     {
-        return siteProductMap;
+        final List<Site> siteList = new ArrayList<>();
+        for (Site site : siteManager.getSites())
+        {
+            if (hasSaleProducts(site, aliceCategory))
+            {
+                siteList.add(site);
+            }
+        }
+
+        return siteList;
     }
 
     private int getLatestIndex(List<UiProduct> productList, int day)
     {
         for (int index = 0 ; index < productList.size() ; index++)
         {
-            if (productList.get(index).getSaleStartDate().until(LocalDateTime.now(), ChronoUnit.MINUTES) > 24 * 60 * day)
+            if (productList.get(index).getSaleStartDate().until(LocalDate.now(), ChronoUnit.DAYS) > day)
             {
                 return index;
             }
@@ -135,52 +180,53 @@ public class SaleProductService
         return productList.size();
     }
 
-    private List<UiProduct> filterLatest(List<UiProduct> productList, int day)
+    private List<UiProduct> getSaleProductsFromCache(Site site, AliceCategory aliceCategory)
     {
-        final List<UiProduct> latestProductList = new ArrayList<>();
-        for (UiProduct uiProduct : productList)
+        SiteProduct siteProduct = siteProductMap.get(site);
+        if (shouldRefresh(siteProduct))
         {
-            if (uiProduct.getSaleStartDate().until(LocalDateTime.now(), ChronoUnit.HOURS) <= 24 * day)
+            refresh(site);
+            siteProduct = siteProductMap.get(site);
+        }
+
+        final List<UiProduct> productList = new ArrayList<>();
+        for (Map.Entry<Category, List<UiProduct>> entry : siteProduct.getCategoryProductMap().entrySet())
+        {
+            if (aliceCategory == null || entry.getKey().isAliceCategory(aliceCategory))
             {
-                latestProductList.add(uiProduct);
+                productList.addAll(entry.getValue());
             }
         }
 
-        return latestProductList;
+        return productList;
     }
 
-    /**
-     * Returns sale products sorted by sale date descending, i.e. newest first
-     */
-    private List<UiProduct> getSaleProductsFromCache(Site site)
+    private SiteProduct getSaleProductsFromDatabase(Site site)
     {
-        CachedList<UiProduct> cachedProductList = siteProductMap.get(site.id);
-        if (shouldRefresh(cachedProductList))
+        final Map<Category, List<UiProduct>> categoryUiProductMap = new LinkedHashMap<>();
+        final SiteProduct siteProduct = new SiteProduct(site, categoryUiProductMap);
+        final List<Category> categoryList = categoryService.findSiteCategories(site);
+        if (categoryList.size() > 0)
         {
-            refresh(site);
-            cachedProductList = siteProductMap.get(site.id);
+            final Map<Category, List<Product>> categoryProductMap = productService.searchSaleProducts(categoryList);
+            for (Map.Entry<Category, List<Product>> entry : categoryProductMap.entrySet())
+            {
+                if (siteManager.isValidCategory(entry.getKey()))
+                {
+                    final List<UiProduct> uiProductList = ModelConverter.convertProductList(site, entry.getValue());
+                    categoryUiProductMap.put(entry.getKey(), uiProductList);
+                }
+            }
         }
+        siteProduct.setCachedTime(LocalDateTime.now());
 
-        return cachedProductList.list;
+        return siteProduct;
     }
 
-    /**
-     * Returns sale products sorted by sale date descending, i.e. newest first
-     */
-    private List<UiProduct> getSaleProductsFromDatabase(Site site)
+    private boolean shouldRefresh(SiteProduct siteProduct)
     {
-        final List<UiProduct> uiProductList = ModelConverter
-            .convertProductList(site, productService.searchSaleProducts(site.id));
-        uiProductList.sort(new SaleDateComparator());
-        final int endIndex = Math.min(uiProductList.size(), webAppConfig.getSaleProductCacheCount());
-
-        return uiProductList.subList(0, endIndex);
-    }
-
-    private boolean shouldRefresh(CachedList<UiProduct> cachedProductList)
-    {
-        return cachedProductList == null
-            || cachedProductList.cachedTime.until(LocalDateTime.now(), ChronoUnit.SECONDS) > webAppConfig
+        return siteProduct == null
+            || siteProduct.getCachedTime().until(LocalDateTime.now(), ChronoUnit.SECONDS) > webAppConfig
             .getSaleProductCacheTimeoutSeconds();
     }
 

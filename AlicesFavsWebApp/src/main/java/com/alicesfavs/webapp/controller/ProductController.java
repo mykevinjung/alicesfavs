@@ -3,13 +3,11 @@ package com.alicesfavs.webapp.controller;
 import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.webapp.config.WebAppConfig;
-import com.alicesfavs.webapp.service.NewProductService;
 import com.alicesfavs.webapp.service.ProductSortType;
 import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
 import com.alicesfavs.webapp.uimodel.Page;
 import com.alicesfavs.webapp.uimodel.UiProduct;
-import com.alicesfavs.webapp.util.ModelConverter;
 import com.alicesfavs.webapp.util.Pagination;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +17,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,13 +42,12 @@ public class ProductController
     private static final String NEXT_PAGE = "nextPage";
     private static final String PREV_PAGE = "prevPage";
     private static final String SORT_BY = "sortBy";
-    private static final String SITE = "site";
-    private static final String CATEGORY_NAME = "categoryName";
+    private static final String BREADCRUMB1 = "breadcrumb1";
+    private static final String BREADCRUMB2 = "breadcrumb2";
     private static final String SUBTITLE = "subtitle";
 
     private static final String VIEW_HOME = "home";
     private static final String VIEW_SALE = "sale";
-    private static final String VIEW_NEW_ARRIVALS = "new-arrivals";
 
     @Autowired
     private SiteManager siteManager;
@@ -58,83 +56,80 @@ public class ProductController
     private SaleProductService saleProductService;
 
     @Autowired
-    private NewProductService newProductService;
-
-    @Autowired
     private WebAppConfig webAppConfig;
 
     @RequestMapping(value = "/home2", method = RequestMethod.GET)
     public String home(ModelMap model, Device device)
     {
         final Map<String, List<UiProduct>> categoryProductMap = new LinkedHashMap<>();
-        for (AliceCategory aliceCategory : siteManager.getCategorySiteMap().keySet())
+        for (AliceCategory aliceCategory : siteManager.getAliceCategoryList())
         {
             final List<UiProduct> newSaleList = saleProductService.getNewSaleProducts(aliceCategory);
-            categoryProductMap.put(aliceCategory.name, newSaleList);
+            categoryProductMap.put(aliceCategory.name.toLowerCase(), newSaleList);
         }
         model.addAttribute("saleCategoryProductMap", categoryProductMap);
-        model.addAttribute("newProductList", newProductService.getNewProducts());
         model.addAttribute("mobile", device.isMobile());
 
         return VIEW_HOME;
     }
 
-    // TODO should do same thing as new arrival?  Clothing all
     @RequestMapping(value = "/sale/{siteId}", method = RequestMethod.GET)
-    public String sale(@PathVariable String siteId, HttpServletRequest request, ModelMap model, Device device)
+    public String sale(@PathVariable String siteId, @RequestParam(name = "category", required = false) String category,
+        HttpServletRequest request, ModelMap model, Device device)
     {
-        final Site site = siteManager.getSiteByStringId(siteId);
-        if (site == null)
+        List<Site> siteList;
+        AliceCategory aliceCategory = siteManager.getAliceCatgory(siteId);
+        if (aliceCategory != null)
         {
-            throw new ResourceNotFoundException("Site '" + siteId + "' not found");
+            siteList = getAliceCategorySites(aliceCategory);
+            model.addAttribute(BREADCRUMB1, aliceCategory.name);
+            model.addAttribute(SUBTITLE, "Sale - " + aliceCategory.name);
+        }
+        else
+        {
+            final Site site = siteManager.getSiteByStringId(siteId);
+            if (site == null)
+            {
+                throw new ResourceNotFoundException("Site '" + siteId + "' not found");
+            }
+
+            siteList = new ArrayList<>();
+            siteList.add(site);
+            aliceCategory = siteManager.getAliceCatgory(category);
+            if (aliceCategory != null)
+            {
+                model.addAttribute(BREADCRUMB1, aliceCategory.name);
+                model.addAttribute(BREADCRUMB2, site.displayName);
+                model.addAttribute(SUBTITLE, "Sale - " + aliceCategory.name + " > " + site.displayName);
+            }
+            else
+            {
+                model.addAttribute(BREADCRUMB1, site.displayName);
+                model.addAttribute(SUBTITLE, "Sale - " + site.displayName);
+            }
         }
 
-        final ProductSortType productSortType = ProductSortType.fromCode(request.getParameter(SORT_BY));
-        final List<UiProduct> productList = saleProductService.getSaleProducts(site, productSortType);
+        final ProductSortType productSortType = ProductSortType.fromCode(request.getParameter(SORT_BY), ProductSortType.DATE);
+        final List<UiProduct> productList = saleProductService.getSaleProducts(siteList, aliceCategory, productSortType);
         addProductAttributes(request, model, productList, webAppConfig.getSaleProductPageSize());
-
-        model.addAttribute(SITE, ModelConverter.convertSite(site));
-        model.addAttribute(SORT_BY,
-            productSortType == null ? ProductSortType.DATE.getCode() : productSortType.getCode());
+        model.addAttribute(SORT_BY, productSortType.getCode());
         model.addAttribute("mobile", device.isMobile());
-        model.addAttribute(SUBTITLE, "Sale - " + site.displayName);
 
         return VIEW_SALE;
     }
 
-    @RequestMapping(value = "/new-arrivals/{categoryName}", method = RequestMethod.GET)
-    public String newArrivals(@PathVariable String categoryName, HttpServletRequest request, ModelMap model,
-        Device device)
+    private List<Site> getAliceCategorySites(AliceCategory aliceCategory)
     {
-        final List<UiProduct> productList;
-        final AliceCategory aliceCategory = siteManager.getAliceCatgory(categoryName);
-        if (aliceCategory != null)
+        final List<Site> siteList = new ArrayList<>();
+        for (Site site : siteManager.getSites())
         {
-            final ProductSortType productSortType = ProductSortType.fromCode(request.getParameter(SORT_BY));
-            productList = newProductService.getNewProducts(aliceCategory, productSortType);
-            model.addAttribute(CATEGORY_NAME, categoryName);
-            model.addAttribute(SORT_BY,
-                productSortType == null ? ProductSortType.DATE.getCode() : productSortType.getCode());
-            model.addAttribute(SUBTITLE, "New Arrivals - " + aliceCategory.name);
-        }
-        else
-        {
-            final Site site = siteManager.getSiteByStringId(categoryName);
-            if (site == null)
+            if (saleProductService.hasSaleProducts(site, aliceCategory))
             {
-                throw new ResourceNotFoundException("Category/Site '" + categoryName + "' not found");
+                siteList.add(site);
             }
-
-            productList = newProductService.getNewProducts(site);
-            model.addAttribute(CATEGORY_NAME, site.displayName);
-            model.addAttribute(SUBTITLE, "New Arrivals - " + site.displayName);
         }
-        addProductAttributes(request, model, productList, webAppConfig.getNewProductPageSize());
-        model.addAttribute("logo", "/resources/images/logo2.png");
-        model.addAttribute("mobile", device.isMobile());
-        model.addAttribute("newArrivalsTitle", "Newly found from the past 7 days");
 
-        return VIEW_NEW_ARRIVALS;
+        return siteList;
     }
 
     private void addProductAttributes(HttpServletRequest request, ModelMap model, List<UiProduct> productList,

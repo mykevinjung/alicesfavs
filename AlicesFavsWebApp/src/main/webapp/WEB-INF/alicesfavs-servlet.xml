@@ -20,7 +20,7 @@
     </mvc:annotation-driven>
 
     <mvc:interceptors>
-        <bean class="com.alicesfavs.webapp.interceptor.CategorySiteInterceptor"></bean>
+        <bean class="com.alicesfavs.webapp.interceptor.BaseInterceptor"></bean>
 
         <!-- Resolve the device which has generated the request -->
         <bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor" />

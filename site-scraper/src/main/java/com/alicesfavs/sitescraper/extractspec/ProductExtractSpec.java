@@ -23,9 +23,6 @@ public class ProductExtractSpec
     // spec to extract product image url data
     public List<ElementDataSpec> imageUrlSpecList;
 
-    // spec to extract product brand name data
-    public ElementDataSpec brandNameSpec;
-
     // spec to extract product price data
     public List<ElementDataSpec> priceSpecList;
 
@@ -35,7 +32,7 @@ public class ProductExtractSpec
     public String toString()
     {
         return "ProductExtractSpec[containerSpec=" + containerSpec + ", productSpec=" + productSpec + ", idSpec="
-                + idSpec + ", nameSpec=" + nameSpec + ", urlSpec=" + urlSpec + ", brandNameSpec=" + brandNameSpec
+                + idSpec + ", nameSpec=" + nameSpec + ", urlSpec=" + urlSpec
                 + ", imageUrlSpecList=" + imageUrlSpecList + ", priceSpecList=" + priceSpecList + ", wasPriceSpecList="
                 + wasPriceSpecList + "]";
     }

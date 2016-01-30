@@ -7,20 +7,24 @@ import java.util.Comparator;
 /**
  * Created by kjung on 10/31/15.
  */
-public class DiscountAmountComparator implements Comparator<UiProduct>
+public class DiscountAmountComparator extends DecoratedComparator
 {
-    @Override 
-    public int compare(UiProduct p1, UiProduct p2)
+    public DiscountAmountComparator()
     {
-        if (p1.getWasPrice() != null && p2.getWasPrice() != null)
-        {
-            final double p1amount = p1.getWasPrice() - p1.getPrice();
-            final double p2amount = p2.getWasPrice() - p2.getPrice();
+        super();
+    }
 
-            // remove decimal (cents)
-            return (int) ((p2amount - p1amount) * 100);
-        }
+    public DiscountAmountComparator(Comparator<UiProduct> baseComparator)
+    {
+        super(baseComparator);
+    }
 
-        return 0;
+    @Override
+    protected int compare0(UiProduct p1, UiProduct p2)
+    {
+        final double p1amount = p1.getWasPrice() - p1.getPrice();
+        final double p2amount = p2.getWasPrice() - p2.getPrice();
+
+        return (int) ((p2amount - p1amount) * 100);
     }
 }

@@ -1,6 +1,5 @@
 package com.alicesfavs.webapp.controller;
 
-import com.alicesfavs.webapp.service.NewProductService;
 import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -53,19 +52,10 @@ public class BaseController
     @Autowired
     private SaleProductService saleProductService;
 
-    @Autowired
-    private NewProductService newProductService;
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap model)
     {
         return "comingsoon";
-    }
-
-    @RequestMapping(value = "/sale", method = RequestMethod.GET)
-    public String saleRedirect(ModelMap model)
-    {
-        return VIEW_INDEX;
     }
 
     @RequestMapping(value = "/contact-us", method = RequestMethod.GET)
@@ -132,10 +122,6 @@ public class BaseController
     {
         model.addAttribute("logo", "/resources/images/logo3.png");
         model.addAttribute(SUBTITLE, "About Us");
-        DecimalFormat formatter = new DecimalFormat("#,###");
-        model.addAttribute("totalBrandCount", formatter.format(siteManager.getSites().size()));
-        model.addAttribute("totalSalesCount", formatter.format(saleProductService.getTotalSalesCount()));
-        model.addAttribute("totalNewArrivalsCount", formatter.format(newProductService.getTotalNewArrivalsCount()));
 
         return VIEW_ABOUT_US;
     }

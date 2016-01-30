@@ -10,7 +10,7 @@ import com.alicesfavs.datamodel.ExtractStatus;
 public interface CategoryDao
 {
 
-    Category insertCategory(long siteId, CategoryExtract categoryExtract1, CategoryExtract categoryExtract2,
+    Category insertCategory(long siteId, Long aliceCategoryId, CategoryExtract categoryExtract1, CategoryExtract categoryExtract2,
             CategoryExtract categoryExtract3, Integer displayOrder, ExtractStatus extractStatus, Long extractJobId,
             LocalDateTime extractedDate);
 

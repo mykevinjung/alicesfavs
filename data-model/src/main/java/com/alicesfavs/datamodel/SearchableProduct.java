@@ -25,7 +25,6 @@ public class SearchableProduct
     public String name;
     public String price;
     public String wasPrice;
-    public String brandName;
     public String url;
     public String imageUrl;
     public LocalDateTime saleStartDate;

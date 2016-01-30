@@ -23,7 +23,7 @@ public class AliceCategoryDaoImpl implements AliceCategoryDao
         + "FROM ALICE_CATEGORY WHERE DISPLAY = ? ORDER BY ID ASC";
 
     private static final int[] SELECT_PARAM_TYPES =
-        { Types.CHAR };
+        { Types.NUMERIC };
 
     @Autowired
     private DaoSupport<AliceCategory> daoSupport;
@@ -31,8 +31,7 @@ public class AliceCategoryDaoImpl implements AliceCategoryDao
     @Override
     public List<AliceCategory> selectAliceCategoriesByDisplay(boolean display)
     {
-        final Object[] params =
-            { display ? '1' : '0' };
+        final Object[] params = { display ? 1 : 0 };
         return daoSupport.selectObjectList(SELECT_ALL, SELECT_PARAM_TYPES, params,
             new AliceCategoryRowMapper());
     }

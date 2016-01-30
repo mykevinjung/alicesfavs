@@ -121,7 +121,8 @@ public class SiteScraperImpl implements SiteScraper
     private List<CategoryExtract> extractCategories(Site site, String pageUrl, CategoryExtractSpec categoryExtractSpec)
             throws SiteScrapeException, ElementNotFoundException, DataNotFoundException
     {
-        final Document doc = openUrl(site, pageUrl);
+        String openUrl = StringUtils.hasText(categoryExtractSpec.baseUrl) ? categoryExtractSpec.baseUrl : pageUrl;
+        final Document doc = openUrl(site, openUrl);
         if (doc != null)
         {
             return dataExtractor.extractCategories(doc, categoryExtractSpec);

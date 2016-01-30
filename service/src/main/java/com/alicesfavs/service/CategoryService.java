@@ -7,13 +7,17 @@ import com.alicesfavs.datamodel.CategoryExtract;
 import com.alicesfavs.datamodel.CategoryProduct;
 import com.alicesfavs.datamodel.MultirootTree;
 import com.alicesfavs.datamodel.Product;
+import com.alicesfavs.datamodel.Site;
 
 public interface CategoryService
 {
 
     List<Category> saveCategoryExtract(long jobId, long siteId, MultirootTree<CategoryExtract> categoryExtracts);
 
-    List<Category> findSiteCategories(long siteId);
+    /**
+     * Returns the categories of the site in display order
+     */
+    List<Category> findSiteCategories(Site site);
 
     CategoryProduct saveCategoryProduct(Category category, Product product, Integer displayOrder, long extractJobId);
 

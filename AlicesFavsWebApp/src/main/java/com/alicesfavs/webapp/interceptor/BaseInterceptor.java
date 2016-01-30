@@ -2,6 +2,7 @@ package com.alicesfavs.webapp.interceptor;
 
 import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Site;
+import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
 import com.alicesfavs.webapp.util.ModelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +12,21 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by kjung on 10/30/15.
  */
 @Component
-public class CategorySiteInterceptor extends HandlerInterceptorAdapter
+public class BaseInterceptor extends HandlerInterceptorAdapter
 {
 
     @Autowired
     private SiteManager siteManager;
+
+    @Autowired
+    private SaleProductService saleProductService;
 
     /**
      * Add category-site map into ModelAndView so that the map can be used for things like top menu
@@ -30,16 +34,30 @@ public class CategorySiteInterceptor extends HandlerInterceptorAdapter
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
         ModelAndView modelAndView) throws Exception
     {
-        for (Map.Entry<AliceCategory, List<Site>> categorySite : siteManager.getCategorySiteMap().entrySet())
+        for (AliceCategory aliceCategory : siteManager.getAliceCategoryList())
         {
-            modelAndView.addObject(categorySite.getKey().name.toLowerCase(),
-                ModelConverter.convertSiteList(categorySite.getValue()));
+            modelAndView.addObject(aliceCategory.name.toLowerCase(),
+                ModelConverter.convertSiteList(getAliceCategorySites(aliceCategory)));
         }
 
         if (!modelAndView.getModelMap().containsKey("logo"))
         {
             modelAndView.addObject("logo", "/resources/images/logo1.png");
         }
+    }
+
+    private List<Site> getAliceCategorySites(AliceCategory aliceCategory)
+    {
+        final List<Site> siteList = new ArrayList<>();
+        for (Site site : siteManager.getSites())
+        {
+            if (saleProductService.hasSaleProducts(site, aliceCategory))
+            {
+                siteList.add(site);
+            }
+        }
+
+        return siteList;
     }
 
 }

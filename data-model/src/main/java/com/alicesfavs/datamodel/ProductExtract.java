@@ -12,7 +12,6 @@ public class ProductExtract
     public String name;
     public String price;
     public String wasPrice;
-    public String brandName;
     public String url;
     public String imageUrl;
 
@@ -25,7 +24,7 @@ public class ProductExtract
     public String toString()
     {
         return "ProductExtract[id=" + id + ", name=" + name + ", price=" + price + ", wasPrice=" + wasPrice
-                + ", brandName=" + brandName + ", url=" + url + ", imageUrl=" + imageUrl + "]";
+                + ", url=" + url + ", imageUrl=" + imageUrl + "]";
     }
 
 }

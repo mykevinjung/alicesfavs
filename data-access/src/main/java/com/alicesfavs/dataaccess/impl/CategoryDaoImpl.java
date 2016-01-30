@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alicesfavs.dataaccess.util.ResultSetUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -27,32 +25,33 @@ import com.alicesfavs.datamodel.ModelBase;
 public class CategoryDaoImpl implements CategoryDao
 {
 
-    private static final String INSERT_CATEGORY = "INSERT INTO CATEGORY (SITE_ID, NAME_EXTRACT1, URL_EXTRACT1, "
+    private static final String INSERT_CATEGORY = "INSERT INTO CATEGORY (SITE_ID, ALICE_CATEGORY_ID, NAME_EXTRACT1, URL_EXTRACT1, "
         + "NAME_EXTRACT2, URL_EXTRACT2, NAME_EXTRACT3, URL_EXTRACT3, DISPLAY_ORDER, EXTRACT_STATUS, EXTRACT_JOB_ID, "
-        + "EXTRACTED_DATE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        + "EXTRACTED_DATE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String UPDATE_CATEGORY =
-        "UPDATE CATEGORY SET SITE_ID = ?, NAME_EXTRACT1 = ?, URL_EXTRACT1 = ?, "
+        "UPDATE CATEGORY SET SITE_ID = ?, ALICE_CATEGORY_ID = ?, NAME_EXTRACT1 = ?, URL_EXTRACT1 = ?, "
             + "NAME_EXTRACT2 = ?, URL_EXTRACT2 = ?, NAME_EXTRACT3 = ?, URL_EXTRACT3 = ?, "
             + "DISPLAY_ORDER = ?, EXTRACT_STATUS = ?, EXTRACT_JOB_ID = ?, EXTRACTED_DATE = ? WHERE ID = ?";
 
     private static final String UPDATE_EXTRACT_STATUS = "UPDATE CATEGORY SET EXTRACT_STATUS = ? "
         + "WHERE SITE_ID = ? AND EXTRACT_STATUS = ? AND EXTRACT_JOB_ID <> ?";
 
-    private static final String SELECT_CATEGORY_BY_SITE_ID = "SELECT ID, SITE_ID, NAME_EXTRACT1, URL_EXTRACT1, "
+    private static final String SELECT_CATEGORY_BY_SITE_ID = "SELECT ID, SITE_ID, ALICE_CATEGORY_ID, NAME_EXTRACT1, URL_EXTRACT1, "
         + "NAME_EXTRACT2, URL_EXTRACT2, NAME_EXTRACT3, URL_EXTRACT3, DISPLAY_ORDER, EXTRACT_STATUS, EXTRACT_JOB_ID, "
-        + "EXTRACTED_DATE, CREATED_DATE, UPDATED_DATE FROM CATEGORY WHERE SITE_ID = ? AND EXTRACT_STATUS = ?";
+        + "EXTRACTED_DATE, CREATED_DATE, UPDATED_DATE FROM CATEGORY WHERE SITE_ID = ? AND EXTRACT_STATUS = ? "
+        + "ORDER BY DISPLAY_ORDER";
 
-    private static final String SELECT_CATEGORY_BY_NAME = "SELECT ID, SITE_ID, NAME_EXTRACT1, URL_EXTRACT1, "
+    private static final String SELECT_CATEGORY_BY_NAME = "SELECT ID, SITE_ID, ALICE_CATEGORY_ID, NAME_EXTRACT1, URL_EXTRACT1, "
         + "NAME_EXTRACT2, URL_EXTRACT2, NAME_EXTRACT3, URL_EXTRACT3, DISPLAY_ORDER, EXTRACT_STATUS, EXTRACT_JOB_ID, "
         + "EXTRACTED_DATE, CREATED_DATE, UPDATED_DATE FROM CATEGORY WHERE SITE_ID = ?";
 
     private static final int[] INSERT_PARAM_TYPES =
-        { Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
+        { Types.BIGINT, Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
             Types.INTEGER, Types.INTEGER, Types.BIGINT, Types.TIMESTAMP };
 
     private static final int[] UPDATE_PARAM_TYPES =
-        { Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
+        { Types.BIGINT, Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
             Types.INTEGER, Types.INTEGER, Types.BIGINT, Types.TIMESTAMP, Types.BIGINT };
 
     private static final int[] UPDATE_EXTRACT_STATUS_PARAM_TYPES =
@@ -61,12 +60,12 @@ public class CategoryDaoImpl implements CategoryDao
     @Autowired
     private DaoSupport<Category> daoSupport;
 
-    public Category insertCategory(long siteId, CategoryExtract categoryExtract1, CategoryExtract categoryExtract2,
+    public Category insertCategory(long siteId, Long aliceCategoryId, CategoryExtract categoryExtract1, CategoryExtract categoryExtract2,
         CategoryExtract categoryExtract3, Integer displayOrder, ExtractStatus extractStatus, Long extractJobId,
         LocalDateTime extractedDate)
     {
         final Object[] params =
-            { siteId, getCategoryName(categoryExtract1), getCategoryUrl(categoryExtract1),
+            { siteId, aliceCategoryId, getCategoryName(categoryExtract1), getCategoryUrl(categoryExtract1),
                 getCategoryName(categoryExtract2), getCategoryUrl(categoryExtract2), getCategoryName(categoryExtract3),
                 getCategoryUrl(categoryExtract3), displayOrder, extractStatus.getCode(), extractJobId,
                 DateTimeUtils.toTimestamp(extractedDate) };
@@ -84,7 +83,7 @@ public class CategoryDaoImpl implements CategoryDao
     public Category updateCategory(Category category)
     {
         final Object[] params =
-            { category.siteId, getCategoryName(category.categoryExtract1), getCategoryUrl(category.categoryExtract1),
+            { category.siteId, category.aliceCategoryId, getCategoryName(category.categoryExtract1), getCategoryUrl(category.categoryExtract1),
                 getCategoryName(category.categoryExtract2), getCategoryUrl(category.categoryExtract2),
                 getCategoryName(category.categoryExtract3), getCategoryUrl(category.categoryExtract3),
                 category.displayOrder, category.extractStatus.getCode(), category.extractJobId,
@@ -168,6 +167,7 @@ public class CategoryDaoImpl implements CategoryDao
             final Category category = new Category(extractable, siteId, categoryExtract1, categoryExtract2,
                 categoryExtract3);
             category.displayOrder = ResultSetUtils.getInt(rs, "DISPLAY_ORDER");
+            category.aliceCategoryId = ResultSetUtils.getLong(rs, "ALICE_CATEGORY_ID");
 
             return category;
         }

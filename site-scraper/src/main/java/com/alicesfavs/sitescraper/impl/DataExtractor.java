@@ -93,17 +93,6 @@ public class DataExtractor
                 {
                     // ignore, optional
                 }
-                try
-                {
-                    if (productExtractSpec.brandNameSpec != null)
-                    {
-                        productExtract.brandName = extractData(element, productExtractSpec.brandNameSpec);
-                    }
-                }
-                catch (DataNotFoundException e)
-                {
-                    // ignore, optional
-                }
                 productList.add(productExtract);
                 //System.out.println(productExtract);
             }

@@ -3,6 +3,8 @@ package com.alicesfavs.sitescraper.extractspec;
 public class CategoryExtractSpec
 {
 
+    public String baseUrl;
+
     /**
      * spec of an element that contains categories, such as top navigation, left navigation
      */
@@ -24,8 +26,8 @@ public class CategoryExtractSpec
 
     public String toString()
     {
-        return "CategoryExtractSpec[containerSpec=" + containerSpec + ", categorySpec=" + categorySpec + ", nameSpec="
-                + nameSpec + ", urlSpec=" + urlSpec + ", subcategorySpec=" + subcategorySpec + "]";
+        return "CategoryExtractSpec[baseUrl=" + baseUrl + ", containerSpec=" + containerSpec + ", categorySpec=" + categorySpec
+            + ", nameSpec=" + nameSpec + ", urlSpec=" + urlSpec + ", subcategorySpec=" + subcategorySpec + "]";
     }
 
 }

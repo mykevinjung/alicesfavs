@@ -63,40 +63,6 @@
 
         </div>
 
-        <h3 class="section-title clearfix title_center "><span>Facts</span>  </h3>
-
-        <div  class="row container ">
-          <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
-
-            <div class="featured-box  pos-center  " title=""  style="">
-              <div class="box-inner">
-                <div class="featured-img  " style=" "><img src="/resources/images/favicon.png" style="width:40%;"></div><!-- end icon -->
-                <p><b>Started by Alice & Kevin</b></p>
-              </div>
-            </div>
-          </div></div>
-
-          <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
-
-            <div class="featured-box  pos-center  " title=""  style="">
-              <div class="box-inner">
-                <div class="featured-img  " style=" "><img src="/resources/images/favicon.png" style="width:40%;"></div><!-- end icon -->
-                <p><b>Based in Greater Seattle</b></p>
-              </div>
-            </div>
-          </div></div>
-          <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
-
-            <div class="featured-box  pos-center  " title=""  style="">
-              <div class="box-inner">
-                <div class="featured-img  " style=" "><img src="/resources/images/favicon.png" style="width:40%;"></div><!-- end icon -->
-                <p><b>${totalBrandCount} brands<br>${totalSalesCount} sales<br>${totalNewArrivalsCount} new arrivals</b></p>
-              </div>
-            </div>
-          </div></div>
-
-        </div>
-
       </div><!-- #content -->
     </div><!-- .row  -->
   </div><!-- .page-wrapper -->

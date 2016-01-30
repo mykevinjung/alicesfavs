@@ -3,16 +3,16 @@
         "containerSpec":{
             "id":null,
             "tagName":"div",
-            "className":"dept-sub-list-content",
+            "className":"mkDept8",
             "attributeKey":null,
             "valuePattern":null
         },
         "categorySpec":{
             "id":null,
-            "tagName":"li",
+            "tagName":"a",
             "className":null,
-            "attributeKey":null,
-            "valuePattern":null
+            "attributeKey":"href",
+            "valuePattern":"/sale/.*"
         },
         "nameSpec":{
             "containerSpec":null,
@@ -25,7 +25,7 @@
             },
             "dataSpec":{
                 "attributeKey":"$nested_text",
-                "valuePattern":null,
+                "valuePattern":"HANDBAGS|SHOES|CLOTHING|WATCHES|JEWELRY & ACCESSORIES|PETITES|PLUS SIZES",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
@@ -42,104 +42,7 @@
             "dataSpec":{
                 "attributeKey":"abs:href",
                 "valuePattern":null,
-                "valueExcludePattern":".*holiday-gift-guide.*",
-                "substringPattern":null
-            }
-        },
-        "subcategorySpec": {
-            "containerSpec": {
-                "id": null,
-                "tagName": "ul",
-                "className": "subcategory_submenu",
-                "attributeKey": null,
-                "valuePattern": null
-            },
-            "categorySpec": {
-                "id": null,
-                "tagName": "li",
-                "className": null,
-                "attributeKey": null,
-                "valuePattern": null
-            },
-            "nameSpec": {
-                "containerSpec": null,
-                "elementSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": null,
-                    "valuePattern": null
-                },
-                "dataSpec": {
-                    "attributeKey": "$nested_text",
-                    "valuePattern": null,
-                    "valueExcludePattern": null,
-                    "substringPattern": null
-                }
-            },
-            "urlSpec": {
-                "containerSpec": null,
-                "elementSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": null,
-                    "valuePattern": null
-                },
-                "dataSpec": {
-                    "attributeKey": "abs:href",
-                    "valuePattern": null,
-                    "valueExcludePattern": null,
-                    "substringPattern": null
-                }
-            },
-            "subcategorySpec": null
-        }
-    },
-    {
-        "containerSpec":{
-            "id":null,
-            "tagName":"div",
-            "className":"dept-sub-list-content",
-            "attributeKey":null,
-            "valuePattern":null
-        },
-        "categorySpec":{
-            "id":null,
-            "tagName":"li",
-            "className":null,
-            "attributeKey":null,
-            "valuePattern":null
-        },
-        "nameSpec":{
-            "containerSpec":null,
-            "elementSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "dataSpec":{
-                "attributeKey":"$nested_text",
-                "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":null
-            }
-        },
-        "urlSpec":{
-            "containerSpec":null,
-            "elementSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "dataSpec":{
-                "attributeKey":"abs:href",
-                "valuePattern":null,
-                "valueExcludePattern":".*holiday-gift-guide.*",
                 "substringPattern":null
             }
         },

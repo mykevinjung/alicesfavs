@@ -9,11 +9,13 @@ public interface SiteDao
 {
 
     Site insertSite(String stringId, Country country, String displayName, String url, boolean display,
-        Integer displayWeight, boolean useStoredImage, String currency, String cookies);
+        Integer displayWeight, String currency, String cookies);
 
     Site updateSite(Site site);
 
     Site selectSiteByStringId(String stringId);
+
+    List<Site> selectAllSites();
 
     List<Site> selectSiteByAliceCategory(long aliceCategoryId);
 

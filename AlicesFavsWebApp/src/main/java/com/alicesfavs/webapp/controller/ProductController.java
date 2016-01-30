@@ -3,6 +3,7 @@ package com.alicesfavs.webapp.controller;
 import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.webapp.config.WebAppConfig;
+import com.alicesfavs.webapp.exception.ResourceNotFoundException;
 import com.alicesfavs.webapp.service.ProductSortType;
 import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
@@ -71,6 +72,12 @@ public class ProductController
         model.addAttribute("mobile", device.isMobile());
 
         return VIEW_HOME;
+    }
+
+    @RequestMapping(value = "/product", method = RequestMethod.GET)
+    public void product(HttpServletRequest request)
+    {
+
     }
 
     @RequestMapping(value = "/sale/{siteId}", method = RequestMethod.GET)

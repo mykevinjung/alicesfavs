@@ -1,4 +1,4 @@
-package com.alicesfavs.webapp.controller;
+package com.alicesfavs.webapp.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

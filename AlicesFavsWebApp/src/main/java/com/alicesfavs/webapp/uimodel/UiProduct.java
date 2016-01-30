@@ -9,6 +9,7 @@ public class UiProduct
 {
 
     // product info
+    private final String encryptedId;
     private String itemId;
     private String name;
     private String url;
@@ -25,6 +26,11 @@ public class UiProduct
     private String siteStringId;
     private Integer siteDisplayWeight;
 
+    public UiProduct(String encryptedId)
+    {
+        this.encryptedId = encryptedId;
+    }
+
     public int getDiscountPercentage()
     {
         if (price != null && wasPrice != null && wasPrice != 0)
@@ -33,6 +39,11 @@ public class UiProduct
         }
 
         return 0;
+    }
+
+    public String getEncryptedId()
+    {
+        return encryptedId;
     }
 
     public String getItemId()
@@ -165,4 +176,23 @@ public class UiProduct
         this.saleStartDate = saleStartDate;
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        UiProduct product = (UiProduct) o;
+
+        return encryptedId.equals(product.encryptedId);
+
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return encryptedId.hashCode();
+    }
 }

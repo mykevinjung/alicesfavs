@@ -42,6 +42,11 @@ public class ProductDaoImpl implements ProductDao
     private static final String UPDATE_EXTRACT_STATUS = "UPDATE PRODUCT SET EXTRACT_STATUS = ? "
         + "WHERE SITE_ID = ? AND EXTRACT_STATUS <> ? AND EXTRACT_JOB_ID <> ?";
 
+    private static final String SELECT_PRODUCT_BY_ID = "SELECT ID, SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
+        + "WAS_PRICE_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, "
+        + "PRICE_CHANGED_DATE, SALE_START_DATE, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
+        + "CREATED_DATE, UPDATED_DATE FROM PRODUCT WHERE ID = ?";
+
     private static final String SELECT_PRODUCT_BY_IDS = "SELECT ID, SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
         + "WAS_PRICE_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, "
         + "PRICE_CHANGED_DATE, SALE_START_DATE, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
@@ -83,6 +88,9 @@ public class ProductDaoImpl implements ProductDao
 
     private static final int[] SELECT_NEW_PRODUCTS_BY_SITE_PARAM_TYPES =
         { Types.BIGINT, Types.INTEGER, Types.TIMESTAMP };
+
+    private static final int[] SELECT_BY_ID_PARAM_TYPES =
+        { Types.BIGINT };
 
     private static final int[] SELECT_BY_IDS_PARAM_TYPES =
         { Types.BIGINT, Types.VARCHAR };
@@ -129,6 +137,14 @@ public class ProductDaoImpl implements ProductDao
         product.updatedDate = daoSupport.update(UPDATE_PRODUCT, UPDATE_PARAM_TYPES, params);
 
         return product;
+    }
+
+    public Product selectProductById(Long productId)
+    {
+        final Object[] params = { productId };
+
+        return daoSupport.selectObject(SELECT_PRODUCT_BY_ID, SELECT_BY_ID_PARAM_TYPES, params,
+            new ProductRowMapper());
     }
 
     public Product selectProductById(Long siteId, String productExtractId)

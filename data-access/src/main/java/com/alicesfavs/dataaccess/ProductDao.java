@@ -18,6 +18,8 @@ public interface ProductDao
 
     Product updateProduct(Product product);
 
+    Product selectProductById(Long productId);
+
     Product selectProductById(Long siteId, String productExtractId);
 
     int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus newStatus);

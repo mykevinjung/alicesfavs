@@ -49,9 +49,17 @@ public class SaleProductService
     @Autowired
     private WebAppConfig webAppConfig;
 
+    @Autowired
+    private Encryptor encryptor;
+
     private Map<Site, SiteProduct> siteProductMap = new Hashtable<>();
 
     private Map<AliceCategory, List<UiProduct>> newSaleProductMap = new HashMap<>();
+
+    public Product getProduct(long productId)
+    {
+        return productService.findProduct(productId);
+    }
 
     public List<UiProduct> getSaleProducts(Site site, AliceCategory aliceCategory)
     {
@@ -60,13 +68,13 @@ public class SaleProductService
 
     public List<UiProduct> getSaleProducts(List<Site> siteList, AliceCategory aliceCategory, ProductSortType productSortType)
     {
-        final List<UiProduct> sortBySaleDate = new ArrayList<>();
+        final List<UiProduct> productList = new ArrayList<>();
         for (Site site: siteList)
         {
-            sortBySaleDate.addAll(getSaleProducts(site, aliceCategory));
+            addAllIfNotExist(productList, getSaleProducts(site, aliceCategory));
         }
 
-        return sortSaleProducts(sortBySaleDate, productSortType);
+        return sortSaleProducts(productList, productSortType);
     }
 
     private List<UiProduct> sortSaleProducts(List<UiProduct> uiProductList, ProductSortType productSortType)
@@ -114,7 +122,7 @@ public class SaleProductService
         final List<UiProduct> allProductList = new ArrayList<>();
         for (Site site : siteList)
         {
-            allProductList.addAll(getSaleProducts(site, aliceCategory));
+            addAllIfNotExist(allProductList, getSaleProducts(site, aliceCategory));
         }
 
         // get the latest sales
@@ -194,11 +202,22 @@ public class SaleProductService
         {
             if (aliceCategory == null || entry.getKey().isAliceCategory(aliceCategory))
             {
-                productList.addAll(entry.getValue());
+                addAllIfNotExist(productList, entry.getValue());
             }
         }
 
         return productList;
+    }
+
+    private void addAllIfNotExist(List<UiProduct> productList, List<UiProduct> c)
+    {
+        for (UiProduct product : c)
+        {
+            if (!productList.contains(product))
+            {
+                productList.add(product);
+            }
+        }
     }
 
     private SiteProduct getSaleProductsFromDatabase(Site site)
@@ -213,7 +232,8 @@ public class SaleProductService
             {
                 if (siteManager.isValidCategory(entry.getKey()))
                 {
-                    final List<UiProduct> uiProductList = ModelConverter.convertProductList(site, entry.getValue());
+                    final List<UiProduct> uiProductList =
+                        ModelConverter.convertProductList(site, entry.getValue(), encryptor);
                     categoryUiProductMap.put(entry.getKey(), uiProductList);
                 }
             }

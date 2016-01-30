@@ -69,6 +69,12 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
+    public Product findProduct(long productId)
+    {
+        return productDao.selectProductById(productId);
+    }
+
+    @Override
     public Product findProduct(long siteId, String siteProductId)
     {
         return productDao.selectProductById(siteId, siteProductId);

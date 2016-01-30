@@ -42,6 +42,12 @@ public class WebAppConfig
     @Value(value = "${refresh.allowedaddr}")
     private String refreshAllowedAddr;
 
+    @Value(value = "${encryptor.key}")
+    private String encryptorKey;
+
+    @Value(value = "${encryptor.initVector}")
+    private String encryptorInitVector;
+
     public int getSiteCacheTimeoutSeconds()
     {
         return siteCacheTimeoutSeconds;
@@ -95,6 +101,16 @@ public class WebAppConfig
     public String[] getRefreshAllowedAddrArray()
     {
         return refreshAllowedAddr != null ? refreshAllowedAddr.split(",") : new String[0];
+    }
+
+    public String getEncryptorKey()
+    {
+        return encryptorKey;
+    }
+
+    public String getEncryptorInitVector()
+    {
+        return encryptorInitVector;
     }
 
 }

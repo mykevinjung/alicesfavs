@@ -2,6 +2,7 @@ package com.alicesfavs.webapp.controller;
 
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.webapp.config.WebAppConfig;
+import com.alicesfavs.webapp.exception.ResourceNotFoundException;
 import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
 import org.slf4j.Logger;

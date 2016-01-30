@@ -3,6 +3,8 @@ package com.alicesfavs.webapp.util;
 import com.alicesfavs.datamodel.Country;
 import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.Site;
+import com.alicesfavs.webapp.exception.EncryptionException;
+import com.alicesfavs.webapp.service.Encryptor;
 import com.alicesfavs.webapp.uimodel.UiProduct;
 import com.alicesfavs.webapp.uimodel.UiSite;
 import org.springframework.util.StringUtils;
@@ -38,9 +40,18 @@ public class ModelConverter
         return uiSiteList;
     }
 
-    public static  UiProduct convertProduct(Site site, Product product)
+    public static  UiProduct convertProduct(Site site, Product product, Encryptor encryptor)
     {
-        final UiProduct uiProduct = new UiProduct();
+        final String encryptedId;
+        try
+        {
+            encryptedId = encryptor.encrypt(String.valueOf(product.id));
+        }
+        catch (EncryptionException e)
+        {
+            throw new RuntimeException("Unexpected exception", e);
+        }
+        final UiProduct uiProduct = new UiProduct(encryptedId);
         uiProduct.setItemId(product.productExtract.id);
         uiProduct.setName(product.productExtract.name);
         uiProduct.setUrl(product.productExtract.url);
@@ -65,17 +76,18 @@ public class ModelConverter
         return uiProduct;
     }
 
-    public static List<UiProduct> convertProductList(Site site, List<Product> productList)
+    public static List<UiProduct> convertProductList(Site site, List<Product> productList, Encryptor encryptor)
     {
-        return convertProductList(site, productList, 0, productList.size());
+        return convertProductList(site, productList, encryptor, 0, productList.size());
     }
 
-    public static List<UiProduct> convertProductList(Site site, List<Product> productList, int startIndex, int endIndex)
+    public static List<UiProduct> convertProductList(Site site, List<Product> productList, Encryptor encryptor,
+        int startIndex, int endIndex)
     {
         final List<UiProduct> uiProductList = new ArrayList<>(endIndex - startIndex);
         for (int index = startIndex ; index < endIndex ; index++)
         {
-            uiProductList.add(convertProduct(site, productList.get(index)));
+            uiProductList.add(convertProduct(site, productList.get(index), encryptor));
         }
 
         return uiProductList;

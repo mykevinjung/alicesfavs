@@ -21,6 +21,8 @@ public interface ProductService
 
     Product saveProduct(Job job, Site site, ExtractStatus extractStatus, List<ProductExtract> productExtractList);
 
+    Product findProduct(long productId);
+
     Product findProduct(long siteId, String siteProductId);
 
     int markNotFoundProduct(Job job, Site site);

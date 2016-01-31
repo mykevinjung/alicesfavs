@@ -1,5 +1,6 @@
 package com.alicesfavs.webapp.util;
 
+import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Country;
 import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.Site;
@@ -40,20 +41,12 @@ public class ModelConverter
         return uiSiteList;
     }
 
-    public static  UiProduct convertProduct(Site site, Product product, Encryptor encryptor)
+    public static  UiProduct convertProduct(Site site, Product product, AliceCategory aliceCategory)
     {
-        final String encryptedId;
-        try
-        {
-            encryptedId = encryptor.encrypt(String.valueOf(product.id));
-        }
-        catch (EncryptionException e)
-        {
-            throw new RuntimeException("Unexpected exception", e);
-        }
-        final UiProduct uiProduct = new UiProduct(encryptedId);
+        final UiProduct uiProduct = new UiProduct(product.id);
         uiProduct.setItemId(product.productExtract.id);
         uiProduct.setName(product.productExtract.name);
+        uiProduct.setAliceCategory(aliceCategory.name.toLowerCase());
         uiProduct.setUrl(product.productExtract.url);
         uiProduct.setImageUrl(product.productExtract.imageUrl);
         uiProduct.setPrice(product.price);
@@ -76,18 +69,18 @@ public class ModelConverter
         return uiProduct;
     }
 
-    public static List<UiProduct> convertProductList(Site site, List<Product> productList, Encryptor encryptor)
+    public static List<UiProduct> convertProductList(Site site, List<Product> productList, AliceCategory aliceCategory)
     {
-        return convertProductList(site, productList, encryptor, 0, productList.size());
+        return convertProductList(site, productList, aliceCategory, 0, productList.size());
     }
 
-    public static List<UiProduct> convertProductList(Site site, List<Product> productList, Encryptor encryptor,
+    public static List<UiProduct> convertProductList(Site site, List<Product> productList, AliceCategory aliceCategory,
         int startIndex, int endIndex)
     {
         final List<UiProduct> uiProductList = new ArrayList<>(endIndex - startIndex);
         for (int index = startIndex ; index < endIndex ; index++)
         {
-            uiProductList.add(convertProduct(site, productList.get(index), encryptor));
+            uiProductList.add(convertProduct(site, productList.get(index), aliceCategory));
         }
 
         return uiProductList;

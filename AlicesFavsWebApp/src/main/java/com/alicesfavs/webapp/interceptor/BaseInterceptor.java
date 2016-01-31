@@ -34,16 +34,25 @@ public class BaseInterceptor extends HandlerInterceptorAdapter
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
         ModelAndView modelAndView) throws Exception
     {
-        for (AliceCategory aliceCategory : siteManager.getAliceCategoryList())
+        if (modelAndView != null && !isRedirect(modelAndView))
         {
-            modelAndView.addObject(aliceCategory.name.toLowerCase(),
-                ModelConverter.convertSiteList(getAliceCategorySites(aliceCategory)));
-        }
+            for (AliceCategory aliceCategory : siteManager.getAliceCategoryList())
+            {
+                modelAndView.addObject(aliceCategory.name.toLowerCase(),
+                    ModelConverter.convertSiteList(getAliceCategorySites(aliceCategory)));
+            }
 
-        if (!modelAndView.getModelMap().containsKey("logo"))
-        {
-            modelAndView.addObject("logo", "/resources/images/logo1.png");
+            if (!modelAndView.getModelMap().containsKey("logo"))
+            {
+                modelAndView.addObject("logo", "/resources/images/logo1.png");
+            }
         }
+    }
+
+    private boolean isRedirect(ModelAndView modelAndView)
+    {
+        final String viewName = modelAndView.getViewName();
+        return viewName != null && viewName.startsWith("redirect:");
     }
 
     private List<Site> getAliceCategorySites(AliceCategory aliceCategory)

@@ -58,7 +58,14 @@ public class SaleProductService
 
     public Product getProduct(long productId)
     {
-        return productService.findProduct(productId);
+        try
+        {
+            return productService.findProduct(productId);
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 
     public List<UiProduct> getSaleProducts(Site site, AliceCategory aliceCategory)
@@ -209,6 +216,7 @@ public class SaleProductService
         return productList;
     }
 
+    // we can use LinkedHashSet later
     private void addAllIfNotExist(List<UiProduct> productList, List<UiProduct> c)
     {
         for (UiProduct product : c)
@@ -230,10 +238,11 @@ public class SaleProductService
             final Map<Category, List<Product>> categoryProductMap = productService.searchSaleProducts(categoryList);
             for (Map.Entry<Category, List<Product>> entry : categoryProductMap.entrySet())
             {
-                if (siteManager.isValidCategory(entry.getKey()))
+                final AliceCategory aliceCategory = siteManager.getAliceCategory(entry.getKey());
+                if (aliceCategory != null)
                 {
                     final List<UiProduct> uiProductList =
-                        ModelConverter.convertProductList(site, entry.getValue(), encryptor);
+                        ModelConverter.convertProductList(site, entry.getValue(), aliceCategory);
                     categoryUiProductMap.put(entry.getKey(), uiProductList);
                 }
             }

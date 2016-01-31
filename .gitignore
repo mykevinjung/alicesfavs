@@ -17,4 +17,4 @@ hs_err_pid*
 target
 logs
 resources/uxtemplate/flatsome_main
-data-access/src/main/resources/env/prod/jdbc.properties
+#data-access/src/main/resources/env/prod/jdbc.properties

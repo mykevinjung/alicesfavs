@@ -9,9 +9,10 @@ public class UiProduct
 {
 
     // product info
-    private final String encryptedId;
+    private final long id;
     private String itemId;
     private String name;
+    private String aliceCategory;
     private String url;
     private String imageUrl;
     private String priceWithCurrency;
@@ -26,9 +27,9 @@ public class UiProduct
     private String siteStringId;
     private Integer siteDisplayWeight;
 
-    public UiProduct(String encryptedId)
+    public UiProduct(long id)
     {
-        this.encryptedId = encryptedId;
+        this.id = id;
     }
 
     public int getDiscountPercentage()
@@ -41,9 +42,9 @@ public class UiProduct
         return 0;
     }
 
-    public String getEncryptedId()
+    public long getId()
     {
-        return encryptedId;
+        return id;
     }
 
     public String getItemId()
@@ -64,6 +65,16 @@ public class UiProduct
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public String getAliceCategory()
+    {
+        return aliceCategory;
+    }
+
+    public void setAliceCategory(String aliceCategory)
+    {
+        this.aliceCategory = aliceCategory;
     }
 
     public String getUrl()
@@ -176,8 +187,7 @@ public class UiProduct
         this.saleStartDate = saleStartDate;
     }
 
-    @Override
-    public boolean equals(Object o)
+    @Override public boolean equals(Object o)
     {
         if (this == o)
             return true;
@@ -186,13 +196,13 @@ public class UiProduct
 
         UiProduct product = (UiProduct) o;
 
-        return encryptedId.equals(product.encryptedId);
+        return id == product.id;
 
     }
 
-    @Override
-    public int hashCode()
+    @Override public int hashCode()
     {
-        return encryptedId.hashCode();
+        return (int) (id ^ (id >>> 32));
     }
+
 }

@@ -1,9 +1,11 @@
 package com.alicesfavs.webapp.controller;
 
 import com.alicesfavs.datamodel.AliceCategory;
+import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.webapp.config.WebAppConfig;
 import com.alicesfavs.webapp.exception.ResourceNotFoundException;
+import com.alicesfavs.webapp.service.BotDetector;
 import com.alicesfavs.webapp.service.ProductSortType;
 import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -33,6 +36,7 @@ import java.util.Map;
 public class ProductController
 {
 
+    private static final String PAGE_ID = "pageId";
     private static final String PAGE_NUMBER = "pageNo";
     private static final String PRODUCT_LIST = "productList";
     private static final String START_INDEX = "startIndex";
@@ -57,6 +61,9 @@ public class ProductController
     private SaleProductService saleProductService;
 
     @Autowired
+    private BotDetector botDetector;
+
+    @Autowired
     private WebAppConfig webAppConfig;
 
     @RequestMapping(value = "/home2", method = RequestMethod.GET)
@@ -69,15 +76,36 @@ public class ProductController
             categoryProductMap.put(aliceCategory.name.toLowerCase(), newSaleList);
         }
         model.addAttribute("saleCategoryProductMap", categoryProductMap);
+        model.addAttribute(PAGE_ID, "home");
         model.addAttribute("mobile", device.isMobile());
 
         return VIEW_HOME;
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.GET)
-    public void product(HttpServletRequest request)
+    @RequestMapping(value = "/redirect/product", method = RequestMethod.GET)
+    public String product(HttpServletRequest request, HttpServletResponse response,
+        @RequestParam(name = "id") long productId)
     {
+        final Product product = saleProductService.getProduct(productId);
+        if (product == null)
+        {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return null;
+        }
 
+        final String redirectUrl = product.productExtract.url;
+        if (!botDetector.isBot(request))
+        {
+            // siteId=michaelkors&id=10000365&pageId=sale-site&pageNo=1&category=clothing&position=1
+            // store redirect info
+            final String siteId = request.getParameter("siteId");
+            final String pageId = request.getParameter(PAGE_ID);
+            final int pageNo = NumberUtils.toInt(request.getParameter(PAGE_NUMBER), 1);
+            final String category = request.getParameter("category");
+            final int position = NumberUtils.toInt(request.getParameter("position"), 1);
+        }
+
+        return "redirect:" + redirectUrl;
     }
 
     @RequestMapping(value = "/sale/{siteId}", method = RequestMethod.GET)
@@ -86,11 +114,13 @@ public class ProductController
     {
         List<Site> siteList;
         AliceCategory aliceCategory = siteManager.getAliceCatgory(siteId);
+        String pageId;
         if (aliceCategory != null)
         {
             siteList = getAliceCategorySites(aliceCategory);
             model.addAttribute(BREADCRUMB1, aliceCategory.name);
             model.addAttribute(SUBTITLE, "Sale - " + aliceCategory.name);
+            pageId = "sale-category-all";
         }
         else
         {
@@ -108,17 +138,20 @@ public class ProductController
                 model.addAttribute(BREADCRUMB1, aliceCategory.name);
                 model.addAttribute(BREADCRUMB2, site.displayName);
                 model.addAttribute(SUBTITLE, "Sale - " + aliceCategory.name + " > " + site.displayName);
+                pageId = "sale-category-site";
             }
             else
             {
                 model.addAttribute(BREADCRUMB1, site.displayName);
                 model.addAttribute(SUBTITLE, "Sale - " + site.displayName);
+                pageId = "sale-site";
             }
         }
 
         final ProductSortType productSortType = ProductSortType.fromCode(request.getParameter(SORT_BY), ProductSortType.DATE);
         final List<UiProduct> productList = saleProductService.getSaleProducts(siteList, aliceCategory, productSortType);
         addProductAttributes(request, model, productList, webAppConfig.getSaleProductPageSize());
+        model.addAttribute(PAGE_ID, pageId);
         model.addAttribute(SORT_BY, productSortType.getCode());
         model.addAttribute("mobile", device.isMobile());
 

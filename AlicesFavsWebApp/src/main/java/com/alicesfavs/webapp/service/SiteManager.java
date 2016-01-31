@@ -74,6 +74,19 @@ public class SiteManager
         return false;
     }
 
+    public AliceCategory getAliceCategory(Category category)
+    {
+        for (AliceCategory aliceCategory : aliceCategoryList)
+        {
+            if (category.isAliceCategory(aliceCategory))
+            {
+                return aliceCategory;
+            }
+        }
+
+        return null;
+    }
+
     public List<Site> getSites()
     {
         return siteList;

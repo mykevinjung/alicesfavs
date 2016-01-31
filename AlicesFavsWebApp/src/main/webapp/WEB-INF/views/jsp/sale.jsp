@@ -42,10 +42,10 @@
             <div class="row">
                 <div class="large-12 columns">
                     <ul class="products small-block-grid-2 large-block-grid-4">
-                        <c:forEach items="${productList}" var="product">
+                        <c:forEach items="${productList}" var="product" varStatus="loop">
                         <li class="product-small  grid1 grid-normal">
                             <div class="inner-wrap">
-                                <a <c:if test="${mobile != true}">target="_blank"</c:if> href="${product.url}">
+                                <a <c:if test="${mobile != true}">target="_blank"</c:if> href="/redirect/product?siteId=${product.siteStringId}&id=${product.id}&pageId=${pageId}&pageNo=${pageNo}&category=${product.aliceCategory}&position=${loop.index+1}">
                                     <div class="product-image">
                                         <div class="front-image"><img width="247" height="300" src="${product.imageUrl}" class="attachment-shop_catalog wp-post-image aligncenter" alt="${product.name}" /></div>
                                     </div><!-- end product-image -->
@@ -55,7 +55,7 @@
                                         <h5 class="category">
                                             <a href="/sale/${product.siteStringId}" rel="tag">${product.siteName}</a>          </h5>
                                         <div class="tx-div small"></div>
-                                        <a item-id="${product.itemId}" <c:if test="${mobile != true}">target="_blank"</c:if> href="${product.url}"><p class="name">${product.name}</p></a>
+                                        <a item-id="${product.id}" <c:if test="${mobile != true}">target="_blank"</c:if> href="/redirect/product?siteId=${product.siteStringId}&id=${product.id}&pageId=${pageId}&pageNo=${pageNo}&category=${product.aliceCategory}&position=${loop.index+1}"><p class="name">${product.name}</p></a>
 
                                         <del><span class="amount">${product.wasPriceWithCurrency}</span></del> <span class="price"><ins><span class="amount">${product.priceWithCurrency}</span></ins></span>
 

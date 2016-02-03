@@ -49,24 +49,9 @@ public class SaleProductService
     @Autowired
     private WebAppConfig webAppConfig;
 
-    @Autowired
-    private Encryptor encryptor;
-
     private Map<Site, SiteProduct> siteProductMap = new Hashtable<>();
 
     private Map<AliceCategory, List<UiProduct>> newSaleProductMap = new HashMap<>();
-
-    public Product getProduct(long productId)
-    {
-        try
-        {
-            return productService.findProduct(productId);
-        }
-        catch (Exception e)
-        {
-            return null;
-        }
-    }
 
     public List<UiProduct> getSaleProducts(Site site, AliceCategory aliceCategory)
     {

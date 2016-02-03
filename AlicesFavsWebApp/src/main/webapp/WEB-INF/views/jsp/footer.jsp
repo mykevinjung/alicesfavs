@@ -8,7 +8,7 @@
     <div class="row">
       <div class="large-12 columns">
         <div class="left">
-          <div class="copyright-footer">Copyright 2015 © <strong>Alice's Favs, Inc.</strong></div>
+          <div class="copyright-footer">Copyright 2016 © <strong>Alice's Favs, Inc.</strong></div>
         </div><!-- .left -->
         <div class="right">
           <div class="menu-top-nav-and-footer-nav-container"><ul id="menu-top-nav-and-footer-nav-1" class="footer-nav">

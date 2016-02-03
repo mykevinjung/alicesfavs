@@ -4,6 +4,7 @@ import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
+import com.alicesfavs.webapp.uimodel.Constants;
 import com.alicesfavs.webapp.util.ModelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -52,7 +53,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter
     private boolean isRedirect(ModelAndView modelAndView)
     {
         final String viewName = modelAndView.getViewName();
-        return viewName != null && viewName.startsWith("redirect:");
+        return viewName != null && viewName.startsWith(Constants.REDIRECT_PREFIX);
     }
 
     private List<Site> getAliceCategorySites(AliceCategory aliceCategory)

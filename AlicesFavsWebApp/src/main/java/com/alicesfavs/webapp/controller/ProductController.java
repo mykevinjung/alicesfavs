@@ -1,14 +1,13 @@
 package com.alicesfavs.webapp.controller;
 
 import com.alicesfavs.datamodel.AliceCategory;
-import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.webapp.config.WebAppConfig;
 import com.alicesfavs.webapp.exception.ResourceNotFoundException;
-import com.alicesfavs.webapp.service.BotDetector;
 import com.alicesfavs.webapp.service.ProductSortType;
 import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
+import com.alicesfavs.webapp.uimodel.Constants;
 import com.alicesfavs.webapp.uimodel.Page;
 import com.alicesfavs.webapp.uimodel.UiProduct;
 import com.alicesfavs.webapp.util.Pagination;
@@ -36,32 +35,11 @@ import java.util.Map;
 public class ProductController
 {
 
-    private static final String PAGE_ID = "pageId";
-    private static final String PAGE_NUMBER = "pageNo";
-    private static final String PRODUCT_LIST = "productList";
-    private static final String START_INDEX = "startIndex";
-    private static final String END_INDEX = "endIndex";
-    private static final String TOTAL_PAGE_NO = "totalPageNo";
-    private static final String TOTAL_COUNT = "totalCount";
-    private static final String PAGE_LIST = "pageList";
-    private static final String NEXT_PAGE = "nextPage";
-    private static final String PREV_PAGE = "prevPage";
-    private static final String SORT_BY = "sortBy";
-    private static final String BREADCRUMB1 = "breadcrumb1";
-    private static final String BREADCRUMB2 = "breadcrumb2";
-    private static final String SUBTITLE = "subtitle";
-
-    private static final String VIEW_HOME = "home";
-    private static final String VIEW_SALE = "sale";
-
     @Autowired
     private SiteManager siteManager;
 
     @Autowired
     private SaleProductService saleProductService;
-
-    @Autowired
-    private BotDetector botDetector;
 
     @Autowired
     private WebAppConfig webAppConfig;
@@ -76,36 +54,10 @@ public class ProductController
             categoryProductMap.put(aliceCategory.name.toLowerCase(), newSaleList);
         }
         model.addAttribute("saleCategoryProductMap", categoryProductMap);
-        model.addAttribute(PAGE_ID, "home");
+        model.addAttribute(Constants.PAGE_ID, "home");
         model.addAttribute("mobile", device.isMobile());
 
-        return VIEW_HOME;
-    }
-
-    @RequestMapping(value = "/redirect/product", method = RequestMethod.GET)
-    public String product(HttpServletRequest request, HttpServletResponse response,
-        @RequestParam(name = "id") long productId)
-    {
-        final Product product = saleProductService.getProduct(productId);
-        if (product == null)
-        {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return null;
-        }
-
-        final String redirectUrl = product.productExtract.url;
-        if (!botDetector.isBot(request))
-        {
-            // siteId=michaelkors&id=10000365&pageId=sale-site&pageNo=1&category=clothing&position=1
-            // store redirect info
-            final String siteId = request.getParameter("siteId");
-            final String pageId = request.getParameter(PAGE_ID);
-            final int pageNo = NumberUtils.toInt(request.getParameter(PAGE_NUMBER), 1);
-            final String category = request.getParameter("category");
-            final int position = NumberUtils.toInt(request.getParameter("position"), 1);
-        }
-
-        return "redirect:" + redirectUrl;
+        return Constants.VIEW_HOME;
     }
 
     @RequestMapping(value = "/sale/{siteId}", method = RequestMethod.GET)
@@ -118,8 +70,8 @@ public class ProductController
         if (aliceCategory != null)
         {
             siteList = getAliceCategorySites(aliceCategory);
-            model.addAttribute(BREADCRUMB1, aliceCategory.name);
-            model.addAttribute(SUBTITLE, "Sale - " + aliceCategory.name);
+            model.addAttribute(Constants.BREADCRUMB1, aliceCategory.name);
+            model.addAttribute(Constants.SUBTITLE, "Sale - " + aliceCategory.name);
             pageId = "sale-category-all";
         }
         else
@@ -135,27 +87,27 @@ public class ProductController
             aliceCategory = siteManager.getAliceCatgory(category);
             if (aliceCategory != null)
             {
-                model.addAttribute(BREADCRUMB1, aliceCategory.name);
-                model.addAttribute(BREADCRUMB2, site.displayName);
-                model.addAttribute(SUBTITLE, "Sale - " + aliceCategory.name + " > " + site.displayName);
+                model.addAttribute(Constants.BREADCRUMB1, aliceCategory.name);
+                model.addAttribute(Constants.BREADCRUMB2, site.displayName);
+                model.addAttribute(Constants.SUBTITLE, "Sale - " + aliceCategory.name + " > " + site.displayName);
                 pageId = "sale-category-site";
             }
             else
             {
-                model.addAttribute(BREADCRUMB1, site.displayName);
-                model.addAttribute(SUBTITLE, "Sale - " + site.displayName);
+                model.addAttribute(Constants.BREADCRUMB1, site.displayName);
+                model.addAttribute(Constants.SUBTITLE, "Sale - " + site.displayName);
                 pageId = "sale-site";
             }
         }
 
-        final ProductSortType productSortType = ProductSortType.fromCode(request.getParameter(SORT_BY), ProductSortType.DATE);
+        final ProductSortType productSortType = ProductSortType.fromCode(request.getParameter(Constants.SORT_BY), ProductSortType.DATE);
         final List<UiProduct> productList = saleProductService.getSaleProducts(siteList, aliceCategory, productSortType);
         addProductAttributes(request, model, productList, webAppConfig.getSaleProductPageSize());
-        model.addAttribute(PAGE_ID, pageId);
-        model.addAttribute(SORT_BY, productSortType.getCode());
+        model.addAttribute(Constants.PAGE_ID, pageId);
+        model.addAttribute(Constants.SORT_BY, productSortType.getCode());
         model.addAttribute("mobile", device.isMobile());
 
-        return VIEW_SALE;
+        return Constants.VIEW_SALE;
     }
 
     private List<Site> getAliceCategorySites(AliceCategory aliceCategory)
@@ -177,22 +129,22 @@ public class ProductController
     {
         final int totalCount = productList.size();
         final Pagination pagination = new Pagination(pageSize, totalCount, request,
-            PAGE_NUMBER);
+            Constants.PAGE_NUMBER);
         final int totalPageNo = pagination.getTotalPageNo();
-        final int pageNo = pagination.getActualPageNo(NumberUtils.toInt(request.getParameter(PAGE_NUMBER), 1));
+        final int pageNo = pagination.getActualPageNo(NumberUtils.toInt(request.getParameter(Constants.PAGE_NUMBER), 1));
         final int startIndex = pagination.getStartIndex(pageNo);
         final int endIndex = pagination.getEndIndex(pageNo);
         final List<Page> pageList = pagination.getPageList(pageNo);
 
-        model.addAttribute(PRODUCT_LIST, productList.subList(startIndex, endIndex));
-        model.addAttribute(START_INDEX, startIndex + 1);
-        model.addAttribute(END_INDEX, endIndex);
-        model.addAttribute(PAGE_NUMBER, pageNo);
-        model.addAttribute(TOTAL_PAGE_NO, totalPageNo);
-        model.addAttribute(TOTAL_COUNT, totalCount);
-        model.addAttribute(PAGE_LIST, pageList);
-        model.addAttribute(NEXT_PAGE, pagination.getNextPage(pageList, pageNo));
-        model.addAttribute(PREV_PAGE, pagination.getPrevPage(pageList, pageNo));
+        model.addAttribute(Constants.PRODUCT_LIST, productList.subList(startIndex, endIndex));
+        model.addAttribute(Constants.START_INDEX, startIndex + 1);
+        model.addAttribute(Constants.END_INDEX, endIndex);
+        model.addAttribute(Constants.PAGE_NUMBER, pageNo);
+        model.addAttribute(Constants.TOTAL_PAGE_NO, totalPageNo);
+        model.addAttribute(Constants.TOTAL_COUNT, totalCount);
+        model.addAttribute(Constants.PAGE_LIST, pageList);
+        model.addAttribute(Constants.NEXT_PAGE, pagination.getNextPage(pageList, pageNo));
+        model.addAttribute(Constants.PREV_PAGE, pagination.getPrevPage(pageList, pageNo));
     }
 
 }

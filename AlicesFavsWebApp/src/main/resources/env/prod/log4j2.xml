@@ -4,7 +4,7 @@
 		<Property name="log-path">logs</Property>
 	</Properties>
 	<Appenders>
-		<RollingFile name="RollingFile" fileName="${log-path}/alicesfavs-webapp.log"
+		<RollingFile name="WebAppLog" fileName="${log-path}/alicesfavs-webapp.log"
 					 filePattern="${log-path}/alicesfavs-webapp-%d{yyyy-MM-dd}-%i.log">
 			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{1} - %msg%n"/>
 			<Policies>
@@ -15,10 +15,10 @@
 	</Appenders>
 	<Loggers>
 		<Logger name="root" level="INFO" additivity="false">
-			<appender-ref ref="RollingFile" level="INFO"/>
+			<appender-ref ref="WebAppLog" level="INFO"/>
 		</Logger>
 		<Root level="INFO" additivity="false">
-			<AppenderRef ref="RollingFile"/>
+			<AppenderRef ref="WebAppLog"/>
 		</Root>
 	</Loggers>
 </Configuration>

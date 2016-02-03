@@ -5,6 +5,7 @@ import com.alicesfavs.webapp.config.WebAppConfig;
 import com.alicesfavs.webapp.exception.ResourceNotFoundException;
 import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
+import com.alicesfavs.webapp.uimodel.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,6 @@ public class RefreshController
 {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RefreshController.class);
-
-    private static final String VIEW_BLANK = "blank";
 
     @Autowired
     private SiteManager siteManager;
@@ -50,7 +49,7 @@ public class RefreshController
 
         saleProductService.refresh(site);
 
-        return VIEW_BLANK;
+        return Constants.VIEW_BLANK;
     }
 
     @RequestMapping(value = "/refresh/site-manager", method = RequestMethod.GET)
@@ -60,7 +59,7 @@ public class RefreshController
 
         siteManager.refresh();
 
-        return VIEW_BLANK;
+        return Constants.VIEW_BLANK;
     }
 
     private void validateRequest(HttpServletRequest request)

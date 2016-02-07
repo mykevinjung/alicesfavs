@@ -67,7 +67,7 @@
           <div id="logo" class="logo-left">
             <h1>
               <a href="/home2" title="Alice's Favs" rel="home">
-                <img src="${logo}" class="header_logo " alt="Alice's Favs"/>
+                <img src="/resources/images/logo1.png" class="header_logo " alt="Alice's Favs"/>
               </a>
             </h1>
           </div><!-- .logo -->

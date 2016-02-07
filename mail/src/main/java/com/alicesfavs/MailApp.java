@@ -20,7 +20,7 @@ public class MailApp
         UserVerificationMailData data = new UserVerificationMailData();
         data.toAddress = "mykevinjung@gmail.com";
         data.toPersonal = "Sung Muk Jung";
-        data.verificationUrl = "http://www.shkgroup.com/contact_us.html";
+        data.verificationUrl = "http://www.alicesfavs.com/contact-us";
 
         System.out.println("sending...");
         sender.sendUserVerificationMail(data);

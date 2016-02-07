@@ -42,11 +42,6 @@ public class BaseInterceptor extends HandlerInterceptorAdapter
                 modelAndView.addObject(aliceCategory.name.toLowerCase(),
                     ModelConverter.convertSiteList(getAliceCategorySites(aliceCategory)));
             }
-
-            if (!modelAndView.getModelMap().containsKey("logo"))
-            {
-                modelAndView.addObject("logo", "/resources/images/logo1.png");
-            }
         }
     }
 

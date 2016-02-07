@@ -34,38 +34,42 @@
     <ul class="mobile-main-menu">
       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#">Clothing</a>
         <ul class="sub-menu">
+          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/clothing">All</a></li>
           <c:forEach items="${clothing}" var="site">
-            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=clothing">${site.displayName}</a></li>
           </c:forEach>
         </ul>
       </li>
       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#">Shoes</a>
         <ul class="sub-menu">
+          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/shoes">All</a></li>
           <c:forEach items="${shoes}" var="site">
-            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=shoes">${site.displayName}</a></li>
+          </c:forEach>
+        </ul>
+      </li>
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#">Bags</a>
+        <ul class="sub-menu">
+          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/bags">All</a></li>
+          <c:forEach items="${bags}" var="site">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=bags">${site.displayName}</a></li>
           </c:forEach>
         </ul>
       </li>
       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#">Accessories</a>
         <ul class="sub-menu">
+          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/accessories">All</a></li>
           <c:forEach items="${accessories}" var="site">
-            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=accessories">${site.displayName}</a></li>
           </c:forEach>
         </ul>
       </li>
       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#">Home</a>
         <ul class="sub-menu">
+          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/home">All</a></li>
           <c:forEach items="${home}" var="site">
-            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}">${site.displayName}</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=home">${site.displayName}</a></li>
           </c:forEach>
-        </ul>
-      </li>
-      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#">New Arrivals</a>
-        <ul class="sub-menu">
-          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/clothing">Clothing</a></li>
-          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/shoes">Shoes</a></li>
-          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/accessories">Accessories</a></li>
-          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/new-arrivals/home">Home</a></li>
         </ul>
       </li>
     </ul>

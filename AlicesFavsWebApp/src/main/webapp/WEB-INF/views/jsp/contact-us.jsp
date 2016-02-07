@@ -19,8 +19,6 @@
             <div class="accordion-inner"><p>Product information on Alice's Favs does not reflect the actual information at real time. So there might be some product with out-dated information. Please see <a href="/disclaimer">Disclaimer</a>.</p></div>
             <div class="accordion-title"><a href="#">I have a brand that I like to see on Alice's Favs.</a></div>
             <div class="accordion-inner"><p>Sure let us know what brand you like to see. We will review and see if we can add.</p></div>
-            <div class="accordion-title"><a href="#">How often is the product information updated?</a></div>
-            <div class="accordion-inner"><p>We try to update the product information everyday, even more than once a day unless there is a technical issue.</p></div>
           </div>
         </div>
         </div>

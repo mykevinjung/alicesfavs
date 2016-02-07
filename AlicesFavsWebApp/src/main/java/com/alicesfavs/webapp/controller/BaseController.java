@@ -94,7 +94,6 @@ public class BaseController
     @RequestMapping(value = "/about-us", method = RequestMethod.GET)
     public String aboutUs(ModelMap model)
     {
-        model.addAttribute("logo", "/resources/images/logo3.png");
         model.addAttribute(Constants.SUBTITLE, "About Us");
 
         return Constants.VIEW_ABOUT_US;
@@ -103,7 +102,6 @@ public class BaseController
     @RequestMapping(value = "/disclaimer", method = RequestMethod.GET)
     public String disclaimer(ModelMap model)
     {
-        model.addAttribute("logo", "/resources/images/logo3.png");
         model.addAttribute(Constants.SUBTITLE, "Disclaimer");
         
         return Constants.VIEW_DISCLAIMER;

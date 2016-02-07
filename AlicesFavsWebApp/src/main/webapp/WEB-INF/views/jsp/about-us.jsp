@@ -37,7 +37,7 @@
             <div class="featured-box  pos-center  " title=""  style="">
               <div class="box-inner">
                 <h4>The best from the best brands<span> </span></h4>
-                <p>All the sale and new arrivals from the best brands are in one place! Start your shopping here.</p>
+                <p>All the sale from the best brands in one place! Start your shopping here.</p>
               </div>
             </div>
           </div></div>
@@ -56,7 +56,7 @@
             <div class="featured-box  pos-center  " title=""  style="">
               <div class="box-inner">
                 <h4>More features coming...<span> </span></h4>
-                <p>We are adding more features for the shoppers. Stay tuned!</p>
+                <p>We are adding more features. Stay tuned!</p>
               </div>
             </div>
           </div></div>

@@ -18,23 +18,11 @@ public class WebAppConfig
     @Value(value = "${saleproduct.cache.timeoutseconds}")
     private int saleProductCacheTimeoutSeconds;
 
-    @Value(value = "${newproduct.cache.timeoutseconds}")
-    private int newProductCacheTimeoutSeconds;
-
     @Value(value = "${saleproduct.pagesize}")
     private int saleProductPageSize;
 
-    @Value(value = "${newproduct.pagesize}")
-    private int newProductPageSize;
-
     @Value(value = "${saleproduct.cache.maxcount}")
     private int saleProductCacheCount;
-
-    @Value(value = "${newproduct.cache.maxcount}")
-    private int newProductCacheCount;
-
-    @Value(value = "${newproduct.dayafter}")
-    private int newProductDayAfter;
 
     @Value(value = "${home.category.productsize}")
     private int categoryProductSize;
@@ -58,34 +46,14 @@ public class WebAppConfig
         return saleProductCacheTimeoutSeconds;
     }
 
-    public int getNewProductCacheTimeoutSeconds()
-    {
-        return newProductCacheTimeoutSeconds;
-    }
-
     public int getSaleProductPageSize()
     {
         return saleProductPageSize;
     }
 
-    public int getNewProductPageSize()
-    {
-        return newProductPageSize;
-    }
-
     public int getSaleProductCacheCount()
     {
         return saleProductCacheCount;
-    }
-
-    public int getNewProductCacheCount()
-    {
-        return newProductCacheCount;
-    }
-
-    public int getNewProductDayAfter()
-    {
-        return newProductDayAfter;
     }
 
     public int getCategoryProductSize()

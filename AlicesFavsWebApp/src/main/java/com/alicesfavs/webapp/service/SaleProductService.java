@@ -131,7 +131,7 @@ public class SaleProductService
 
         final List<UiProduct> latestList = allProductList.subList(0, latestIndex);
         latestList.sort(new DiscountPercentageComparator());
-        final int endIndex = Math.min(allProductList.size(), webAppConfig.getCategoryProductSize());
+        final int endIndex = Math.min(latestList.size(), webAppConfig.getCategoryProductSize());
 
         productList = latestList.subList(0, endIndex);
         newSaleProductMap.put(aliceCategory, productList);

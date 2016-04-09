@@ -40,6 +40,7 @@ public class Constants
     public static final String VIEW_ABOUT_US = "about-us";
     public static final String VIEW_CONTACT_US = "contact-us";
     public static final String VIEW_DISCLAIMER = "disclaimer";
+    public static final String VIEW_ERROR_404 = "error404";
     public static final String VIEW_BLANK = "blank";
 
     public static final String REDIRECT_PREFIX = "redirect:";

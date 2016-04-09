@@ -1,7 +1,9 @@
 package com.alicesfavs.webapp.controller;
 
-import com.alicesfavs.webapp.service.SaleProductService;
-import com.alicesfavs.webapp.service.SiteManager;
+import com.alicesfavs.mail.MailAddress;
+import com.alicesfavs.mail.MailRequest;
+import com.alicesfavs.mail.MailSender;
+import com.alicesfavs.mail.SendMailException;
 import com.alicesfavs.webapp.uimodel.Constants;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
@@ -26,11 +28,10 @@ public class BaseController
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(ModelMap model)
-    {
-        return "comingsoon";
-    }
+    @Autowired
+    private MailSender mailSender;
+
+    private final MailAddress contactUsAddress = new MailAddress("alice@alicesfavs.com", "Alice's Favs");
 
     @RequestMapping(value = "/contact-us", method = RequestMethod.GET)
     public String contactUs(ModelMap model)
@@ -50,17 +51,17 @@ public class BaseController
     @RequestMapping(value = "/contact-us", method = RequestMethod.POST)
     public String sendUsEmail(HttpServletRequest request, ModelMap model)
     {
-        final String name = request.getParameter(Constants.PARAM_SUBJECT);
+        final String subject = request.getParameter(Constants.PARAM_SUBJECT);
         final String email = request.getParameter(Constants.PARAM_EMAIL);
         final String message = request.getParameter(Constants.PARAM_MESSAGE);
         final List<String> responseMsgList = new ArrayList<>();
 
-        model.addAttribute(Constants.PARAM_SUBJECT, name);
+        model.addAttribute(Constants.PARAM_SUBJECT, subject);
         model.addAttribute(Constants.PARAM_EMAIL, email);
         model.addAttribute(Constants.PARAM_MESSAGE, message);
         model.addAttribute(Constants.PARAM_RESPONSE_MSG_LIST, responseMsgList);
 
-        if (!StringUtils.hasText(name) || Constants.DEFAULT_SUBJECT.equals(name))
+        if (!StringUtils.hasText(subject) || Constants.DEFAULT_SUBJECT.equals(subject))
         {
             responseMsgList.add("Please enter a subject.");
         }
@@ -75,16 +76,21 @@ public class BaseController
 
         if (responseMsgList.size() == 0)
         {
-            // then let's send an email
-            if ("mykevinjung@gmail.com".equals(email))
+            try
             {
+                final String messageBody = "From " + email + "\r\n" + message;
+                final MailRequest mailRequest = new MailRequest();
+                mailRequest.withFromAddress(contactUsAddress).withToAddress(contactUsAddress)
+                    .withSubject(subject).withBody(messageBody);
+                mailSender.send(mailRequest);
                 model.addAttribute(Constants.PARAM_EMAIL_SENT, true);
                 responseMsgList.add("Thank you. Your message has been sent.");
             }
-            else
+            catch (SendMailException e)
             {
+                LOGGER.error("Error in sending email: ", e);
                 model.addAttribute(Constants.PARAM_EMAIL_SENT, false);
-                responseMsgList.add("There was an error in sending an email. Please try later again.");
+                responseMsgList.add("There was an error in sending an email. If this repeats, please send an email to " + contactUsAddress.getAddress() + " directly.");
             }
         }
 
@@ -112,7 +118,7 @@ public class BaseController
     {
         model.addAttribute(Constants.SUBTITLE, "Page Not Found");
 
-        return "comingsoon";
+        return Constants.VIEW_ERROR_404;
     }
 
 }

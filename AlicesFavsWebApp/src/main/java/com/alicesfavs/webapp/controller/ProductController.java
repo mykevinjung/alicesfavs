@@ -44,7 +44,7 @@ public class ProductController
     @Autowired
     private WebAppConfig webAppConfig;
 
-    @RequestMapping(value = "/home2", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(ModelMap model, Device device)
     {
         final Map<String, List<UiProduct>> categoryProductMap = new LinkedHashMap<>();

@@ -23,7 +23,7 @@
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-ses</artifactId>
-      <version>1.10.39</version>
+      <version>1.10.50</version>
     </dependency>
     <dependency>
       <groupId>com.sun.mail</groupId>
@@ -34,12 +34,6 @@
       <groupId>javax.activation</groupId>
       <artifactId>activation</artifactId>
       <version>1.1.1</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

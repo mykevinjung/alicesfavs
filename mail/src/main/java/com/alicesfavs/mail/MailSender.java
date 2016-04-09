@@ -6,6 +6,6 @@ package com.alicesfavs.mail;
 public interface MailSender
 {
 
-    void sendUserVerificationMail(UserVerificationMailData userVerificationMailData) throws MailSendException;
+    MailResult send(MailRequest mailRequest) throws SendMailException;
 
 }

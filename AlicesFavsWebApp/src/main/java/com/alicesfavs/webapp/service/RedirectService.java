@@ -15,7 +15,6 @@ public class RedirectService
     @Autowired
     private ProductService productService;
 
-
     public Product getProduct(long productId)
     {
         try

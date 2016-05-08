@@ -54,7 +54,7 @@ public class ProductController
             categoryProductMap.put(aliceCategory.name.toLowerCase(), newSaleList);
         }
         model.addAttribute("saleCategoryProductMap", categoryProductMap);
-        model.addAttribute(Constants.PAGE_ID, "home");
+        model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_HOME);
         model.addAttribute("mobile", device.isMobile());
 
         return Constants.VIEW_HOME;
@@ -72,7 +72,7 @@ public class ProductController
             siteList = getAliceCategorySites(aliceCategory);
             model.addAttribute(Constants.BREADCRUMB1, aliceCategory.name);
             model.addAttribute(Constants.SUBTITLE, "Sale - " + aliceCategory.name);
-            pageId = "sale-category-all";
+            pageId = Constants.PAGE_ID_SALE_CAT_ALL;
         }
         else
         {
@@ -90,13 +90,13 @@ public class ProductController
                 model.addAttribute(Constants.BREADCRUMB1, aliceCategory.name);
                 model.addAttribute(Constants.BREADCRUMB2, site.displayName);
                 model.addAttribute(Constants.SUBTITLE, "Sale - " + aliceCategory.name + " > " + site.displayName);
-                pageId = "sale-category-site";
+                pageId = Constants.PAGE_ID_SALE_CAT_SITE;
             }
             else
             {
                 model.addAttribute(Constants.BREADCRUMB1, site.displayName);
                 model.addAttribute(Constants.SUBTITLE, "Sale - " + site.displayName);
-                pageId = "sale-site";
+                pageId = Constants.PAGE_ID_SALE_SITE;
             }
         }
 

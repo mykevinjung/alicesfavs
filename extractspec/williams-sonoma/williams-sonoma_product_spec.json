@@ -27,7 +27,7 @@
                 "attributeKey":"data-product",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":"\\{productSku:'([a-zA-Z0-9]+?)'.*"
+                "substringPattern":".*groupId:'([a-zA-Z0-9-]+?)'.*"
             }
         },
         "nameSpec":{
@@ -87,11 +87,11 @@
                     "id":null,
                     "tagName":"img",
                     "className":null,
-                    "attributeKey":"src",
+                    "attributeKey":"data-blzsrc",
                     "valuePattern":null
                 },
                 "dataSpec":{
-                    "attributeKey":"src",
+                    "attributeKey":"data-blzsrc",
                     "valuePattern":null,
                     "valueExcludePattern":".*/blank.gif",
                     "substringPattern":null
@@ -125,44 +125,22 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"span",
+                    "className":"product-price",
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "elementSpec":{
+                    "id":null,
+                    "tagName":"span",
                     "className":"price-sale",
                     "attributeKey":null,
                     "valuePattern":null
                 },
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"span",
-                    "className":"currency",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
                 "dataSpec":{
                     "attributeKey":"$nested_text",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":null
-                }
-            },
-            {
-                "containerSpec":{
-                    "id":null,
-                    "tagName":"span",
-                    "className":"price-standard",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"span",
-                    "className":"currency",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "dataSpec":{
-                    "attributeKey":"$nested_text",
-                    "valuePattern":null,
-                    "valueExcludePattern":null,
-                    "substringPattern":null
+                    "substringPattern":"Sale (.*)"
                 }
             }
         ],
@@ -171,14 +149,14 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"price-strike-sale",
+                    "className":"product-price",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"currency",
+                    "className":"price-strike-sale",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -186,7 +164,7 @@
                     "attributeKey":"$nested_text",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":null
+                    "substringPattern":"Sugg. Price (.*)"
                 }
             }
         ]

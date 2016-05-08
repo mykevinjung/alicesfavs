@@ -7,7 +7,22 @@ public class Constants
 {
 
     public static final String PAGE_ID = "pageId";
+
+    // home page www.alicesfavs.com
+    public static final String PAGE_ID_HOME = "home";
+
+    // For example, Clothing -> All i.e. /sale/clothing
+    public static final String PAGE_ID_SALE_CAT_ALL = "sale-category-all";
+
+    // For example, Clothing -> JCrew i.e. /sale/jcrew?category=clothing
+    public static final String PAGE_ID_SALE_CAT_SITE = "sale-category-site";
+
+    // For example, /sale/jcrew
+    public static final String PAGE_ID_SALE_SITE = "sale-site";
+
     public static final String PAGE_NUMBER = "pageNo";
+    public static final String POSITION = "position";
+    public static final String CATEGORY = "category";
     public static final String PRODUCT_LIST = "productList";
     public static final String START_INDEX = "startIndex";
     public static final String END_INDEX = "endIndex";

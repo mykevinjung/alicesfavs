@@ -25,7 +25,7 @@
             },
             "dataSpec":{
                 "attributeKey":"$nested_text",
-                "valuePattern":"HANDBAGS|SHOES|CLOTHING|WATCHES|JEWELRY & ACCESSORIES|PETITES|PLUS SIZES",
+                "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
             }

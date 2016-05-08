@@ -6,6 +6,7 @@ import com.alicesfavs.webapp.exception.ResourceNotFoundException;
 import com.alicesfavs.webapp.service.SaleProductService;
 import com.alicesfavs.webapp.service.SiteManager;
 import com.alicesfavs.webapp.uimodel.Constants;
+import com.alicesfavs.webapp.util.HttpUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class RefreshController
 
     private void validateRequest(HttpServletRequest request)
     {
-        final String remoteAddr = getRemoteAddr(request);
+        final String remoteAddr = HttpUtils.getRemoteAddr(request);
         if (StringUtils.hasText(remoteAddr))
         {
             for (String addr : webAppConfig.getRefreshAllowedAddrArray())
@@ -78,17 +79,6 @@ public class RefreshController
 
         LOGGER.error("Refresh request from unknown address: " + remoteAddr);
         throw new ResourceNotFoundException("Unknown address: " + remoteAddr);
-    }
-
-    private String getRemoteAddr(HttpServletRequest request)
-    {
-        String ipAddress = request.getHeader("X-FORWARDED-FOR");
-        if (ipAddress == null)
-        {
-            ipAddress = request.getRemoteAddr();
-        }
-
-        return ipAddress;
     }
 
 }

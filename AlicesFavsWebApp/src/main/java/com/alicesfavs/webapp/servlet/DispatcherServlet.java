@@ -40,9 +40,8 @@ public class DispatcherServlet extends org.springframework.web.servlet.Dispatche
             saleProductService.refresh(site);
         }
 
-        for (AliceCategory aliceCategory : siteManager.getAliceCategoryList())
-        {
-            saleProductService.getNewSaleProducts(aliceCategory);
-        }
+        siteManager.getAliceCategoryList().forEach(item -> {
+            saleProductService.getNewSaleProducts(item);
+        });
     }
 }

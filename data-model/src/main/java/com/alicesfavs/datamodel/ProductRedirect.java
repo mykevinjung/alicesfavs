@@ -12,10 +12,17 @@ public class ProductRedirect extends ModelBase
     public long productId;
     public String redirectUrl;
     public String sessionId;
-    public Long userId;
-    public Long userLoginSessionId;
     public String remoteAddress;
     public String userAgent;
+    public String category;
+    public String pageId;
+    public int pageNo;
+    public int position;
+
+    public ProductRedirect()
+    {
+        super(-1L, LocalDateTime.now());
+    }
 
     public ProductRedirect(long id, LocalDateTime createdDate)
     {

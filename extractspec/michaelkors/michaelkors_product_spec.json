@@ -20,11 +20,11 @@
                 "id":null,
                 "tagName":"li",
                 "className":"product_panel_data",
-                "attributeKey":"data-mfritemnum",
+                "attributeKey":"id",
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"data-mfritemnum",
+                "attributeKey":"id",
                 "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null

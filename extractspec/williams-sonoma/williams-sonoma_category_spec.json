@@ -1,9 +1,10 @@
 [
     {
+        "baseUrl":"http://www.williams-sonoma.com/shop/sale-special-offer/view-all-sale/?cm_type=gnav",
         "containerSpec":{
             "id":null,
-            "tagName":"ul",
-            "className":"sub-brand-bar-tabs",
+            "tagName":"li",
+            "className":"category-9",
             "attributeKey":null,
             "valuePattern":null
         },
@@ -53,130 +54,70 @@
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":".*tab",
+                "valuePattern":".*/sale-special-offer/sale-.*",
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        }
+    },
+    {
+        "baseUrl":"http://www.williams-sonoma.com/shop/home-sale/home-all-sale/?cm_type=lnav",
+        "containerSpec":{
+            "id":null,
+            "tagName":"div",
+            "className":"side-nav",
+            "attributeKey":null,
+            "valuePattern":null
+        },
+        "categorySpec":{
+            "id":null,
+            "tagName":"a",
+            "className":null,
+            "attributeKey":null,
+            "valuePattern":null
+        },
+        "nameSpec":{
+            "containerSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "dataSpec":{
+                "attributeKey":"$nested_text",
+                "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
         },
-        "subcategorySpec": {
-            "containerSpec": {
-                "id": "topnav-container",
-                "tagName": "nav",
-                "className": null,
-                "attributeKey": null,
-                "valuePattern": null
+        "urlSpec":{
+            "containerSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
             },
-            "categorySpec": {
-                "id": null,
-                "tagName": "a",
-                "className": null,
-                "attributeKey": null,
-                "valuePattern": null
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
             },
-            "nameSpec": {
-                "containerSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": null,
-                    "valuePattern": null
-                },
-                "elementSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": "class",
-                    "valuePattern": "topnav-.*"
-                },
-                "dataSpec": {
-                    "attributeKey": "$nested_text",
-                    "valuePattern": null,
-                    "valueExcludePattern": ".*Williams-Sonoma.*",
-                    "substringPattern": null
-                }
-            },
-            "urlSpec": {
-                "containerSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": null,
-                    "valuePattern": null
-                },
-                "elementSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": "class",
-                    "valuePattern": "topnav-.*"
-                },
-                "dataSpec": {
-                    "attributeKey": "abs:href",
-                    "valuePattern": ".*cm_type=gnav",
-                    "valueExcludePattern": null,
-                    "substringPattern": null
-                }
-            },
-            "subcategorySpec": {
-                "containerSpec": {
-                    "id": null,
-                    "tagName": "div",
-                    "className": "side-nav",
-                    "attributeKey": null,
-                    "valuePattern": null
-                },
-                "categorySpec": {
-                    "id": null,
-                    "tagName": "li",
-                    "className": "navLink",
-                    "attributeKey": null,
-                    "valuePattern": null
-                },
-                "nameSpec": {
-                    "containerSpec": {
-                        "id": null,
-                        "tagName": "a",
-                        "className": null,
-                        "attributeKey": null,
-                        "valuePattern": null
-                    },
-                    "elementSpec": {
-                        "id": null,
-                        "tagName": "a",
-                        "className": null,
-                        "attributeKey": null,
-                        "valuePattern": null
-                    },
-                    "dataSpec": {
-                        "attributeKey": "$nested_text",
-                        "valuePattern": null,
-                        "valueExcludePattern": null,
-                        "substringPattern": null
-                    }
-                },
-                "urlSpec": {
-                    "containerSpec": {
-                        "id": null,
-                        "tagName": "a",
-                        "className": null,
-                        "attributeKey": null,
-                        "valuePattern": null
-                    },
-                    "elementSpec": {
-                        "id": null,
-                        "tagName": "a",
-                        "className": null,
-                        "attributeKey": null,
-                        "valuePattern": null
-                    },
-                    "dataSpec": {
-                        "attributeKey": "abs:href",
-                        "valuePattern": ".*cm_type=lnav",
-                        "valueExcludePattern": null,
-                        "substringPattern": null
-                    }
-                },
-                "subcategorySpec": null
+            "dataSpec":{
+                "attributeKey":"abs:href",
+                "valuePattern":".*/home-sale/home-.*",
+                "valueExcludePattern":null,
+                "substringPattern":null
             }
         }
     }

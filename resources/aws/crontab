@@ -19,12 +19,10 @@
 # anntaylor
 50 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anntaylor >> /dev/null 2>&1
 50 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anntaylor >> /dev/null 2>&1
-50 22 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anntaylor >> /dev/null 2>&1
 
 # michaelkors
 52 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh michaelkors >> /dev/null 2>&1
 52 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh michaelkors >> /dev/null 2>&1
-52 22 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh michaelkors >> /dev/null 2>&1
 
 # madewell
 55 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh madewell >> /dev/null 2>&1
@@ -39,12 +37,10 @@
 # williams-sonoma
 10 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh williams-sonoma >> /dev/null 2>&1
 10 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh williams-sonoma >> /dev/null 2>&1
-10 23 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh williams-sonoma >> /dev/null 2>&1
 
 # toryburch
 20 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toryburch >> /dev/null 2>&1
 20 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toryburch >> /dev/null 2>&1
-20 23 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toryburch >> /dev/null 2>&1
 
 # verabradley
 25 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh verabradley >> /dev/null 2>&1

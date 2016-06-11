@@ -10,7 +10,7 @@
         "productSpec":{
             "id":null,
             "tagName":"div",
-            "className":"producttile-inner",
+            "className":"producttile",
             "attributeKey":null,
             "valuePattern":null
         },

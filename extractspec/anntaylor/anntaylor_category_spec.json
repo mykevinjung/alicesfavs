@@ -41,7 +41,7 @@
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":null,
+                "valuePattern":".*anntaylor.com/(sale-.*|new-to-sale)/cat.*",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }

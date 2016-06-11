@@ -28,8 +28,8 @@
   <div  class="page-wrapper">
     <div class="row">
       <div id="content" class="large-12 columns" role="main">
-        <p class="lead text-center">Alice looks around for shopping all the time, finding all the good stuff from her favorite brands,
-          checking if the price of her favorite products have dropped. We wanted to do the work for her and help her shopping.</p>
+        <p class="lead text-center">Alice, my wife, looks around her favorite brand sites all the time,
+          checking if there is any good deal, if the price has dropped, not buying but looking every day. I wanted to do the work for her and help her shopping.</p>
         <p class="lead text-center">While we were doing this, we noticed that many brands have more than half of their products on sale.
           So why do we buy non-sale products? We decided to collect all products on sale here.</p>
         <hr>
@@ -39,7 +39,7 @@
             <div class="featured-box  pos-center  " title=""  style="">
               <div class="box-inner">
                 <h4>The best from the best brands<span> </span></h4>
-                <p>All the sale from the best brands in one place! Start your shopping here.</p>
+                <p>All sales from the best brands at one stop! Start your shopping here.</p>
               </div>
             </div>
           </div></div>
@@ -49,7 +49,7 @@
             <div class="featured-box  pos-center  " title=""  style="">
               <div class="box-inner">
                 <h4>More brands coming...<span> </span></h4>
-                <p>We are adding more brands you love. More brands, more choices, more happiness!</p>
+                <p>We are adding more brands you love. More brands, more choices!</p>
               </div>
             </div>
           </div></div>

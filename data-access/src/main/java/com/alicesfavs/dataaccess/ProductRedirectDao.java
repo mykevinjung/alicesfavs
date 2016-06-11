@@ -8,7 +8,6 @@ import com.alicesfavs.datamodel.ProductRedirect;
 public interface ProductRedirectDao
 {
 
-    ProductRedirect insertProductRedirect(long siteId, long productId, String redirectUrl, String sessionId,
-        Long userId, Long userLoginSessionId, String remoteAddress, String userAgent);
+    ProductRedirect insertProductRedirect(ProductRedirect productRedirect);
 
 }

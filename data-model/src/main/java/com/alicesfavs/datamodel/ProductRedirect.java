@@ -18,6 +18,7 @@ public class ProductRedirect extends ModelBase
     public String pageId;
     public int pageNo;
     public int position;
+    public boolean isMobile;
 
     public ProductRedirect()
     {

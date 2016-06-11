@@ -75,6 +75,8 @@ public class RedirectController
             productRedirect.position = NumberUtils.toInt(request.getParameter(Constants.POSITION), 1);
             productRedirect.category = request.getParameter(Constants.CATEGORY);
             productRedirect.sessionId = request.getRequestedSessionId();
+            productRedirect.isMobile = device.isMobile();
+            redirectService.saveProductRedirect(productRedirect);
         }
 
         return Constants.REDIRECT_PREFIX + product.productExtract.url;

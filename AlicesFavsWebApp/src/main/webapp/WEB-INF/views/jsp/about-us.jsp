@@ -28,7 +28,7 @@
   <div  class="page-wrapper">
     <div class="row">
       <div id="content" class="large-12 columns" role="main">
-        <p class="lead text-center">Alice looks around  shopping all the time, finding all the good stuff from her favorite brands,
+        <p class="lead text-center">Alice looks around for shopping all the time, finding all the good stuff from her favorite brands,
           checking if the price of her favorite products have dropped. We wanted to do the work for her and help her shopping.</p>
         <p class="lead text-center">While we were doing this, we noticed that many brands have more than half of their products on sale.
           So why do we buy non-sale products? We decided to collect all products on sale here.</p>

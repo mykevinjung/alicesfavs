@@ -7,9 +7,14 @@ import org.springframework.util.Assert;
 public class ModelBase
 {
 
-    public final long id;
-    public final LocalDateTime createdDate;
+    public long id;
+    public LocalDateTime createdDate;
     public LocalDateTime updatedDate;
+
+    public ModelBase()
+    {
+        // default constructor
+    }
 
     public ModelBase(long id, LocalDateTime createdDate)
     {
@@ -25,6 +30,11 @@ public class ModelBase
     }
 
     public ModelBase(ModelBase other)
+    {
+        setModelBase(other);
+    }
+
+    public void setModelBase(ModelBase other)
     {
         this.id = other.id;
         this.createdDate = other.createdDate;

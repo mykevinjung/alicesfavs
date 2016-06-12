@@ -1,8 +1,9 @@
 [
     {
+        "baseUrl":"http://www.rebeccaminkoff.com/sale/",
         "containerSpec":{
-            "id":null,
-            "tagName":"header",
+            "id":"narrow-by-list",
+            "tagName":"dl",
             "className":null,
             "attributeKey":null,
             "valuePattern":null
@@ -15,13 +16,7 @@
             "valuePattern":null
         },
         "nameSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
@@ -37,13 +32,7 @@
             }
         },
         "urlSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
@@ -53,11 +42,11 @@
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":".*/anthro/category/.*/shopsale-.*",
+                "valuePattern":".*rebeccaminkoff.com/sale\\?cat=.*",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
         },
-        "subcategorySpec":null
+        "subcategorySpec": null
     }
 ]

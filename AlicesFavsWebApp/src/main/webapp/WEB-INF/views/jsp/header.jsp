@@ -44,7 +44,7 @@
         <div class="large-12 columns">
           <!-- left text -->
           <div class="left-text left">
-            <div class="html"><b>ALL THE SALES FROM THE BEST BRANDS</b></div><!-- .html -->
+            <div class="html"><b>ALL SALES FROM THE BEST BRANDS</b></div><!-- .html -->
           </div>
           <!-- top bar right -->
           <div class="right-text right">

@@ -30,8 +30,7 @@ public class SiteScrapeJob
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SiteScrapeJob.class);
 
-    private static final String REFRESH_SALE_URI = "/refresh/sale/";
-    private static final String REFRESH_NEW_ARRIVAL_URI = "/refresh/new-arrivals/";
+    private static final String REFRESH_URI = "/refresh/";
     private static final int FOUND_PRODUCT_MAX_VARIATION_PCT = 20;
     private static final int TOTAL_SALE_PRODUCT_MAX_VARIATION_PCT = 40;
 
@@ -168,8 +167,7 @@ public class SiteScrapeJob
         {
             if (StringUtils.hasText(refreshAddr))
             {
-                refreshSite(refreshAddr, REFRESH_SALE_URI, site);
-                refreshSite(refreshAddr, REFRESH_NEW_ARRIVAL_URI, site);
+                refreshSite(refreshAddr, REFRESH_URI, site);
             }
         }
     }

@@ -1,5 +1,6 @@
 [
     {
+        "baseUrl":"http://www.potterybarn.com/",
         "containerSpec": {
             "id": "topnav-container",
             "tagName": "nav",
@@ -53,7 +54,7 @@
             },
             "dataSpec": {
                 "attributeKey": "abs:href",
-                "valuePattern": ".*/\\?cm_type=gnav",
+                "valuePattern": ".*potterybarn.com/shop/sale/.*",
                 "valueExcludePattern": null,
                 "substringPattern": null
             }
@@ -61,124 +62,125 @@
         "subcategorySpec": null
     },
     {
-        "containerSpec":{
-            "id":"pb-family",
-            "tagName":"ul",
-            "className":null,
-            "attributeKey":null,
-            "valuePattern":null
+        "baseUrl":"http://www.potterybarnkids.com/",
+        "containerSpec": {
+            "id": "topnav-container",
+            "tagName": "nav",
+            "className": null,
+            "attributeKey": null,
+            "valuePattern": null
         },
-        "categorySpec":{
-            "id":null,
-            "tagName":"a",
-            "className":null,
-            "attributeKey":null,
-            "valuePattern":null
+        "categorySpec": {
+            "id": null,
+            "tagName": "a",
+            "className": null,
+            "attributeKey": null,
+            "valuePattern": null
         },
-        "nameSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "elementSpec":{
-                "id":null,
-                "tagName":"img",
-                "className":null,
-                "attributeKey":"src",
-                "valuePattern":null
-            },
-            "dataSpec":{
-                "attributeKey":"alt",
-                "valuePattern":"pottery barn baby|PBteen",
-                "valueExcludePattern":null,
-                "substringPattern":null
-            }
-        },
-        "urlSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "elementSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "dataSpec":{
-                "attributeKey":"abs:href",
-                "valuePattern":null,
-                "valueExcludePattern":null,
-                "substringPattern":null
-            }
-        },
-        "subcategorySpec": {
+        "nameSpec": {
             "containerSpec": {
-                "id": "topnav-container",
-                "tagName": "nav",
-                "className": null,
-                "attributeKey": null,
-                "valuePattern": null
-            },
-            "categorySpec": {
                 "id": null,
                 "tagName": "a",
                 "className": null,
                 "attributeKey": null,
                 "valuePattern": null
             },
-            "nameSpec": {
-                "containerSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": null,
-                    "valuePattern": null
-                },
-                "elementSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": null,
-                    "valuePattern": null
-                },
-                "dataSpec": {
-                    "attributeKey": "$nested_text",
-                    "valuePattern": null,
-                    "valueExcludePattern": null,
-                    "substringPattern": null
-                }
+            "elementSpec": {
+                "id": null,
+                "tagName": "a",
+                "className": null,
+                "attributeKey": null,
+                "valuePattern": null
             },
-            "urlSpec": {
-                "containerSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": null,
-                    "valuePattern": null
-                },
-                "elementSpec": {
-                    "id": null,
-                    "tagName": "a",
-                    "className": null,
-                    "attributeKey": null,
-                    "valuePattern": null
-                },
-                "dataSpec": {
-                    "attributeKey": "abs:href",
-                    "valuePattern": ".*/\\?cm_type=gnav",
-                    "valueExcludePattern": null,
-                    "substringPattern": null
-                }
+            "dataSpec": {
+                "attributeKey": "$nested_text",
+                "valuePattern": null,
+                "valueExcludePattern": null,
+                "substringPattern": null
+            }
+        },
+        "urlSpec": {
+            "containerSpec": {
+                "id": null,
+                "tagName": "a",
+                "className": null,
+                "attributeKey": null,
+                "valuePattern": null
             },
-            "subcategorySpec": null
+            "elementSpec": {
+                "id": null,
+                "tagName": "a",
+                "className": null,
+                "attributeKey": null,
+                "valuePattern": null
+            },
+            "dataSpec": {
+                "attributeKey": "abs:href",
+                "valuePattern": ".*potterybarnkids.com/shop/sale/.*",
+                "valueExcludePattern": null,
+                "substringPattern": null
+            }
+        }
+    },
+    {
+        "baseUrl":"http://www.pbteen.com/",
+        "containerSpec": {
+            "id": "topnav-container",
+            "tagName": "nav",
+            "className": null,
+            "attributeKey": null,
+            "valuePattern": null
+        },
+        "categorySpec": {
+            "id": null,
+            "tagName": "a",
+            "className": null,
+            "attributeKey": null,
+            "valuePattern": null
+        },
+        "nameSpec": {
+            "containerSpec": {
+                "id": null,
+                "tagName": "a",
+                "className": null,
+                "attributeKey": null,
+                "valuePattern": null
+            },
+            "elementSpec": {
+                "id": null,
+                "tagName": "a",
+                "className": null,
+                "attributeKey": null,
+                "valuePattern": null
+            },
+            "dataSpec": {
+                "attributeKey": "$nested_text",
+                "valuePattern": null,
+                "valueExcludePattern": null,
+                "substringPattern": null
+            }
+        },
+        "urlSpec": {
+            "containerSpec": {
+                "id": null,
+                "tagName": "a",
+                "className": null,
+                "attributeKey": null,
+                "valuePattern": null
+            },
+            "elementSpec": {
+                "id": null,
+                "tagName": "a",
+                "className": null,
+                "attributeKey": null,
+                "valuePattern": null
+            },
+            "dataSpec": {
+                "attributeKey": "abs:href",
+                "valuePattern": ".*pbteen.com/shop/sale/.*",
+                "valueExcludePattern": null,
+                "substringPattern": null
+            }
         }
     }
 ]

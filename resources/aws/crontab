@@ -11,10 +11,13 @@
 30 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh potterybarn >> /dev/null 2>&1
 30 22 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh potterybarn >> /dev/null 2>&1
 
+# rebeccaminkoff
+35 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh rebeccaminkoff >> /dev/null 2>&1
+35 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh rebeccaminkoff >> /dev/null 2>&1
+
 # anthropologie
 40 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anthropologie >> /dev/null 2>&1
 40 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anthropologie >> /dev/null 2>&1
-40 22 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anthropologie >> /dev/null 2>&1
 
 # anntaylor
 50 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anntaylor >> /dev/null 2>&1

@@ -146,7 +146,7 @@
                     "attributeKey":"$nested_text",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":".*special (\\$.*)"
+                    "substringPattern":".*(?i)Special (\\$.*)"
                 }
             },
             {
@@ -168,29 +168,7 @@
                     "attributeKey":"$nested_text",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":".*sale (\\$.*)"
-                }
-            },
-            {
-                "containerSpec":{
-                    "id":null,
-                    "tagName":"span",
-                    "className":"product-price",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"span",
-                    "className":"price-standard",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "dataSpec":{
-                    "attributeKey":"$nested_text",
-                    "valuePattern":null,
-                    "valueExcludePattern":null,
-                    "substringPattern":null
+                    "substringPattern":".*(?i)Sale (\\$.*)"
                 }
             }
         ],

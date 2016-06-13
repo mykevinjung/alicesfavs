@@ -30,13 +30,13 @@ public class RegexTest
     public void testExtractText()
     {
 
-        final String testString = "/anthro/product/shopsale-freshcuts-jewelryaccessories/38097556.jsp";
-        final String regex = ".*/([a-zA-Z0-9]+)\\.jsp.*";
+        final String testString = "sale $123.99";
+        final String regex = ".*(?i)Sale (\\$.*)";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(testString);
 
         assertTrue("Can't find the string!", matcher.find());
-        assertEquals("Can't extract the string!", "38097556", matcher.group(1));
+        assertEquals("Can't extract the string!", "$123.99", matcher.group(1));
     }
 }

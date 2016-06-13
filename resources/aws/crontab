@@ -9,7 +9,6 @@
 # potterybarn
 30 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh potterybarn >> /dev/null 2>&1
 30 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh potterybarn >> /dev/null 2>&1
-30 22 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh potterybarn >> /dev/null 2>&1
 
 # rebeccaminkoff
 35 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh rebeccaminkoff >> /dev/null 2>&1

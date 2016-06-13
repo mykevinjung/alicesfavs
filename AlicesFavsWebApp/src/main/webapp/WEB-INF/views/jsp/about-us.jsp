@@ -29,7 +29,7 @@
     <div class="row">
       <div id="content" class="large-12 columns" role="main">
         <p class="lead text-center">Alice, my wife, looks around her favorite brand sites all the time,
-          checking if there is any good deal, if the price has dropped, not buying but looking every day. I wanted to do the work for her and help her shopping.</p>
+          checking if there are any good deals; if the price has dropped. I wanted to do the work for her and help her shopping.</p>
         <p class="lead text-center">While we were doing this, we noticed that many brands have more than half of their products on sale.
           So why do we buy non-sale products? We decided to collect all products on sale here.</p>
         <hr>

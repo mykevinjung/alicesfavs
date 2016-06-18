@@ -60,12 +60,12 @@ public class ProductController
         return Constants.VIEW_HOME;
     }
 
-    @RequestMapping(value = "/sale/{siteId}", method = RequestMethod.GET)
-    public String sale(@PathVariable String siteId, @RequestParam(name = "category", required = false) String category,
+    @RequestMapping(value = "/sale/{siteIdOrCategory}", method = RequestMethod.GET)
+    public String sale(@PathVariable String siteIdOrCategory, @RequestParam(name = "category", required = false) String category,
         HttpServletRequest request, ModelMap model, Device device)
     {
         List<Site> siteList;
-        AliceCategory aliceCategory = siteManager.getAliceCatgory(siteId);
+        AliceCategory aliceCategory = siteManager.getAliceCatgory(siteIdOrCategory);
         String pageId;
         if (aliceCategory != null)
         {
@@ -76,10 +76,10 @@ public class ProductController
         }
         else
         {
-            final Site site = siteManager.getSiteByStringId(siteId);
+            final Site site = siteManager.getSiteByStringId(siteIdOrCategory);
             if (site == null)
             {
-                throw new ResourceNotFoundException("Site '" + siteId + "' not found");
+                throw new ResourceNotFoundException("Site '" + siteIdOrCategory + "' not found");
             }
 
             siteList = new ArrayList<>();

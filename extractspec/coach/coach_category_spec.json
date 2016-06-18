@@ -2,10 +2,10 @@
     {
         "containerSpec":{
             "id":null,
-            "tagName":null,
-            "className":"dropdown-menu",
-            "attributeKey":"role",
-            "valuePattern":"menu"
+            "tagName":"li",
+            "className":"topcategory-8",
+            "attributeKey":null,
+            "valuePattern":null
         },
         "categorySpec":{
             "id":null,
@@ -41,7 +41,7 @@
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":null,
+                "valuePattern":".*coach.com/shop/sale.*",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }

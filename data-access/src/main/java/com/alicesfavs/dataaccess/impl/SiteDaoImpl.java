@@ -31,7 +31,7 @@ public class SiteDaoImpl implements SiteDao
     private static final String SELECT_ALL =
         "SELECT ID, STRING_ID, COUNTRY_CODE, DISPLAY_NAME, URL, DISPLAY, "
             + "DISPLAY_WEIGHT, CURRENCY, COOKIES, CREATED_DATE, UPDATED_DATE FROM SITE "
-            + "WHERE DISPLAY = 1";
+            + "WHERE DISPLAY = 1 ORDER BY DISPLAY_NAME ASC";
 
     private static final String SELECT_BY_ALICE_CATEGORY_ID =
         "SELECT S.ID, S.STRING_ID, S.COUNTRY_CODE, S.DISPLAY_NAME, S.URL, S.DISPLAY, "

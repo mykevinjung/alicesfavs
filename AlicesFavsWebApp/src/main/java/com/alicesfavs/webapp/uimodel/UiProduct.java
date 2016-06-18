@@ -187,7 +187,8 @@ public class UiProduct
         this.saleStartDate = saleStartDate;
     }
 
-    @Override public boolean equals(Object o)
+    @Override
+    public boolean equals(Object o)
     {
         if (this == o)
             return true;

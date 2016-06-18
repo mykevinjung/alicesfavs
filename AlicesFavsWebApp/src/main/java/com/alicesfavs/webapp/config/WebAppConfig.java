@@ -25,7 +25,7 @@ public class WebAppConfig
     private int saleProductCacheCount;
 
     @Value(value = "${home.category.productsize}")
-    private int categoryProductSize;
+    private int homeCategoryProductSize;
 
     @Value(value = "${refresh.allowedaddr}")
     private String refreshAllowedAddr;
@@ -56,9 +56,9 @@ public class WebAppConfig
         return saleProductCacheCount;
     }
 
-    public int getCategoryProductSize()
+    public int getHomeCategoryProductSize()
     {
-        return categoryProductSize;
+        return homeCategoryProductSize;
     }
 
     public String getRefreshAllowedAddr()

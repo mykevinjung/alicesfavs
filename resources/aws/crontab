@@ -67,7 +67,6 @@
 # coach
 37 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh coach >> /dev/null 2>&1
 37 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh coach >> /dev/null 2>&1
-37 23 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh coach >> /dev/null 2>&1
 
 # toms
 40 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toms >> /dev/null 2>&1

@@ -126,28 +126,6 @@
                     "valueExcludePattern":null,
                     "substringPattern":null
                 }
-            },
-            {
-                "containerSpec":{
-                    "id":null,
-                    "tagName":"div",
-                    "className":"product-price",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"span",
-                    "className":"price-sales",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "dataSpec":{
-                    "attributeKey":"$nested_text",
-                    "valuePattern":null,
-                    "valueExcludePattern":null,
-                    "substringPattern":null
-                }
             }
         ],
         "wasPriceSpecList":[

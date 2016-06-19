@@ -1,7 +1,8 @@
 [
     {
+        "baseUrl":"http://www.crateandbarrel.com/sale/",
         "containerSpec":{
-            "id":"topNavContainer",
+            "id":"leftNavigationMenu",
             "tagName":"div",
             "className":null,
             "attributeKey":null,
@@ -9,8 +10,8 @@
         },
         "categorySpec":{
             "id":null,
-            "tagName":"li",
-            "className":"nav-item",
+            "tagName":"a",
+            "className":null,
             "attributeKey":null,
             "valuePattern":null
         },
@@ -19,7 +20,7 @@
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"title",
+                "className":null,
                 "attributeKey":null,
                 "valuePattern":null
             },
@@ -34,7 +35,7 @@
             "containerSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"title",
+                "className":null,
                 "attributeKey":null,
                 "valuePattern":null
             },

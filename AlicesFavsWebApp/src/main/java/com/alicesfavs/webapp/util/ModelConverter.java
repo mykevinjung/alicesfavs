@@ -4,15 +4,16 @@ import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Country;
 import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.Site;
-import com.alicesfavs.webapp.exception.EncryptionException;
-import com.alicesfavs.webapp.service.Encryptor;
 import com.alicesfavs.webapp.uimodel.UiProduct;
 import com.alicesfavs.webapp.uimodel.UiSite;
 import org.springframework.util.StringUtils;
 
 import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
@@ -22,6 +23,8 @@ import java.util.List;
  */
 public class ModelConverter
 {
+
+    private static final ZoneId ZONE_PST = ZoneId.of(ZoneId.SHORT_IDS.get("PST"));
 
     public static UiSite convertSite(Site site)
     {
@@ -65,10 +68,16 @@ public class ModelConverter
         uiProduct.setSiteName(site.displayName);
         uiProduct.setSiteStringId(site.stringId);
         uiProduct.setSiteDisplayWeight(site.displayWeight);
-        uiProduct.setCreatedDate(product.createdDate.toLocalDate());
-        uiProduct.setSaleStartDate(product.saleStartDate.toLocalDate());
+        uiProduct.setCreatedDate(getLocalDate(product.createdDate));
+        uiProduct.setSaleStartDate(getLocalDate(product.saleStartDate));
 
         return uiProduct;
+    }
+
+    private static LocalDate getLocalDate(LocalDateTime localDateTime)
+    {
+        ZonedDateTime utcDateTime = localDateTime.atZone(ZoneOffset.UTC);
+        return utcDateTime.withZoneSameInstant(ZONE_PST).toLocalDate();
     }
 
     public static List<UiProduct> convertProductList(Site site, List<Product> productList, AliceCategory aliceCategory)

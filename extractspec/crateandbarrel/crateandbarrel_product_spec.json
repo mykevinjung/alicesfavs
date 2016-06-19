@@ -3,7 +3,7 @@
         "containerSpec":{
             "id":null,
             "tagName":"div",
-            "className":"spillContent",
+            "className":"jsItemRow",
             "attributeKey":null,
             "valuePattern":null
         },

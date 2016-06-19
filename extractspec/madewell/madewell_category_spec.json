@@ -1,164 +1,44 @@
 [
     {
+        "baseUrl":"https://www.madewell.com/sale.jsp",
         "containerSpec":{
-            "id":"globalHeaderNav",
-            "tagName":"ul",
+            "id":"category",
+            "tagName":"div",
             "className":null,
             "attributeKey":null,
             "valuePattern":null
         },
         "categorySpec":{
             "id":null,
-            "tagName":"li",
+            "tagName":"a",
             "className":null,
-            "attributeKey":null,
-            "valuePattern":null
+            "attributeKey":"data-group",
+            "valuePattern":"category"
         },
         "nameSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"li",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
                 "className":null,
-                "attributeKey":"name",
-                "valuePattern":".*lpos=top_nav.*"
+                "attributeKey":"data-group",
+                "valuePattern":"category"
             },
             "dataSpec":{
                 "attributeKey":"$nested_text",
-                "valuePattern":"NEW ARRIVALS|DRESSES|Shirts|sweaters|Coats|SHOES|BAGS",
-                "valueExcludePattern":null,
-                "substringPattern":null
-            }
-        },
-        "urlSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"li",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "elementSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":"name",
-                "valuePattern":".*lpos=top_nav.*"
-            },
-            "dataSpec":{
-                "attributeKey":"abs:href",
                 "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
         },
-        "subcategorySpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"table",
-                "className":"catlefNav",
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "categorySpec":{
-                "id":null,
-                "tagName":"td",
-                "className":"subCategoryOpen",
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "nameSpec":{
-                "containerSpec":null,
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"a",
-                    "className":"subCategoryOff",
-                    "attributeKey":"name",
-                    "valuePattern":".*lpos=left_nav.*"
-                },
-                "dataSpec":{
-                    "attributeKey":"$nested_text",
-                    "valuePattern":null,
-                    "valueExcludePattern":null,
-                    "substringPattern":null
-                }
-            },
-            "urlSpec":{
-                "containerSpec":null,
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"a",
-                    "className":"subCategoryOff",
-                    "attributeKey":"name",
-                    "valuePattern":".*lpos=left_nav.*"
-                },
-                "dataSpec":{
-                    "attributeKey":"abs:href",
-                    "valuePattern":null,
-                    "valueExcludePattern":null,
-                    "substringPattern":null
-                }
-            },
-            "subcategorySpec":null
-        }
-    },
-    {
-        "containerSpec":{
-            "id":"globalHeaderNav",
-            "tagName":"ul",
-            "className":null,
-            "attributeKey":null,
-            "valuePattern":null
-        },
-        "categorySpec":{
-            "id":null,
-            "tagName":"li",
-            "className":null,
-            "attributeKey":null,
-            "valuePattern":null
-        },
-        "nameSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"li",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "elementSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":"name",
-                "valuePattern":".*lpos=top_nav.*"
-            },
-            "dataSpec":{
-                "attributeKey":"$nested_text",
-                "valuePattern":"DENIM|SALE",
-                "valueExcludePattern":null,
-                "substringPattern":null
-            }
-        },
         "urlSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"li",
-                "className":null,
-                "attributeKey":null,
-                "valuePattern":null
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
                 "className":null,
-                "attributeKey":"name",
-                "valuePattern":".*lpos=top_nav.*"
+                "attributeKey":"data-group",
+                "valuePattern":"category"
             },
             "dataSpec":{
                 "attributeKey":"abs:href",

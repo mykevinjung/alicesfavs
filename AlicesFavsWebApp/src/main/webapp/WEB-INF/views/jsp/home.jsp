@@ -21,7 +21,7 @@
                 <ul class="products small-block-grid-2 large-block-grid-4">
                     <c:forEach items="${saleCategoryProductEntry.value}" var="product" varStatus="loop">
                         <li class="product-small  grid1 grid-normal">
-                            <div class="inner-wrap">
+                            <div class="inner-wrap" sale-start-date="${product.saleStartDate}">
                                 <a <c:if test="${mobile != true}">target="_blank"</c:if> href="/redirect/product?siteId=${product.siteStringId}&id=${product.id}&pageId=${pageId}&category=${product.aliceCategory}&position=${loop.index+1}">
                                     <div class="product-image">
                                         <div class="front-image"><img width="247" height="300" src="${product.imageUrl}" class="attachment-shop_catalog wp-post-image aligncenter" alt="${product.name}" /></div>

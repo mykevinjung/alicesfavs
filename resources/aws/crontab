@@ -29,12 +29,10 @@
 # madewell
 55 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh madewell >> /dev/null 2>&1
 55 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh madewell >> /dev/null 2>&1
-55 22 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh madewell >> /dev/null 2>&1
 
 # jcrew
 01 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh jcrew >> /dev/null 2>&1
 01 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh jcrew >> /dev/null 2>&1
-01 23 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh jcrew >> /dev/null 2>&1
 
 # williams-sonoma
 10 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh williams-sonoma >> /dev/null 2>&1

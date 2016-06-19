@@ -24,12 +24,7 @@ public abstract class DecoratedComparator implements Comparator<UiProduct>
     @Override
     public int compare(UiProduct p1, UiProduct p2)
     {
-        int compare = compare0(p1, p2);
-        if (compare == 0  && baseComparator != null)
-        {
-            compare = baseComparator.compare(p1, p2);
-        }
-
+        final int compare = compare0(p1, p2);
         if (compare > 0)
         {
             return 1;
@@ -37,6 +32,10 @@ public abstract class DecoratedComparator implements Comparator<UiProduct>
         else if (compare < 0)
         {
             return -1;
+        }
+        else if (baseComparator != null)
+        {
+            return baseComparator.compare(p1, p2);
         }
         else
         {

@@ -43,7 +43,7 @@
                 <div class="large-12 columns">
                     <ul class="products small-block-grid-2 large-block-grid-4">
                         <c:forEach items="${productList}" var="product" varStatus="loop">
-                        <li class="product-small  grid1 grid-normal">
+                        <li class="product-small  grid1 grid-normal" sale-start-date="${product.saleStartDate}">
                             <div class="inner-wrap">
                                 <a <c:if test="${mobile != true}">target="_blank"</c:if> href="/redirect/product?siteId=${product.siteStringId}&id=${product.id}&pageId=${pageId}&pageNo=${pageNo}&category=${product.aliceCategory}&position=${loop.index+1}">
                                     <div class="product-image">

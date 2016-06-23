@@ -1,10 +1,9 @@
 [
     {
-        "baseUrl":"https://www.madewell.com/sale.jsp",
         "containerSpec":{
-            "id":"category",
-            "tagName":"div",
-            "className":null,
+            "id":null,
+            "tagName":"ul",
+            "className":"navbar-top",
             "attributeKey":null,
             "valuePattern":null
         },
@@ -12,8 +11,8 @@
             "id":null,
             "tagName":"a",
             "className":null,
-            "attributeKey":"data-group",
-            "valuePattern":"category"
+            "attributeKey":null,
+            "valuePattern":null
         },
         "nameSpec":{
             "containerSpec":null,
@@ -21,14 +20,14 @@
                 "id":null,
                 "tagName":"a",
                 "className":null,
-                "attributeKey":"data-group",
-                "valuePattern":"category"
+                "attributeKey":null,
+                "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"$nested_text",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":"(.+) \\([0-9]+\\)"
+                "substringPattern":null
             }
         },
         "urlSpec":{
@@ -37,16 +36,16 @@
                 "id":null,
                 "tagName":"a",
                 "className":null,
-                "attributeKey":"data-group",
-                "valuePattern":"category"
+                "attributeKey":null,
+                "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":null,
+                "valuePattern":".*surlatable.com/category/[a-zA-Z0-9]+/[a-zA-Z0-9+]+Sale.*",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
         },
-        "subcategorySpec":null
+        "subcategorySpec": null
     }
 ]

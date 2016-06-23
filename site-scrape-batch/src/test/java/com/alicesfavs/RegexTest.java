@@ -20,8 +20,8 @@ public class RegexTest
     public void testRegex()
     {
 
-        final String testString = "http://www.rebeccaminkoff.com/sale?cat=63";
-        final String regex = ".*rebeccaminkoff.com/sale\\?cat=.*";
+        final String testString = "http://www.surlatable.com/category/cat2241641/Small+Appliance+Sale?cleanSession=true&pCat=cat360431";
+        final String regex = ".*surlatable.com/category/[a-zA-Z0-9]+/[a-zA-Z0-9+]+Sale;.*";
 
         assertTrue("Does not match!", testString.matches(regex));
     }
@@ -30,13 +30,13 @@ public class RegexTest
     public void testExtractText()
     {
 
-        final String testString = "sale $123.99";
-        final String regex = ".*(?i)Sale (\\$.*)";
+        final String testString = "http://www.surlatable.com/product/PRO-2446060/Staub+Essential+Ov";
+        final String regex = ".*/product/PRO-([0-9]+)/.*";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(testString);
 
         assertTrue("Can't find the string!", matcher.find());
-        assertEquals("Can't extract the string!", "$123.99", matcher.group(1));
+        assertEquals("Can't extract the string!", "2446060", matcher.group(1));
     }
 }

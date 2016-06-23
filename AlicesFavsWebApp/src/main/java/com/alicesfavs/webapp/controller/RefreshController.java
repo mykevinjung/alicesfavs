@@ -59,6 +59,7 @@ public class RefreshController
         validateRequest(request);
 
         siteManager.refresh();
+        saleProductService.refreshNewSaleProductMap();
 
         return Constants.VIEW_BLANK;
     }

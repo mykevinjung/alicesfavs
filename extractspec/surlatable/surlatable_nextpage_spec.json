@@ -1,0 +1,26 @@
+[
+  {
+    "nextPageSpec":{
+      "containerSpec":{
+        "id":null,
+        "tagName":"li",
+        "className":"nextpage",
+        "attributeKey":null,
+        "valuePattern":null
+      },
+      "elementSpec":{
+        "id":null,
+        "tagName":"a",
+        "className":null,
+        "attributeKey":"$nested_text",
+        "valuePattern":"Next.*"
+      },
+      "dataSpec":{
+        "attributeKey":"abs:href",
+        "valuePattern":".*No=.*",
+        "valueExcludePattern":null,
+        "substringPattern":null
+      }
+    }
+  }
+]

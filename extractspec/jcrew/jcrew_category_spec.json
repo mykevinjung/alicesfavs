@@ -75,7 +75,7 @@
                     "attributeKey":"$nested_text",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":null
+                    "substringPattern":"(.+) \\([0-9]+\\)"
                 }
             },
             "urlSpec":{

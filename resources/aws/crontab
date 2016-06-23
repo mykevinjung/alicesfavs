@@ -1,6 +1,10 @@
 # refresh site manager
 5,35 * * * * wget -a /opt/apache-tomcat-8.0.28/logs/refresh-site-manager.log http://52.27.245.48/refresh/site-manager
 
+# surlatable
+20 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh surlatable >> /dev/null 2>&1
+20 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh surlatable >> /dev/null 2>&1
+
 # eddiebauer
 25 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh eddiebauer >> /dev/null 2>&1
 25 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh eddiebauer >> /dev/null 2>&1

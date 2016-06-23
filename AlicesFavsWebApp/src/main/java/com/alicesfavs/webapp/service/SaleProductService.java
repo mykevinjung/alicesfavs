@@ -125,6 +125,11 @@ public class SaleProductService
         }
     }
 
+    public synchronized void refreshNewSaleProductMap()
+    {
+        newSaleProductMap.clear();
+    }
+
     private List<Site> getAliceCategorySites(AliceCategory aliceCategory)
     {
         final List<Site> siteList = new ArrayList<>();

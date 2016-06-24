@@ -2,8 +2,8 @@
     {
         "containerSpec":{
             "id":null,
-            "tagName":"div",
-            "className":"navigation",
+            "tagName":"li",
+            "className":"sale-navigation",
             "attributeKey":null,
             "valuePattern":null
         },
@@ -32,7 +32,7 @@
             "dataSpec":{
                 "attributeKey":"$nested_text",
                 "valuePattern":null,
-                "valueExcludePattern":".*Under|Patterns",
+                "valueExcludePattern":null,
                 "substringPattern":null
             }
         },
@@ -53,7 +53,7 @@
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":".*verabradley.com/section/.*",
+                "valuePattern":".*verabradley.com/category/sale/.*",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }

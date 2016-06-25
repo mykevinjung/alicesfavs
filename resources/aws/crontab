@@ -78,3 +78,11 @@
 45 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh crateandbarrel >> /dev/null 2>&1
 45 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh crateandbarrel >> /dev/null 2>&1
 45 23 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh crateandbarrel >> /dev/null 2>&1
+
+# also
+50 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh aldo >> /dev/null 2>&1
+50 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh aldo >> /dev/null 2>&1
+
+# vince
+55 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh vince >> /dev/null 2>&1
+55 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh vince >> /dev/null 2>&1

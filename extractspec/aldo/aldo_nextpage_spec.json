@@ -1,0 +1,26 @@
+[
+  {
+    "nextPageSpec":{
+      "containerSpec":{
+        "id":null,
+        "tagName":"span",
+        "className":"controls",
+        "attributeKey":null,
+        "valuePattern":null
+      },
+      "elementSpec":{
+        "id":null,
+        "tagName":"a",
+        "className":null,
+        "attributeKey":"$nested_text",
+        "valuePattern":"»"
+      },
+      "dataSpec":{
+        "attributeKey":"abs:href",
+        "valuePattern":".*page=.*",
+        "valueExcludePattern":".*#$",
+        "substringPattern":null
+      }
+    }
+  }
+]

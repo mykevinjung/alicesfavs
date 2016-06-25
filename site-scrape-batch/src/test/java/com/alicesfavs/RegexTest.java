@@ -20,8 +20,8 @@ public class RegexTest
     public void testRegex()
     {
 
-        final String testString = "http://www.surlatable.com/category/cat2241641/Small+Appliance+Sale?cleanSession=true&pCat=cat360431";
-        final String regex = ".*surlatable.com/category/[a-zA-Z0-9]+/[a-zA-Z0-9+]+Sale;.*";
+        final String testString = "ONE SIZE";
+        final String regex = "[A-Z/ ]+";
 
         assertTrue("Does not match!", testString.matches(regex));
     }

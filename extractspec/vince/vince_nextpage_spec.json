@@ -1,0 +1,26 @@
+[
+    {
+        "nextPageSpec":{
+            "containerSpec":{
+                "id":null,
+                "tagName":"ul",
+                "className":"pagn-pages",
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":"title",
+                "valuePattern":"View.*"
+            },
+            "dataSpec":{
+                "attributeKey":"abs:href",
+                "valuePattern":null,
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        }
+    }
+]

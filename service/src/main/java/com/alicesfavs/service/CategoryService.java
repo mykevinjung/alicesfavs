@@ -12,7 +12,7 @@ import com.alicesfavs.datamodel.Site;
 public interface CategoryService
 {
 
-    List<Category> saveCategoryExtract(long jobId, long siteId, MultirootTree<CategoryExtract> categoryExtracts);
+    List<Category> saveCategoryExtract(long jobId, Site site, MultirootTree<CategoryExtract> categoryExtracts);
 
     /**
      * Returns the categories of the site in display order

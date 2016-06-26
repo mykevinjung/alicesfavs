@@ -70,7 +70,7 @@ public class ProductExtractor
 
             //final List<Category> categories = categoryService.findSiteCategories(site.id);
             //testCategoryExtracts(categoryExtracts, categories);
-            final List<Category> categoryList = categoryService.saveCategoryExtract(job.id, site.id, categoryExtracts);
+            final List<Category> categoryList = categoryService.saveCategoryExtract(job.id, site, categoryExtracts);
             job.foundCategory = categoryList.size();
             job.notFoundCategory = categoryService.markNotFoundCategory(job.id, site.id);
             LOGGER.info("Number of not found category: " + job.notFoundCategory);

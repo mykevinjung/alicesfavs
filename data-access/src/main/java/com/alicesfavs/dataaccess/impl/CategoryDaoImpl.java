@@ -93,24 +93,6 @@ public class CategoryDaoImpl implements CategoryDao
         return category;
     }
 
-    public Category selectCategoryByName(long siteId, String categoryName1, String categoryName2, String categoryName3)
-    {
-        final List<Object> paramList = new ArrayList<Object>();
-        final StringBuilder sql = new StringBuilder(SELECT_CATEGORY_BY_NAME);
-        paramList.add(siteId);
-        addIfNotEmpty(1, categoryName1, sql, paramList);
-        addIfNotEmpty(2, categoryName2, sql, paramList);
-        addIfNotEmpty(3, categoryName3, sql, paramList);
-        final int[] types = new int[paramList.size()];
-        types[0] = Types.BIGINT;
-        for (int index = 1; index < types.length; index++)
-        {
-            types[index] = Types.VARCHAR;
-        }
-
-        return daoSupport.selectObject(sql.toString(), types, paramList.toArray(), new CategoryRowMapper());
-    }
-
     public List<Category> selectCategoryBySiteId(long siteId, ExtractStatus extractStatus)
     {
         final Object[] params =

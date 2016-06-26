@@ -16,8 +16,6 @@ public interface CategoryDao
 
     Category updateCategory(Category category);
 
-    Category selectCategoryByName(long siteId, String categoryName1, String categoryName2, String categoryName3);
-
     List<Category> selectCategoryBySiteId(long siteId, ExtractStatus extractStatus);
 
     int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus currentStatus, ExtractStatus newStatus);

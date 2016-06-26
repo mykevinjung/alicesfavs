@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alicesfavs.datamodel.Site;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,15 +31,16 @@ public class CategoryServiceImpl implements CategoryService
     @Autowired
     private CategoryProductDao categoryProductDao;
 
-    public List<Category> saveCategoryExtract(long jobId, long siteId, MultirootTree<CategoryExtract> categoryExtracts)
+    public List<Category> saveCategoryExtract(long jobId, Site site, MultirootTree<CategoryExtract> categoryExtracts)
     {
         final List<Node<CategoryExtract>> leafCategories = categoryExtracts.getAllLeafNodes();
         final LocalDateTime now = LocalDateTime.now();
         final List<Category> categories = new ArrayList<>();
+        final List<Category> existingCategories = findSiteCategories(site);
         for (int index = 0; index < leafCategories.size(); index++)
         {
             final CategoryExtract[] categoryHierarchy = getCategoryHierarchy(leafCategories.get(index));
-            final Category category = saveCategoryExtract(jobId, siteId, index, now, categoryHierarchy);
+            final Category category = saveCategoryExtract(jobId, site.id, index, now, categoryHierarchy, existingCategories);
             categories.add(category);
         }
 
@@ -85,20 +87,11 @@ public class CategoryServiceImpl implements CategoryService
     }
 
     private Category saveCategoryExtract(long jobId, long siteId, int displayOrder, LocalDateTime extractTime,
-            CategoryExtract[] categoryHierarchy)
+            CategoryExtract[] categoryHierarchy, List<Category> existingCategories)
     {
-        Category existingCategory = categoryDao.selectCategoryByName(siteId, getCategoryName(categoryHierarchy[0]),
-                getCategoryName(categoryHierarchy[1]), getCategoryName(categoryHierarchy[2]));
-        if (existingCategory == null)
+        final Category existingCategory = findSameCategory(categoryHierarchy, existingCategories);
+        if (existingCategory != null)
         {
-            return categoryDao.insertCategory(siteId, null, categoryHierarchy[0], categoryHierarchy[1], categoryHierarchy[2],
-                    displayOrder, ExtractStatus.EXTRACTED, jobId, extractTime);
-        }
-        else
-        {
-            copyCategoryExtractUrl(existingCategory.categoryExtract1, categoryHierarchy[0]);
-            copyCategoryExtractUrl(existingCategory.categoryExtract2, categoryHierarchy[1]);
-            copyCategoryExtractUrl(existingCategory.categoryExtract3, categoryHierarchy[2]);
             existingCategory.displayOrder = displayOrder;
             existingCategory.extractedDate = extractTime;
             existingCategory.extractJobId = jobId;
@@ -106,19 +99,45 @@ public class CategoryServiceImpl implements CategoryService
             categoryDao.updateCategory(existingCategory);
             return existingCategory;
         }
+        else
+        {
+            return categoryDao.insertCategory(siteId, null, categoryHierarchy[0], categoryHierarchy[1], categoryHierarchy[2],
+                displayOrder, ExtractStatus.EXTRACTED, jobId, extractTime);
+        }
+    }
+
+    private Category findSameCategory(CategoryExtract[] categoryHierarchy, List<Category> existingCategoryList)
+    {
+        for (Category category : existingCategoryList)
+        {
+            if (isSameCategory(categoryHierarchy, category))
+            {
+                return category;
+            }
+        }
+        return null;
+    }
+
+    private boolean isSameCategory(CategoryExtract[] categoryHierarchy, Category existingCategory)
+    {
+        if (existingCategory != null)
+        {
+            return isSameCategoryExtract(categoryHierarchy[0], existingCategory.categoryExtract1)
+                && isSameCategoryExtract(categoryHierarchy[1], existingCategory.categoryExtract2)
+                && isSameCategoryExtract(categoryHierarchy[2], existingCategory.categoryExtract3);
+        }
+        return false;
+    }
+
+    private boolean isSameCategoryExtract(CategoryExtract categoryExtract1, CategoryExtract categoryExtract2)
+    {
+        return (categoryExtract1 == null && categoryExtract2 == null)
+            || (categoryExtract1 != null && categoryExtract1.equals(categoryExtract2));
     }
 
     private String getCategoryName(CategoryExtract categoryExtract)
     {
         return categoryExtract != null ? categoryExtract.name : null;
-    }
-
-    private void copyCategoryExtractUrl(CategoryExtract existingCategory, CategoryExtract newCategory)
-    {
-        if (existingCategory != null && newCategory != null)
-        {
-            existingCategory.url = newCategory.url;
-        }
     }
 
     private CategoryExtract[] getCategoryHierarchy(Node<CategoryExtract> leafNode)

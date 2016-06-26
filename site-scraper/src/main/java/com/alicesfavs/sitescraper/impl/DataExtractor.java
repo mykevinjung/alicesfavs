@@ -29,7 +29,6 @@ public class DataExtractor
     public List<CategoryExtract> extractCategories(Element rootElement, CategoryExtractSpec categoryExtractSpec)
             throws ElementNotFoundException, DataNotFoundException
     {
-        // TODO let's use set instead of list
         final Elements elements = extractElements(rootElement, categoryExtractSpec.containerSpec,
                 categoryExtractSpec.categorySpec);
 
@@ -49,7 +48,6 @@ public class DataExtractor
                     categoryExtract.url = extractData(element, categoryExtractSpec.urlSpec);
                 }
                 categoryList.add(categoryExtract);
-                //System.out.println(categoryExtract);
             }
             catch (ElementNotFoundException | DataNotFoundException e)
             {

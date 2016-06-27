@@ -55,7 +55,14 @@ public class ProductController
         }
         model.addAttribute("saleCategoryProductMap", categoryProductMap);
         model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_HOME);
-        model.addAttribute("mobile", device.isMobile());
+        model.addAttribute(Constants.MOBILE, device.isMobile());
+
+        // seo
+        final StringBuilder description = new StringBuilder();
+        description.append("Alice's Favs - All sales from the best brands in one place")
+        .append(" for clothing, shoes, bags, accessories and home.")
+        .append(" Start your shopping at Alice's Favs!");
+        model.addAttribute(Constants.META_DESCRIPTION, description.toString());
 
         return Constants.VIEW_HOME;
     }
@@ -76,29 +83,23 @@ public class ProductController
         }
 
         // category-site specific info
-        model.addAttribute(Constants.BREADCRUMB1, aliceCategory.name);
-        model.addAttribute(Constants.BREADCRUMB2, site.displayName);
-        model.addAttribute(Constants.SUBTITLE, "Sale - " + aliceCategory.name + " > " + site.displayName);
-        model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_CAT_SITE);
-
         final List<Site> siteList = new ArrayList<>();
         siteList.add(site);
+        model.addAttribute(Constants.BREADCRUMB1, aliceCategory.name);
+        model.addAttribute(Constants.BREADCRUMB2, site.displayName);
+        model.addAttribute(Constants.SUBTITLE, "Sale - " + aliceCategory.name + " - " + site.displayName);
+        model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_CAT_SITE);
+
+        // seo
+        final String description = String.format("Alice's Favs - %s on sale at %s", aliceCategory.name, site.displayName);
+        model.addAttribute(Constants.META_DESCRIPTION, description);
+
         return renderSale(aliceCategory, siteList, request, model, device);
     }
 
-    private String renderSale(AliceCategory aliceCategory, List<Site> siteList, HttpServletRequest request, ModelMap model, Device device)
-    {
-        final ProductSortType productSortType = ProductSortType.fromCode(request.getParameter(Constants.SORT_BY), ProductSortType.DATE);
-        final List<UiProduct> productList = saleProductService.getSaleProducts(siteList, aliceCategory, productSortType);
-        addProductAttributes(request, model, productList, webAppConfig.getSaleProductPageSize());
-        model.addAttribute(Constants.SORT_BY, productSortType.getCode());
-        model.addAttribute("mobile", device.isMobile());
-
-        return Constants.VIEW_SALE;
-    }
-
     @RequestMapping(value = "/sale/{category}", method = RequestMethod.GET)
-    public String saleByCategoryAll(@PathVariable String category, HttpServletRequest request, ModelMap model, Device device)
+    public String saleByCategoryAll(@PathVariable String category, HttpServletRequest request, ModelMap model,
+        Device device)
     {
         final AliceCategory aliceCategory = siteManager.getAliceCatgory(category);
         if (aliceCategory == null)
@@ -111,6 +112,10 @@ public class ProductController
         model.addAttribute(Constants.BREADCRUMB1, aliceCategory.name);
         model.addAttribute(Constants.SUBTITLE, "Sale - " + aliceCategory.name);
         model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_CAT_ALL);
+
+        // seo
+        final String description = String.format("Alice's Favs - %s on sale", aliceCategory.name);
+        model.addAttribute(Constants.META_DESCRIPTION, description);
 
         return renderSale(aliceCategory, siteList, request, model, device);
     }
@@ -131,6 +136,10 @@ public class ProductController
         model.addAttribute(Constants.SUBTITLE, "Sale - " + site.displayName);
         model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_SITE);
 
+        // seo
+        final String description = String.format("Alice's Favs - All sales at %s", site.displayName);
+        model.addAttribute(Constants.META_DESCRIPTION, description);
+
         return renderSale(null, siteList, request, model, device);
     }
 
@@ -148,6 +157,20 @@ public class ProductController
         return siteList;
     }
 
+    private String renderSale(AliceCategory aliceCategory, List<Site> siteList, HttpServletRequest request,
+        ModelMap model, Device device)
+    {
+        final ProductSortType productSortType = ProductSortType
+            .fromCode(request.getParameter(Constants.SORT_BY), ProductSortType.DATE);
+        final List<UiProduct> productList = saleProductService
+            .getSaleProducts(siteList, aliceCategory, productSortType);
+        addProductAttributes(request, model, productList, webAppConfig.getSaleProductPageSize());
+        model.addAttribute(Constants.SORT_BY, productSortType.getCode());
+        model.addAttribute(Constants.MOBILE, device.isMobile());
+
+        return Constants.VIEW_SALE;
+    }
+
     private void addProductAttributes(HttpServletRequest request, ModelMap model, List<UiProduct> productList,
         int pageSize)
     {
@@ -155,7 +178,8 @@ public class ProductController
         final Pagination pagination = new Pagination(pageSize, totalCount, request,
             Constants.PAGE_NUMBER);
         final int totalPageNo = pagination.getTotalPageNo();
-        final int pageNo = pagination.getActualPageNo(NumberUtils.toInt(request.getParameter(Constants.PAGE_NUMBER), 1));
+        final int pageNo = pagination
+            .getActualPageNo(NumberUtils.toInt(request.getParameter(Constants.PAGE_NUMBER), 1));
         final int startIndex = pagination.getStartIndex(pageNo);
         final int endIndex = pagination.getEndIndex(pageNo);
         final List<Page> pageList = pagination.getPageList(pageNo);

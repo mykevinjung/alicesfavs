@@ -43,7 +43,11 @@ public class BaseController
         model.addAttribute(Constants.PARAM_DEFAULT_SUBJECT, Constants.DEFAULT_SUBJECT);
         model.addAttribute(Constants.PARAM_DEFAULT_EMAIL, Constants.DEFAULT_EMAIL);
         model.addAttribute(Constants.PARAM_DEFAULT_MESSAGE, Constants.DEFAULT_MESSAGE);
-        model.addAttribute(Constants.SUBTITLE, "Contact Us");
+        model.addAttribute(Constants.SUBTITLE, "Contact us");
+
+        // seo
+        final String description = "Alice's Favs - Contact us";
+        model.addAttribute(Constants.META_DESCRIPTION, description);
 
         return Constants.VIEW_CONTACT_US;
     }
@@ -94,13 +98,21 @@ public class BaseController
             }
         }
 
+        // seo
+        final String description = "Alice's Favs - Contact us";
+        model.addAttribute(Constants.META_DESCRIPTION, description);
+
         return contactUs(model);
     }
 
     @RequestMapping(value = "/about-us", method = RequestMethod.GET)
     public String aboutUs(ModelMap model)
     {
-        model.addAttribute(Constants.SUBTITLE, "About Us");
+        model.addAttribute(Constants.SUBTITLE, "About us");
+
+        // seo
+        final String description = "Alice's Favs - About us";
+        model.addAttribute(Constants.META_DESCRIPTION, description);
 
         return Constants.VIEW_ABOUT_US;
     }
@@ -109,7 +121,11 @@ public class BaseController
     public String disclaimer(ModelMap model)
     {
         model.addAttribute(Constants.SUBTITLE, "Disclaimer");
-        
+
+        // seo
+        final String description = "Alice's Favs - Disclaimer";
+        model.addAttribute(Constants.META_DESCRIPTION, description);
+
         return Constants.VIEW_DISCLAIMER;
     }
 

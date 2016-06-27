@@ -14,10 +14,10 @@ public class Constants
     // For example, Clothing -> All i.e. /sale/clothing
     public static final String PAGE_ID_SALE_CAT_ALL = "sale-category-all";
 
-    // For example, Clothing -> JCrew i.e. /sale/jcrew?category=clothing
+    // For example, Clothing -> JCrew i.e. /sale/clothing/jcrew
     public static final String PAGE_ID_SALE_CAT_SITE = "sale-category-site";
 
-    // For example, /sale/jcrew
+    // For example, /sale/brand/jcrew
     public static final String PAGE_ID_SALE_SITE = "sale-site";
 
     public static final String PAGE_NUMBER = "pageNo";
@@ -35,6 +35,7 @@ public class Constants
     public static final String BREADCRUMB1 = "breadcrumb1";
     public static final String BREADCRUMB2 = "breadcrumb2";
     public static final String SUBTITLE = "subtitle";
+    public static final String MOBILE = "mobile";
     public static final String PARAM_EMAIL_SENT = "emailSent";
     public static final String PARAM_SUBJECT = "subject";
     public static final String PARAM_EMAIL = "email";
@@ -46,7 +47,6 @@ public class Constants
     public static final String DEFAULT_SUBJECT = "Subject";
     public static final String DEFAULT_EMAIL = "Your email";
     public static final String DEFAULT_MESSAGE = "Your message and name";
-
 
 
     // view name
@@ -61,10 +61,10 @@ public class Constants
 
     public static final String REDIRECT_PREFIX = "redirect:";
 
-    // seo attributes
-    public static final String SEO_DESCRIPTION = "seoDescription";
-    public static final String SEO_KEYWORDS = "seoKeywords";
-    public static final String SEO_TITLE = "seoTitle";
-
+    // attributes for SEO
+    public static final String META_DESCRIPTION = "metaDescription";
+    public static final String META_KEYWORDS = "metaKeywords";
+    public static final String META_TITLE = "metaTitle";
     public static final String CANONICAL_LINK = "canonicalLink";
+
 }

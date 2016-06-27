@@ -38,8 +38,8 @@
 
             <div class="featured-box  pos-center  " title=""  style="">
               <div class="box-inner">
-                <h4>The best from the best brands<span> </span></h4>
-                <p>All sales from the best brands at one stop! Start your shopping here.</p>
+                <h4>The best from the favorite brands<span> </span></h4>
+                <p>All sales from the favorite brands in one place! Start your shopping here.</p>
               </div>
             </div>
           </div></div>

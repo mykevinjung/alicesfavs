@@ -59,7 +59,7 @@ public class ProductController
 
         // seo
         final StringBuilder description = new StringBuilder();
-        description.append("Alice's Favs - All sales from the best brands in one place")
+        description.append("Alice's Favs - All sales from the favorite brands in one place")
         .append(" for clothing, shoes, bags, accessories and home.")
         .append(" Start your shopping at Alice's Favs!");
         model.addAttribute(Constants.META_DESCRIPTION, description.toString());

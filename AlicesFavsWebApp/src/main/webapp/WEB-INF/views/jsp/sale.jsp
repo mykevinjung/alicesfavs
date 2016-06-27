@@ -11,7 +11,7 @@
         <div class="large-12 columns">
             <div class="breadcrumb-row">
                 <div class="left">
-                    <h3 class="breadcrumb" itemscope="breadcrumb">${breadcrumb1}<c:if test="${not empty breadcrumb2}"><span>/</span>${breadcrumb2}</c:if></h3>    </div><!-- .left -->
+                    <h3 class="breadcrumb" itemscope="breadcrumb"><a href="/">Sale</a><span>/</span>${breadcrumb1}<c:if test="${not empty breadcrumb2}"><span>/</span>${breadcrumb2}</c:if></h3>    </div><!-- .left -->
 
                 <c:if test="${totalCount > 0}">
                     <div class="right">
@@ -53,7 +53,7 @@
                                 <div class="info style-grid1">
                                     <div class="text-center">
                                         <h5 class="category">
-                                            <a href="/sale/${product.siteStringId}" rel="tag">${product.siteName}</a>          </h5>
+                                            <a href="/sale/brand/${product.siteStringId}" rel="tag">${product.siteName}</a>          </h5>
                                         <div class="tx-div small"></div>
                                         <a item-id="${product.id}" <c:if test="${mobile != true}">target="_blank"</c:if> href="/redirect/product?siteId=${product.siteStringId}&id=${product.id}&pageId=${pageId}&pageNo=${pageNo}&category=${product.aliceCategory}&position=${loop.index+1}"><p class="name">${product.name}</p></a>
 

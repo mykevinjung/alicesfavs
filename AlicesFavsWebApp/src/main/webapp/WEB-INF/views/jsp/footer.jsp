@@ -36,7 +36,7 @@
         <ul class="sub-menu">
           <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/clothing">All</a></li>
           <c:forEach items="${clothing}" var="site">
-            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=clothing">${site.displayName}</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/clothing/${site.stringId}">${site.displayName}</a></li>
           </c:forEach>
         </ul>
       </li>
@@ -44,7 +44,7 @@
         <ul class="sub-menu">
           <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/shoes">All</a></li>
           <c:forEach items="${shoes}" var="site">
-            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=shoes">${site.displayName}</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/shoes/${site.stringId}">${site.displayName}</a></li>
           </c:forEach>
         </ul>
       </li>
@@ -52,7 +52,7 @@
         <ul class="sub-menu">
           <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/bags">All</a></li>
           <c:forEach items="${bags}" var="site">
-            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=bags">${site.displayName}</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/bags/${site.stringId}">${site.displayName}</a></li>
           </c:forEach>
         </ul>
       </li>
@@ -60,7 +60,7 @@
         <ul class="sub-menu">
           <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/accessories">All</a></li>
           <c:forEach items="${accessories}" var="site">
-            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=accessories">${site.displayName}</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/accessories/${site.stringId}">${site.displayName}</a></li>
           </c:forEach>
         </ul>
       </li>
@@ -68,7 +68,7 @@
         <ul class="sub-menu">
           <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/home">All</a></li>
           <c:forEach items="${home}" var="site">
-            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/${site.stringId}?category=home">${site.displayName}</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/home/${site.stringId}">${site.displayName}</a></li>
           </c:forEach>
         </ul>
       </li>

@@ -30,7 +30,7 @@
                                 <div class="info style-grid1">
                                     <div class="text-center">
                                         <h5 class="category">
-                                            <a href="/sale/${product.siteStringId}" rel="tag">${product.siteName}</a>          </h5>
+                                            <a href="/sale/brand/${product.siteStringId}" rel="tag">${product.siteName}</a>          </h5>
                                         <div class="tx-div small"></div>
                                         <a item-id="${product.id}" <c:if test="${mobile != true}">target="_blank"</c:if> href="/redirect/product?siteId=${product.siteStringId}&id=${product.id}&pageId=${pageId}&category=${product.aliceCategory}&position=${loop.index+1}"><p class="name">${product.name}</p></a>
                                         <del><span class="amount">${product.wasPriceWithCurrency}</span></del> <span class="price"><ins><span class="amount">${product.priceWithCurrency}</span></ins></span>

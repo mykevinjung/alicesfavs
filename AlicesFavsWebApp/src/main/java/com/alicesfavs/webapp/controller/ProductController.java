@@ -60,54 +60,78 @@ public class ProductController
         return Constants.VIEW_HOME;
     }
 
-    @RequestMapping(value = "/sale/{siteIdOrCategory}", method = RequestMethod.GET)
-    public String sale(@PathVariable String siteIdOrCategory, @RequestParam(name = "category", required = false) String category,
+    @RequestMapping(value = "/sale/{category}/{siteId}", method = RequestMethod.GET)
+    public String saleByCategorySite(@PathVariable String category, @PathVariable String siteId,
         HttpServletRequest request, ModelMap model, Device device)
     {
-        List<Site> siteList;
-        AliceCategory aliceCategory = siteManager.getAliceCatgory(siteIdOrCategory);
-        String pageId;
-        if (aliceCategory != null)
+        final AliceCategory aliceCategory = siteManager.getAliceCatgory(category);
+        if (aliceCategory == null)
         {
-            siteList = getAliceCategorySites(aliceCategory);
-            model.addAttribute(Constants.BREADCRUMB1, aliceCategory.name);
-            model.addAttribute(Constants.SUBTITLE, "Sale - " + aliceCategory.name);
-            pageId = Constants.PAGE_ID_SALE_CAT_ALL;
+            throw new ResourceNotFoundException("Category '" + category + "' not found");
         }
-        else
+        final Site site = siteManager.getSiteByStringId(siteId);
+        if (site == null)
         {
-            final Site site = siteManager.getSiteByStringId(siteIdOrCategory);
-            if (site == null)
-            {
-                throw new ResourceNotFoundException("Site '" + siteIdOrCategory + "' not found");
-            }
-
-            siteList = new ArrayList<>();
-            siteList.add(site);
-            aliceCategory = siteManager.getAliceCatgory(category);
-            if (aliceCategory != null)
-            {
-                model.addAttribute(Constants.BREADCRUMB1, aliceCategory.name);
-                model.addAttribute(Constants.BREADCRUMB2, site.displayName);
-                model.addAttribute(Constants.SUBTITLE, "Sale - " + aliceCategory.name + " > " + site.displayName);
-                pageId = Constants.PAGE_ID_SALE_CAT_SITE;
-            }
-            else
-            {
-                model.addAttribute(Constants.BREADCRUMB1, site.displayName);
-                model.addAttribute(Constants.SUBTITLE, "Sale - " + site.displayName);
-                pageId = Constants.PAGE_ID_SALE_SITE;
-            }
+            throw new ResourceNotFoundException("Site '" + siteId + "' not found");
         }
 
+        // category-site specific info
+        model.addAttribute(Constants.BREADCRUMB1, aliceCategory.name);
+        model.addAttribute(Constants.BREADCRUMB2, site.displayName);
+        model.addAttribute(Constants.SUBTITLE, "Sale - " + aliceCategory.name + " > " + site.displayName);
+        model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_CAT_SITE);
+
+        final List<Site> siteList = new ArrayList<>();
+        siteList.add(site);
+        return renderSale(aliceCategory, siteList, request, model, device);
+    }
+
+    private String renderSale(AliceCategory aliceCategory, List<Site> siteList, HttpServletRequest request, ModelMap model, Device device)
+    {
         final ProductSortType productSortType = ProductSortType.fromCode(request.getParameter(Constants.SORT_BY), ProductSortType.DATE);
         final List<UiProduct> productList = saleProductService.getSaleProducts(siteList, aliceCategory, productSortType);
         addProductAttributes(request, model, productList, webAppConfig.getSaleProductPageSize());
-        model.addAttribute(Constants.PAGE_ID, pageId);
         model.addAttribute(Constants.SORT_BY, productSortType.getCode());
         model.addAttribute("mobile", device.isMobile());
 
         return Constants.VIEW_SALE;
+    }
+
+    @RequestMapping(value = "/sale/{category}", method = RequestMethod.GET)
+    public String saleByCategoryAll(@PathVariable String category, HttpServletRequest request, ModelMap model, Device device)
+    {
+        final AliceCategory aliceCategory = siteManager.getAliceCatgory(category);
+        if (aliceCategory == null)
+        {
+            throw new ResourceNotFoundException("Category '" + category + "' not found");
+        }
+
+        // category specific info
+        final List<Site> siteList = getAliceCategorySites(aliceCategory);
+        model.addAttribute(Constants.BREADCRUMB1, aliceCategory.name);
+        model.addAttribute(Constants.SUBTITLE, "Sale - " + aliceCategory.name);
+        model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_CAT_ALL);
+
+        return renderSale(aliceCategory, siteList, request, model, device);
+    }
+
+    @RequestMapping(value = "/sale/brand/{siteId}", method = RequestMethod.GET)
+    public String saleByBrand(@PathVariable String siteId, HttpServletRequest request, ModelMap model, Device device)
+    {
+        final Site site = siteManager.getSiteByStringId(siteId);
+        if (site == null)
+        {
+            throw new ResourceNotFoundException("Site '" + siteId + "' not found");
+        }
+
+        // brand specific info
+        final List<Site> siteList = new ArrayList<>();
+        siteList.add(site);
+        model.addAttribute(Constants.BREADCRUMB1, site.displayName);
+        model.addAttribute(Constants.SUBTITLE, "Sale - " + site.displayName);
+        model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_SITE);
+
+        return renderSale(null, siteList, request, model, device);
     }
 
     private List<Site> getAliceCategorySites(AliceCategory aliceCategory)

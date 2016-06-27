@@ -56,8 +56,15 @@ public class Constants
     public static final String VIEW_CONTACT_US = "contact-us";
     public static final String VIEW_DISCLAIMER = "disclaimer";
     public static final String VIEW_ERROR_404 = "error404";
+    public static final String VIEW_ERROR_500 = "error500";
     public static final String VIEW_BLANK = "blank";
 
     public static final String REDIRECT_PREFIX = "redirect:";
 
+    // seo attributes
+    public static final String SEO_DESCRIPTION = "seoDescription";
+    public static final String SEO_KEYWORDS = "seoKeywords";
+    public static final String SEO_TITLE = "seoTitle";
+
+    public static final String CANONICAL_LINK = "canonicalLink";
 }

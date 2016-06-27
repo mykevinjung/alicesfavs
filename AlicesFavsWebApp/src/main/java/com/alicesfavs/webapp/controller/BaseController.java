@@ -121,4 +121,10 @@ public class BaseController
         return Constants.VIEW_ERROR_404;
     }
 
+    @RequestMapping(value = "/error500", method = RequestMethod.GET)
+    public String error500(ModelMap model)
+    {
+        return Constants.VIEW_ERROR_500;
+    }
+
 }

@@ -8,6 +8,8 @@ import com.alicesfavs.webapp.uimodel.Constants;
 import com.alicesfavs.webapp.util.ModelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -35,7 +37,27 @@ public class BaseInterceptor extends HandlerInterceptorAdapter
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
         ModelAndView modelAndView) throws Exception
     {
-        if (modelAndView != null && !isRedirect(modelAndView))
+        if (modelAndView != null)
+        {
+            addCanonicalLink(request, modelAndView);
+            addCategorySites(modelAndView);
+        }
+    }
+
+    private void addCanonicalLink(HttpServletRequest request, ModelAndView modelAndView)
+    {
+        String canonicalLink = request.getRequestURI();
+        final String queryString = request.getQueryString();
+        if (StringUtils.hasText(queryString))
+        {
+            canonicalLink += "?" + queryString;
+        }
+        modelAndView.addObject(Constants.CANONICAL_LINK, canonicalLink);
+    }
+
+    private void addCategorySites(ModelAndView modelAndView)
+    {
+        if (!isRedirect(modelAndView))
         {
             for (AliceCategory aliceCategory : siteManager.getAliceCategoryList())
             {

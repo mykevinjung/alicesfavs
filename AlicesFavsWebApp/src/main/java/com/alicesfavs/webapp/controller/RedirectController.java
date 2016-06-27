@@ -74,7 +74,7 @@ public class RedirectController
             productRedirect.pageNo = NumberUtils.toInt(request.getParameter(Constants.PAGE_NUMBER), 1);
             productRedirect.position = NumberUtils.toInt(request.getParameter(Constants.POSITION), 1);
             productRedirect.category = request.getParameter(Constants.CATEGORY);
-            productRedirect.sessionId = request.getRequestedSessionId();
+            productRedirect.sessionId = request.getSession().getId();
             productRedirect.isMobile = device.isMobile();
             redirectService.saveProductRedirect(productRedirect);
         }

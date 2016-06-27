@@ -17,6 +17,8 @@
   <title>
     <c:if test="${not empty subtitle}">${subtitle} | </c:if><c:choose><c:when test="${not empty title}">${title}</c:when><c:otherwise>Alice's Favs - All Sales from the best brands</c:otherwise></c:choose>
   </title>
+
+  <link rel="canonical" href="http://www.alicesfavs.com${canonicalLink}">
   <link rel='stylesheet' id='flatsome-css-minified-css'  href='/resources/css/flatsome.min.css' type='text/css' media='all' />
   <link rel='stylesheet' id='flatsome-style-css'  href='/resources/css/style.css' type='text/css' media='all' />
   <link rel='stylesheet' id='flatsome-googlefonts-css'  href='//fonts.googleapis.com/css?family=Dancing+Script%3A300%2C400%2C700%2C900%7CLato%3A300%2C400%2C700%2C900%7CLato%3A300%2C400%2C700%2C900%7CLato%3A300%2C400%2C700%2C900&#038;subset=latin&#038;ver=4.3.1' type='text/css' media='all' />

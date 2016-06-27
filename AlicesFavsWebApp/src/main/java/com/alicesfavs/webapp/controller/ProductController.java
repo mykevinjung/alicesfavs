@@ -91,7 +91,7 @@ public class ProductController
         model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_CAT_SITE);
 
         // seo
-        final String description = String.format("Alice's Favs - %s on sale at %s", aliceCategory.name, site.displayName);
+        final String description = String.format("%s on sale at %s - Alice's Favs", aliceCategory.name, site.displayName);
         model.addAttribute(Constants.META_DESCRIPTION, description);
 
         return renderSale(aliceCategory, siteList, request, model, device);
@@ -114,7 +114,7 @@ public class ProductController
         model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_CAT_ALL);
 
         // seo
-        final String description = String.format("Alice's Favs - %s on sale", aliceCategory.name);
+        final String description = String.format("%s on sale - Alice's Favs", aliceCategory.name);
         model.addAttribute(Constants.META_DESCRIPTION, description);
 
         return renderSale(aliceCategory, siteList, request, model, device);
@@ -137,7 +137,7 @@ public class ProductController
         model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_SITE);
 
         // seo
-        final String description = String.format("Alice's Favs - All sales at %s", site.displayName);
+        final String description = String.format("All sales at %s - Alice's Favs", site.displayName);
         model.addAttribute(Constants.META_DESCRIPTION, description);
 
         return renderSale(null, siteList, request, model, device);

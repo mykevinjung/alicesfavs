@@ -8,6 +8,7 @@ import com.alicesfavs.datamodel.CategoryExtract;
 import com.alicesfavs.datamodel.ProductExtract;
 import com.alicesfavs.sitescraper.extractspec.CategoryExtractSpec;
 import com.alicesfavs.sitescraper.extractspec.NextPageExtractSpec;
+import com.alicesfavs.sitescraper.extractspec.ProductDetailExtractSpec;
 import com.alicesfavs.sitescraper.extractspec.ProductExtractSpec;
 
 public interface SiteScraper
@@ -23,5 +24,8 @@ public interface SiteScraper
     List<ProductExtract> extractProducts(Site site, CategoryExtract categoryExtract,
         List<ProductExtractSpec> productExtractSpecList, List<NextPageExtractSpec> nextPageExtractSpecList)
         throws SiteScrapeException;
+
+    void extractProductDetail(Site site, ProductExtract productExtract,
+        List<ProductDetailExtractSpec> productDetailExtractSpecList) throws SiteScrapeException;
 
 }

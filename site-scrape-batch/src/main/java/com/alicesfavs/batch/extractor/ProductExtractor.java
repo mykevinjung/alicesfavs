@@ -2,6 +2,7 @@ package com.alicesfavs.batch.extractor;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import com.alicesfavs.datamodel.*;
 import com.alicesfavs.service.CategoryService;
 import com.alicesfavs.service.ProductService;
 import com.alicesfavs.sitescraper.extractspec.CategoryExtractSpec;
+import com.alicesfavs.sitescraper.extractspec.ProductDetailExtractSpec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,8 @@ public class ProductExtractor
         job.notFoundProduct = productService.markNotFoundProduct(job, site);
 
         saveCategoryProduct(job, site, categoryMap, productMap);
+
+        extractProductDetail(site, productMap.values());
     }
 
     private List<Category> extractCategory(Job job, Site site) throws ExtractException
@@ -99,6 +103,43 @@ public class ProductExtractor
         catch (SiteScrapeException e)
         {
             throw new ExtractException("Error in extracting categories", e);
+        }
+    }
+
+    private void extractProductDetail(Site site, Collection<Product> productList) throws ExtractException
+    {
+        try
+        {
+            final List<ProductDetailExtractSpec> productDetailExtractSpecList =
+                batchConfig.getProductDetailExtractSpec(site);
+            if (productDetailExtractSpecList != null && productDetailExtractSpecList.size() > 0)
+            {
+                LOGGER.info("Extracting product details...");
+                for (Product product : productList)
+                {
+                    extractProductDetail(site, product, productDetailExtractSpecList);
+                }
+            }
+        }
+        catch (IOException e)
+        {
+            throw new ExtractException("Error in getting category extract spec", e);
+        }
+        catch (SiteScrapeException e)
+        {
+            throw new ExtractException("Error in extracting categories", e);
+        }
+    }
+
+    private void extractProductDetail(Site site, Product product,
+        List<ProductDetailExtractSpec> productDetailExtractSpecList) throws SiteScrapeException
+    {
+        final boolean oldSoldOut = product.productExtract.soldOut;
+        product.productExtract.soldOut = false;
+        siteScraper.extractProductDetail(site, product.productExtract, productDetailExtractSpecList);
+        if (oldSoldOut != product.productExtract.soldOut)
+        {
+            productService.saveProduct(product);
         }
     }
 

@@ -31,8 +31,6 @@ public class Product extends Extractable
      */
     public LocalDateTime saleStartDate;
 
-    public boolean soldOut;
-
     /**
      * The date when this product is first found or the date when the product price was last changed.
      */

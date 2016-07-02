@@ -9,6 +9,12 @@ import java.sql.SQLException;
 public class ResultSetUtils
 {
 
+    public static boolean getBoolean(ResultSet rs, String columnName) throws SQLException
+    {
+        final int result = rs.getInt(columnName);
+        return rs.wasNull() ? false : result == 1;
+    }
+
     public static Double getDouble(ResultSet rs, String columnName) throws SQLException
     {
         final double result = rs.getDouble(columnName);

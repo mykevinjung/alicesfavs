@@ -91,7 +91,12 @@ public class ModelConverter
         final List<UiProduct> uiProductList = new ArrayList<>(endIndex - startIndex);
         for (int index = startIndex ; index < endIndex ; index++)
         {
-            uiProductList.add(convertProduct(site, productList.get(index), aliceCategory));
+            // filter out sold out product
+            final Product product = productList.get(index);
+            if (!product.productExtract.soldOut)
+            {
+                uiProductList.add(convertProduct(site, product, aliceCategory));
+            }
         }
 
         return uiProductList;

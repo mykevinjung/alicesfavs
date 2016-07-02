@@ -7,6 +7,7 @@ import com.alicesfavs.sitescraper.extractspec.DataExtractSpec;
 import com.alicesfavs.sitescraper.extractspec.ElementDataSpec;
 import com.alicesfavs.sitescraper.extractspec.ElementExtractSpec;
 import com.alicesfavs.sitescraper.extractspec.NextPageExtractSpec;
+import com.alicesfavs.sitescraper.extractspec.ProductDetailExtractSpec;
 import com.alicesfavs.sitescraper.extractspec.ProductExtractSpec;
 
 import org.jsoup.nodes.Element;
@@ -101,6 +102,23 @@ public class DataExtractor
         }
 
         return productList;
+    }
+
+    public void extractProductDetail(Element rootElement, ProductDetailExtractSpec productDetailExtractSpec,
+        ProductExtract productExtract)
+    {
+        try
+        {
+            final String soldOut = extractData(rootElement, productDetailExtractSpec.soldOutSpec);
+            if (StringUtils.hasText(soldOut))
+            {
+                productExtract.soldOut = true;
+            }
+        }
+        catch (DataNotFoundException | ElementNotFoundException e)
+        {
+            // sold out
+        }
     }
 
     public String extractNextPageUrl(Element rootElement, NextPageExtractSpec nextPageExtractSpec)

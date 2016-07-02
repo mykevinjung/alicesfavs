@@ -31,12 +31,12 @@ public class ProductDaoImpl implements ProductDao
     private static final String INSERT_PRODUCT =
         "INSERT INTO PRODUCT (SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
             + "WAS_PRICE_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, "
-            + "PRICE_CHANGED_DATE, SALE_START_DATE, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "PRICE_CHANGED_DATE, SALE_START_DATE, SOLD_OUT, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String UPDATE_PRODUCT = "UPDATE PRODUCT SET SITE_ID = ?, ID_EXTRACT = ?, NAME_EXTRACT = ?, "
         + "PRICE_EXTRACT = ?, WAS_PRICE_EXTRACT = ?, URL_EXTRACT = ?, IMAGE_URL_EXTRACT = ?, "
-        + "PRICE = ?, WAS_PRICE = ?, PRICE_CHANGED_DATE = ?, SALE_START_DATE = ?, "
+        + "PRICE = ?, WAS_PRICE = ?, PRICE_CHANGED_DATE = ?, SALE_START_DATE = ?, SOLD_OUT = ?, "
         + "EXTRACT_STATUS = ?, EXTRACT_JOB_ID = ?, EXTRACTED_DATE = ? WHERE ID = ?";
 
     private static final String UPDATE_EXTRACT_STATUS = "UPDATE PRODUCT SET EXTRACT_STATUS = ? "
@@ -44,24 +44,24 @@ public class ProductDaoImpl implements ProductDao
 
     private static final String SELECT_PRODUCT_BY_ID = "SELECT ID, SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
         + "WAS_PRICE_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, "
-        + "PRICE_CHANGED_DATE, SALE_START_DATE, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
+        + "PRICE_CHANGED_DATE, SALE_START_DATE, SOLD_OUT, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
         + "CREATED_DATE, UPDATED_DATE FROM PRODUCT WHERE ID = ?";
 
     private static final String SELECT_PRODUCT_BY_IDS = "SELECT ID, SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
         + "WAS_PRICE_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, "
-        + "PRICE_CHANGED_DATE, SALE_START_DATE, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
+        + "PRICE_CHANGED_DATE, SALE_START_DATE, SOLD_OUT, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
         + "CREATED_DATE, UPDATED_DATE FROM PRODUCT WHERE SITE_ID = ? AND ID_EXTRACT = ?";
 
     private static final String SELECT_SALE_PRODUCTS_BY_SITE =
         "SELECT ID, SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
             + "WAS_PRICE_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, "
-            + "PRICE_CHANGED_DATE, SALE_START_DATE, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
+            + "PRICE_CHANGED_DATE, SALE_START_DATE, SOLD_OUT, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
             + "CREATED_DATE, UPDATED_DATE FROM PRODUCT WHERE SALE_START_DATE IS NOT NULL AND SITE_ID = ? AND EXTRACT_STATUS = ?";
 
     private static final String SELECT_SALE_PRODUCTS_BY_SITE_CATEGORY =
         "SELECT CP.CATEGORY_ID, P.ID, P.SITE_ID, P.ID_EXTRACT, P.NAME_EXTRACT, P.PRICE_EXTRACT, "
             + "P.WAS_PRICE_EXTRACT, P.URL_EXTRACT, P.IMAGE_URL_EXTRACT, P.PRICE, P.WAS_PRICE, "
-            + "P.PRICE_CHANGED_DATE, P.SALE_START_DATE, P.EXTRACT_STATUS, P.EXTRACT_JOB_ID, P.EXTRACTED_DATE, "
+            + "P.PRICE_CHANGED_DATE, P.SALE_START_DATE, P.SOLD_OUT, P.EXTRACT_STATUS, P.EXTRACT_JOB_ID, P.EXTRACTED_DATE, "
             + "P.CREATED_DATE, P.UPDATED_DATE FROM PRODUCT P JOIN CATEGORY_PRODUCT CP ON P.ID = CP.PRODUCT_ID "
             + "WHERE P.SALE_START_DATE IS NOT NULL AND P.EXTRACT_STATUS = 1 "
             + "AND CP.EXTRACT_STATUS = 1 AND CP.CATEGORY_ID IN (%s) ORDER BY CP.CATEGORY_ID, CP.DISPLAY_ORDER";
@@ -69,19 +69,19 @@ public class ProductDaoImpl implements ProductDao
     private static final String SELECT_NEW_PRODUCTS_BY_SITE =
         "SELECT ID, SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
             + "WAS_PRICE_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, "
-            + "PRICE_CHANGED_DATE, SALE_START_DATE, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
+            + "PRICE_CHANGED_DATE, SALE_START_DATE, SOLD_OUT, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
             + "CREATED_DATE, UPDATED_DATE FROM PRODUCT WHERE SALE_START_DATE IS NULL AND "
             + "SITE_ID = ? AND EXTRACT_STATUS = ? AND CREATED_DATE >= ?";
 
     private static final int[] INSERT_PARAM_TYPES =
         { Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
             Types.VARCHAR, Types.DECIMAL, Types.DECIMAL, Types.TIMESTAMP, Types.TIMESTAMP,
-            Types.INTEGER, Types.BIGINT, Types.TIMESTAMP };
+            Types.INTEGER, Types.INTEGER, Types.BIGINT, Types.TIMESTAMP };
 
     private static final int[] UPDATE_PARAM_TYPES =
         { Types.BIGINT, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
             Types.VARCHAR, Types.DECIMAL, Types.DECIMAL, Types.TIMESTAMP, Types.TIMESTAMP,
-            Types.INTEGER, Types.BIGINT, Types.TIMESTAMP, Types.BIGINT };
+            Types.INTEGER, Types.INTEGER, Types.BIGINT, Types.TIMESTAMP, Types.BIGINT };
 
     private static final int[] SELECT_SALE_PRODUCTS_BY_SITE_PARAM_TYPES =
         { Types.BIGINT, Types.INTEGER };
@@ -110,7 +110,7 @@ public class ProductDaoImpl implements ProductDao
             { siteId, productExtract.id, productExtract.name, productExtract.price, productExtract.wasPrice,
                 productExtract.url, productExtract.imageUrl, price, wasPrice,
                 DateTimeUtils.toTimestamp(priceChangedDate), DateTimeUtils.toTimestamp(saleStartDate),
-                extractStatus.getCode(), extractJobId, DateTimeUtils.toTimestamp(extractedDate) };
+                productExtract.soldOut, extractStatus.getCode(), extractJobId, DateTimeUtils.toTimestamp(extractedDate) };
         final ModelBase modelBase = daoSupport.insert(INSERT_PRODUCT, INSERT_PARAM_TYPES, params);
 
         final Product product = new Product(modelBase, siteId, productExtract);
@@ -132,7 +132,7 @@ public class ProductDaoImpl implements ProductDao
                 product.productExtract.wasPrice, product.productExtract.url,
                 product.productExtract.imageUrl, product.price, product.wasPrice,
                 DateTimeUtils.toTimestamp(product.priceChangedDate), DateTimeUtils.toTimestamp(product.saleStartDate),
-                product.extractStatus.getCode(), product.extractJobId,
+                product.productExtract.soldOut ? 1 : 0, product.extractStatus.getCode(), product.extractJobId,
                 DateTimeUtils.toTimestamp(product.extractedDate), product.id };
         product.updatedDate = daoSupport.update(UPDATE_PRODUCT, UPDATE_PARAM_TYPES, params);
 
@@ -229,6 +229,7 @@ public class ProductDaoImpl implements ProductDao
             productExtract.wasPrice = rs.getString("WAS_PRICE_EXTRACT");
             productExtract.url = rs.getString("URL_EXTRACT");
             productExtract.imageUrl = rs.getString("IMAGE_URL_EXTRACT");
+            productExtract.soldOut = ResultSetUtils.getBoolean(rs, "SOLD_OUT");
 
             final Product product = new Product(extractable, rs.getLong("SITE_ID"), productExtract);
             product.price = ResultSetUtils.getDouble(rs, "PRICE");

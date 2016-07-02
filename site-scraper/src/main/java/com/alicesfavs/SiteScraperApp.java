@@ -15,6 +15,7 @@ import com.alicesfavs.sitescraper.extractspec.ProductExtractSpec;
 import com.alicesfavs.sitescraper.impl.SiteScraperImpl;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.jsoup.Connection;
+import org.jsoup.HttpStatusException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.springframework.util.StringUtils;
 
 /**
  * Hello world!
@@ -31,6 +37,7 @@ public class SiteScraperApp
 {
     public static void main(String[] args) throws Exception
     {
+        Document document = openUrl("http://www.anthropologie.com/anthro/product/shopsale-freshcuts/4130231803773.jsp");
         Site site = new Site(1, LocalDateTime.now(), "anthropologie");
         site.url = "http://www.anthropologie.com";
 
@@ -45,6 +52,13 @@ public class SiteScraperApp
         // readJcrew();
         // readNordStrom();
     }
+
+    private static Document openUrl(String url) throws IOException
+    {
+        Connection conn = Jsoup.connect(url);
+        return conn.get();
+    }
+
 
     private static void test2()
     {

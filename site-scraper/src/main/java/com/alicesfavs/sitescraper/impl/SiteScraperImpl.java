@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alicesfavs.sitescraper.extractspec.ProductDetailExtractSpec;
 import org.jsoup.Connection;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
@@ -116,6 +117,20 @@ public class SiteScraperImpl implements SiteScraper
         }
 
         return productList;
+    }
+
+    @Override
+    public void extractProductDetail(Site site, ProductExtract productExtract,
+        List<ProductDetailExtractSpec> productDetailExtractSpecList) throws SiteScrapeException
+    {
+        final Document doc = openUrl(site, productExtract.url);
+        if (doc != null)
+        {
+            for (ProductDetailExtractSpec productDetailExtractSpec : productDetailExtractSpecList)
+            {
+                dataExtractor.extractProductDetail(doc, productDetailExtractSpec, productExtract);
+            }
+        }
     }
 
     private List<CategoryExtract> extractCategories(Site site, String pageUrl, CategoryExtractSpec categoryExtractSpec)

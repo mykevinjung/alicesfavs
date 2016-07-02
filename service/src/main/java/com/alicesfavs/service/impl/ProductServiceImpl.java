@@ -69,6 +69,12 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
+    public void saveProduct(Product product)
+    {
+        productDao.updateProduct(product);
+    }
+
+    @Override
     public Product findProduct(long productId)
     {
         return productDao.selectProductById(productId);
@@ -117,7 +123,6 @@ public class ProductServiceImpl implements ProductService
         }
         else
         {
-            final LocalDateTime oldSaleStartDate = product.saleStartDate;
             product = updateProduct(job, site, product, extractStatus, productExtract);
         }
 

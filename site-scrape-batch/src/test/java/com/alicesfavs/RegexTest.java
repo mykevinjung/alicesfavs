@@ -20,8 +20,8 @@ public class RegexTest
     public void testRegex()
     {
 
-        final String testString = "ONE SIZE";
-        final String regex = "[A-Z/ ]+";
+        final String testString = "src/main/i18n/pages/abc_en_US.properties";
+        final String regex = "src/main/i18n/pages/.*en_US.properties";
 
         assertTrue("Does not match!", testString.matches(regex));
     }

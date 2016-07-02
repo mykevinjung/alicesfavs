@@ -100,12 +100,24 @@ public class SaleProductService
             return productList;
         }
 
-        // collect all sales of the category
+        // collect first items from each site
+        productList = new ArrayList<>();
         final List<Site> siteList = getAliceCategorySites(aliceCategory);
-        final List<UiProduct> allProductList = getSaleProducts(siteList, aliceCategory, ProductSortType.DATE);
-        final int endIndex = Math.min(allProductList.size(), webAppConfig.getHomeCategoryProductSize());
-
-        productList = allProductList.subList(0, endIndex);
+        final int todayEpochDay = (int) LocalDate.now().toEpochDay();
+        for (int index = 0; ; index++)
+        {
+            final Site site = siteList.get((todayEpochDay + index) % siteList.size());
+            final List<UiProduct> siteProductList = getSaleProducts(site, aliceCategory);
+            final int productIndex = webAppConfig.getHomeCategoryProductSize() / siteList.size();
+            if (productIndex < siteProductList.size())
+            {
+                productList.add(siteProductList.get(productIndex));
+            }
+            if (productList.size() == webAppConfig.getHomeCategoryProductSize())
+            {
+                break;
+            }
+        }
         newSaleProductMap.put(aliceCategory, productList);
 
         return productList;
@@ -161,6 +173,7 @@ public class SaleProductService
                 addAllIfNotExist(productList, entry.getValue());
             }
         }
+        sortSaleProducts(productList, ProductSortType.DATE);
 
         return productList;
     }
@@ -192,7 +205,10 @@ public class SaleProductService
                 {
                     final List<UiProduct> uiProductList =
                         ModelConverter.convertProductList(site, entry.getValue(), aliceCategory);
-                    categoryUiProductMap.put(entry.getKey(), uiProductList);
+                    if (uiProductList.size() > 0)
+                    {
+                        categoryUiProductMap.put(entry.getKey(), uiProductList);
+                    }
                 }
             }
         }

@@ -6,19 +6,22 @@ import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.CategoryService;
 import com.alicesfavs.service.ProductService;
+import com.alicesfavs.webapp.comparator.CategoryDisplayOrderComparator;
 import com.alicesfavs.webapp.comparator.DiscountAmountComparator;
 import com.alicesfavs.webapp.comparator.DiscountPercentageComparator;
+import com.alicesfavs.webapp.comparator.ProductDisplayOrderComparator;
 import com.alicesfavs.webapp.comparator.SaleDateComparator;
+import com.alicesfavs.webapp.comparator.SiteDisplayOrderComparator;
 import com.alicesfavs.webapp.config.WebAppConfig;
 import com.alicesfavs.webapp.uimodel.SiteProduct;
 import com.alicesfavs.webapp.uimodel.UiProduct;
+import com.alicesfavs.webapp.util.LocalDateUtils;
 import com.alicesfavs.webapp.util.ModelConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -103,7 +106,7 @@ public class SaleProductService
         // collect first items from each site
         productList = new ArrayList<>();
         final List<Site> siteList = getAliceCategorySites(aliceCategory);
-        final int todayEpochDay = (int) LocalDate.now().toEpochDay();
+        final int todayEpochDay = (int) LocalDateUtils.now().toEpochDay();
         for (int index = 0; ; index++)
         {
             final Site site = siteList.get((todayEpochDay + index) % siteList.size());
@@ -198,13 +201,14 @@ public class SaleProductService
         if (categoryList.size() > 0)
         {
             final Map<Category, List<Product>> categoryProductMap = productService.searchSaleProducts(categoryList);
+            int categoryDisplayOrder = 0;
             for (Map.Entry<Category, List<Product>> entry : categoryProductMap.entrySet())
             {
                 final AliceCategory aliceCategory = siteManager.getAliceCategory(entry.getKey());
                 if (aliceCategory != null)
                 {
                     final List<UiProduct> uiProductList =
-                        ModelConverter.convertProductList(site, entry.getValue(), aliceCategory);
+                        ModelConverter.convertProductList(++categoryDisplayOrder, site, entry.getValue(), aliceCategory);
                     if (uiProductList.size() > 0)
                     {
                         categoryUiProductMap.put(entry.getKey(), uiProductList);

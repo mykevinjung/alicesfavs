@@ -22,6 +22,12 @@ public class UiProduct
     private LocalDate createdDate;
     private LocalDate saleStartDate;
 
+    /**
+     * Display order within the site, not across the sites
+     */
+    private int categoryDisplayOrder;
+    private int productDisplayOrder;
+
     // site info
     private String siteName;
     private String siteStringId;
@@ -185,6 +191,26 @@ public class UiProduct
     public void setSaleStartDate(LocalDate saleStartDate)
     {
         this.saleStartDate = saleStartDate;
+    }
+
+    public int getCategoryDisplayOrder()
+    {
+        return categoryDisplayOrder;
+    }
+
+    public void setCategoryDisplayOrder(int categoryDisplayOrder)
+    {
+        this.categoryDisplayOrder = categoryDisplayOrder;
+    }
+
+    public int getProductDisplayOrder()
+    {
+        return productDisplayOrder;
+    }
+
+    public void setProductDisplayOrder(int productDisplayOrder)
+    {
+        this.productDisplayOrder = productDisplayOrder;
     }
 
     @Override

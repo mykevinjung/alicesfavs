@@ -62,7 +62,7 @@ public class ProductExtractor
 
         saveCategoryProduct(job, site, categoryMap, productMap);
 
-        extractProductDetail(site, productMap.values());
+//        extractProductDetail(site, productMap.values());
     }
 
     private List<Category> extractCategory(Job job, Site site) throws ExtractException

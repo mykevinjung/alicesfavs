@@ -46,7 +46,8 @@ public class BaseController
         model.addAttribute(Constants.SUBTITLE, "Contact us");
 
         // seo
-        final String description = "Alice's Favs - Contact us";
+        final String description = "Alice's Favs - Contact us"
+            + " - All sales from the favorite brands in one place for clothing, shoes, bags, accessories and home.";
         model.addAttribute(Constants.META_DESCRIPTION, description);
 
         return Constants.VIEW_CONTACT_US;
@@ -99,7 +100,8 @@ public class BaseController
         }
 
         // seo
-        final String description = "Alice's Favs - Contact us";
+        final String description = "Alice's Favs - Contact us"
+            + " - All sales from the favorite brands in one place for clothing, shoes, bags, accessories and home.";
         model.addAttribute(Constants.META_DESCRIPTION, description);
 
         return contactUs(model);
@@ -111,7 +113,8 @@ public class BaseController
         model.addAttribute(Constants.SUBTITLE, "About us");
 
         // seo
-        final String description = "Alice's Favs - About us";
+        final String description = "Alice's Favs - About us"
+            + " - All sales from the favorite brands in one place for clothing, shoes, bags, accessories and home.";
         model.addAttribute(Constants.META_DESCRIPTION, description);
 
         return Constants.VIEW_ABOUT_US;
@@ -123,7 +126,8 @@ public class BaseController
         model.addAttribute(Constants.SUBTITLE, "Disclaimer");
 
         // seo
-        final String description = "Alice's Favs - Disclaimer";
+        final String description = "Alice's Favs - Disclaimer"
+            + " - All sales from the favorite brands in one place for clothing, shoes, bags, accessories and home.";
         model.addAttribute(Constants.META_DESCRIPTION, description);
 
         return Constants.VIEW_DISCLAIMER;

@@ -91,7 +91,9 @@ public class ProductController
         model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_CAT_SITE);
 
         // seo
-        final String description = String.format("%s on sale at %s - Alice's Favs", aliceCategory.name, site.displayName);
+        final String description = String.format("%s on sale at %s - Alice's Favs"
+            + " - All sales from the favorite brands in one place for clothing, shoes, bags, accessories and home.",
+            aliceCategory.name, site.displayName);
         model.addAttribute(Constants.META_DESCRIPTION, description);
 
         return renderSale(aliceCategory, siteList, request, model, device);
@@ -114,7 +116,9 @@ public class ProductController
         model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_CAT_ALL);
 
         // seo
-        final String description = String.format("%s on sale - Alice's Favs", aliceCategory.name);
+        final String description = String.format("%s on sale - Alice's Favs"
+            + " - All sales from the favorite brands in one place for clothing, shoes, bags, accessories and home.",
+            aliceCategory.name);
         model.addAttribute(Constants.META_DESCRIPTION, description);
 
         return renderSale(aliceCategory, siteList, request, model, device);
@@ -137,7 +141,9 @@ public class ProductController
         model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_SITE);
 
         // seo
-        final String description = String.format("All sales at %s - Alice's Favs", site.displayName);
+        final String description = String.format("All sales at %s - Alice's Favs"
+            + " - All sales from the favorite brands in one place for clothing, shoes, bags, accessories and home.",
+            site.displayName);
         model.addAttribute(Constants.META_DESCRIPTION, description);
 
         return renderSale(null, siteList, request, model, device);

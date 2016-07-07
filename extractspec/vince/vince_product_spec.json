@@ -1,36 +1,30 @@
 [
     {
         "containerSpec":{
-            "id":"searchResults",
-            "tagName":"section",
-            "className":null,
+            "id":null,
+            "tagName":"ul",
+            "className":"search-result-items",
             "attributeKey":null,
             "valuePattern":null
         },
         "productSpec":{
             "id":null,
-            "tagName":"li",
-            "className":"prod-search-results",
+            "tagName":"div",
+            "className":"product-tile",
             "attributeKey":null,
             "valuePattern":null
         },
         "idSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"div",
-                "className":"prod-image",
-                "attributeKey":null,
-                "valuePattern":null
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":"id",
+                "tagName":"div",
+                "className":"product-tile",
+                "attributeKey":"data-styleid",
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"id",
+                "attributeKey":"data-styleid",
                 "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
@@ -39,8 +33,8 @@
         "nameSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"h2",
-                "className":"prod-name",
+                "tagName":"div",
+                "className":"product-name",
                 "attributeKey":null,
                 "valuePattern":null
             },
@@ -61,8 +55,8 @@
         "urlSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"h2",
-                "className":"prod-name",
+                "tagName":"div",
+                "className":"product-name",
                 "attributeKey":null,
                 "valuePattern":null
             },
@@ -85,19 +79,19 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"div",
-                    "className":"product-swatch-image",
+                    "className":"product-image",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
-                    "tagName":"a",
-                    "className":null,
+                    "tagName":"img",
+                    "className":"list-main-image",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "dataSpec":{
-                    "attributeKey":"data-imgoff",
+                    "attributeKey":"src",
                     "valuePattern":null,
                     "valueExcludePattern":null,
                     "substringPattern":null
@@ -109,14 +103,14 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"div",
-                    "className":"prod-pricedetails",
+                    "className":"product-pricing",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"prod-pricenow",
+                    "className":"product-sales-price",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -133,14 +127,14 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"div",
-                    "className":"prod-pricedetails",
+                    "className":"product-pricing",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"prod-price-was",
+                    "className":"product-standard-price",
                     "attributeKey":null,
                     "valuePattern":null
                 },

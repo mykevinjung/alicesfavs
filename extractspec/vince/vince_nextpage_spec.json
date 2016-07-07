@@ -3,17 +3,17 @@
         "nextPageSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"ul",
-                "className":"pagn-pages",
+                "tagName":"div",
+                "className":"pagination",
                 "attributeKey":null,
                 "valuePattern":null
             },
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":null,
-                "attributeKey":"title",
-                "valuePattern":"View.*"
+                "className":"page-next",
+                "attributeKey":null,
+                "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"abs:href",

@@ -14,7 +14,7 @@
 
   <!-- Retina/iOS favicon -->
   <link rel="apple-touch-icon-precomposed" href="/resources/images/logo_touch.png" />
-  <title><c:if test="${not empty subtitle}">${subtitle} | </c:if><c:choose><c:when test="${not empty title}">${title}</c:when><c:otherwise>Alice's Favs - All sales from the best brands</c:otherwise></c:choose></title>
+  <title><c:if test="${not empty subtitle}">${subtitle} | </c:if><c:choose><c:when test="${not empty title}">${title}</c:when><c:otherwise>Alice's Favs - All sales from the favorite brands</c:otherwise></c:choose></title>
 
   <link rel="canonical" href="http://www.alicesfavs.com${canonicalLink}">
   <c:if test="${not empty metaDescription}"><meta name="description" content="${metaDescription}" /></c:if>
@@ -58,7 +58,6 @@
                 <div class="html-block-inner">
                   <div class="social-icons size-small">
                     <a href="http://www.facebook.com/sharer.php?u=http://www.alicesfavs.com/" onclick="window.open(this.href,this.title,'width=500,height=500,top=300px,left=300px');  return false;"  rel="nofollow" target="_blank" class="icon icon_facebook tip-top" title="Share on Facebook"><span class="icon-facebook"></span></a>
-                    <a href="https://twitter.com/share?url=http://www.alicesfavs.com/" onclick="window.open(this.href,this.title,'width=500,height=500,top=300px,left=300px');  return false;"  rel="nofollow" target="_blank" class="icon icon_twitter tip-top" title="Share on Twitter"><span class="icon-twitter"></span></a>
                   </div>
                 </div>
               </li>

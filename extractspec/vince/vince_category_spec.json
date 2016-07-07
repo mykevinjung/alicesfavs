@@ -1,32 +1,31 @@
 [
     {
-        "baseUrl":"http://www.vince.com/womens-sale/view-all/icat/wsaleall",
         "containerSpec":{
-            "id":"refinement-source-size",
-            "tagName":"div",
-            "className":null,
+            "id":null,
+            "tagName":"ul",
+            "className":"menu-category",
             "attributeKey":null,
             "valuePattern":null
         },
         "categorySpec":{
             "id":null,
-            "tagName":"div",
-            "className":"search-facet",
-            "attributeKey":"data-facetname",
+            "tagName":"a",
+            "className":null,
+            "attributeKey":null,
             "valuePattern":null
         },
         "nameSpec":{
             "containerSpec":null,
             "elementSpec":{
                 "id":null,
-                "tagName":"div",
-                "className":"search-facet",
-                "attributeKey":"data-facetname",
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"data-facetname",
-                "valuePattern":"[A-Z/ ]+",
+                "attributeKey":"$nested_text",
+                "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
@@ -35,68 +34,66 @@
             "containerSpec":null,
             "elementSpec":{
                 "id":null,
-                "tagName":"div",
-                "className":"search-facet",
-                "attributeKey":"data-facetname",
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"data-url",
-                "valuePattern":null,
+                "attributeKey":"abs:href",
+                "valuePattern":".*vince.com/(women|men)-sale.*",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
         },
-        "subcategorySpec":null
-    },
-    {
-        "baseUrl":"http://www.vince.com/view-all/icat/msaleall",
-        "containerSpec":{
-            "id":"refinement-source-size",
-            "tagName":"div",
-            "className":null,
-            "attributeKey":null,
-            "valuePattern":null
-        },
-        "categorySpec":{
-            "id":null,
-            "tagName":"div",
-            "className":"search-facet",
-            "attributeKey":"data-facetname",
-            "valuePattern":null
-        },
-        "nameSpec":{
-            "containerSpec":null,
-            "elementSpec":{
+        "subcategorySpec":{
+            "containerSpec":{
                 "id":null,
                 "tagName":"div",
-                "className":"search-facet",
-                "attributeKey":"data-facetname",
+                "className":"category-refinement",
+                "attributeKey":null,
                 "valuePattern":null
             },
-            "dataSpec":{
-                "attributeKey":"data-facetname",
-                "valuePattern":"[A-Z/ ]+",
-                "valueExcludePattern":null,
-                "substringPattern":null
-            }
-        },
-        "urlSpec":{
-            "containerSpec":null,
-            "elementSpec":{
+            "categorySpec":{
                 "id":null,
-                "tagName":"div",
-                "className":"search-facet",
-                "attributeKey":"data-facetname",
+                "tagName":"a",
+                "className":"refinement-link",
+                "attributeKey":null,
                 "valuePattern":null
             },
-            "dataSpec":{
-                "attributeKey":"data-url",
-                "valuePattern":null,
-                "valueExcludePattern":null,
-                "substringPattern":null
-            }
-        },
-        "subcategorySpec":null
+            "nameSpec":{
+                "containerSpec":null,
+                "elementSpec":{
+                    "id":null,
+                    "tagName":"a",
+                    "className":null,
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "dataSpec":{
+                    "attributeKey":"$nested_text",
+                    "valuePattern":null,
+                    "valueExcludePattern":null,
+                    "substringPattern":null
+                }
+            },
+            "urlSpec":{
+                "containerSpec":null,
+                "elementSpec":{
+                    "id":null,
+                    "tagName":"a",
+                    "className":null,
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "dataSpec":{
+                    "attributeKey":"abs:href",
+                    "valuePattern":".*vince.com/[a-zA-Z0-9-]+-sale.*",
+                    "valueExcludePattern":null,
+                    "substringPattern":null
+                }
+            },
+            "subcategorySpec":null
+        }
     }
 ]

@@ -82,7 +82,6 @@
       <li class="html-block">
         <div class="social-icons size-small">
           <a href="http://www.facebook.com/sharer.php?u=http://www.alicesfavs.com/" onclick="window.open(this.href,this.title,'width=500,height=500,top=300px,left=300px');  return false;"  rel="nofollow" target="_blank" class="icon icon_facebook tip-top" title="Share on Facebook"><span class="icon-facebook"></span></a>
-          <a href="https://twitter.com/share?url=http://www.alicesfavs.com/" onclick="window.open(this.href,this.title,'width=500,height=500,top=300px,left=300px');  return false;"  rel="nofollow" target="_blank" class="icon icon_twitter tip-top" title="Share on Twitter"><span class="icon-twitter"></span></a>
         </div>
       </li>
     </ul>

@@ -2,15 +2,15 @@
     {
         "containerSpec":{
             "id":null,
-            "tagName":"ul",
-            "className":"columns-3",
+            "tagName":"div",
+            "className":"product-listing",
             "attributeKey":null,
             "valuePattern":null
         },
         "productSpec":{
             "id":null,
-            "tagName":"li",
-            "className":"product",
+            "tagName":"div",
+            "className":"product-wrap",
             "attributeKey":null,
             "valuePattern":null
         },
@@ -20,14 +20,14 @@
                 "id":null,
                 "tagName":"a",
                 "className":null,
-                "attributeKey":"itemtype",
-                "valuePattern":"http://schema.org/Product"
+                "attributeKey":null,
+                "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"href",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":".*/([a-zA-Z0-9]+?)\\?"
+                "substringPattern":"/.*/([a-zA-Z0-9]+)\\?"
             }
         },
         "nameSpec":{
@@ -53,7 +53,7 @@
                 "tagName":"a",
                 "className":null,
                 "attributeKey":"itemtype",
-                "valuePattern":"http://schema.org/Product"
+                "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"abs:href",

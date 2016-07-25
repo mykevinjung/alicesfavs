@@ -33,6 +33,8 @@ public class SiteScraperImpl implements SiteScraper
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(SiteScraperImpl.class);
 
+    private static final int MAX_NEXT_PAGE_LOOP = 100;
+
     private DataExtractor dataExtractor = new DataExtractor();
 
     @Override
@@ -104,8 +106,9 @@ public class SiteScraperImpl implements SiteScraper
             throws SiteScrapeException
     {
         String url = categoryExtract.url;
+        int loopCount = 0;
         final List<ProductExtract> productList = new ArrayList<>();
-        while (StringUtils.hasText(url))
+        while (StringUtils.hasText(url) && loopCount++ < MAX_NEXT_PAGE_LOOP)
         {
             final Document doc = openUrl(site, url);
             if (doc == null)
@@ -172,7 +175,15 @@ public class SiteScraperImpl implements SiteScraper
         {
             try
             {
-                return dataExtractor.extractNextPageUrl(document, nextPageExtractSpec);
+                final String nextPageUrl = dataExtractor.extractNextPageUrl(document, nextPageExtractSpec);
+                if (nextPageUrl.matches(".*/[a-zA-Z0-9]+&goToPage=2"))
+                {
+                    return nextPageUrl.replace("&goToPage=2", "?&goToPage=2");
+                }
+                else
+                {
+                    return nextPageUrl;
+                }
             }
             catch (ElementNotFoundException | DataNotFoundException e)
             {

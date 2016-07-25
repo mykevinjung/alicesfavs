@@ -20,8 +20,8 @@ public class RegexTest
     public void testRegex()
     {
 
-        final String testString = "src/main/i18n/pages/abc_en_US.properties";
-        final String regex = "src/main/i18n/pages/.*en_US.properties";
+        final String testString = "http://www.loft.com/sale-view-all-petite/cat2130026&goToPage=2";
+        final String regex = ".*/[a-zA-Z0-9]+&goToPage=.*";
 
         assertTrue("Does not match!", testString.matches(regex));
     }

@@ -91,3 +91,7 @@
 # vince
 55 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh vince >> /dev/null 2>&1
 55 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh vince >> /dev/null 2>&1
+
+# loft
+01 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh loft >> /dev/null 2>&1
+01 18 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh loft >> /dev/null 2>&1

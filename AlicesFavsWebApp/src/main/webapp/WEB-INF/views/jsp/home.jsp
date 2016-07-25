@@ -6,6 +6,73 @@
 <div id="main-content" class="site-main hfeed light">
     <div class="row"><div class="large-12 columns"><div class="top-divider"></div></div></div>
 
+    <div class="cat-header">
+        <div class="ux-slider-wrapper relative">
+            <div class="ux-slider iosSlider  slider-style-normal  slider-nav-dark slider-nav-inside slider-nav-circle js-flickity"
+                 data-flickity-options='{
+            "cellAlign": "center",
+            "imagesLoaded": true,
+            "lazyLoad": 1,
+            "freeScroll": false,
+            "wrapAround": true,
+            "autoPlay": 6000,
+            "prevNextButtons": true,
+            "contain" : true,
+            "percentPosition": true,
+            "pageDots": true,
+            "selectedAttraction" : 0.1,
+            "friction": 0.6,
+            "rightToLeft": false,
+            "draggable": false        }'
+                 style=""
+            >
+                <div id="banner_1" class="ux_banner dark    "  style="height:450px; " data-height="450px" role="banner">
+                    <div class="banner-bg "  style="background-image:url('/resources/images/fashion-leggy-girl-in-a-high-heeled-shoes-in-short-dress.png'); "><img src="/resources/images/fashion-leggy-girl-in-a-high-heeled-shoes-in-short-dress.png"  alt="" style="visibility:hidden;" /></div>
+                    <div class="row" >
+                        <div class="inner center text-center "  style="width:80%;">
+                            <div class="inner-wrap animated flipInX" style=" ">
+                                <h1>ALL SALES IN ONE PLACE</h1>
+                                <div class="tx-div medium"></div>
+                                <h2 class="alt-font">Updated everyday!</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end .ux_banner -->
+
+                <div id="banner_2" class="ux_banner dark    "  style="height:450px; " data-height="450px" role="banner">
+                    <div class="banner-bg "  style="background-image:url('/resources/images/vintage-women-clothing-and-accessories-on-the-wooden-background.png'); "><img src="/resources/images/vintage-women-clothing-and-accessories-on-the-wooden-background.png"  alt="" style="visibility:hidden;" /></div>
+                    <div class="row" >
+                        <div class="inner right center text-center "  style="width:80%;">
+                            <div class="inner-wrap animated fadeInLeft">
+                                <h2 class="animated fadeInLeft">New sale items this week&#8230;</h2>
+                                <div class="tx-div medium"></div>
+                                <h3 class="animated fadeInLeft"><a href="/sale/brand/anntaylor" style="color: inherit;">300+ items from Ann Taylor</a></h3>
+                                <h3 class="animated fadeInLeft"><a href="/sale/brand/potterybarn" style="color: inherit;">250+ items from Pottery Barn</a></h3>
+                                <h3 class="animated fadeInLeft"><a href="/sale/brand/anthropologie" style="color: inherit;">150 items from Anthropologie</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end .ux_banner -->
+
+                <div id="banner_3" class="ux_banner dark    "  style="height:450px; " data-height="450px" role="banner">
+                    <a href="http://www.anthropologie.com/anthro/category/shoes/shoes.jsp?cm_sp=FEATURES-_-SUB_CATEGORY-_-SHOES">
+                    <div class="banner-bg "  style="background-image:url('http://images.contentful.com/pasba798pw1y/1qNpifqHCIqA2wOIUcw4Mw/b564ccbf39ff54a894b56a58271dc406/072516_V1_HPG_desktop_slice_03.jpg?w=1192'); ">
+                        <img src="http://images.contentful.com/pasba798pw1y/1qNpifqHCIqA2wOIUcw4Mw/b564ccbf39ff54a894b56a58271dc406/072516_V1_HPG_desktop_slice_03.jpg?w=1192"  alt="" style="visibility:hidden;" /></div>
+                    <div class="row" >
+                        <div class="inner center text-center "  style="width:80%;">
+                            <div class="inner-wrap animated flipInX" style=" ">
+                                <h1 style="color: #000000;">Fall-forward pairs from Anthropologie</h1>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div><!-- end .ux_banner -->
+
+            </div>
+            <div class="ux-loading dark"></div>
+        </div><!-- .ux-slider-wrapper -->
+    </div>
+
     <div class="row category-page">
 
         <c:forEach items="${saleCategoryProductMap}" var="saleCategoryProductEntry">

@@ -13,8 +13,8 @@
       <div class="small-12    large-12  columns"  ><div class="column-inner"  >
         <h3 class="section-title clearfix  "><span>Disclaimer</span>  </h3><!-- end section_title -->
 
-        <p>We try to update product information as soon as possible but the information is not real-time and there may be information different from the actual brand site.
-        We also try to collect all the products on sale but we might have missed some of them.</p>
+        <p>We try to update product information as soon as possible but the information is not real-time and there may be a difference between the data on Alice's Favs and the brand site.
+        We also try to collect all the products on sale but we might have missed some of them and also might have found them lately.</p>
       </div></div>
     </div>
 

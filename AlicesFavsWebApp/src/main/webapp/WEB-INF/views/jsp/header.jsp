@@ -76,11 +76,9 @@
 
 
           <div id="logo" class="logo-left">
-            <h1>
               <a href="/" title="Alice's Favs" rel="home">
                 <img src="/resources/images/logo1.png" class="header_logo " alt="Alice's Favs"/>
               </a>
-            </h1>
           </div><!-- .logo -->
 
           <div class="left-links">

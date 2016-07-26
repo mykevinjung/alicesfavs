@@ -47,7 +47,10 @@ public class Constants
     public static final String DEFAULT_SUBJECT = "Subject";
     public static final String DEFAULT_EMAIL = "Your email";
     public static final String DEFAULT_MESSAGE = "Your message and name";
+    public static final String NEW_SALE_THIS_WEEK = "newSaleThisWeek";
 
+
+    public static final String BRAND_SALE_URL_PREFIX = "/sale/brand/";
 
     // view name
     public static final String VIEW_HOME = "home";

@@ -7,7 +7,7 @@
 
   <div class="page-header">
     <div id="banner_1179620215" class="ux_banner dark    "  style="height:300px; " data-height="300px" role="banner">
-      <div class="banner-bg "  style="background-image:url('/resources/images/about-us.jpg'); "><img src="/resources/images/about-us.jpg"  alt="" style="visibility:hidden;" /></div>
+      <div class="banner-bg "  style="background-image:url('/resources/images/about-us.png'); "><img src="/resources/images/about-us.png"  alt="" style="visibility:hidden;" /></div>
       <div class="row" >
         <div class="inner center text-center "  style="width:60%;">
           <div class="inner-wrap animated flipInX" style=" ">
@@ -30,7 +30,7 @@
         <p class="lead text-center">Alice, my wife, looks around her favorite brand sites all the time,
           checking if there are any good deals; if the price has dropped. I wanted to do the work for her and help her shopping.</p>
         <p class="lead text-center">While we were doing this, we noticed that many brands have even more than half of their products on sale.
-          So why would you buy at full price? Here we collected all products on sale.</p>
+          So why would you buy them at full price? Here we collected all products on sale.</p>
         <hr>
         <div  class="row container ">
           <div class="small-12    large-4  columns   "  ><div class="column-inner"  >

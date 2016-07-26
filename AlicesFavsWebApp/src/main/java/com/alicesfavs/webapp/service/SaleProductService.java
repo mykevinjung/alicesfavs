@@ -11,10 +11,13 @@ import com.alicesfavs.webapp.comparator.DiscountAmountComparator;
 import com.alicesfavs.webapp.comparator.DiscountPercentageComparator;
 import com.alicesfavs.webapp.comparator.ProductDisplayOrderComparator;
 import com.alicesfavs.webapp.comparator.SaleDateComparator;
+import com.alicesfavs.webapp.comparator.SaleSummaryComparator;
 import com.alicesfavs.webapp.comparator.SiteDisplayOrderComparator;
 import com.alicesfavs.webapp.config.WebAppConfig;
+import com.alicesfavs.webapp.uimodel.Constants;
 import com.alicesfavs.webapp.uimodel.SiteProduct;
 import com.alicesfavs.webapp.uimodel.UiProduct;
+import com.alicesfavs.webapp.uimodel.UiSaleSummary;
 import com.alicesfavs.webapp.util.LocalDateUtils;
 import com.alicesfavs.webapp.util.ModelConverter;
 import org.slf4j.Logger;
@@ -22,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -56,6 +60,23 @@ public class SaleProductService
 
     private Map<AliceCategory, List<UiProduct>> newSaleProductMap = new HashMap<>();
 
+    public List<UiSaleSummary> getSaleSummary()
+    {
+        final List<UiSaleSummary> saleSummaryList = new ArrayList<>();
+        for (Site site : siteManager.getSites())
+        {
+            final List<UiProduct> productList = getSaleProducts(site, null);
+            final UiSaleSummary saleSummary = new UiSaleSummary();
+            saleSummary.setSaleCountThisWeek(getSaleCountThisWeek(productList));
+            saleSummary.setSaleCountTotal(productList.size());
+            saleSummary.setSiteName(site.displayName);
+            saleSummary.setBrandSaleUrl(Constants.BRAND_SALE_URL_PREFIX + site.stringId);
+            saleSummaryList.add(saleSummary);
+        }
+        saleSummaryList.sort(new SaleSummaryComparator());
+        return saleSummaryList;
+    }
+
     public List<UiProduct> getSaleProducts(Site site, AliceCategory aliceCategory)
     {
         return getSaleProductsFromCache(site, aliceCategory);
@@ -71,6 +92,21 @@ public class SaleProductService
         sortSaleProducts(productList, productSortType);
 
         return productList;
+    }
+
+    private int getSaleCountThisWeek(List<UiProduct> productList)
+    {
+        int saleCountThisWeek = 0;
+        final LocalDate today = LocalDateUtils.now();
+        for (UiProduct uiProduct : productList)
+        {
+            if (uiProduct.getSaleStartDate().until(today, ChronoUnit.DAYS) <= 7)
+            {
+                saleCountThisWeek++;
+            }
+        }
+
+        return saleCountThisWeek;
     }
 
     private void sortSaleProducts(List<UiProduct> uiProductList, ProductSortType productSortType)

@@ -10,6 +10,7 @@ import com.alicesfavs.webapp.service.SiteManager;
 import com.alicesfavs.webapp.uimodel.Constants;
 import com.alicesfavs.webapp.uimodel.Page;
 import com.alicesfavs.webapp.uimodel.UiProduct;
+import com.alicesfavs.webapp.uimodel.UiSaleSummary;
 import com.alicesfavs.webapp.util.Pagination;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -34,6 +33,8 @@ import java.util.Map;
 @Controller
 public class ProductController
 {
+
+    private static final int MAX_NEW_SALE_THIS_WEEK = 3;
 
     @Autowired
     private SiteManager siteManager;
@@ -56,6 +57,13 @@ public class ProductController
         model.addAttribute("saleCategoryProductMap", categoryProductMap);
         model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_HOME);
         model.addAttribute(Constants.MOBILE, device.isMobile());
+
+        final List<UiSaleSummary> saleSummaryList = saleProductService.getSaleSummary();
+        if (!saleSummaryList.isEmpty())
+        {
+            model.addAttribute(Constants.NEW_SALE_THIS_WEEK,
+                saleSummaryList.subList(0, Math.min(MAX_NEW_SALE_THIS_WEEK, saleSummaryList.size())));
+        }
 
         // seo
         final StringBuilder description = new StringBuilder();
@@ -124,7 +132,7 @@ public class ProductController
         return renderSale(aliceCategory, siteList, request, model, device);
     }
 
-    @RequestMapping(value = "/sale/brand/{siteId}", method = RequestMethod.GET)
+    @RequestMapping(value = Constants.BRAND_SALE_URL_PREFIX + "{siteId}", method = RequestMethod.GET)
     public String saleByBrand(@PathVariable String siteId, HttpServletRequest request, ModelMap model, Device device)
     {
         final Site site = siteManager.getSiteByStringId(siteId);

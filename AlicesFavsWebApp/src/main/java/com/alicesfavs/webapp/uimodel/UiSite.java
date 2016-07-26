@@ -8,6 +8,7 @@ public class UiSite
 
     private String stringId;
     private String displayName;
+    private boolean newSite;
 
     public String getDisplayName()
     {
@@ -27,5 +28,15 @@ public class UiSite
     public void setStringId(String stringId)
     {
         this.stringId = stringId;
+    }
+
+    public boolean isNewSite()
+    {
+        return newSite;
+    }
+
+    public void setNewSite(boolean newSite)
+    {
+        this.newSite = newSite;
     }
 }

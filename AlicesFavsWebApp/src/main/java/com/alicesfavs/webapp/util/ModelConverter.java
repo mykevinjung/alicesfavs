@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
@@ -24,13 +25,12 @@ import java.util.List;
 public class ModelConverter
 {
 
-    private static final ZoneId ZONE_PST = ZoneId.of(ZoneId.SHORT_IDS.get("PST"));
-
     public static UiSite convertSite(Site site)
     {
         final UiSite uiSite = new UiSite();
         uiSite.setStringId(site.stringId);
         uiSite.setDisplayName(site.displayName);
+        uiSite.setNewSite(site.createdDate.until(LocalDateTime.now(), ChronoUnit.DAYS) <= 15);
 
         return uiSite;
     }

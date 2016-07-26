@@ -89,7 +89,7 @@
                   <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/clothing">All</a>
                     <div class=nav-column-links><ul>
                     <c:forEach items="${clothing}" var="site">
-                     <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/clothing/${site.stringId}">${site.displayName}</a></li>
+                     <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/clothing/${site.stringId}">${site.displayName}</a></li>
                     </c:forEach>
                     </ul></div>
                   </li>
@@ -100,7 +100,7 @@
                   <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/shoes">All</a>
                     <div class=nav-column-links><ul>
                     <c:forEach items="${shoes}" var="site">
-                      <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/shoes/${site.stringId}">${site.displayName}</a></li>
+                      <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/shoes/${site.stringId}">${site.displayName}</a></li>
                     </c:forEach>
                     </ul></div>
                   </li>
@@ -111,7 +111,7 @@
                   <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/bags">All</a>
                     <div class=nav-column-links><ul>
                     <c:forEach items="${bags}" var="site">
-                      <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/bags/${site.stringId}">${site.displayName}</a></li>
+                      <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/bags/${site.stringId}">${site.displayName}</a></li>
                     </c:forEach>
                     </ul></div>
                   </li>
@@ -122,7 +122,7 @@
                   <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/accessories">All</a>
                     <div class=nav-column-links><ul>
                     <c:forEach items="${accessories}" var="site">
-                      <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/accessories/${site.stringId}">${site.displayName}</a></li>
+                      <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/accessories/${site.stringId}">${site.displayName}</a></li>
                     </c:forEach>
                     </ul></div>
                   </li>
@@ -133,7 +133,7 @@
                   <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/home">All</a>
                     <div class=nav-column-links><ul>
                     <c:forEach items="${home}" var="site">
-                      <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/home/${site.stringId}">${site.displayName}</a></li>
+                      <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/home/${site.stringId}">${site.displayName}</a></li>
                     </c:forEach>
                     </ul></div>
                   </li>

@@ -9,7 +9,7 @@
   <div  class="page-wrapper">
     <div id="content" role="main">
 
-      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHANNPQYsktwXOXOthV9sq0PYwIXhM100"></script>
       <script type="text/javascript">
 
         function initialize() {
@@ -43,7 +43,7 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             disableDefaultUI: true,
             mapTypeId: 'flatsome',
-            draggable: true,
+            draggable: false,
             zoomControl: false,
             panControl: false,
             mapTypeControl: false,

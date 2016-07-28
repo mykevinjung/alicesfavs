@@ -1,33 +1,34 @@
 [
     {
+        "baseUrl":"https://www.abercrombie.com/shop/us/sale",
         "containerSpec":{
             "id":null,
             "tagName":"div",
-            "className":"wrapper-l2",
+            "className":"sale-wrapper",
             "attributeKey":null,
             "valuePattern":null
         },
         "categorySpec":{
             "id":null,
             "tagName":"a",
-            "className":"label-l2",
-            "attributeKey":"rev",
-            "valuePattern":"header-nav"
+            "className":"cta-button",
+            "attributeKey":null,
+            "valuePattern":null
         },
         "nameSpec":{
             "containerSpec":null,
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"label-l2",
-                "attributeKey":"rev",
-                "valuePattern":"header-nav"
+                "className":"cta-button",
+                "attributeKey":null,
+                "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"$nested_text",
+                "attributeKey":"href",
                 "valuePattern":null,
-                "valueExcludePattern":"View All|New to Sale",
-                "substringPattern":null
+                "valueExcludePattern":null,
+                "substringPattern":".*/shop/us/(.*)\\?.*"
             }
         },
         "urlSpec":{
@@ -35,13 +36,13 @@
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"label-l2",
-                "attributeKey":"rev",
-                "valuePattern":"header-nav"
+                "className":"cta-button",
+                "attributeKey":null,
+                "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":".*anntaylor.com/(sale-.*|new-to-sale)/cat.*",
+                "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
             }

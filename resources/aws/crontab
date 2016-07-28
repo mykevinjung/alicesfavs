@@ -95,3 +95,7 @@
 # loft
 01 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh loft >> /dev/null 2>&1
 01 18 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh loft >> /dev/null 2>&1
+
+# abercrombie
+06 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh abercrombie >> /dev/null 2>&1
+06 18 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh abercrombie >> /dev/null 2>&1

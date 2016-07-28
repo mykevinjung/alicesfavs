@@ -86,57 +86,42 @@
 
               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="/sale/clothing" class="nav-top-link">Clothing</a>
                 <div class=nav-dropdown><ul>
-                  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/clothing">All</a>
-                    <div class=nav-column-links><ul>
-                    <c:forEach items="${clothing}" var="site">
-                     <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/clothing/${site.stringId}">${site.displayName}</a></li>
-                    </c:forEach>
-                    </ul></div>
-                  </li>
+                  <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-object-page"><a href="/sale/clothing" style="color:black"><b>All</b></a></li>
+                  <c:forEach items="${clothing}" var="site">
+                    <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item-type-custom menu-item-object-custom menu-item menu-item-object-page"><a href="/sale/clothing/${site.stringId}">${site.displayName}</a></li>
+                  </c:forEach>
                 </ul></div>
               </li>
               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="/sale/shoes" class="nav-top-link">Shoes</a>
                 <div class=nav-dropdown><ul>
-                  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/shoes">All</a>
-                    <div class=nav-column-links><ul>
-                    <c:forEach items="${shoes}" var="site">
-                      <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/shoes/${site.stringId}">${site.displayName}</a></li>
-                    </c:forEach>
-                    </ul></div>
-                  </li>
+                  <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-object-page"><a href="/sale/shoes" style="color:black"><b>All</b></a></li>
+                  <c:forEach items="${shoes}" var="site">
+                    <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item-type-custom menu-item-object-custom menu-item menu-item-object-page"><a href="/sale/shoes/${site.stringId}">${site.displayName}</a></li>
+                  </c:forEach>
                 </ul></div>
               </li>
               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="/sale/bags" class="nav-top-link">Bags</a>
                 <div class=nav-dropdown><ul>
-                  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/bags">All</a>
-                    <div class=nav-column-links><ul>
-                    <c:forEach items="${bags}" var="site">
-                      <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/bags/${site.stringId}">${site.displayName}</a></li>
-                    </c:forEach>
-                    </ul></div>
-                  </li>
+                  <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-object-page"><a href="/sale/bags" style="color:black"><b>All</b></a></li>
+                  <c:forEach items="${bags}" var="site">
+                    <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item-type-custom menu-item-object-custom menu-item menu-item-object-page"><a href="/sale/bags/${site.stringId}">${site.displayName}</a></li>
+                  </c:forEach>
                 </ul></div>
               </li>
               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="/sale/accessories" class="nav-top-link">Accessories</a>
                 <div class=nav-dropdown><ul>
-                  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/accessories">All</a>
-                    <div class=nav-column-links><ul>
-                    <c:forEach items="${accessories}" var="site">
-                      <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/accessories/${site.stringId}">${site.displayName}</a></li>
-                    </c:forEach>
-                    </ul></div>
-                  </li>
+                  <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-object-page"><a href="/sale/accessories" style="color:black"><b>All</b></a></li>
+                  <c:forEach items="${accessories}" var="site">
+                    <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item-type-custom menu-item-object-custom menu-item menu-item-object-page"><a href="/sale/accessories/${site.stringId}">${site.displayName}</a></li>
+                  </c:forEach>
                 </ul></div>
               </li>
               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="/sale/home" class="nav-top-link">Home</a>
                 <div class=nav-dropdown><ul>
-                  <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-parent-item"><a href="/sale/home">All</a>
-                    <div class=nav-column-links><ul>
-                    <c:forEach items="${home}" var="site">
-                      <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/home/${site.stringId}">${site.displayName}</a></li>
-                    </c:forEach>
-                    </ul></div>
-                  </li>
+                  <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-object-page"><a href="/sale/home" style="color:black"><b>All</b></a></li>
+                  <c:forEach items="${home}" var="site">
+                    <li class="<c:if test="${site.newSite}">label-new</c:if> menu-item-type-custom menu-item-object-custom menu-item menu-item-object-page"><a href="/sale/home/${site.stringId}">${site.displayName}</a></li>
+                  </c:forEach>
                 </ul></div>
               </li>
             </ul>

@@ -28,7 +28,7 @@
                 "attributeKey":"href",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":".*/shop/us/(.*)\\?.*"
+                "substringPattern":".*/shop/[a-zA-Z0-9]+/(.*)\\?.*"
             }
         },
         "urlSpec":{

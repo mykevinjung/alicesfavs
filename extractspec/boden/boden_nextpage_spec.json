@@ -1,0 +1,20 @@
+[
+  {
+    "nextPageSpec":{
+      "containerSpec":null,
+      "elementSpec":{
+        "id":null,
+        "tagName":"link",
+        "className":null,
+        "attributeKey":"rel",
+        "valuePattern":"next"
+      },
+      "dataSpec":{
+        "attributeKey":"href",
+        "valuePattern":null,
+        "valueExcludePattern":null,
+        "substringPattern":null
+      }
+    }
+  }
+]

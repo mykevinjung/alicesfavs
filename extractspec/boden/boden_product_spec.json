@@ -15,18 +15,25 @@
             "valuePattern":null
         },
         "idSpec":{
-            "containerSpec":null,
+            "containerSpec":{
+                "id":null,
+                "tagName":"div",
+                "className":"name",
+                "attributeKey":null,
+                "valuePattern":null
+            },
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"grid-product__image-link",
+                "className":null,
+                "attributeKey":"data-productid",
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"href",
+                "attributeKey":"data-productid",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":".*-([0-9_]+)$"
+                "substringPattern":null
             }
         },
         "nameSpec":{
@@ -52,11 +59,18 @@
             }
         },
         "urlSpec":{
-            "containerSpec":null,
+            "containerSpec":{
+                "id":null,
+                "tagName":"div",
+                "className":"name",
+                "attributeKey":null,
+                "valuePattern":null
+            },
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"grid-product__image-link",
+                "className":null,
+                "attributeKey":"data-productid",
                 "valuePattern":null
             },
             "dataSpec":{

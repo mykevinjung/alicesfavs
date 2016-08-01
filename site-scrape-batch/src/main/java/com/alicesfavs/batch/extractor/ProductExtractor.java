@@ -13,6 +13,7 @@ import com.alicesfavs.service.CategoryService;
 import com.alicesfavs.service.ProductService;
 import com.alicesfavs.sitescraper.extractspec.CategoryExtractSpec;
 import com.alicesfavs.sitescraper.extractspec.ProductDetailExtractSpec;
+import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,11 @@ public class ProductExtractor
         saveCategoryProduct(job, site, categoryMap, productMap);
 
 //        extractProductDetail(site, productMap.values());
+    }
+
+    public void setWebDriver(WebDriver webDriver)
+    {
+        siteScraper.setWebDriver(webDriver);
     }
 
     private List<Category> extractCategory(Job job, Site site) throws ExtractException

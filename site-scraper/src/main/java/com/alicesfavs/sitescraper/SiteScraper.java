@@ -10,6 +10,7 @@ import com.alicesfavs.sitescraper.extractspec.CategoryExtractSpec;
 import com.alicesfavs.sitescraper.extractspec.NextPageExtractSpec;
 import com.alicesfavs.sitescraper.extractspec.ProductDetailExtractSpec;
 import com.alicesfavs.sitescraper.extractspec.ProductExtractSpec;
+import org.openqa.selenium.WebDriver;
 
 public interface SiteScraper
 {
@@ -27,5 +28,7 @@ public interface SiteScraper
 
     void extractProductDetail(Site site, ProductExtract productExtract,
         List<ProductDetailExtractSpec> productDetailExtractSpecList) throws SiteScrapeException;
+
+    void setWebDriver(WebDriver webDriver);
 
 }

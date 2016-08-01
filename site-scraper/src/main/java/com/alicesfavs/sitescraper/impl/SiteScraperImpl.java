@@ -12,6 +12,8 @@ import org.jsoup.Connection;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -36,6 +38,14 @@ public class SiteScraperImpl implements SiteScraper
     private static final int MAX_NEXT_PAGE_LOOP = 100;
 
     private DataExtractor dataExtractor = new DataExtractor();
+
+    private WebDriver webDriver;
+
+    @Override
+    public void setWebDriver(WebDriver webDriver)
+    {
+        this.webDriver = webDriver;
+    }
 
     @Override
     public MultirootTree<CategoryExtract> extractCategories(Site site,
@@ -110,7 +120,7 @@ public class SiteScraperImpl implements SiteScraper
         final List<ProductExtract> productList = new ArrayList<>();
         while (StringUtils.hasText(url) && loopCount++ < MAX_NEXT_PAGE_LOOP)
         {
-            final Document doc = openUrl(site, url);
+            final Document doc = openUrl(site, url, true);
             if (doc == null)
             {
                 break;
@@ -126,7 +136,7 @@ public class SiteScraperImpl implements SiteScraper
     public void extractProductDetail(Site site, ProductExtract productExtract,
         List<ProductDetailExtractSpec> productDetailExtractSpecList) throws SiteScrapeException
     {
-        final Document doc = openUrl(site, productExtract.url);
+        final Document doc = openUrl(site, productExtract.url, false);
         if (doc != null)
         {
             for (ProductDetailExtractSpec productDetailExtractSpec : productDetailExtractSpecList)
@@ -140,7 +150,7 @@ public class SiteScraperImpl implements SiteScraper
             throws SiteScrapeException, ElementNotFoundException, DataNotFoundException
     {
         String openUrl = StringUtils.hasText(categoryExtractSpec.baseUrl) ? categoryExtractSpec.baseUrl : pageUrl;
-        final Document doc = openUrl(site, openUrl);
+        final Document doc = openUrl(site, openUrl, false);
         if (doc != null)
         {
             return dataExtractor.extractCategories(doc, categoryExtractSpec);
@@ -193,14 +203,14 @@ public class SiteScraperImpl implements SiteScraper
         return null;
     }
 
-    private Document openUrl(Site site, String url) throws SiteScrapeException
+    private Document openUrl(Site site, String url, boolean useWebDriver) throws SiteScrapeException
     {
         int tryCount = 0;
         while (true)
         {
             try
             {
-                return openUrl(url, 90 * 1000, "Alice's Favs SmartCrawler", site.cookies);
+                return openUrl(url, 90 * 1000, "Alice's Favs SmartCrawler", site.cookies, useWebDriver);
             }
             catch (SocketTimeoutException e)
             {
@@ -229,18 +239,30 @@ public class SiteScraperImpl implements SiteScraper
         }
     }
 
-    private Document openUrl(String url, int timeout, String userAgent, String cookies) throws IOException
+    private Document openUrl(String url, int timeout, String userAgent, String cookies, boolean useWebDriver) throws IOException
     {
         try
         {
             LOGGER.debug("Opening " + url);
-            Connection conn = Jsoup.connect(url).timeout(timeout).userAgent(userAgent);
-            if (StringUtils.hasText(cookies))
+            if (useWebDriver && webDriver != null)
             {
-                conn.cookies(getCookieMap(cookies));
+                webDriver.manage().window().maximize();
+                webDriver.get(url);
+                final String pageSource = webDriver.getPageSource();
+                final Document document = Jsoup.parse(pageSource);
+                document.setBaseUri(url);
+                return document;
             }
+            else
+            {
+                Connection conn = Jsoup.connect(url).timeout(timeout).userAgent(userAgent);
+                if (StringUtils.hasText(cookies))
+                {
+                    conn.cookies(getCookieMap(cookies));
+                }
 
-            return conn.get();
+                return conn.get();
+            }
         }
         catch (HttpStatusException e)
         {

@@ -8,6 +8,7 @@ import com.alicesfavs.datamodel.ProductExtract;
 import com.alicesfavs.service.ProductService;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
+import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,11 @@ public class SiteScrapeJob
             }
         }
         LOGGER.info(job.toString());
+    }
+
+    public void setWebDriver(WebDriver webDriver)
+    {
+        productExtractor.setWebDriver(webDriver);
     }
 
     private Map<String, Product> saveProduct(Job job, Site site, Map<String, List<ProductExtract>> productExtractMap)

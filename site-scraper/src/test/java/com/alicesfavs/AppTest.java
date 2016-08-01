@@ -1,15 +1,16 @@
 package com.alicesfavs;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.SilentCssErrorHandler;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.DefaultJavaScriptErrorListener;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  * Unit test for simple App.
@@ -40,23 +41,33 @@ public class AppTest
      */
     public void testApp() throws Exception
     {
-        try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_45)) {
-            webClient.getOptions().setThrowExceptionOnScriptError(false);
-            webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
-            webClient.getOptions().setPrintContentOnFailingStatusCode(false);
-            webClient.getOptions().setPopupBlockerEnabled(true);
-            webClient.getOptions().setHomePage("http://www.bodenusa.com");
-            webClient.getOptions().setActiveXNative(true);
-            webClient.getOptions().setRedirectEnabled(true);
-            webClient.getOptions().setCssEnabled(false);
-            webClient.setCssErrorHandler(new SilentCssErrorHandler());
-            webClient.setJavaScriptErrorListener(new DefaultJavaScriptErrorListener());
-            final HtmlPage page = webClient.getPage("http://www.bodenusa.com/en-us/clearance/womens-dresses?viewby=Colours&sort=StaffFavourite&viewtype=large&page=1");
-            webClient.waitForBackgroundJavaScriptStartingBefore(200);
-            webClient.waitForBackgroundJavaScript(15*1000);
-            final String asXml = page.getWebResponse().getContentAsString();
-            final String asXml2 = page.asXml();
-            System.out.println("asXml: " + asXml);
-        }
+//        try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_45)) {
+//            webClient.getOptions().setThrowExceptionOnScriptError(false);
+//            webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+//            webClient.getOptions().setPrintContentOnFailingStatusCode(false);
+//            webClient.getOptions().setPopupBlockerEnabled(true);
+//            webClient.getOptions().setActiveXNative(true);
+//            webClient.getOptions().setRedirectEnabled(true);
+//            webClient.getOptions().setCssEnabled(false);
+//            webClient.getOptions().setJavaScriptEnabled(true);
+//            final HtmlPage page = webClient.getPage("http://www.bodenusa.com/en-us/clearance/womens-dresses?viewby=Colours&sort=StaffFavourite&viewtype=large&page=1");
+//            webClient.waitForBackgroundJavaScriptStartingBefore(200);
+//            webClient.waitForBackgroundJavaScript(15*1000);
+//            final String asXml = page.getWebResponse().getContentAsString();
+//            final String asXml2 = page.asXml();
+//            System.out.println("asXml: " + asXml);
+//        }
+    }
+
+    public void testSelenium() throws Exception
+    {
+//        System.setProperty("webdriver.chrome.driver", "/Users/kjung/src/sungmuk/chromedriver");
+//        WebDriver webDriver = new ChromeDriver();
+//        webDriver.manage().window().maximize();
+//        webDriver.get("http://www.bodenusa.com/en-us/clearance/womens-dresses?viewby=Colours&sort=StaffFavourite&viewtype=large&page=1");
+//        Object o = ((JavascriptExecutor)webDriver).executeScript("window.scrollBy(0,3450);", "");
+//        final String pageSource = webDriver.getPageSource();
+//        System.out.println("pageSource: " + pageSource);
+//        webDriver.quit();
     }
 }

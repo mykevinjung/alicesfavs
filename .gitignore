@@ -18,3 +18,5 @@ target
 logs
 resources/uxtemplate/flatsome_main
 #data-access/src/main/resources/env/prod/jdbc.properties
+phantomjsdriver.log
+site-scrape-batch/src/main/resources/phantomjs-2.1.1-macosx/

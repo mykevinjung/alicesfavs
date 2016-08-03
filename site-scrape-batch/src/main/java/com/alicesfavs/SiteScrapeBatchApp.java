@@ -3,6 +3,9 @@ package com.alicesfavs;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -21,8 +24,8 @@ public class SiteScrapeBatchApp
     private static final Logger LOGGER = LoggerFactory.getLogger(SiteScrapeBatchApp.class);
 
     private static final String FORCE_SAVE = "forceSave";
-    private static final String USE_SELENIUM = "useSelenium";
-    private static final String FIREFOX_PATH = "firefox.driver";
+    private static final String USE_PHANTOMJS = "usePhantomJS";
+    private static final String PHANTOMJS_PATH = "phantomjs.path";
 
     public static void main(String[] args) throws Exception
     {
@@ -36,19 +39,20 @@ public class SiteScrapeBatchApp
         {
             final String siteId = args[0].trim();
             final boolean forceSave = args.length >= 2 && FORCE_SAVE.equalsIgnoreCase(args[1]) ? true : false;
-            final boolean useSelenium = args.length >= 2 && USE_SELENIUM.equalsIgnoreCase(args[1]) ? true : false;
+            final boolean usePhantomJS = args.length >= 2 && USE_PHANTOMJS.equalsIgnoreCase(args[1]) ? true : false;
             final ApplicationContext context = new ClassPathXmlApplicationContext("site-scrape-batch.xml");
-            if (useSelenium)
+            if (usePhantomJS)
             {
-                LOGGER.info("Loading Firefox driver...");
-                final String firefoxDriver = System.getProperty(FIREFOX_PATH);
-                File file = new File(firefoxDriver);
-                FirefoxProfile firefoxProfile = new FirefoxProfile();
-                firefoxProfile.addExtension(file);
-                // Avoid startup screen
-                firefoxProfile.setPreference("extensions.firebug.currentVersion", "2.0.17");
+                LOGGER.info("Loading PhantomJS Driver...");
+                final String[] phantomArgs = new  String[] { "--webdriver-loglevel=NONE" };
+                DesiredCapabilities caps = new DesiredCapabilities();
+                caps.setJavascriptEnabled(true);
+                caps.setCapability("takesScreenshot", true);
+                caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                    System.getProperty(PHANTOMJS_PATH));
+                caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, phantomArgs);
 
-                webDriver = new FirefoxDriver(firefoxProfile);
+                webDriver = new PhantomJSDriver(caps);
             }
             SiteScrapeJob job = context.getBean(SiteScrapeJob.class);
             job.setWebDriver(webDriver);

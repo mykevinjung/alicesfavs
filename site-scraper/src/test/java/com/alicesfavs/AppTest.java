@@ -78,18 +78,18 @@ public class AppTest
     }
 
     public void testPhantomJS() throws Exception {
-        final String phantomJSPath = "/Users/kjung/src/sungmuk/alicesfavs/site-scrape-batch/src/main/resources/phantomjs-2.1.1-macosx/bin/phantomjs";
-        final String[] phantomArgs = new  String[] { "--webdriver-loglevel=NONE" };
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setJavascriptEnabled(true);
-        caps.setCapability("takesScreenshot", true);
-        caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomJSPath);
-        caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, phantomArgs);
-
-        WebDriver webDriver = new PhantomJSDriver(caps);
-        webDriver.get(url);
-        final String pageSource = webDriver.getPageSource();
-        System.out.println("pageSource: " + pageSource);
-        webDriver.quit();
+//        final String phantomJSPath = "/Users/kjung/src/sungmuk/alicesfavs/site-scrape-batch/src/main/resources/phantomjs-2.1.1-macosx/bin/phantomjs";
+//        final String[] phantomArgs = new  String[] { "--webdriver-loglevel=NONE" };
+//        DesiredCapabilities caps = new DesiredCapabilities();
+//        caps.setJavascriptEnabled(true);
+//        caps.setCapability("takesScreenshot", true);
+//        caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomJSPath);
+//        caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, phantomArgs);
+//
+//        WebDriver webDriver = new PhantomJSDriver(caps);
+//        webDriver.get(url);
+//        final String pageSource = webDriver.getPageSource();
+//        System.out.println("pageSource: " + pageSource);
+//        webDriver.quit();
     }
 }

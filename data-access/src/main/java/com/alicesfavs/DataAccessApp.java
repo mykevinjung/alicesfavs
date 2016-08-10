@@ -20,8 +20,9 @@ public class DataAccessApp
     {
         // testCategoryDao();
         // testProductDao();
-         testPriceHistory();
+        // testPriceHistory();
         // testSiteDao();
+        testProductDaoUpdate();
     }
 
     private static void testSiteDao() throws Exception
@@ -55,7 +56,8 @@ public class DataAccessApp
         productExtract.imageUrl = "http://www.anthropologie.com/anthro/product/image/234123416.jpg";
         productExtract.wasPrice = null;
 
-        Product product = productDao.insertProduct(1001L, productExtract, 134.32, null, LocalDateTime.now(),
+        Product product = productDao.insertProduct(new Site(1001L, LocalDateTime.now(),
+            "test"), productExtract, 134.32, null, LocalDateTime.now(),
             null, ExtractStatus.EXTRACTED, 1L, LocalDateTime.now());
         System.out.println(product);
 
@@ -68,10 +70,20 @@ public class DataAccessApp
         product.extractStatus = ExtractStatus.NOT_FOUND;
         product.extractJobId = 2L;
         product.extractedDate = LocalDateTime.now();
-        productDao.updateProduct(product);
+        productDao.updateProduct(product, new Site(1001L, LocalDateTime.now(), "test"));
         System.out.println(product);
 
         System.out.println(productDao.selectProductById(product.siteId, "234123416"));
+    }
+
+    private static void testProductDaoUpdate() throws Exception
+    {
+        ApplicationContext context = new ClassPathXmlApplicationContext("data-access.xml");
+        ProductDao productDao = context.getBean(ProductDao.class);
+        final Product product = productDao.selectProductById(10000748L);
+        final Site site = new Site(1015, LocalDateTime.now(), "michaelkors");
+        site.displayName = "MichaelKors";
+        productDao.updateProduct(product, site);
     }
 
     private static void testCategoryDao() throws Exception

@@ -8,15 +8,16 @@ import com.alicesfavs.datamodel.Category;
 import com.alicesfavs.datamodel.ExtractStatus;
 import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.ProductExtract;
+import com.alicesfavs.datamodel.Site;
 
 public interface ProductDao
 {
 
-    Product insertProduct(long siteId, ProductExtract productExtract, Double price, Double wasPrice,
+    Product insertProduct(Site site, ProductExtract productExtract, Double price, Double wasPrice,
         LocalDateTime priceChangedDate, LocalDateTime saleStartDate, ExtractStatus extractStatus,
         Long extractJobId, LocalDateTime extractedDate);
 
-    Product updateProduct(Product product);
+    Product updateProduct(Product product, Site site);
 
     Product selectProductById(Long productId);
 

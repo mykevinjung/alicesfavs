@@ -59,14 +59,13 @@
                 </c:if>
 
                 <div id="banner_3" class="ux_banner dark    "  style="height:400px; " data-height="400px" role="banner">
-                    <a href="http://www.anthropologie.com/anthro/category/shoes/shoes.jsp?cm_sp=FEATURES-_-SUB_CATEGORY-_-SHOES">
-                    <div class="banner-bg "  style="background-image:url('http://images.contentful.com/pasba798pw1y/1qNpifqHCIqA2wOIUcw4Mw/b564ccbf39ff54a894b56a58271dc406/072516_V1_HPG_desktop_slice_03.jpg?w=1192'); ">
-                        <img src="http://images.contentful.com/pasba798pw1y/1qNpifqHCIqA2wOIUcw4Mw/b564ccbf39ff54a894b56a58271dc406/072516_V1_HPG_desktop_slice_03.jpg?w=1192"  alt="" style="visibility:hidden;" /></div>
+                    <a href="http://www.rebeccaminkoff.com/endless-summer-sale/">
+                    <div class="banner-bg "  style="background-image:url('http://www.rebeccaminkoff.com/media/wysiwyg/homepage-slider/ESS_HPSlider_Final_2.jpg'); ">
+                        <img src="http://www.rebeccaminkoff.com/media/wysiwyg/homepage-slider/ESS_HPSlider_Final_2.jpg"  alt="" style="visibility:hidden;" /></div>
                     <div class="row" >
                         <div class="inner center text-center "  style="width:80%;">
                             <div class="inner-wrap animated flipInX" style=" ">
-                                <h1 style="color: #000000;">Fall-forward pairs</h1>
-                                <h1 style="color: #000000;">from Anthropologie</h1>
+                                <h1 style="color: #000000;">Rebecca Minkoff</h1>
                             </div>
                         </div>
                     </div>

@@ -33,6 +33,7 @@ public class SiteScrapeBatchApp
         {
             throw new RuntimeException("siteId is not passed in the argument");
         }
+        LOGGER.info("args size: " + args.length);
 
         WebDriver webDriver = null;
         try

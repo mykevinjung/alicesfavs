@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import com.alicesfavs.batch.BatchConfig;
 import com.alicesfavs.datamodel.*;
+import com.alicesfavs.service.AliceCategoryService;
 import com.alicesfavs.service.CategoryService;
 import com.alicesfavs.service.ProductService;
 import com.alicesfavs.sitescraper.extractspec.CategoryExtractSpec;
@@ -32,6 +34,9 @@ public class ProductExtractor
     private BatchConfig batchConfig;
 
     @Autowired
+    private AliceCategoryService aliceCategoryService;
+
+    @Autowired
     private CategoryService categoryService;
 
     @Autowired
@@ -39,6 +44,8 @@ public class ProductExtractor
 
     @Autowired
     private SiteScraper siteScraper;
+
+    private List<AliceCategory> aliceCategoryList;
 
     public void extractProduct(Job job, Site site) throws ExtractException
     {
@@ -52,6 +59,7 @@ public class ProductExtractor
         {
             final List<ProductExtract> peList = extractCategoryProducts(site, category);
             buildProductExtractMap(productExtractMap, peList);
+            populateCategoryInfo(peList, category);
             categoryMap.put(category, peList);
         }
 
@@ -170,6 +178,38 @@ public class ProductExtractor
         LOGGER.info("Saved category-product map count: " + count);
         final int countNotFoundCategoryProduct = categoryService.markNotFoundCategoryProduct(job.id, site.id);
         LOGGER.info("Number of not found category-product: " + countNotFoundCategoryProduct);
+    }
+
+    private void populateCategoryInfo(List<ProductExtract> peList, Category category)
+    {
+        for (ProductExtract productExtract : peList)
+        {
+            productExtract.addCategory(category);
+            final AliceCategory aliceCategory = getAliceCategory(category);
+            if (aliceCategory != null)
+            {
+                productExtract.addAliceCategory(aliceCategory);
+            }
+        }
+    }
+
+    private AliceCategory getAliceCategory(Category category)
+    {
+        if (category.aliceCategoryId != null)
+        {
+            if (aliceCategoryList == null)
+            {
+                aliceCategoryList = aliceCategoryService.findAllAliceCategories();
+            }
+            for (AliceCategory aliceCategory : aliceCategoryList)
+            {
+                if (aliceCategory.id == category.aliceCategoryId)
+                {
+                    return aliceCategory;
+                }
+            }
+        }
+        return null;
     }
 
     private void buildProductExtractMap(Map<String, List<ProductExtract>> peMap, List<ProductExtract> peList)

@@ -31,15 +31,20 @@ public class ProductDaoImpl implements ProductDao
     private static final String INSERT_PRODUCT =
         "INSERT INTO PRODUCT (SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
             + "WAS_PRICE_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, "
-            + "PRICE_CHANGED_DATE, SALE_START_DATE, SOLD_OUT, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "PRICE_CHANGED_DATE, SALE_START_DATE, SOLD_OUT, EXTRACT_STATUS, "
+            + "EXTRACT_JOB_ID, EXTRACTED_DATE, SEARCHABLE_TEXT) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, %s)";
 
     private static final String UPDATE_PRODUCT = "UPDATE PRODUCT SET SITE_ID = ?, ID_EXTRACT = ?, NAME_EXTRACT = ?, "
         + "PRICE_EXTRACT = ?, WAS_PRICE_EXTRACT = ?, URL_EXTRACT = ?, IMAGE_URL_EXTRACT = ?, "
         + "PRICE = ?, WAS_PRICE = ?, PRICE_CHANGED_DATE = ?, SALE_START_DATE = ?, SOLD_OUT = ?, "
-        + "EXTRACT_STATUS = ?, EXTRACT_JOB_ID = ?, EXTRACTED_DATE = ? WHERE ID = ?";
+        + "EXTRACT_STATUS = ?, EXTRACT_JOB_ID = ?, EXTRACTED_DATE = ?, SEARCHABLE_TEXT = %s WHERE ID = ?";
 
     private static final String UPDATE_EXTRACT_STATUS = "UPDATE PRODUCT SET EXTRACT_STATUS = ? "
+        + "WHERE SITE_ID = ? AND EXTRACT_STATUS <> ? AND EXTRACT_JOB_ID <> ?";
+
+    private static final String UPDATE_EXTRACT_STATUS_AND_NULLIFY_SEARCHABLE_TEXT =
+        "UPDATE PRODUCT SET EXTRACT_STATUS = ?, SEARCHABLE_TEXT = NULL "
         + "WHERE SITE_ID = ? AND EXTRACT_STATUS <> ? AND EXTRACT_JOB_ID <> ?";
 
     private static final String SELECT_PRODUCT_BY_ID = "SELECT ID, SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
@@ -102,19 +107,20 @@ public class ProductDaoImpl implements ProductDao
     @Autowired
     private DaoSupport<Product> daoSupport;
 
-    public Product insertProduct(long siteId, ProductExtract productExtract, Double price, Double wasPrice,
+    public Product insertProduct(Site site, ProductExtract productExtract, Double price, Double wasPrice,
         LocalDateTime priceChangedDate, LocalDateTime saleStartDate,
         ExtractStatus extractStatus,
         Long extractJobId, LocalDateTime extractedDate)
     {
         final Object[] params =
-            { siteId, productExtract.id, productExtract.name, productExtract.price, productExtract.wasPrice,
+            { site.id, productExtract.id, productExtract.name, productExtract.price, productExtract.wasPrice,
                 productExtract.url, productExtract.imageUrl, price, wasPrice,
                 DateTimeUtils.toTimestamp(priceChangedDate), DateTimeUtils.toTimestamp(saleStartDate),
-                productExtract.soldOut, extractStatus.getCode(), extractJobId, DateTimeUtils.toTimestamp(extractedDate) };
-        final ModelBase modelBase = daoSupport.insert(INSERT_PRODUCT, INSERT_PARAM_TYPES, params);
+                productExtract.soldOut, extractStatus.getCode(), extractJobId, DateTimeUtils.toTimestamp(extractedDate)};
+        final String sql = String.format(INSERT_PRODUCT, buildSearchableText(productExtract, site));
+        final ModelBase modelBase = daoSupport.insert(sql, INSERT_PARAM_TYPES, params);
 
-        final Product product = new Product(modelBase, siteId, productExtract);
+        final Product product = new Product(modelBase, site.id, productExtract);
         product.price = price;
         product.wasPrice = wasPrice;
         product.priceChangedDate = priceChangedDate;
@@ -126,7 +132,7 @@ public class ProductDaoImpl implements ProductDao
         return product;
     }
 
-    public Product updateProduct(Product product)
+    public Product updateProduct(Product product, Site site)
     {
         final Object[] params =
             { product.siteId, product.productExtract.id, product.productExtract.name, product.productExtract.price,
@@ -135,7 +141,8 @@ public class ProductDaoImpl implements ProductDao
                 DateTimeUtils.toTimestamp(product.priceChangedDate), DateTimeUtils.toTimestamp(product.saleStartDate),
                 product.productExtract.soldOut ? 1 : 0, product.extractStatus.getCode(), product.extractJobId,
                 DateTimeUtils.toTimestamp(product.extractedDate), product.id };
-        product.updatedDate = daoSupport.update(UPDATE_PRODUCT, UPDATE_PARAM_TYPES, params);
+        final String sql = String.format(UPDATE_PRODUCT, buildSearchableText(product.productExtract, site));
+        product.updatedDate = daoSupport.update(sql, UPDATE_PARAM_TYPES, params);
 
         return product;
     }
@@ -160,7 +167,15 @@ public class ProductDaoImpl implements ProductDao
     {
         final Object[] params = { newStatus.getCode(), siteId, newStatus.getCode(), excludingJobId };
 
-        return daoSupport.updateMultiple(UPDATE_EXTRACT_STATUS, UPDATE_EXTRACT_STATUS_PARAM_TYPES, params);
+        if (newStatus == ExtractStatus.EXTRACTED)
+        {
+            return daoSupport.updateMultiple(UPDATE_EXTRACT_STATUS, UPDATE_EXTRACT_STATUS_PARAM_TYPES, params);
+        }
+        else
+        {
+            return daoSupport.updateMultiple(UPDATE_EXTRACT_STATUS_AND_NULLIFY_SEARCHABLE_TEXT,
+                UPDATE_EXTRACT_STATUS_PARAM_TYPES, params);
+        }
     }
 
     @Override
@@ -182,6 +197,43 @@ public class ProductDaoImpl implements ProductDao
             new CategoryProductRowMapper(categoryProductMap));
 
         return categoryProductMap;
+    }
+
+    private String buildSearchableText(ProductExtract productExtract, Site site)
+    {
+        final StringBuilder builder = new StringBuilder();
+        // site name with weight A
+        builder.append("setweight(to_tsvector('english', '").append(site.displayName).append("'), 'A')");
+        if (!site.stringId.equalsIgnoreCase(site.displayName))
+        {
+            builder.append(" || setweight(to_tsvector('english', '").append(site.stringId).append("'), 'A')");
+        }
+
+        // alice category name with weight B
+        if (productExtract.aliceCategoryNames != null && !productExtract.aliceCategoryNames.isEmpty())
+        {
+            builder.append(" || setweight(to_tsvector('english', '");
+            for (String aliceCategoryName : productExtract.aliceCategoryNames)
+            {
+                builder.append(" " + aliceCategoryName);
+            }
+            builder.append("'), 'B')");
+        }
+        // category name with weight C
+        if (productExtract.categoryNames != null && !productExtract.categoryNames.isEmpty())
+        {
+            builder.append(" || setweight(to_tsvector('english', '");
+            for (String categoryName : productExtract.categoryNames)
+            {
+                builder.append(" " + categoryName);
+            }
+            builder.append("'), 'C')");
+        }
+
+        // product name with weight D
+        builder.append(" || setweight(to_tsvector('english', '").append(productExtract.name).append("'), 'D')");
+
+        return builder.toString();
     }
 
     private String getSelectSaleProductsBySiteCategory(List<Category> categoryList)

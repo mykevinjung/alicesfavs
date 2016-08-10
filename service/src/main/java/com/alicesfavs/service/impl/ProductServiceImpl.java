@@ -65,13 +65,20 @@ public class ProductServiceImpl implements ProductService
         List<ProductExtract> productExtractList)
     {
         final ProductExtract bestProduct = findBestPriceExtract(site, productExtractList);
+        // collect all category info into one
+        for (ProductExtract pe : productExtractList)
+        {
+            bestProduct.aliceCategoryNames.addAll(pe.aliceCategoryNames);
+            bestProduct.categoryNames.addAll(pe.categoryNames);
+        }
         return saveProduct(job, site, extractStatus, bestProduct);
     }
 
     @Override
     public void saveProduct(Product product)
     {
-        productDao.updateProduct(product);
+        throw new UnsupportedOperationException("why do you need to use this?");
+        //productDao.updateProduct(product);
     }
 
     @Override
@@ -163,7 +170,7 @@ public class ProductServiceImpl implements ProductService
         final LocalDateTime priceChangedDate = LocalDateTime.now();
         final LocalDateTime saleStartDate = (wasPrice != null) ? LocalDateTime.now() : null;
 
-        return productDao.insertProduct(site.id, productExtract, price, wasPrice, priceChangedDate,
+        return productDao.insertProduct(site, productExtract, price, wasPrice, priceChangedDate,
             saleStartDate, extractStatus, job.id, LocalDateTime.now());
     }
 
@@ -181,6 +188,8 @@ public class ProductServiceImpl implements ProductService
         existingProduct.productExtract.price = newExtract.price;
         existingProduct.productExtract.url = newExtract.url;
         existingProduct.productExtract.wasPrice = newExtract.wasPrice;
+        existingProduct.productExtract.aliceCategoryNames = newExtract.aliceCategoryNames;
+        existingProduct.productExtract.categoryNames = newExtract.categoryNames;
         existingProduct.wasPrice = stringPriceToDouble(site, newExtract.wasPrice);
 
         // set sale start date
@@ -203,7 +212,7 @@ public class ProductServiceImpl implements ProductService
             existingProduct.priceChangedDate = LocalDateTime.now();
         }
 
-        final Product product = productDao.updateProduct(existingProduct);
+        final Product product = productDao.updateProduct(existingProduct, site);
         if (hasPriceChanged)
         {
             priceHistoryDao

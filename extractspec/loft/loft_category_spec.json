@@ -2,9 +2,9 @@
     {
         "baseUrl":"http://www.loft.com/sale/catl00008",
         "containerSpec":{
-            "id":"cat0",
-            "tagName":"nav",
-            "className":null,
+            "id":null,
+            "tagName":"div",
+            "className":"categories",
             "attributeKey":null,
             "valuePattern":null
         },

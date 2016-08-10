@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.alicesfavs.dataaccess.util.ResultSetUtils;
+import com.alicesfavs.dataaccess.util.StringEscapeUtils;
 import com.alicesfavs.datamodel.Category;
 import com.alicesfavs.datamodel.Site;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -203,10 +204,12 @@ public class ProductDaoImpl implements ProductDao
     {
         final StringBuilder builder = new StringBuilder();
         // site name with weight A
-        builder.append("setweight(to_tsvector('english', '").append(site.displayName).append("'), 'A')");
+        builder.append("setweight(to_tsvector('english', '")
+            .append(StringEscapeUtils.escapeSql(site.displayName)).append("'), 'A')");
         if (!site.stringId.equalsIgnoreCase(site.displayName))
         {
-            builder.append(" || setweight(to_tsvector('english', '").append(site.stringId).append("'), 'A')");
+            builder.append(" || setweight(to_tsvector('english', '")
+                .append(StringEscapeUtils.escapeSql(site.stringId)).append("'), 'A')");
         }
 
         // alice category name with weight B
@@ -215,7 +218,7 @@ public class ProductDaoImpl implements ProductDao
             builder.append(" || setweight(to_tsvector('english', '");
             for (String aliceCategoryName : productExtract.aliceCategoryNames)
             {
-                builder.append(" " + aliceCategoryName);
+                builder.append(" ").append(StringEscapeUtils.escapeSql(aliceCategoryName));
             }
             builder.append("'), 'B')");
         }
@@ -225,13 +228,14 @@ public class ProductDaoImpl implements ProductDao
             builder.append(" || setweight(to_tsvector('english', '");
             for (String categoryName : productExtract.categoryNames)
             {
-                builder.append(" " + categoryName);
+                builder.append(" ").append(StringEscapeUtils.escapeSql(categoryName));
             }
             builder.append("'), 'C')");
         }
 
         // product name with weight D
-        builder.append(" || setweight(to_tsvector('english', '").append(productExtract.name).append("'), 'D')");
+        builder.append(" || setweight(to_tsvector('english', '")
+            .append(StringEscapeUtils.escapeSql(productExtract.name)).append("'), 'D')");
 
         return builder.toString();
     }

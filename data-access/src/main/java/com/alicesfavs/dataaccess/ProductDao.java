@@ -8,6 +8,7 @@ import com.alicesfavs.datamodel.Category;
 import com.alicesfavs.datamodel.ExtractStatus;
 import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.ProductExtract;
+import com.alicesfavs.datamodel.SearchResultList;
 import com.alicesfavs.datamodel.Site;
 
 public interface ProductDao
@@ -27,7 +28,7 @@ public interface ProductDao
 
     List<Product> selectSaleProducts(long siteId, ExtractStatus status);
 
-    List<Product> searchSaleProducts(String searchText, ExtractStatus status, int startNum, int endNum);
+    SearchResultList<Product> searchSaleProducts(String searchText, ExtractStatus status, int count, int offset);
 
     Map<Category, List<Product>> selectSaleProducts(List<Category> categoryList);
 

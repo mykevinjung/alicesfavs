@@ -84,6 +84,23 @@
           <div class="left-links">
             <ul id="site-navigation" class="header-nav">
 
+              <li class="search-dropdown">
+                <a href="#" class="nav-top-link icon-search" onClick="return false;"></a>
+                <div class="nav-dropdown">
+                  <div class="row yith-search-premium collapse search-wrapper ">
+                    <form role="search" method="get" class="yith-search-premium" action="/sale/search">
+                      <div class="large-10 small-10 columns">
+                        <input type="search" value="" name="searchText"  class="yith-s"
+                               data-append-top placeholder="Search for products" data-loader-icon="" data-min-chars="3" />
+                      </div><!-- input -->
+                      <div class="large-2 small-2 columns">
+                        <button type="submit" id="yith-searchsubmit" class="button secondary postfix"><i class="icon-search"></i></button>
+                      </div><!-- button -->
+                    </form>
+                  </div><!-- row -->
+                </div><!-- .nav-dropdown -->
+              </li><!-- .search-dropdown -->
+
               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="/sale/clothing" class="nav-top-link">Clothing</a>
                 <div class=nav-dropdown><ul>
                   <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-object-page"><a href="/sale/clothing" style="color:black"><b>All</b></a></li>

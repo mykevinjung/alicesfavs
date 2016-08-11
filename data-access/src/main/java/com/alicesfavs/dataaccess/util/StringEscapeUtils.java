@@ -8,7 +8,12 @@ public class StringEscapeUtils
 
     public static String escapeSql(String sql)
     {
-        return sql.replace("'", "''");
+        return sql.replaceAll("'", "''");
+    }
+
+    public static String escapeTsQuery(String sql)
+    {
+        return sql.replaceAll("'", "''").replaceAll("[*&|:()#$%\\^]", " ");
     }
 
 }

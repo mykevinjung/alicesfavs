@@ -1,6 +1,7 @@
 package com.alicesfavs.webapp.controller;
 
 import com.alicesfavs.datamodel.AliceCategory;
+import com.alicesfavs.datamodel.SearchResultList;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.webapp.config.WebAppConfig;
 import com.alicesfavs.webapp.exception.ResourceNotFoundException;
@@ -20,6 +21,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -157,6 +159,31 @@ public class ProductController
         return renderSale(null, siteList, request, model, device);
     }
 
+    @RequestMapping(value = "/sale/search", method = RequestMethod.GET)
+    public String search(@RequestParam(value = "searchText") String searchText, HttpServletRequest request,
+        ModelMap model, Device device)
+    {
+        // category specific info
+        model.addAttribute(Constants.SEARCH_TEXT, searchText);
+        model.addAttribute(Constants.PAGE_ID, Constants.PAGE_ID_SALE_SEARCH);
+
+        // seo
+        final String description = "Alice's Favs - All sales from the favorite brands in one place "
+            + "for clothing, shoes, bags, accessories and home.";
+        model.addAttribute(Constants.META_DESCRIPTION, description);
+
+        final ProductSortType productSortType = ProductSortType
+            .fromCode(request.getParameter(Constants.SORT_BY), ProductSortType.DATE);
+        final int pageNo = NumberUtils.toInt(request.getParameter(Constants.PAGE_NUMBER), 1);
+        final List<UiProduct> productList = saleProductService.searchSaleProducts(searchText,
+            webAppConfig.getSaleProductPageSize(), webAppConfig.getSaleProductPageSize() * (pageNo - 1));
+        addProductAttributes(request, model, productList, webAppConfig.getSaleProductPageSize());
+        model.addAttribute(Constants.SORT_BY, productSortType.getCode());
+        model.addAttribute(Constants.MOBILE, device.isMobile());
+
+        return Constants.VIEW_SEARCH;
+    }
+
     private List<Site> getAliceCategorySites(AliceCategory aliceCategory)
     {
         final List<Site> siteList = new ArrayList<>();
@@ -188,7 +215,15 @@ public class ProductController
     private void addProductAttributes(HttpServletRequest request, ModelMap model, List<UiProduct> productList,
         int pageSize)
     {
-        final int totalCount = productList.size();
+        final int totalCount;
+        if (productList instanceof SearchResultList)
+        {
+            totalCount = ((SearchResultList)productList).getSearchResultCount();
+        }
+        else
+        {
+            totalCount = productList.size();
+        }
         final Pagination pagination = new Pagination(pageSize, totalCount, request,
             Constants.PAGE_NUMBER);
         final int totalPageNo = pagination.getTotalPageNo();
@@ -198,7 +233,14 @@ public class ProductController
         final int endIndex = pagination.getEndIndex(pageNo);
         final List<Page> pageList = pagination.getPageList(pageNo);
 
-        model.addAttribute(Constants.PRODUCT_LIST, productList.subList(startIndex, endIndex));
+        if (productList instanceof SearchResultList)
+        {
+            model.addAttribute(Constants.PRODUCT_LIST, productList);
+        }
+        else
+        {
+            model.addAttribute(Constants.PRODUCT_LIST, productList.subList(startIndex, endIndex));
+        }
         model.addAttribute(Constants.START_INDEX, startIndex + 1);
         model.addAttribute(Constants.END_INDEX, endIndex);
         model.addAttribute(Constants.PAGE_NUMBER, pageNo);

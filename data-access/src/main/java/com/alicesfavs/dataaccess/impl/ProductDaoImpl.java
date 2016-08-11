@@ -12,6 +12,7 @@ import java.util.Map;
 import com.alicesfavs.dataaccess.util.ResultSetUtils;
 import com.alicesfavs.dataaccess.util.StringEscapeUtils;
 import com.alicesfavs.datamodel.Category;
+import com.alicesfavs.datamodel.SearchResultList;
 import com.alicesfavs.datamodel.Site;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -64,12 +65,20 @@ public class ProductDaoImpl implements ProductDao
             + "PRICE_CHANGED_DATE, SALE_START_DATE, SOLD_OUT, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
             + "CREATED_DATE, UPDATED_DATE FROM PRODUCT WHERE SALE_START_DATE IS NOT NULL AND SITE_ID = ? AND EXTRACT_STATUS = ?";
 
-    private static final String SEARCH_SALE_PRODUCT =
+    private static final String SEARCH_SALE_PRODUCT2 =
         "SELECT ID, SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
             + "WAS_PRICE_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, "
             + "PRICE_CHANGED_DATE, SALE_START_DATE, SOLD_OUT, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
             + "CREATED_DATE, UPDATED_DATE FROM PRODUCT WHERE SALE_START_DATE IS NOT NULL AND EXTRACT_STATUS = ? "
             + "AND SEARCHABLE_TEXT @@ to_tsquery('english', '%s')";
+
+    private static final String SEARCH_SALE_PRODUCT = "SELECT count(*) OVER() AS TOTAL_COUNT, * FROM ("
+            + "SELECT ID, SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
+            + "WAS_PRICE_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, "
+            + "PRICE_CHANGED_DATE, SALE_START_DATE, SOLD_OUT, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
+            + "CREATED_DATE, UPDATED_DATE, ts_rank_cd(searchable_text, to_tsquery('english', '%s')) AS score "
+            + "FROM PRODUCT WHERE SALE_START_DATE IS NOT NULL AND EXTRACT_STATUS = ? "
+            + ") s WHERE score > 0 ORDER BY score DESC LIMIT ? OFFSET ?";
 
     private static final String SELECT_SALE_PRODUCTS_BY_SITE_CATEGORY =
         "SELECT CP.CATEGORY_ID, P.ID, P.SITE_ID, P.ID_EXTRACT, P.NAME_EXTRACT, P.PRICE_EXTRACT, "
@@ -104,7 +113,7 @@ public class ProductDaoImpl implements ProductDao
         { Types.BIGINT, Types.INTEGER, Types.TIMESTAMP };
 
     private static final int[] SEARCH_PARAM_TYPES =
-        { Types.BIGINT };
+        { Types.INTEGER, Types.INTEGER, Types.INTEGER };
 
     private static final int[] SELECT_BY_ID_PARAM_TYPES =
         { Types.BIGINT };
@@ -200,12 +209,24 @@ public class ProductDaoImpl implements ProductDao
     }
 
     @Override
-    public List<Product> searchSaleProducts(String searchText, ExtractStatus status, int startNum, int endNum)
+    public SearchResultList<Product> searchSaleProducts(String searchText, ExtractStatus status, int count, int offset)
     {
-        final Object[] params = { status };
+        final Object[] params = { status.getCode(), count, offset };
 
-        final String sql = String.format(SEARCH_SALE_PRODUCT, searchText);
-        return daoSupport.selectObjectList(sql, SEARCH_PARAM_TYPES, params, new ProductRowMapper());
+        final String sql = String.format(SEARCH_SALE_PRODUCT, StringEscapeUtils.escapeSql(searchText));
+        final List<Product> result = daoSupport.selectObjectList(sql, SEARCH_PARAM_TYPES,
+            params, new ProductWithCountRowMapper());
+        final SearchResultList<Product> searchResultList = new SearchResultList<>(result);
+        if (result.isEmpty())
+        {
+            searchResultList.setSearchResultCount(0);
+        }
+        else
+        {
+            searchResultList.setSearchResultCount(((ProductWithCount)result.get(0)).totalCount);
+        }
+
+        return searchResultList;
     }
 
     @Override
@@ -292,6 +313,41 @@ public class ProductDaoImpl implements ProductDao
         return daoSupport
             .selectObjectList(SELECT_NEW_PRODUCTS_BY_SITE, SELECT_NEW_PRODUCTS_BY_SITE_PARAM_TYPES, params,
                 new ProductRowMapper());
+    }
+
+    private class ProductWithCount extends Product
+    {
+        private int totalCount;
+
+        private ProductWithCount(Extractable extractable, long siteId, ProductExtract productExtract)
+        {
+            super(extractable, siteId, productExtract);
+        }
+    }
+
+    private class ProductWithCountRowMapper implements RowMapper<Product>
+    {
+        public ProductWithCount mapRow(ResultSet rs, int rowNum) throws SQLException
+        {
+            final Extractable extractable = RowMapperUtils.mapRowToExtractable(rs, rowNum);
+            final ProductExtract productExtract = new ProductExtract(rs.getString("ID_EXTRACT"));
+            productExtract.name = rs.getString("NAME_EXTRACT");
+            productExtract.price = rs.getString("PRICE_EXTRACT");
+            productExtract.wasPrice = rs.getString("WAS_PRICE_EXTRACT");
+            productExtract.url = rs.getString("URL_EXTRACT");
+            productExtract.imageUrl = rs.getString("IMAGE_URL_EXTRACT");
+            productExtract.soldOut = ResultSetUtils.getBoolean(rs, "SOLD_OUT");
+
+            final ProductWithCount product = new ProductWithCount(extractable, rs.getLong("SITE_ID"), productExtract);
+            product.price = ResultSetUtils.getDouble(rs, "PRICE");
+            product.wasPrice = ResultSetUtils.getDouble(rs, "WAS_PRICE");
+            product.priceChangedDate = DateTimeUtils.toLocalDateTime(rs.getTimestamp("PRICE_CHANGED_DATE"));
+            product.saleStartDate = DateTimeUtils.toLocalDateTime(rs.getTimestamp("SALE_START_DATE"));
+
+            product.totalCount = rs.getInt("TOTAL_COUNT");
+
+            return product;
+        }
     }
 
     private class ProductRowMapper implements RowMapper<Product>

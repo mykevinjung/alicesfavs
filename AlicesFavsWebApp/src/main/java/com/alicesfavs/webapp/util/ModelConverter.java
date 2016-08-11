@@ -3,6 +3,7 @@ package com.alicesfavs.webapp.util;
 import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Country;
 import com.alicesfavs.datamodel.Product;
+import com.alicesfavs.datamodel.SearchResultList;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.webapp.uimodel.UiProduct;
 import com.alicesfavs.webapp.uimodel.UiSite;
@@ -92,6 +93,61 @@ public class ModelConverter
         }
 
         return uiProductList;
+    }
+
+    public static  UiProduct convertProduct(Product product, Site site)
+    {
+        final UiProduct uiProduct = new UiProduct(product.id);
+        uiProduct.setItemId(product.productExtract.id);
+        uiProduct.setName(product.productExtract.name);
+        uiProduct.setUrl(product.productExtract.url);
+        uiProduct.setImageUrl(product.productExtract.imageUrl);
+        uiProduct.setPrice(product.price);
+        uiProduct.setWasPrice(product.wasPrice);
+        uiProduct.setPriceWithCurrency(product.productExtract.price);
+        if (StringUtils.hasText(product.productExtract.wasPrice))
+        {
+            uiProduct.setWasPriceWithCurrency(product.productExtract.wasPrice);
+        }
+        else if (product.wasPrice != null)
+        {
+            uiProduct.setWasPriceWithCurrency(formatWithCurrency(product.wasPrice, site));
+        }
+        uiProduct.setSiteName(site.displayName);
+        uiProduct.setSiteStringId(site.stringId);
+        uiProduct.setSiteDisplayWeight(site.displayWeight);
+        uiProduct.setCreatedDate(LocalDateUtils.getLocalDate(product.createdDate));
+        uiProduct.setSaleStartDate(LocalDateUtils.getLocalDate(product.saleStartDate));
+
+        return uiProduct;
+    }
+
+    public static SearchResultList<UiProduct> convertProductList(SearchResultList<Product> productList, List<Site> allSiteList)
+    {
+        final SearchResultList<UiProduct> uiProductList = new SearchResultList<>();
+        for (Product product : productList)
+        {
+            final Site site = getProductSite(product, allSiteList);
+            if (site != null)
+            {
+                uiProductList.add(convertProduct(product, site));
+            }
+        }
+        uiProductList.setSearchResultCount(productList.getSearchResultCount());
+
+        return uiProductList;
+    }
+
+    private static Site getProductSite(Product product, List<Site> allSiteList)
+    {
+        for(Site site : allSiteList)
+        {
+            if (site.id == product.siteId)
+            {
+                return site;
+            }
+        }
+        return null;
     }
 
     private static String formatWithCurrency(double price, Site site)

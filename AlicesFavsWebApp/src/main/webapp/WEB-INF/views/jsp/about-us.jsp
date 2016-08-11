@@ -27,10 +27,10 @@
   <div  class="page-wrapper">
     <div class="row">
       <div id="content" class="large-12 columns" role="main">
-        <p class="lead text-center">Alice, my wife, looks around her favorite brand sites all the time,
-          checking if there are any good deals; if the price has dropped. I wanted to do the work for her and help her shopping.</p>
-        <p class="lead text-center">While we were doing this, we noticed that many brands have even more than half of their products on sale.
-          So why would you buy them at full price? Here we collected all products on sale.</p>
+        <p class="lead text-center">My wife, Alice, loves to browse through her favorite brand websites, always checking for good deals and sales.
+          I wanted to do the work for her and help her shop.</p>
+        <p class="lead text-center">While doing this work, we noticed that many brands have more than half of their products on sale.
+          So why would you ever buy them at full price? Here, we have collected the products on sale.</p>
         <hr>
         <div  class="row container ">
           <div class="small-12    large-4  columns   "  ><div class="column-inner"  >

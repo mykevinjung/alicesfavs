@@ -70,7 +70,7 @@
       </script>
 
       <div id="map_container">
-        <div id="591315591" style="height:400px;"></div>
+        <div id="591315591" style="height:350px;"></div>
         <div id="map_overlay_top"></div>
         <div id="map_overlay_bottom"></div>
         <div class="map-info">
@@ -91,9 +91,9 @@
           <h3 class="section-title clearfix  "><span>Frequently Asked Questions</span>  </h3><!-- end section_title -->
           <div class="accordion" rel="0">
             <div class="accordion-title"><a href="#">Some product information is not correct.</a></div>
-            <div class="accordion-inner"><p>Product information on Alice's Favs does not reflect the information at real time. There might be some delay in updating the information. Please see <a href="/disclaimer">Disclaimer</a>.</p></div>
+            <div class="accordion-inner"><p>It is possible that the product information on Alice's Favs does not reflect the information at real time. As our site is not updated every minute, there may be a delay updating the information. Please see <a href="/disclaimer">Disclaimer</a>.</p></div>
             <div class="accordion-title"><a href="#">I have a brand that I like to see on Alice's Favs.</a></div>
-            <div class="accordion-inner"><p>Sure let us know what brand you like to see. We will review and see if we can add.</p></div>
+            <div class="accordion-inner"><p>Sure! Let us know what brand you would like to see. We will review and work to add it to our site.</p></div>
           </div>
         </div>
         </div>

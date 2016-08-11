@@ -32,6 +32,21 @@
   <div class="mobile-sidebar">
 
     <ul class="mobile-main-menu">
+
+      <li class="search">
+        <div class="row yith-search-premium collapse search-wrapper ">
+          <form role="search" method="get" class="yith-search-premium" action="/sale/search">
+            <div class="large-10 small-10 columns">
+              <input type="search" value="" name="searchText"  class="yith-s"
+                     data-append-top placeholder="Search for products" data-loader-icon="" data-min-chars="3" />
+            </div><!-- input -->
+            <div class="large-2 small-2 columns">
+              <button type="submit" id="yith-searchsubmit" class="button secondary postfix"><i class="icon-search"></i></button>
+            </div><!-- button -->
+          </form>
+        </div><!-- row -->
+      </li>
+
       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item"><a href="#">Clothing</a>
         <ul class="sub-menu">
           <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/sale/clothing">All</a></li>

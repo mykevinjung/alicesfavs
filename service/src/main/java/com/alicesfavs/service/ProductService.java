@@ -9,6 +9,7 @@ import com.alicesfavs.datamodel.ExtractStatus;
 import com.alicesfavs.datamodel.Job;
 import com.alicesfavs.datamodel.Product;
 import com.alicesfavs.datamodel.ProductExtract;
+import com.alicesfavs.datamodel.SearchResultList;
 import com.alicesfavs.datamodel.Site;
 
 public interface ProductService
@@ -31,7 +32,7 @@ public interface ProductService
 
     List<Product> searchSaleProducts(long siteId);
 
-    List<Product> searchSaleProducts(String searchText, int startNum, int endNum);
+    SearchResultList<Product> searchSaleProducts(String searchText, int count, int offset);
 
     Map<Category, List<Product>> searchSaleProducts(List<Category> categoryList);
 

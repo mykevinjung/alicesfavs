@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.alicesfavs.datamodel.Category;
 import com.alicesfavs.datamodel.Job;
+import com.alicesfavs.datamodel.SearchResultList;
 import com.alicesfavs.datamodel.Site;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -106,9 +107,9 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    public List<Product> searchSaleProducts(String searchText, int startNum, int endNum)
+    public SearchResultList<Product> searchSaleProducts(String searchText, int count, int offset)
     {
-        return productDao.searchSaleProducts(searchText, ExtractStatus.EXTRACTED, startNum, endNum);
+        return productDao.searchSaleProducts(searchText, ExtractStatus.EXTRACTED, count, offset);
     }
 
     public List<Product> searchSaleProducts(Site site, Category category)

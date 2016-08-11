@@ -20,6 +20,9 @@ public class Constants
     // For example, /sale/brand/jcrew
     public static final String PAGE_ID_SALE_SITE = "sale-site";
 
+    // /sale/search
+    public static final String PAGE_ID_SALE_SEARCH = "sale-search";
+
     public static final String PAGE_NUMBER = "pageNo";
     public static final String POSITION = "position";
     public static final String CATEGORY = "category";
@@ -35,6 +38,7 @@ public class Constants
     public static final String BREADCRUMB1 = "breadcrumb1";
     public static final String BREADCRUMB2 = "breadcrumb2";
     public static final String SUBTITLE = "subtitle";
+    public static final String SEARCH_TEXT = "searchText";
     public static final String MOBILE = "mobile";
     public static final String PARAM_EMAIL_SENT = "emailSent";
     public static final String PARAM_SUBJECT = "subject";
@@ -55,6 +59,7 @@ public class Constants
     // view name
     public static final String VIEW_HOME = "home";
     public static final String VIEW_SALE = "sale";
+    public static final String VIEW_SEARCH = "search";
     public static final String VIEW_ABOUT_US = "about-us";
     public static final String VIEW_CONTACT_US = "contact-us";
     public static final String VIEW_DISCLAIMER = "disclaimer";

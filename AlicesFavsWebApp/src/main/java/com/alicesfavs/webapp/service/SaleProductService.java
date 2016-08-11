@@ -1,8 +1,10 @@
 package com.alicesfavs.webapp.service;
 
+import com.alicesfavs.dataaccess.util.StringEscapeUtils;
 import com.alicesfavs.datamodel.AliceCategory;
 import com.alicesfavs.datamodel.Category;
 import com.alicesfavs.datamodel.Product;
+import com.alicesfavs.datamodel.SearchResultList;
 import com.alicesfavs.datamodel.Site;
 import com.alicesfavs.service.CategoryService;
 import com.alicesfavs.service.ProductService;
@@ -17,6 +19,7 @@ import com.alicesfavs.webapp.uimodel.UiProduct;
 import com.alicesfavs.webapp.uimodel.UiSaleSummary;
 import com.alicesfavs.webapp.util.LocalDateUtils;
 import com.alicesfavs.webapp.util.ModelConverter;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +92,33 @@ public class SaleProductService
         sortSaleProducts(productList, productSortType);
 
         return productList;
+    }
+
+    public SearchResultList<UiProduct> searchSaleProducts(String searchText, int count, int offset)
+    {
+        if (StringUtils.isBlank(searchText))
+        {
+            return new SearchResultList<>();
+        }
+
+        final String queryString = buildQueryString(searchText);
+        final SearchResultList<Product> productList = productService.searchSaleProducts(queryString, count, offset);
+        return ModelConverter.convertProductList(productList, siteManager.getSites());
+    }
+
+    private String buildQueryString(String searchText)
+    {
+        final String[] tokens = StringUtils.split(searchText);
+        final StringBuilder builder = new StringBuilder(tokens[0]);
+        for (int index = 1 ; index < tokens.length ; index++)
+        {
+            final String escapedToken = StringEscapeUtils.escapeTsQuery(tokens[index]);
+            if (!StringUtils.isBlank(escapedToken))
+            {
+                builder.append("|").append(escapedToken);
+            }
+        }
+        return builder.toString();
     }
 
     private int getSaleCountThisWeek(List<UiProduct> productList)

@@ -31,6 +31,8 @@ public interface ProductService
 
     List<Product> searchSaleProducts(long siteId);
 
+    List<Product> searchSaleProducts(String searchText, int startNum, int endNum);
+
     Map<Category, List<Product>> searchSaleProducts(List<Category> categoryList);
 
     List<Product> searchNewProducts(long siteId, LocalDateTime afterCreatedDate);

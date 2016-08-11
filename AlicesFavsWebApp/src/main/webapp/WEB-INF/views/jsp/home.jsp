@@ -40,8 +40,25 @@
                     </div>
                 </div><!-- end .ux_banner -->
 
+                <div id="banner_2" class="ux_banner dark    "  style="height:400px; " data-height="400px" role="banner">
+                    <a href="https://www.abercrombie.com/shop/us">
+                        <div class="banner-bg "  style="background-image:url('/resources/images/20160810-ab.jpeg'); ">
+                            <img src="/resources/images/20160810-ab.jpeg"  alt="" style="visibility:hidden;" /></div>
+                        <div class="row" >
+                            <div class="inner center text-center "  style="width:80%;">
+                                <div class="inner-wrap animated flipInX" style=" ">
+                                    <h3>TWO DAYS, EXCLUSIVELY ONLINE</h3>
+                                    <h1>60% OFF</h1>
+                                    <div class="tx-div medium"></div>
+                                    <h2>from Abercrombie & Fitch</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div><!-- end .ux_banner -->
+
                 <c:if test="${not empty newSaleThisWeek}">
-                    <div id="banner_2" class="ux_banner dark    "  style="height:400px; " data-height="400px" role="banner">
+                    <div id="banner_3" class="ux_banner dark    "  style="height:400px; " data-height="400px" role="banner">
                         <div class="banner-bg "  style="background-image:url('/resources/images/vintage-clothing-accessories.png'); ">
                             <img src="/resources/images/vintage-clothing-accessories.png"  alt="" style="visibility:hidden;" /></div>
                         <div class="row" >
@@ -57,20 +74,6 @@
                         </div>
                     </div><!-- end .ux_banner-->
                 </c:if>
-
-                <div id="banner_3" class="ux_banner dark    "  style="height:400px; " data-height="400px" role="banner">
-                    <a href="http://www.rebeccaminkoff.com/endless-summer-sale/">
-                    <div class="banner-bg "  style="background-image:url('http://www.rebeccaminkoff.com/media/wysiwyg/homepage-slider/ESS_HPSlider_Final_2.jpg'); ">
-                        <img src="http://www.rebeccaminkoff.com/media/wysiwyg/homepage-slider/ESS_HPSlider_Final_2.jpg"  alt="" style="visibility:hidden;" /></div>
-                    <div class="row" >
-                        <div class="inner center text-center "  style="width:80%;">
-                            <div class="inner-wrap animated flipInX" style=" ">
-                                <h1 style="color: #000000;">Rebecca Minkoff</h1>
-                            </div>
-                        </div>
-                    </div>
-                    </a>
-                </div><!-- end .ux_banner -->
 
             </div>
             <div class="ux-loading dark"></div>

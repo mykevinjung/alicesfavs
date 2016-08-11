@@ -64,6 +64,13 @@ public class ProductDaoImpl implements ProductDao
             + "PRICE_CHANGED_DATE, SALE_START_DATE, SOLD_OUT, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
             + "CREATED_DATE, UPDATED_DATE FROM PRODUCT WHERE SALE_START_DATE IS NOT NULL AND SITE_ID = ? AND EXTRACT_STATUS = ?";
 
+    private static final String SEARCH_SALE_PRODUCT =
+        "SELECT ID, SITE_ID, ID_EXTRACT, NAME_EXTRACT, PRICE_EXTRACT, "
+            + "WAS_PRICE_EXTRACT, URL_EXTRACT, IMAGE_URL_EXTRACT, PRICE, WAS_PRICE, "
+            + "PRICE_CHANGED_DATE, SALE_START_DATE, SOLD_OUT, EXTRACT_STATUS, EXTRACT_JOB_ID, EXTRACTED_DATE, "
+            + "CREATED_DATE, UPDATED_DATE FROM PRODUCT WHERE SALE_START_DATE IS NOT NULL AND EXTRACT_STATUS = ? "
+            + "AND SEARCHABLE_TEXT @@ to_tsquery('english', '%s')";
+
     private static final String SELECT_SALE_PRODUCTS_BY_SITE_CATEGORY =
         "SELECT CP.CATEGORY_ID, P.ID, P.SITE_ID, P.ID_EXTRACT, P.NAME_EXTRACT, P.PRICE_EXTRACT, "
             + "P.WAS_PRICE_EXTRACT, P.URL_EXTRACT, P.IMAGE_URL_EXTRACT, P.PRICE, P.WAS_PRICE, "
@@ -95,6 +102,9 @@ public class ProductDaoImpl implements ProductDao
 
     private static final int[] SELECT_NEW_PRODUCTS_BY_SITE_PARAM_TYPES =
         { Types.BIGINT, Types.INTEGER, Types.TIMESTAMP };
+
+    private static final int[] SEARCH_PARAM_TYPES =
+        { Types.BIGINT };
 
     private static final int[] SELECT_BY_ID_PARAM_TYPES =
         { Types.BIGINT };
@@ -187,6 +197,15 @@ public class ProductDaoImpl implements ProductDao
         return daoSupport
             .selectObjectList(SELECT_SALE_PRODUCTS_BY_SITE, SELECT_SALE_PRODUCTS_BY_SITE_PARAM_TYPES, params,
                 new ProductRowMapper());
+    }
+
+    @Override
+    public List<Product> searchSaleProducts(String searchText, ExtractStatus status, int startNum, int endNum)
+    {
+        final Object[] params = { status };
+
+        final String sql = String.format(SEARCH_SALE_PRODUCT, searchText);
+        return daoSupport.selectObjectList(sql, SEARCH_PARAM_TYPES, params, new ProductRowMapper());
     }
 
     @Override

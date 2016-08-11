@@ -27,6 +27,8 @@ public interface ProductDao
 
     List<Product> selectSaleProducts(long siteId, ExtractStatus status);
 
+    List<Product> searchSaleProducts(String searchText, ExtractStatus status, int startNum, int endNum);
+
     Map<Category, List<Product>> selectSaleProducts(List<Category> categoryList);
 
     List<Product> selectNewProducts(long siteId, ExtractStatus status, LocalDateTime afterCreatedDate);

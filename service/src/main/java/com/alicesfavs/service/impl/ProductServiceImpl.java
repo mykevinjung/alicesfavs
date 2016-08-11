@@ -105,6 +105,12 @@ public class ProductServiceImpl implements ProductService
         return productDao.selectSaleProducts(siteId, ExtractStatus.EXTRACTED);
     }
 
+    @Override
+    public List<Product> searchSaleProducts(String searchText, int startNum, int endNum)
+    {
+        return productDao.searchSaleProducts(searchText, ExtractStatus.EXTRACTED, startNum, endNum);
+    }
+
     public List<Product> searchSaleProducts(Site site, Category category)
     {
         return null;

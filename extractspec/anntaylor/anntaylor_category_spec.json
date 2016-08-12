@@ -1,27 +1,28 @@
 [
     {
+        "baseUrl":"http://www.anntaylor.com/sale/cata00007",
         "containerSpec":{
             "id":null,
             "tagName":"div",
-            "className":"wrapper-l2",
+            "className":"categories",
             "attributeKey":null,
             "valuePattern":null
         },
         "categorySpec":{
             "id":null,
             "tagName":"a",
-            "className":"label-l2",
-            "attributeKey":"rev",
-            "valuePattern":"header-nav"
+            "className":null,
+            "attributeKey":"data-catid",
+            "valuePattern":null
         },
         "nameSpec":{
             "containerSpec":null,
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"label-l2",
-                "attributeKey":"rev",
-                "valuePattern":"header-nav"
+                "className":null,
+                "attributeKey":"data-catid",
+                "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"$nested_text",
@@ -35,13 +36,13 @@
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"label-l2",
-                "attributeKey":"rev",
-                "valuePattern":"header-nav"
+                "className":null,
+                "attributeKey":"data-catid",
+                "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":".*anntaylor.com/(sale-.*|new-to-sale)/cat.*",
+                "valuePattern":".*anntaylor.com/sale-.*/cat.*",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }

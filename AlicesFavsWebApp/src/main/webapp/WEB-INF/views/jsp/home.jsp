@@ -41,20 +41,20 @@
                 </div><!-- end .ux_banner -->
 
                 <div id="banner_2" class="ux_banner dark    "  style="height:400px; " data-height="400px" role="banner">
-                    <a href="https://www.abercrombie.com/shop/us">
-                        <div class="banner-bg "  style="background-image:url('/resources/images/20160810-ab.jpeg'); ">
-                            <img src="/resources/images/20160810-ab.jpeg"  alt="" style="visibility:hidden;" /></div>
-                        <div class="row" >
-                            <div class="inner center text-center "  style="width:80%;">
-                                <div class="inner-wrap animated flipInX" style=" ">
-                                    <h3>TWO DAYS, EXCLUSIVELY ONLINE</h3>
-                                    <h1>60% OFF</h1>
-                                    <div class="tx-div medium"></div>
-                                    <h2>from Abercrombie & Fitch</h2>
-                                </div>
+                        <div class="banner-bg "  style=" ">
                             </div>
+                        <div class="row" >
+                            <a href="http://www.anntaylor.com/sale-view-all/cat2330038">
+                                <div class="inner center text-center "  style="width:80%;">
+                                    <div class="inner-wrap animated flipInX" style=" ">
+                                        <h3>ENDS SUNDAY NIGHT</h3>
+                                        <h1>Extra 50% Off All Sale Styles</h1>
+                                        <div class="tx-div medium"></div>
+                                        <h2>from Ann Taylor</h2>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </a>
                 </div><!-- end .ux_banner -->
 
                 <c:if test="${not empty newSaleThisWeek}">
@@ -64,7 +64,7 @@
                         <div class="row" >
                             <div class="inner right center text-center "  style="width:80%;">
                                 <div class="inner-wrap animated fadeInLeft">
-                                    <h2 class="animated fadeInLeft">New sale items this week&#8230;</h2>
+                                    <h2 class="animated fadeInLeft">New Sale Items This Week&#8230;</h2>
                                     <div class="tx-div medium"></div>
                                     <c:forEach items="${newSaleThisWeek}" var="saleSummary" varStatus="loop">
                                         <h3 class="animated fadeInLeft"><a href="${saleSummary.brandSaleUrl}" style="color: inherit;">${saleSummary.saleCountThisWeek} items from ${saleSummary.siteName}</a></h3>

@@ -103,3 +103,7 @@
 # boden - this may take longer than 10 minutes
 11 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh boden usePhantomJS >> /dev/null 2>&1
 11 18 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh boden usePhantomJS >> /dev/null 2>&1
+
+# katespade
+25 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh katespade >> /dev/null 2>&1
+25 18 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh katespade >> /dev/null 2>&1

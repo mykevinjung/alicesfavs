@@ -48,7 +48,7 @@ public class SiteScrapeBatchApp
                 final String[] phantomArgs = new  String[] { "--webdriver-loglevel=NONE" };
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setJavascriptEnabled(true);
-                caps.setCapability("takesScreenshot", true);
+                caps.setCapability("takesScreenshot", false);
                 caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
                     System.getProperty(PHANTOMJS_PATH));
                 caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, phantomArgs);

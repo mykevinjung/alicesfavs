@@ -44,13 +44,14 @@
                         <div class="banner-bg "  style=" ">
                             </div>
                         <div class="row" >
-                            <a href="http://www.anntaylor.com/sale-view-all/cat2330038">
+                            <a target="_blank" href="http://www.bodenusa.com/en-us/clearance.html">
                                 <div class="inner center text-center "  style="width:80%;">
                                     <div class="inner-wrap animated flipInX" style=" ">
-                                        <h3>ENDS SUNDAY NIGHT</h3>
-                                        <h1>Extra 50% Off All Sale Styles</h1>
+                                        <h3>OH ME OH MY</h3>
+                                        <h3>NOW UP TO</h3>
+                                        <h1>70% OFF CLEARANCE</h1>
                                         <div class="tx-div medium"></div>
-                                        <h2>from Ann Taylor</h2>
+                                        <h2>from Boden</h2>
                                     </div>
                                 </div>
                             </a>

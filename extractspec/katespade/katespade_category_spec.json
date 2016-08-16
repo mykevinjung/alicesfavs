@@ -1,0 +1,51 @@
+[
+    {
+        "containerSpec":{
+            "id":null,
+            "tagName":"div",
+            "className":"ks-sale",
+            "attributeKey":null,
+            "valuePattern":null
+        },
+        "categorySpec":{
+            "id":null,
+            "tagName":"a",
+            "className":null,
+            "attributeKey":"data-nav-category",
+            "valuePattern":"sale"
+        },
+        "nameSpec":{
+            "containerSpec":null,
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":"data-nav-category",
+                "valuePattern":"sale"
+            },
+            "dataSpec":{
+                "attributeKey":"$nested_text",
+                "valuePattern":null,
+                "valueExcludePattern":"view all|just added",
+                "substringPattern":null
+            }
+        },
+        "urlSpec":{
+            "containerSpec":null,
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":"data-nav-category",
+                "valuePattern":"sale"
+            },
+            "dataSpec":{
+                "attributeKey":"abs:href",
+                "valuePattern":null,
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        },
+        "subcategorySpec": null
+    }
+]

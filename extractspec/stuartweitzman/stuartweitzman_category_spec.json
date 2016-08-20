@@ -2,8 +2,8 @@
     {
         "containerSpec":{
             "id":null,
-            "tagName":"ul",
-            "className":"level-3",
+            "tagName":"div",
+            "className":"divSubNav",
             "attributeKey":null,
             "valuePattern":null
         },
@@ -11,7 +11,7 @@
             "id":null,
             "tagName":"a",
             "className":null,
-            "attributeKey":"id",
+            "attributeKey":null,
             "valuePattern":null
         },
         "nameSpec":{
@@ -20,7 +20,7 @@
                 "id":null,
                 "tagName":"a",
                 "className":null,
-                "attributeKey":"id",
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
@@ -36,12 +36,12 @@
                 "id":null,
                 "tagName":"a",
                 "className":null,
-                "attributeKey":"id",
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":".*sale.*",
+                "valuePattern":".*-sale/.*",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }

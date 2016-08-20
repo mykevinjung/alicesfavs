@@ -30,7 +30,7 @@
         <p class="lead text-center">My wife, Alice, loves to browse through her favorite brand websites, always checking for good deals and sales.
           I wanted to do the work for her and help her shop.</p>
         <p class="lead text-center">While doing this work, we noticed that many brands have more than half of their products on sale.
-          So why would you ever buy them at full price? Here, we have collected the products on sale.</p>
+          So why would you ever buy them at full price? Here, we have collected tens of thousands of the products on sale.</p>
         <hr>
         <div  class="row container ">
           <div class="small-12    large-4  columns   "  ><div class="column-inner"  >

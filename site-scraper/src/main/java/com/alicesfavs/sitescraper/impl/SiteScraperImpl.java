@@ -248,6 +248,9 @@ public class SiteScraperImpl implements SiteScraper
             {
                 webDriver.manage().window().maximize();
                 webDriver.get(url);
+
+                scrollDown(5);
+
                 final String pageSource = webDriver.getPageSource();
                 final Document document = Jsoup.parse(pageSource);
                 document.setBaseUri(url);
@@ -269,6 +272,22 @@ public class SiteScraperImpl implements SiteScraper
             // ignore and move forward to next
             LOGGER.error("Http Status Code " + e.getStatusCode() + " in opening " + url, e);
             return null;
+        }
+    }
+
+    private void scrollDown(int count)
+    {
+        final int height = webDriver.manage().window().getSize().getHeight();
+        JavascriptExecutor jse = (JavascriptExecutor) webDriver;
+        for (int index = 1 ; index <= count ; index++)
+        {
+            jse.executeScript(String.format("window.scrollBy(0,%d)", index * height), "");
+            try
+            {
+                Thread.sleep(100);
+            }
+            catch (InterruptedException e)
+            {}
         }
     }
 

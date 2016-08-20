@@ -30,13 +30,13 @@ public class RegexTest
     public void testExtractText()
     {
 
-        final String testString = "https://www.abercrombie.com/shop/us/mens-graphic-tees-tops/logo-graphic-tee-7629650_02";
-        final String regex = ".*-([0-9_]+)$";
+        final String testString = "$455  $228 (50%)";
+        final String regex = ".* (\\$[0-9]+) .*";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(testString);
 
         assertTrue("Can't find the string!", matcher.find());
-        assertEquals("Can't extract the string!", "7629650_02", matcher.group(1));
+        assertEquals("Can't extract the string!", "$228", matcher.group(1));
     }
 }

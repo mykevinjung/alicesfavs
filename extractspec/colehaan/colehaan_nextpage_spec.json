@@ -4,7 +4,7 @@
       "containerSpec":{
         "id":null,
         "tagName":"li",
-        "className":"pagination_label",
+        "className":"next",
         "attributeKey":null,
         "valuePattern":null
       },

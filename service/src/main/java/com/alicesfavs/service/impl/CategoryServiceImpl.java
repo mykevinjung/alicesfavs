@@ -36,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService
         final List<Node<CategoryExtract>> leafCategories = categoryExtracts.getAllLeafNodes();
         final LocalDateTime now = LocalDateTime.now();
         final List<Category> categories = new ArrayList<>();
-        final List<Category> existingCategories = findSiteCategories(site);
+        final List<Category> existingCategories = categoryDao.selectAllCategoryBySiteId(site.id);
         for (int index = 0; index < leafCategories.size(); index++)
         {
             final CategoryExtract[] categoryHierarchy = getCategoryHierarchy(leafCategories.get(index));

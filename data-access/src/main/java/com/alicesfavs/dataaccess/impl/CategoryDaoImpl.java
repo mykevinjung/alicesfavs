@@ -42,6 +42,11 @@ public class CategoryDaoImpl implements CategoryDao
         + "EXTRACTED_DATE, CREATED_DATE, UPDATED_DATE FROM CATEGORY WHERE SITE_ID = ? AND EXTRACT_STATUS = ? "
         + "ORDER BY DISPLAY_ORDER";
 
+    private static final String SELECT_ALL_CATEGORY_BY_SITE_ID = "SELECT ID, SITE_ID, ALICE_CATEGORY_ID, NAME_EXTRACT1, URL_EXTRACT1, "
+        + "NAME_EXTRACT2, URL_EXTRACT2, NAME_EXTRACT3, URL_EXTRACT3, DISPLAY_ORDER, EXTRACT_STATUS, EXTRACT_JOB_ID, "
+        + "EXTRACTED_DATE, CREATED_DATE, UPDATED_DATE FROM CATEGORY WHERE SITE_ID = ? "
+        + "ORDER BY EXTRACT_STATUS ASC, UPDATED_DATE DESC";
+
     private static final String SELECT_CATEGORY_BY_NAME = "SELECT ID, SITE_ID, ALICE_CATEGORY_ID, NAME_EXTRACT1, URL_EXTRACT1, "
         + "NAME_EXTRACT2, URL_EXTRACT2, NAME_EXTRACT3, URL_EXTRACT3, DISPLAY_ORDER, EXTRACT_STATUS, EXTRACT_JOB_ID, "
         + "EXTRACTED_DATE, CREATED_DATE, UPDATED_DATE FROM CATEGORY WHERE SITE_ID = ?";
@@ -101,6 +106,16 @@ public class CategoryDaoImpl implements CategoryDao
             { Types.BIGINT, Types.INTEGER };
 
         return daoSupport.selectObjectList(SELECT_CATEGORY_BY_SITE_ID, types, params, new CategoryRowMapper());
+    }
+
+    public List<Category> selectAllCategoryBySiteId(long siteId)
+    {
+        final Object[] params =
+            { siteId, };
+        final int[] types =
+            { Types.BIGINT };
+
+        return daoSupport.selectObjectList(SELECT_ALL_CATEGORY_BY_SITE_ID, types, params, new CategoryRowMapper());
     }
 
     public int updateExtractStatus(long siteId, long excludingJobId, ExtractStatus currentStatus,

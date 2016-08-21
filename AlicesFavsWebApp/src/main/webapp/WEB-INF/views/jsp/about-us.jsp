@@ -33,35 +33,32 @@
           So why would you ever buy them at full price? Here, we have collected tens of thousands of the products on sale.</p>
         <hr>
         <div  class="row container ">
-          <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
+          <div class="small-12    large-3  columns   "  ><div class="column-inner"  >
 
-            <div class="featured-box  pos-left  " title=""  style="">
-              <div class="box-inner">
-                <div  class="featured-img  "  style=" "><img src="/resources/images/favicon.png" style="width:100%;"></div><!-- end icon -->
-                <h4>All sales in one place<span> </span></h4>
-                <p>All sales from the favorite brands in one place! Start your shopping here.</p>
-              </div>
+            <div class="box-inner">
+              <h4>All sales in one place<span> </span></h4>
+              <p>All sales from the favorite brands in one place! Start your shopping here.</p>
             </div>
           </div></div>
 
-          <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
-
-            <div class="featured-box  pos-left  " title=""  style="">
-              <div class="box-inner">
-                <div  class="featured-img  "  style=" "><img src="/resources/images/favicon.png" style="width:100%;"></div><!-- end icon -->
-                <h4>More brands coming...<span> </span></h4>
-                <p>We are adding more brands you love. More brands, more choices!</p>
-              </div>
+          <div class="small-12    large-3  columns   "  ><div class="column-inner"  >
+            <div class="box-inner">
+              <h4>Updates everyday!<span> </span></h4>
+              <p>We update all the brands several times everyday!</p>
             </div>
           </div></div>
-          <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
 
-            <div class="featured-box  pos-left  " title=""  style="">
-              <div class="box-inner">
-                <div  class="featured-img  "  style=" "><img src="/resources/images/favicon.png" style="width:100%;"></div><!-- end icon -->
-                <h4>More features coming...<span> </span></h4>
-                <p>We are adding more features. Stay tuned!</p>
-              </div>
+          <div class="small-12    large-3  columns   "  ><div class="column-inner"  >
+            <div class="box-inner">
+              <h4>More brands coming...<span> </span></h4>
+              <p>We are adding more brands you love. More brands, more choices!</p>
+            </div>
+          </div></div>
+
+          <div class="small-12    large-3  columns   "  ><div class="column-inner"  >
+            <div class="box-inner">
+              <h4>More features coming...<span> </span></h4>
+              <p>We are adding more features. Stay tuned!</p>
             </div>
           </div></div>
 

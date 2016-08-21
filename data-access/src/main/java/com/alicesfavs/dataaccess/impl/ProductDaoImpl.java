@@ -252,7 +252,13 @@ public class ProductDaoImpl implements ProductDao
                 .append(StringEscapeUtils.escapeSql(site.stringId)).append("'), 'A')");
         }
 
-        // alice category name with weight B
+        // product name and id with weight B
+        builder.append(" || setweight(to_tsvector('english', '")
+            .append(StringEscapeUtils.escapeSql(productExtract.name)).append("'), 'B')");
+        builder.append(" || setweight(to_tsvector('english', '")
+            .append(StringEscapeUtils.escapeSql(productExtract.id)).append("'), 'B')");
+
+        // alice category name with weight C
         if (productExtract.aliceCategoryNames != null && !productExtract.aliceCategoryNames.isEmpty())
         {
             builder.append(" || setweight(to_tsvector('english', '");
@@ -260,9 +266,10 @@ public class ProductDaoImpl implements ProductDao
             {
                 builder.append(" ").append(StringEscapeUtils.escapeSql(aliceCategoryName));
             }
-            builder.append("'), 'B')");
+            builder.append("'), 'C')");
         }
-        // category name with weight C
+
+        // category name with weight D
         if (productExtract.categoryNames != null && !productExtract.categoryNames.isEmpty())
         {
             builder.append(" || setweight(to_tsvector('english', '");
@@ -270,12 +277,8 @@ public class ProductDaoImpl implements ProductDao
             {
                 builder.append(" ").append(StringEscapeUtils.escapeSql(categoryName));
             }
-            builder.append("'), 'C')");
+            builder.append("'), 'D')");
         }
-
-        // product name with weight D
-        builder.append(" || setweight(to_tsvector('english', '")
-            .append(StringEscapeUtils.escapeSql(productExtract.name)).append("'), 'D')");
 
         return builder.toString();
     }

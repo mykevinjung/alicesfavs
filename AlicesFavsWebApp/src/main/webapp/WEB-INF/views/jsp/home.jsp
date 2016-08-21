@@ -23,7 +23,7 @@
             "selectedAttraction" : 0.1,
             "friction": 0.6,
             "rightToLeft": false,
-            "draggable": false        }'
+            "draggable": true        }'
                  style=""
             >
                 <div id="banner_1" class="ux_banner dark    "  style="height:400px; " data-height="400px" role="banner">

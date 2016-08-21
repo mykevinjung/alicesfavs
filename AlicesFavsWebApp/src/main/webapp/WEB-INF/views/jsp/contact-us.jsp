@@ -9,80 +9,8 @@
   <div  class="page-wrapper">
     <div id="content" role="main">
 
-      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHANNPQYsktwXOXOthV9sq0PYwIXhM100"></script>
-      <script type="text/javascript">
-
-        function initialize() {
-          var styles = {
-            'flatsome':  [{
-              "featureType": "administrative",
-              "stylers": [
-                { "visibility": "on" }
-              ]
-            },
-              {
-                "featureType": "road",
-                "stylers": [
-                  { "visibility": "on" },
-                  { "hue": "#58728a" }
-                ]
-              },
-              {
-                "stylers": [
-                  { "visibility": "on" },
-                  { "hue": "#58728a" },
-                  { "saturation": -30 }
-                ]
-              }
-            ]};
-
-          var myLatlng = new google.maps.LatLng(47.6014176,-122.0367389);
-          var myOptions = {
-            zoom: 6,
-            center: myLatlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            disableDefaultUI: true,
-            mapTypeId: 'flatsome',
-            draggable: false,
-            zoomControl: false,
-            panControl: false,
-            mapTypeControl: false,
-            scaleControl: false,
-            streetViewControl: false,
-            overviewMapControl: false,
-            scrollwheel: false,
-            disableDoubleClickZoom: true
-          }
-          var map = new google.maps.Map(document.getElementById("591315591"), myOptions);
-          var styledMapType = new google.maps.StyledMapType(styles['flatsome'], {name: 'flatsome'});
-          map.mapTypes.set('flatsome', styledMapType);
-
-          var marker = new google.maps.Marker({
-            position: myLatlng,
-            map: map,
-            title:""
-          });
-        }
-
-        google.maps.event.addDomListener(window, 'load', initialize);
-        google.maps.event.addDomListener(window, 'resize', initialize);
-
-      </script>
-
-      <div id="map_container">
-        <div id="591315591" style="height:350px;"></div>
-        <div id="map_overlay_top"></div>
-        <div id="map_overlay_bottom"></div>
-        <div class="map-info">
-          <div class="row">
-            <div class="large-4 columns right">
-              <div class="map_inner">
-                <h3>Greater Seattle Area</h3>
-                <p>We are based in Sammamish, WA, USA</p>
-              </div> <!-- map_inner -->
-            </div><!-- large-4 -->
-          </div><!-- row -->
-        </div><!-- .map-info -->
+      <div id="banner_1" class="ux_banner dark    "  style="height:400px; " data-height="400px" role="banner">
+        <div class="banner-bg "  style="background-image:url('/resources/images/seattle-illustration.jpg'); "><img src="/resources/images/seattle-illustration.jpg"  alt="" style="visibility:hidden;" /></div>
       </div>
 
       <div  class="row container ">

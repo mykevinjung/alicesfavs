@@ -40,17 +40,16 @@
                     </div>
                 </div><!-- end .ux_banner -->
 
-                <div id="banner_2" class="ux_banner dark    "  style="height:400px; " data-height="400px" role="banner">
-                        <div class="banner-bg "  style=" ">
-                            </div>
+                <div id="banner_2" class="ux_banner dark "  style="height:400px; " data-height="400px" role="banner">
+                        <div class="banner-bg " style="background-image:url('/resources/images/white.png'); ">
+                            <img src="/resources/images/white.png"  alt="" style="visibility:hidden;" /></div>
                         <div class="row" >
-                            <a target="_blank" href="http://www.anntaylor.com/new-arrivals/cata00008">
+                            <a target="_blank" href="https://www.abercrombie.com/shop/us/womens-jeans-bottoms?icmp=ICT:BTS16:F:SP:1:DNM:PRM:DNM50">
                                 <div class="inner center text-center "  style="width:80%;">
-                                    <div class="inner-wrap animated flipInX" style=" ">
-                                        <h3>Use Code FRIENDS40</h3>
-                                        <h1>40% Off Your Purchase</h1>
-                                        <div class="tx-div medium"></div>
-                                        <h2>from Ann Taylor</h2>
+                                    <div class="inner-wrap animated fadeInLeft" style=" ">
+                                        <h1 style="color: red;">JEANS 50% OFF</h1>
+                                        <div class="tx-div medium"  style="background-color: red;"></div>
+                                        <h3 style="color: red;">from Abercrombie & Fitch</h3>
                                     </div>
                                 </div>
                             </a>

@@ -13,7 +13,7 @@ public class StringEscapeUtils
 
     public static String escapeTsQuery(String sql)
     {
-        return sql.replaceAll("'", "''").replaceAll("[*&|:()#$%\\^]", " ");
+        return sql.replaceAll("[*&|:()#$%\\^'`~!@+]", " ");
     }
 
 }

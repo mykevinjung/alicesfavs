@@ -41,15 +41,15 @@
                 </div><!-- end .ux_banner -->
 
                 <div id="banner_2" class="ux_banner dark "  style="height:400px; " data-height="400px" role="banner">
-                        <div class="banner-bg " style="background-image:url('/resources/images/white.png'); ">
-                            <img src="/resources/images/white.png"  alt="" style="visibility:hidden;" /></div>
+                        <div class="banner-bg " style="background-image:url('/resources/images/white2.png'); ">
+                            <img src="/resources/images/white2.png"  alt="" style="visibility:hidden;" /></div>
                         <div class="row" >
-                            <a target="_blank" href="https://www.abercrombie.com/shop/us/womens-jeans-bottoms?icmp=ICT:BTS16:F:SP:1:DNM:PRM:DNM50">
+                            <a target="_blank" href="http://www.anthropologie.com/anthro/category/clothing/shopsale-freshcuts-clothing.jsp?cm_sp=TOPNAV-_-SHOPSALE-_-FRESHCUTS-CLOTHING#/">
                                 <div class="inner center text-center "  style="width:80%;">
                                     <div class="inner-wrap animated fadeInLeft" style=" ">
-                                        <h1 style="color: red;">JEANS 50% OFF</h1>
+                                        <h1 style="color: #5C5C5F;">EXTRA 25% OFF SALE ITEMS</h1>
                                         <div class="tx-div medium"  style="background-color: red;"></div>
-                                        <h3 style="color: red;">from Abercrombie & Fitch</h3>
+                                        <h3 style="color: #5C5C5F;">from Anthropologie</h3>
                                     </div>
                                 </div>
                             </a>

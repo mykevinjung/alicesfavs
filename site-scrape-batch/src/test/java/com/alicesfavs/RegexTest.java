@@ -20,8 +20,8 @@ public class RegexTest
     public void testRegex()
     {
 
-        final String testString = "View All";
-        final String regex = "View All|New to Sale";
+        final String testString = "/dodcs-ua";
+        final String regex = "/(?!swagger|docs).*";
 
         assertTrue("Does not match!", testString.matches(regex));
     }

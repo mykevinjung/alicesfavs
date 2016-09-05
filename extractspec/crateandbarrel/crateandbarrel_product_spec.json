@@ -1,54 +1,36 @@
 [
     {
-        "containerSpec":{
+        "containerSpec":null,
+        "productSpec":{
             "id":null,
             "tagName":"div",
             "className":"jsItemRow",
             "attributeKey":null,
             "valuePattern":null
         },
-        "productSpec":{
-            "id":null,
-            "tagName":"div",
-            "className":"twoWideRow",
-            "attributeKey":null,
-            "valuePattern":null
-        },
         "idSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"span",
-                "className":"productTitle",
-                "attributeKey":null,
-                "valuePattern":null
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"crate-productMinisetLink",
-                "attributeKey":"title",
+                "className":"product-miniset-title",
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"href",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":".*/[fs]([0-9]+)$"
+                "substringPattern":".*/([a-z0-9]+)$"
             }
         },
         "nameSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"span",
-                "className":"productTitle",
-                "attributeKey":null,
-                "valuePattern":null
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"crate-productMinisetLink",
-                "attributeKey":"title",
+                "className":"product-miniset-title",
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
@@ -59,18 +41,12 @@
             }
         },
         "urlSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"span",
-                "className":"productTitle",
-                "attributeKey":null,
-                "valuePattern":null
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"crate-productMinisetLink",
-                "attributeKey":"title",
+                "className":"product-miniset-title",
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
@@ -83,9 +59,9 @@
         "imageUrlSpecList":[
             {
                 "containerSpec":{
-                    "id":"divImageWrap",
-                    "tagName":"div",
-                    "className":null,
+                    "id":null,
+                    "tagName":"a",
+                    "className":"product-miniset-thumbnail",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -118,22 +94,6 @@
                     "attributeKey":"$own_text",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":"[a-zA-Z\\. ]*(\\$[0-9,\\.]+.*)"
-                }
-            },
-            {
-                "containerSpec":null,
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"span",
-                    "className":"regPrice",
-                    "attributeKey":"id",
-                    "valuePattern":null
-                },
-                "dataSpec":{
-                    "attributeKey":"$own_text",
-                    "valuePattern":null,
-                    "valueExcludePattern":".*(sugg|reg).*",
                     "substringPattern":"[a-zA-Z\\. ]*(\\$[0-9,\\.]+.*)"
                 }
             }
@@ -158,17 +118,11 @@
         ]
     },
     {
-        "containerSpec":{
-            "id":null,
-            "tagName":"div",
-            "className":"spillContent",
-            "attributeKey":null,
-            "valuePattern":null
-        },
+        "containerSpec":null,
         "productSpec":{
             "id":null,
             "tagName":"div",
-            "className":"hwThreeWideRow",
+            "className":"jsItemRow",
             "attributeKey":null,
             "valuePattern":null
         },
@@ -176,37 +130,37 @@
             "containerSpec":{
                 "id":null,
                 "tagName":"span",
-                "className":"product-info",
+                "className":"productInfo",
                 "attributeKey":null,
                 "valuePattern":null
             },
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"product",
-                "attributeKey":"title",
+                "className":null,
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"href",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":".*/[fs]([0-9]+)$"
+                "substringPattern":".*/([a-z0-9]+)$"
             }
         },
         "nameSpec":{
             "containerSpec":{
                 "id":null,
                 "tagName":"span",
-                "className":"product-info",
+                "className":"productInfo",
                 "attributeKey":null,
                 "valuePattern":null
             },
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"product",
-                "attributeKey":"title",
+                "className":null,
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
@@ -220,15 +174,15 @@
             "containerSpec":{
                 "id":null,
                 "tagName":"span",
-                "className":"product-info",
+                "className":"productInfo",
                 "attributeKey":null,
                 "valuePattern":null
             },
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"product",
-                "attributeKey":"title",
+                "className":null,
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
@@ -242,15 +196,15 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":"span",
-                    "className":"product-thumb",
+                    "tagName":"div",
+                    "className":"product",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"img",
-                    "className":"spillImage",
+                    "className":null,
                     "attributeKey":"data-src",
                     "valuePattern":null
                 },
@@ -276,22 +230,6 @@
                     "attributeKey":"$own_text",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":"[a-zA-Z\\. ]*(\\$[0-9,\\.]+.*)"
-                }
-            },
-            {
-                "containerSpec":null,
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"span",
-                    "className":"regPrice",
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "dataSpec":{
-                    "attributeKey":"$own_text",
-                    "valuePattern":null,
-                    "valueExcludePattern":".*(sugg|reg).*",
                     "substringPattern":"[a-zA-Z\\. ]*(\\$[0-9,\\.]+.*)"
                 }
             }

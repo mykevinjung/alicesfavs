@@ -4,14 +4,14 @@
         "containerSpec":{
             "id":null,
             "tagName":"div",
-            "className":"sale-wrapper",
+            "className":"sale-page__card-button-wrapper",
             "attributeKey":null,
             "valuePattern":null
         },
         "categorySpec":{
             "id":null,
             "tagName":"a",
-            "className":"cta-button",
+            "className":"sale-page__card-button-link",
             "attributeKey":null,
             "valuePattern":null
         },
@@ -20,7 +20,7 @@
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"cta-button",
+                "className":"sale-page__card-button-link",
                 "attributeKey":null,
                 "valuePattern":null
             },
@@ -36,7 +36,7 @@
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"cta-button",
+                "className":"sale-page__card-button-link",
                 "attributeKey":null,
                 "valuePattern":null
             },

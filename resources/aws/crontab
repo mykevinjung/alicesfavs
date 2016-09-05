@@ -110,3 +110,7 @@
 # stuartweitzman
 30 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh stuartweitzman usePhantomJS >> /dev/null 2>&1
 30 18 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh stuartweitzman usePhantomJS >> /dev/null 2>&1
+
+# crateandbarrel
+35 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh crateandbarrel >> /dev/null 2>&1
+35 18 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh crateandbarrel >> /dev/null 2>&1

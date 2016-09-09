@@ -27,13 +27,11 @@
   <div  class="page-wrapper">
     <div class="row">
       <div id="content" class="large-12 columns" role="main">
-        <p class="lead text-center">My wife, Alice, loves to browse through her favorite brand websites, always checking for good deals and sales.
+        <p class="lead text-center">Alice, my wife, loves to browse through her favorite brand websites, checking for good deals and sales.
           I wanted to do the work for her and help her shop.</p>
-        <p class="lead text-center">While doing this work, we noticed that many brands have more than half of their products on sale.
-          So why would you ever buy them at full price? Here, we have collected tens of thousands of the products on sale.</p>
         <hr>
         <div  class="row container ">
-          <div class="small-12    large-3  columns   "  ><div class="column-inner"  >
+          <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
 
             <div class="box-inner">
               <h4>All sales in one place<span> </span></h4>
@@ -41,21 +39,14 @@
             </div>
           </div></div>
 
-          <div class="small-12    large-3  columns   "  ><div class="column-inner"  >
-            <div class="box-inner">
-              <h4>Updates everyday!<span> </span></h4>
-              <p>We update all the brands several times everyday!</p>
-            </div>
-          </div></div>
-
-          <div class="small-12    large-3  columns   "  ><div class="column-inner"  >
+          <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
             <div class="box-inner">
               <h4>More brands coming...<span> </span></h4>
               <p>We are adding more brands you love. More brands, more choices!</p>
             </div>
           </div></div>
 
-          <div class="small-12    large-3  columns   "  ><div class="column-inner"  >
+          <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
             <div class="box-inner">
               <h4>More features coming...<span> </span></h4>
               <p>We are adding more features. Stay tuned!</p>

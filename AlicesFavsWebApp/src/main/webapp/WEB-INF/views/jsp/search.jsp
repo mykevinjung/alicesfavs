@@ -25,7 +25,7 @@
         <c:choose>
             <c:when test="${empty productList}">
                 <div class="large-12 columns">
-                    <p class="woocommerce-info">No products were found matching your selection.</p>
+                    <p class="woocommerce-info">No items were found matching your selection. Maybe the item is not on sale?</p>
                 </div>
             </c:when>
             <c:otherwise>

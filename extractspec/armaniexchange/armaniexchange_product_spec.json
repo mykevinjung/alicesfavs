@@ -1,36 +1,24 @@
 [
     {
-        "containerSpec":{
-            "id":null,
-            "tagName":"div",
-            "className":"product-items-container",
-            "attributeKey":null,
-            "valuePattern":null
-        },
+        "containerSpec":null,
         "productSpec":{
             "id":null,
-            "tagName":"div",
-            "className":"product-item",
-            "attributeKey":null,
-            "valuePattern":null
+            "tagName":"article",
+            "className":null,
+            "attributeKey":"itemtype",
+            "valuePattern":"http://schema.org/Product"
         },
         "idSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"div",
-                "className":"product-image",
-                "attributeKey":null,
-                "valuePattern":null
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
-                "tagName":"img",
+                "tagName":"article",
                 "className":null,
-                "attributeKey":"pid",
+                "attributeKey":"data-ytos-item",
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"pid",
+                "attributeKey":"data-ytos-item",
                 "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
@@ -40,16 +28,16 @@
             "containerSpec":{
                 "id":null,
                 "tagName":"div",
-                "className":"product-detail",
+                "className":"info",
                 "attributeKey":null,
                 "valuePattern":null
             },
             "elementSpec":{
                 "id":null,
-                "tagName":"p",
-                "className":null,
-                "attributeKey":"itemprop",
-                "valuePattern":"name"
+                "tagName":"div",
+                "className":"title",
+                "attributeKey":null,
+                "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"$nested_text",
@@ -59,13 +47,7 @@
             }
         },
         "urlSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"div",
-                "className":"product-image",
-                "attributeKey":null,
-                "valuePattern":null
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
@@ -85,22 +67,22 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"div",
-                    "className":"product-image",
+                    "className":"image",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"img",
-                    "className":null,
-                    "attributeKey":"pid",
+                    "className":"mainImage",
+                    "attributeKey":null,
                     "valuePattern":null
                 },
                 "dataSpec":{
-                    "attributeKey":"src",
+                    "attributeKey":"data-srcset",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":null
+                    "substringPattern":"([^ ]+\\.jpg).*"
                 }
             }
         ],
@@ -108,17 +90,17 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":"p",
-                    "className":"price",
+                    "tagName":"div",
+                    "className":"priceUpdater",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":null,
-                    "attributeKey":"itemprop",
-                    "valuePattern":"minPrice"
+                    "className":"discounted",
+                    "attributeKey":null,
+                    "valuePattern":null
                 },
                 "dataSpec":{
                     "attributeKey":"$nested_text",
@@ -132,15 +114,15 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":"p",
-                    "className":"price",
+                    "tagName":"div",
+                    "className":"priceUpdater",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"was-price",
+                    "className":"full",
                     "attributeKey":null,
                     "valuePattern":null
                 },

@@ -252,7 +252,7 @@ public class ProductServiceImpl implements ProductService
             final String priceWithoutCurrency = (lastCurrencyIndex == -1) ?
                 price :
                 price.substring(lastCurrencyIndex + 1);
-            return NumberFormat.getInstance().parse(priceWithoutCurrency).doubleValue();
+            return NumberFormat.getInstance().parse(priceWithoutCurrency.trim()).doubleValue();
         }
         catch (NullPointerException | ParseException e)
         {

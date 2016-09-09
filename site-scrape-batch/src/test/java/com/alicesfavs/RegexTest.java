@@ -19,24 +19,29 @@ public class RegexTest
     @Test
     public void testRegex()
     {
+//        v-ikarsai: Merging origin/master, resolving merge conflicts
+//        v-ikarsai: Merging master, resolving conflicts
+//        v-ikarsai: Merge remote-tracking branch 'origin/master' into CSE-2827-Add-Axe-unit-test-to-UITK
+//        v-ikarsai: Merge remote-tracking branch 'origin/master' into CSE-2827-Add-Axe-unit-test-to-UITK
 
-        final String testString = "/dodcs-ua";
-        final String regex = "/(?!swagger|docs).*";
 
-        assertTrue("Does not match!", testString.matches(regex));
+        final String testString = "Merge remote-tracking branch 'origin/master' into CSE-2827-Add-Axe-unit-test-to-UITK";
+        final String regex = "(merge|merging) .*master.*";
+
+        assertTrue("Does not match!", testString.toLowerCase().matches(regex));
     }
 
     @Test
     public void testExtractText()
     {
 
-        final String testString = "$455  $228 (50%)";
-        final String regex = ".* (\\$[0-9]+) .*";
+        final String testString = "$ 123.00";
+        final String regex = "\\$ ([0-9,.]+)";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(testString);
 
         assertTrue("Can't find the string!", matcher.find());
-        assertEquals("Can't extract the string!", "$228", matcher.group(1));
+        assertEquals("Can't extract the string!", "123.00", matcher.group(1));
     }
 }

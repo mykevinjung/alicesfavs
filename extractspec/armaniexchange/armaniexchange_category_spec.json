@@ -1,18 +1,18 @@
 [
     {
         "containerSpec":{
-            "id":null,
-            "tagName":"div",
-            "className":"Clearance",
+            "id":"sale",
+            "tagName":"li",
+            "className":null,
             "attributeKey":null,
             "valuePattern":null
         },
         "categorySpec":{
             "id":null,
             "tagName":"li",
-            "className":null,
-            "attributeKey":null,
-            "valuePattern":null
+            "className":"menuItem",
+            "attributeKey":"id",
+            "valuePattern":"(sale_women_sale_|sale_men_sale_).*"
         },
         "nameSpec":{
             "containerSpec":null,
@@ -41,59 +41,10 @@
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":".*/clearance/.*",
+                "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
-        },
-        "subcategorySpec": {
-            "containerSpec":{
-                "id":null,
-                "tagName":"div",
-                "className":"leftNav",
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "categorySpec":{
-                "id":null,
-                "tagName":"li",
-                "className":"level0",
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "nameSpec":{
-                "containerSpec":null,
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"a",
-                    "className":null,
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "dataSpec":{
-                    "attributeKey":"$nested_text",
-                    "valuePattern":null,
-                    "valueExcludePattern":null,
-                    "substringPattern":null
-                }
-            },
-            "urlSpec":{
-                "containerSpec":null,
-                "elementSpec":{
-                    "id":null,
-                    "tagName":"a",
-                    "className":null,
-                    "attributeKey":null,
-                    "valuePattern":null
-                },
-                "dataSpec":{
-                    "attributeKey":"abs:href",
-                    "valuePattern":".*/clearance/.*",
-                    "valueExcludePattern":null,
-                    "substringPattern":null
-                }
-            },
-            "subcategorySpec": null
         }
     }
 ]

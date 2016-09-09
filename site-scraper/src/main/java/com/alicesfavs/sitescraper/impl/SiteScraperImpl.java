@@ -13,6 +13,7 @@ import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -118,9 +119,10 @@ public class SiteScraperImpl implements SiteScraper
         String url = categoryExtract.url;
         int loopCount = 0;
         final List<ProductExtract> productList = new ArrayList<>();
+        final boolean scrollDown = nextPageExtractSpecList.size() == 0;
         while (StringUtils.hasText(url) && loopCount++ < MAX_NEXT_PAGE_LOOP)
         {
-            final Document doc = openUrl(site, url, true);
+            final Document doc = openUrl(site, url, true, scrollDown);
             if (doc == null)
             {
                 break;
@@ -136,7 +138,7 @@ public class SiteScraperImpl implements SiteScraper
     public void extractProductDetail(Site site, ProductExtract productExtract,
         List<ProductDetailExtractSpec> productDetailExtractSpecList) throws SiteScrapeException
     {
-        final Document doc = openUrl(site, productExtract.url, false);
+        final Document doc = openUrl(site, productExtract.url, false, false);
         if (doc != null)
         {
             for (ProductDetailExtractSpec productDetailExtractSpec : productDetailExtractSpecList)
@@ -150,7 +152,7 @@ public class SiteScraperImpl implements SiteScraper
             throws SiteScrapeException, ElementNotFoundException, DataNotFoundException
     {
         String openUrl = StringUtils.hasText(categoryExtractSpec.baseUrl) ? categoryExtractSpec.baseUrl : pageUrl;
-        final Document doc = openUrl(site, openUrl, false);
+        final Document doc = openUrl(site, openUrl, false, false);
         if (doc != null)
         {
             return dataExtractor.extractCategories(doc, categoryExtractSpec);
@@ -203,14 +205,14 @@ public class SiteScraperImpl implements SiteScraper
         return null;
     }
 
-    private Document openUrl(Site site, String url, boolean useWebDriver) throws SiteScrapeException
+    private Document openUrl(Site site, String url, boolean useWebDriver, boolean scrollDown) throws SiteScrapeException
     {
         int tryCount = 0;
         while (true)
         {
             try
             {
-                return openUrl(url, 90 * 1000, "Alice's Favs SmartCrawler", site.cookies, useWebDriver);
+                return openUrl(url, 90 * 1000, "Alice's Favs SmartCrawler", site.cookies, useWebDriver, scrollDown);
             }
             catch (SocketTimeoutException e)
             {
@@ -222,14 +224,7 @@ public class SiteScraperImpl implements SiteScraper
                 {
                     throw new SiteScrapeException("Failed to connect: " + url, e);
                 }
-                try
-                {
-                    Thread.sleep(10 * 1000);
-                }
-                catch (InterruptedException e1)
-                {
-                    // ignore
-                }
+                sleep(10 * 1000);
                 continue;
             }
             catch (IOException e)
@@ -239,7 +234,8 @@ public class SiteScraperImpl implements SiteScraper
         }
     }
 
-    private Document openUrl(String url, int timeout, String userAgent, String cookies, boolean useWebDriver) throws IOException
+    private Document openUrl(String url, int timeout, String userAgent, String cookies,
+        boolean useWebDriver, boolean scrollDown) throws IOException
     {
         try
         {
@@ -249,7 +245,14 @@ public class SiteScraperImpl implements SiteScraper
                 webDriver.manage().window().maximize();
                 webDriver.get(url);
 
-                scrollDown(5);
+                if (scrollDown)
+                {
+                    scrollDown(MAX_NEXT_PAGE_LOOP, 2000);
+                }
+                else
+                {
+                    scrollDown(1, 2000);
+                }
 
                 final String pageSource = webDriver.getPageSource();
                 final Document document = Jsoup.parse(pageSource);
@@ -275,20 +278,35 @@ public class SiteScraperImpl implements SiteScraper
         }
     }
 
-    private void scrollDown(int count)
+    private void scrollDown(int count, int sleepMilliseconds)
     {
-        final int height = webDriver.manage().window().getSize().getHeight();
+        final int MINIMUM_DIFFERENCE = 10;
+        int pageSourceLength = 0;
         JavascriptExecutor jse = (JavascriptExecutor) webDriver;
-        for (int index = 1 ; index <= count ; index++)
+        for (int index = 0 ; index < count ; index++)
         {
-            jse.executeScript(String.format("window.scrollBy(0,%d)", index * height), "");
-            try
+            jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+            sleep(sleepMilliseconds);
+            final int newPageSourceLength = webDriver.getPageSource().length();
+            if (newPageSourceLength - pageSourceLength > MINIMUM_DIFFERENCE)
             {
-                Thread.sleep(100);
+                pageSourceLength = newPageSourceLength;
             }
-            catch (InterruptedException e)
-            {}
+            else
+            {
+                break;
+            }
         }
+    }
+
+    private void sleep(int milliseconds)
+    {
+        try
+        {
+            Thread.sleep(milliseconds);
+        }
+        catch (InterruptedException e)
+        {}
     }
 
     private Map<String, String> getCookieMap(String cookies)

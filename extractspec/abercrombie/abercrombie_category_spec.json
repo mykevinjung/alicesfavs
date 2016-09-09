@@ -1,34 +1,34 @@
 [
     {
-        "baseUrl":"https://www.abercrombie.com/shop/us/sale",
+        "baseUrl":"https://www.abercrombie.com/shop/us/mens",
         "containerSpec":{
-            "id":null,
+            "id":"category-nav",
             "tagName":"div",
-            "className":"sale-page__card-button-wrapper",
+            "className":null,
             "attributeKey":null,
             "valuePattern":null
         },
         "categorySpec":{
             "id":null,
-            "tagName":"a",
-            "className":"sale-page__card-button-link",
-            "attributeKey":null,
-            "valuePattern":null
+            "tagName":"li",
+            "className":null,
+            "attributeKey":"id",
+            "valuePattern":"cat-.*"
         },
         "nameSpec":{
             "containerSpec":null,
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"sale-page__card-button-link",
+                "className":null,
                 "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"href",
+                "attributeKey":"$nested_text",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":".*/shop/[a-zA-Z0-9]+/(.*)\\?.*"
+                "substringPattern":null
             }
         },
         "urlSpec":{
@@ -36,7 +36,57 @@
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"sale-page__card-button-link",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "dataSpec":{
+                "attributeKey":"abs:href",
+                "valuePattern":null,
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        },
+        "subcategorySpec": null
+    },
+    {
+        "baseUrl":"https://www.abercrombie.com/shop/us/womens",
+        "containerSpec":{
+            "id":"category-nav",
+            "tagName":"div",
+            "className":null,
+            "attributeKey":null,
+            "valuePattern":null
+        },
+        "categorySpec":{
+            "id":null,
+            "tagName":"li",
+            "className":null,
+            "attributeKey":"id",
+            "valuePattern":"cat-.*"
+        },
+        "nameSpec":{
+            "containerSpec":null,
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "dataSpec":{
+                "attributeKey":"$nested_text",
+                "valuePattern":null,
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        },
+        "urlSpec":{
+            "containerSpec":null,
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
                 "attributeKey":null,
                 "valuePattern":null
             },

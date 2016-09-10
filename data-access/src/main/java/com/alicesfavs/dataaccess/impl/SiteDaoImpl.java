@@ -25,17 +25,17 @@ public class SiteDaoImpl implements SiteDao
 
     private static final String SELECT_BY_STRING_ID =
         "SELECT ID, STRING_ID, COUNTRY_CODE, DISPLAY_NAME, URL, DISPLAY, "
-            + "DISPLAY_WEIGHT, CURRENCY, COOKIES, CREATED_DATE, UPDATED_DATE FROM SITE "
+            + "DISPLAY_WEIGHT, CURRENCY, COOKIES, DEFAULT_ALICE_CATEGORY_ID, CREATED_DATE, UPDATED_DATE FROM SITE "
             + "WHERE STRING_ID = ?";
 
     private static final String SELECT_ALL =
         "SELECT ID, STRING_ID, COUNTRY_CODE, DISPLAY_NAME, URL, DISPLAY, "
-            + "DISPLAY_WEIGHT, CURRENCY, COOKIES, CREATED_DATE, UPDATED_DATE FROM SITE "
+            + "DISPLAY_WEIGHT, CURRENCY, COOKIES, DEFAULT_ALICE_CATEGORY_ID, CREATED_DATE, UPDATED_DATE FROM SITE "
             + "WHERE DISPLAY = 1 ORDER BY DISPLAY_NAME ASC";
 
     private static final String SELECT_BY_ALICE_CATEGORY_ID =
         "SELECT S.ID, S.STRING_ID, S.COUNTRY_CODE, S.DISPLAY_NAME, S.URL, S.DISPLAY, "
-            + "S.DISPLAY_WEIGHT, S.CURRENCY, S.COOKIES, S.CREATED_DATE, S.UPDATED_DATE "
+            + "S.DISPLAY_WEIGHT, S.CURRENCY, S.COOKIES, S.DEFAULT_ALICE_CATEGORY_ID, S.CREATED_DATE, S.UPDATED_DATE "
             + "FROM SITE S INNER JOIN ALICE_CATEGORY_SITE A ON S.ID = A.SITE_ID "
             + "WHERE S.DISPLAY = 1 AND A.ALICE_CATEGORY_ID = ? ORDER BY S.DISPLAY_NAME";
 
@@ -120,6 +120,7 @@ public class SiteDaoImpl implements SiteDao
             final Integer displayWeight = ResultSetUtils.getInt(rs, "DISPLAY_WEIGHT");
             final String currency = rs.getString("CURRENCY");
             final String cookies = rs.getString("COOKIES");
+            final Long defaultAliceCategoryId = ResultSetUtils.getLong(rs, "DEFAULT_ALICE_CATEGORY_ID");
 
             final Site site = new Site(modelBase, stringId);
             site.country = country;
@@ -129,6 +130,7 @@ public class SiteDaoImpl implements SiteDao
             site.displayWeight = displayWeight;
             site.currency = currency;
             site.cookies = cookies;
+            site.defaultAliceCategoryId = defaultAliceCategoryId;
 
             return site;
         }

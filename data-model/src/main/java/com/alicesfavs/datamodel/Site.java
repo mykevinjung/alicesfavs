@@ -14,6 +14,7 @@ public class Site extends ModelBase
     public Integer displayWeight;
     public String currency;
     public String cookies;
+    public Long defaultAliceCategoryId;
 
     public Site(long id, LocalDateTime createdDate, String stringId)
     {
@@ -39,7 +40,7 @@ public class Site extends ModelBase
     {
         return "Site[" + super.toString() + ", country=" + country + ", stringId=" + stringId + ", displayName="
             + displayName + ", url=" + url + ", display=" + display + ", displayWeight=" + displayWeight
-            + ", currency=" + currency + ", cookies=" + cookies + "]";
+            + ", currency=" + currency + ", cookies=" + cookies + ", defaultAliceCategoryId=" + defaultAliceCategoryId + "]";
     }
 
 }

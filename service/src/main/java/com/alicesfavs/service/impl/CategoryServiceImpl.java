@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alicesfavs.datamodel.Site;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService
         for (int index = 0; index < leafCategories.size(); index++)
         {
             final CategoryExtract[] categoryHierarchy = getCategoryHierarchy(leafCategories.get(index));
-            final Category category = saveCategoryExtract(jobId, site.id, index, now, categoryHierarchy, existingCategories);
+            final Category category = saveCategoryExtract(jobId, site, index, now, categoryHierarchy, existingCategories);
             categories.add(category);
         }
 
@@ -86,12 +85,15 @@ public class CategoryServiceImpl implements CategoryService
         return categoryProductDao.updateExtractStatus(siteId, jobId, ExtractStatus.EXTRACTED, ExtractStatus.NOT_FOUND);
     }
 
-    private Category saveCategoryExtract(long jobId, long siteId, int displayOrder, LocalDateTime extractTime,
+    private Category saveCategoryExtract(long jobId, Site site, int displayOrder, LocalDateTime extractTime,
             CategoryExtract[] categoryHierarchy, List<Category> existingCategories)
     {
         final Category existingCategory = findSameCategory(categoryHierarchy, existingCategories);
         if (existingCategory != null)
         {
+            if (existingCategory.aliceCategoryId == null) {
+                existingCategory.aliceCategoryId = site.defaultAliceCategoryId;
+            }
             existingCategory.displayOrder = displayOrder;
             existingCategory.extractedDate = extractTime;
             existingCategory.extractJobId = jobId;
@@ -101,8 +103,8 @@ public class CategoryServiceImpl implements CategoryService
         }
         else
         {
-            return categoryDao.insertCategory(siteId, null, categoryHierarchy[0], categoryHierarchy[1], categoryHierarchy[2],
-                displayOrder, ExtractStatus.EXTRACTED, jobId, extractTime);
+            return categoryDao.insertCategory(site.id, site.defaultAliceCategoryId, categoryHierarchy[0],
+                categoryHierarchy[1], categoryHierarchy[2], displayOrder, ExtractStatus.EXTRACTED, jobId, extractTime);
         }
     }
 

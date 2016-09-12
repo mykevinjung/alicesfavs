@@ -14,6 +14,7 @@ public class MailRequest
     private MailAddress replyToAddress;
     private String subject;
     private String body;
+    private BodyType bodyType = BodyType.TEXT;
 
     public List<MailAddress> getToAddressList()
     {
@@ -38,6 +39,11 @@ public class MailRequest
     public String getBody()
     {
         return body;
+    }
+
+    public BodyType getBodyType()
+    {
+        return bodyType;
     }
 
     public MailRequest withToAddress(MailAddress toAddress)
@@ -77,6 +83,12 @@ public class MailRequest
     public MailRequest withBody(String body)
     {
         this.body = body;
+        return this;
+    }
+
+    public MailRequest withBodyType(BodyType bodyType)
+    {
+        this.bodyType = bodyType;
         return this;
     }
 

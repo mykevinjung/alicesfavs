@@ -1,6 +1,9 @@
 # refresh site manager
 5,35 * * * * wget -a /opt/apache-tomcat-8.0.28/logs/refresh-site-manager.log http://localhost/refresh/site-manager
 
+# daily report
+20 02 * * * /opt/alicesfavs/site-scrape-batch/daily-report.sh 3  >> /dev/null 2>&1
+
 # madewell - running at midnight only as getting unavailable products when running during daytime
 55 06 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh madewell >> /dev/null 2>&1
 
@@ -36,7 +39,7 @@
 
 # michaelkors
 45 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh michaelkors >> /dev/null 2>&1
-45 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh michaelkors >> /dev/null 2>&1
+#45 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh michaelkors >> /dev/null 2>&1
 
 # stuartweitzman
 50 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh stuartweitzman usePhantomJS >> /dev/null 2>&1

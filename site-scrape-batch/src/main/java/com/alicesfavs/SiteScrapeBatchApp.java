@@ -14,8 +14,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.alicesfavs.batch.SiteScrapeJob;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
-
 /**
  * Hello world!
  */

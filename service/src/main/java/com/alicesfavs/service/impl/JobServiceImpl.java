@@ -44,4 +44,8 @@ public class JobServiceImpl implements JobService
         return jobDao.selectJobs(siteId, afterCreatedDate);
     }
 
+    public List<Job> selectJobs(LocalDateTime afterCreatedDate)
+    {
+        return jobDao.selectJobs(afterCreatedDate);
+    }
 }

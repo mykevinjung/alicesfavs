@@ -16,4 +16,5 @@ public interface JobService
 
     List<Job> selectJobs(long siteId, LocalDateTime afterCreatedDate);
 
+    List<Job> selectJobs(LocalDateTime afterCreatedDate);
 }

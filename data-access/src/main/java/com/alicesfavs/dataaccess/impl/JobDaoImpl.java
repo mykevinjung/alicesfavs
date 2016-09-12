@@ -38,6 +38,10 @@ public class JobDaoImpl implements JobDao
         + "FOUND_CATEGORY, FOUND_PRODUCT, NOT_FOUND_CATEGORY, NOT_FOUND_PRODUCT, CREATED_DATE, UPDATED_DATE FROM JOB "
         + "WHERE SITE_ID = ? AND CREATED_DATE >= ? ORDER BY CREATED_DATE ASC";
 
+    private static final String SELECT_JOBS_BY_DATE = "SELECT ID, SITE_ID, MODE, STATUS, START_TIME, END_TIME, "
+        + "FOUND_CATEGORY, FOUND_PRODUCT, NOT_FOUND_CATEGORY, NOT_FOUND_PRODUCT, CREATED_DATE, UPDATED_DATE FROM JOB "
+        + "WHERE CREATED_DATE >= ? ORDER BY CREATED_DATE ASC";
+
     private static final int[] INSERT_PARAM_TYPES =
         { Types.BIGINT, Types.INTEGER, Types.INTEGER, Types.TIMESTAMP, Types.TIMESTAMP, Types.INTEGER, Types.INTEGER,
             Types.INTEGER, Types.INTEGER };
@@ -51,6 +55,9 @@ public class JobDaoImpl implements JobDao
 
     private static final int[] SELECT_JOBS_BY_SITE_PARAM_TYPES =
         { Types.BIGINT, Types.TIMESTAMP };
+
+    private static final int[] SELECT_JOBS_BY_DATE_PARAM_TYPES =
+        { Types.TIMESTAMP };
 
     @Autowired
     private DaoSupport<Job> daoSupport;
@@ -101,6 +108,16 @@ public class JobDaoImpl implements JobDao
 
         return daoSupport
             .selectObjectList(SELECT_JOBS_BY_SITE_ID, SELECT_JOBS_BY_SITE_PARAM_TYPES, params,
+                new JobRowMapper());
+    }
+
+    @Override
+    public List<Job> selectJobs(LocalDateTime afterCreatedDate)
+    {
+        final Object[] params = { DateTimeUtils.toTimestamp(afterCreatedDate) };
+
+        return daoSupport
+            .selectObjectList(SELECT_JOBS_BY_DATE, SELECT_JOBS_BY_DATE_PARAM_TYPES, params,
                 new JobRowMapper());
     }
 

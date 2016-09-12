@@ -8,6 +8,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<import resource="classpath:/service.xml" />
+	<import resource="classpath:/mail.xml"/>
 
 	<!-- Scans within the base package of the application for @Component classes 
 		to configure as beans -->

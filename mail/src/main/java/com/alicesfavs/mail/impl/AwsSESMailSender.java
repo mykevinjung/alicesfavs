@@ -1,5 +1,6 @@
 package com.alicesfavs.mail.impl;
 
+import com.alicesfavs.mail.BodyType;
 import com.alicesfavs.mail.MailAddress;
 import com.alicesfavs.mail.MailRequest;
 import com.alicesfavs.mail.MailResult;
@@ -59,8 +60,16 @@ public class AwsSESMailSender implements MailSender
 
         // Create the subject and body of the message.
         Content subject = new Content().withData(mailRequest.getSubject());
-        Content textBody = new Content().withData(mailRequest.getBody());
-        Body body = new Body().withText(textBody);
+        Content bodyText = new Content().withData(mailRequest.getBody());
+        Body body;
+        if (mailRequest.getBodyType() == BodyType.HTML)
+        {
+            body = new Body().withHtml(bodyText);
+        }
+        else
+        {
+            body = new Body().withText(bodyText);
+        }
 
         // Create a message with the specified subject and body.
         Message message = new Message().withSubject(subject).withBody(body);

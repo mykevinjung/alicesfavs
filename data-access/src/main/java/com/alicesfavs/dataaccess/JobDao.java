@@ -21,4 +21,9 @@ public interface JobDao
      */
     List<Job> selectJobs(long siteId, LocalDateTime afterCreatedDate);
 
+    /**
+     * This returns a list of jobs that were executed afterCreatedDate
+     * order by createdDate ascending
+     */
+    List<Job> selectJobs(LocalDateTime afterCreatedDate);
 }

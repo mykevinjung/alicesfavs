@@ -1,53 +1,17 @@
 [
     {
-        "containerSpec":null,
-        "categorySpec":{
+        "baseUrl":"http://www.toms.com/sale",
+        "containerSpec":{
             "id":null,
-            "tagName":"a",
-            "className":"megaNavFeaturedOmniClick",
-            "attributeKey":"data-display-name",
+            "tagName":"dd",
+            "className":"show-for-small",
+            "attributeKey":null,
             "valuePattern":null
         },
-        "nameSpec":{
-            "containerSpec":null,
-            "elementSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":"megaNavFeaturedOmniClick",
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "dataSpec":{
-                "attributeKey":"$nested_text",
-                "valuePattern":null,
-                "valueExcludePattern":null,
-                "substringPattern":null
-            }
-        },
-        "urlSpec":{
-            "containerSpec":null,
-            "elementSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":"megaNavFeaturedOmniClick",
-                "attributeKey":null,
-                "valuePattern":null
-            },
-            "dataSpec":{
-                "attributeKey":"abs:href",
-                "valuePattern":null,
-                "valueExcludePattern":null,
-                "substringPattern":null
-            }
-        },
-        "subcategorySpec":null
-    },
-    {
-        "containerSpec":null,
         "categorySpec":{
             "id":null,
-            "tagName":"a",
-            "className":"megaNavSidePane",
+            "tagName":"li",
+            "className":null,
             "attributeKey":null,
             "valuePattern":null
         },
@@ -57,12 +21,12 @@
                 "id":null,
                 "tagName":"a",
                 "className":null,
-                "attributeKey":null,
+                "attributeKey":"title",
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"$nested_text",
-                "valuePattern":null,
+                "attributeKey":"title",
+                "valuePattern":"[a-zA-Z0-9 ]+",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }

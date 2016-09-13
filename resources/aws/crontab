@@ -2,7 +2,7 @@
 5,35 * * * * wget -a /opt/apache-tomcat-8.0.28/logs/refresh-site-manager.log http://localhost/refresh/site-manager
 
 # daily report
-20 02 * * * /opt/alicesfavs/site-scrape-batch/daily-report.sh 3  >> /dev/null 2>&1
+40 23 * * * /opt/alicesfavs/site-scrape-batch/daily-report.sh 3  >> /dev/null 2>&1
 
 # madewell - running at midnight only as getting unavailable products when running during daytime
 55 06 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh madewell >> /dev/null 2>&1
@@ -11,7 +11,7 @@
 #01 06 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh jcrew >> /dev/null 2>&1
 
 # anthropologie - running often in daytime as products get unavailable quickly
-40 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anthropologie >> /dev/null 2>&1
+40 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anthropologie >> /dev/null 2>&1
 40 13 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anthropologie >> /dev/null 2>&1
 40 15 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anthropologie >> /dev/null 2>&1
 40 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anthropologie >> /dev/null 2>&1
@@ -21,78 +21,84 @@
 40 01 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anthropologie >> /dev/null 2>&1
 40 03 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anthropologie >> /dev/null 2>&1
 
-# surlatable
-20 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh surlatable >> /dev/null 2>&1
-20 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh surlatable >> /dev/null 2>&1
-
-# potterybarn
-25 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh potterybarn >> /dev/null 2>&1
-25 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh potterybarn >> /dev/null 2>&1
-
-# rebeccaminkoff
-35 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh rebeccaminkoff >> /dev/null 2>&1
-35 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh rebeccaminkoff >> /dev/null 2>&1
-
-# anntaylor
-40 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anntaylor >> /dev/null 2>&1
-40 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anntaylor >> /dev/null 2>&1
-
-# michaelkors
-45 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh michaelkors >> /dev/null 2>&1
-#45 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh michaelkors >> /dev/null 2>&1
-
 # stuartweitzman
-50 10 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh stuartweitzman usePhantomJS >> /dev/null 2>&1
+50 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh stuartweitzman usePhantomJS >> /dev/null 2>&1
 50 16 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh stuartweitzman usePhantomJS >> /dev/null 2>&1
 
+# michaelkors
+11 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh michaelkors >> /dev/null 2>&1
+#11 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh michaelkors >> /dev/null 2>&1
+
+# anntaylor
+14 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anntaylor >> /dev/null 2>&1
+14 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh anntaylor >> /dev/null 2>&1
+
+# rebeccaminkoff
+18 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh rebeccaminkoff >> /dev/null 2>&1
+18 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh rebeccaminkoff >> /dev/null 2>&1
+
+# potterybarn
+21 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh potterybarn >> /dev/null 2>&1
+21 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh potterybarn >> /dev/null 2>&1
+
+# surlatable
+26 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh surlatable >> /dev/null 2>&1
+26 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh surlatable >> /dev/null 2>&1
+
 # williams-sonoma
-10 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh williams-sonoma >> /dev/null 2>&1
-10 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh williams-sonoma >> /dev/null 2>&1
+29 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh williams-sonoma >> /dev/null 2>&1
+29 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh williams-sonoma >> /dev/null 2>&1
 
 # toryburch
-20 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toryburch >> /dev/null 2>&1
-20 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toryburch >> /dev/null 2>&1
+33 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toryburch >> /dev/null 2>&1
+33 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toryburch >> /dev/null 2>&1
 
 # verabradley
-25 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh verabradley >> /dev/null 2>&1
-25 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh verabradley >> /dev/null 2>&1
+37 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh verabradley >> /dev/null 2>&1
+37 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh verabradley >> /dev/null 2>&1
 
 # katespade
-30 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh katespade >> /dev/null 2>&1
-30 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh katespade >> /dev/null 2>&1
+41 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh katespade >> /dev/null 2>&1
+41 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh katespade >> /dev/null 2>&1
 
 # colehaan
-35 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh colehaan >> /dev/null 2>&1
-35 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh colehaan >> /dev/null 2>&1
+44 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh colehaan >> /dev/null 2>&1
+44 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh colehaan >> /dev/null 2>&1
 
 # coach
-40 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh coach >> /dev/null 2>&1
-40 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh coach >> /dev/null 2>&1
+47 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh coach >> /dev/null 2>&1
+47 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh coach >> /dev/null 2>&1
 
 # aldo
-50 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh aldo >> /dev/null 2>&1
-50 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh aldo >> /dev/null 2>&1
+52 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh aldo >> /dev/null 2>&1
+52 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh aldo >> /dev/null 2>&1
 
 # vince
-55 11 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh vince >> /dev/null 2>&1
-55 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh vince >> /dev/null 2>&1
+56 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh vince >> /dev/null 2>&1
+56 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh vince >> /dev/null 2>&1
 
 # loft
-01 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh loft >> /dev/null 2>&1
+01 13 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh loft >> /dev/null 2>&1
 01 18 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh loft >> /dev/null 2>&1
 
 # abercrombie
-06 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh abercrombie >> /dev/null 2>&1
+06 13 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh abercrombie >> /dev/null 2>&1
 06 18 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh abercrombie >> /dev/null 2>&1
 
 # boden - this may take longer than 10 minutes
-11 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh boden usePhantomJS >> /dev/null 2>&1
-11 18 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh boden usePhantomJS >> /dev/null 2>&1
+11 13 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh boden usePhantomJS >> /dev/null 2>&1
+11 19 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh boden usePhantomJS >> /dev/null 2>&1
 
 # crateandbarrel
-35 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh crateandbarrel >> /dev/null 2>&1
-35 18 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh crateandbarrel >> /dev/null 2>&1
+35 13 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh crateandbarrel >> /dev/null 2>&1
+35 19 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh crateandbarrel >> /dev/null 2>&1
 
 # armaniexchange
-40 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh armaniexchange usePhantomJS >> /dev/null 2>&1
-40 18 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh armaniexchange usePhantomJS >> /dev/null 2>&1
+40 13 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh armaniexchange usePhantomJS >> /dev/null 2>&1
+40 19 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh armaniexchange usePhantomJS >> /dev/null 2>&1
+
+# toms
+50 13 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toms >> /dev/null 2>&1
+51 13 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toms >> /dev/null 2>&1
+50 19 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toms >> /dev/null 2>&1
+51 19 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toms >> /dev/null 2>&1

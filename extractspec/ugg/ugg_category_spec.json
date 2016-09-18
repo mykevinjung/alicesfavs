@@ -1,58 +1,10 @@
 [
     {
+        "baseUrl":"http://www.ugg.com/master-sale",
         "containerSpec":{
             "id":null,
-            "tagName":"ul",
-            "className":"level-3",
-            "attributeKey":null,
-            "valuePattern":null
-        },
-        "categorySpec":{
-            "id":null,
-            "tagName":"li",
-            "className":null,
-            "attributeKey":"class",
-            "valuePattern":null
-        },
-        "nameSpec":{
-            "containerSpec":null,
-            "elementSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":"class",
-                "valuePattern":null
-            },
-            "dataSpec":{
-                "attributeKey":"$nested_text",
-                "valuePattern":null,
-                "valueExcludePattern":null,
-                "substringPattern":null
-            }
-        },
-        "urlSpec":{
-            "containerSpec":null,
-            "elementSpec":{
-                "id":null,
-                "tagName":"a",
-                "className":null,
-                "attributeKey":"class",
-                "valuePattern":null
-            },
-            "dataSpec":{
-                "attributeKey":"abs:href",
-                "valuePattern":null,
-                "valueExcludePattern":".*#0",
-                "substringPattern":null
-            }
-        },
-        "subcategorySpec": null
-    },
-    {
-        "containerSpec":{
-            "id":null,
-            "tagName":"ul",
-            "className":"nav-secondary",
+            "tagName":"div",
+            "className":"Type",
             "attributeKey":null,
             "valuePattern":null
         },
@@ -68,13 +20,13 @@
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"level-2",
-                "attributeKey":null,
+                "className":null,
+                "attributeKey":"title",
                 "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"$nested_text",
-                "valuePattern":".*Sale.*",
+                "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
             }
@@ -84,8 +36,8 @@
             "elementSpec":{
                 "id":null,
                 "tagName":"a",
-                "className":"level-2",
-                "attributeKey":null,
+                "className":null,
+                "attributeKey":"title",
                 "valuePattern":null
             },
             "dataSpec":{

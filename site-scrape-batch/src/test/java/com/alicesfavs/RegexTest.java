@@ -19,14 +19,9 @@ public class RegexTest
     @Test
     public void testRegex()
     {
-//        v-ikarsai: Merging origin/master, resolving merge conflicts
-//        v-ikarsai: Merging master, resolving conflicts
-//        v-ikarsai: Merge remote-tracking branch 'origin/master' into CSE-2827-Add-Axe-unit-test-to-UITK
-//        v-ikarsai: Merge remote-tracking branch 'origin/master' into CSE-2827-Add-Axe-unit-test-to-UITK
 
-
-        final String testString = "Merge remote-tracking branch 'origin/master' into CSE-2827-Add-Axe-unit-test-to-UITK";
-        final String regex = "(merge|merging) .*master.*";
+        final String testString = "content/resources/views/brands/wotif/pages/hotels/retailsearch/views/results/pricecol_en_us.xml";
+        final String regex = "content/resources/.*en_us.xml";
 
         assertTrue("Does not match!", testString.toLowerCase().matches(regex));
     }

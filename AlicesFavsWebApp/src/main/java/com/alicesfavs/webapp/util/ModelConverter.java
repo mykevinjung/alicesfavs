@@ -10,11 +10,7 @@ import com.alicesfavs.webapp.uimodel.UiSite;
 import org.springframework.util.StringUtils;
 
 import java.text.NumberFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Currency;
@@ -31,7 +27,7 @@ public class ModelConverter
         final UiSite uiSite = new UiSite();
         uiSite.setStringId(site.stringId);
         uiSite.setDisplayName(site.displayName);
-        uiSite.setNewSite(site.createdDate.until(LocalDateTime.now(), ChronoUnit.DAYS) <= 15);
+        uiSite.setNewSite(site.createdDate.until(LocalDateTime.now(), ChronoUnit.DAYS) <= 10);
 
         return uiSite;
     }

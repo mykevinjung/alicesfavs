@@ -63,15 +63,20 @@ public class SaleProductService
     public List<UiSaleSummary> getSaleSummary()
     {
         final List<UiSaleSummary> saleSummaryList = new ArrayList<>();
+        final LocalDateTime now = LocalDateTime.now();
         for (Site site : siteManager.getSites())
         {
-            final List<UiProduct> productList = getSaleProducts(site, null);
-            final UiSaleSummary saleSummary = new UiSaleSummary();
-            saleSummary.setSaleCountThisWeek(getSaleCountThisWeek(productList));
-            saleSummary.setSaleCountTotal(productList.size());
-            saleSummary.setSiteName(site.displayName);
-            saleSummary.setBrandSaleUrl(Constants.BRAND_SALE_URL_PREFIX + site.stringId);
-            saleSummaryList.add(saleSummary);
+            // do not include new site from Sale Summary
+            if (site.createdDate.until(now, ChronoUnit.DAYS) > 7 )
+            {
+                final List<UiProduct> productList = getSaleProducts(site, null);
+                final UiSaleSummary saleSummary = new UiSaleSummary();
+                saleSummary.setSaleCountThisWeek(getSaleCountThisWeek(productList));
+                saleSummary.setSaleCountTotal(productList.size());
+                saleSummary.setSiteName(site.displayName);
+                saleSummary.setBrandSaleUrl(Constants.BRAND_SALE_URL_PREFIX + site.stringId);
+                saleSummaryList.add(saleSummary);
+            }
         }
         saleSummaryList.sort(new SaleSummaryComparator());
         return saleSummaryList;

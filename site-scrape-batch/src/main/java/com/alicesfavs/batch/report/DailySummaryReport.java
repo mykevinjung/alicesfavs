@@ -62,7 +62,7 @@ public class DailySummaryReport
         final MailRequest mailRequest = new MailRequest();
         mailRequest.withSubject("Daily Summary - " + getPstDateNow())
             .withFromAddress(new MailAddress("alice@alicesfavs.com", "Alice's Favs"))
-            .withToAddress(new MailAddress("alice@alicesfavs.com", "Alice's Favs"))
+            .withToAddress(new MailAddress("mykevinjung@gmail.com", "Kevin Jung"))
             .withBody(emailContent).withBodyType(BodyType.HTML);
         mailSender.send(mailRequest);
 

@@ -2,7 +2,7 @@
 5,35 * * * * wget -a /opt/apache-tomcat-8.0.28/logs/refresh-site-manager.log http://localhost/refresh/site-manager
 
 # daily report
-40 23 * * * /opt/alicesfavs/site-scrape-batch/daily-report.sh 3  >> /dev/null 2>&1
+50 23 * * * /opt/alicesfavs/site-scrape-batch/daily-report.sh 3  >> /dev/null 2>&1
 
 # madewell - running at midnight only as getting unavailable products when running during daytime
 55 06 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh madewell >> /dev/null 2>&1
@@ -66,8 +66,8 @@
 44 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh colehaan >> /dev/null 2>&1
 
 # coach
-47 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh coach >> /dev/null 2>&1
-47 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh coach >> /dev/null 2>&1
+47 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh coach usePhantomJS >> /dev/null 2>&1
+47 17 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh coach usePhantomJS >> /dev/null 2>&1
 
 # aldo
 52 12 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh aldo >> /dev/null 2>&1
@@ -102,3 +102,7 @@
 51 13 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toms >> /dev/null 2>&1
 50 19 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toms >> /dev/null 2>&1
 51 19 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toms >> /dev/null 2>&1
+
+# ugg
+55 13 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh ugg usePhantomJS >> /dev/null 2>&1
+55 19 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh ugg usePhantomJS >> /dev/null 2>&1

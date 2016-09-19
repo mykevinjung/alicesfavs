@@ -103,6 +103,14 @@
 50 19 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toms >> /dev/null 2>&1
 51 19 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh toms >> /dev/null 2>&1
 
+# eileenfisher
+53 13 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh eileenfisher >> /dev/null 2>&1
+53 19 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh eileenfisher >> /dev/null 2>&1
+
 # ugg
 55 13 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh ugg usePhantomJS >> /dev/null 2>&1
 55 19 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh ugg usePhantomJS >> /dev/null 2>&1
+
+# clarks
+59 13 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh clarks usePhantomJS >> /dev/null 2>&1
+59 19 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh clarks usePhantomJS >> /dev/null 2>&1

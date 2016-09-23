@@ -1,0 +1,45 @@
+[
+    {
+        "containerSpec":null,
+        "categorySpec":{
+            "id":null,
+            "tagName":"div",
+            "className":"catnav--sale",
+            "attributeKey":null,
+            "valuePattern":null
+        },
+        "nameSpec":{
+            "containerSpec":null,
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "dataSpec":{
+                "attributeKey":"$nested_text",
+                "valuePattern":null,
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        },
+        "urlSpec":{
+            "containerSpec":null,
+            "elementSpec":{
+                "id":null,
+                "tagName":"a",
+                "className":null,
+                "attributeKey":null,
+                "valuePattern":null
+            },
+            "dataSpec":{
+                "attributeKey":"abs:href",
+                "valuePattern":null,
+                "valueExcludePattern":null,
+                "substringPattern":null
+            }
+        },
+        "subcategorySpec": null
+    }
+]

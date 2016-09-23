@@ -40,6 +40,24 @@
                     </div>
                 </div><!-- end .ux_banner -->
 
+                <div id="banner_2" class="ux_banner dark "  style="height:400px; " data-height="400px" role="banner">
+                    <div class="banner-bg " style="background-image:url('/resources/images/white2.png'); ">
+                        <img src="/resources/images/white2.png"  alt="" style="visibility:hidden;" /></div>
+                    <div class="row" >
+                        <a target="_blank" href="http://www.anthropologie.com/anthro/category/clothing/shopsale-clothing.jsp">
+                            <div class="inner center text-center "  style="width:80%;">
+                                <div class="inner-wrap animated fadeInRight" style=" ">
+                                    <h4 style="color: lightgray;">limited time</h4>
+                                    <h2 style="color: orange;">EXTRA 30% OFF</h2>
+                                    <h4 style="color: lightgray;">discount reflected at checkout</h4>
+                                    <div class="tx-div medium"  style="background-color: white;"></div>
+                                    <h3 style="color: gray;">from Anthropologie</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div><!-- end .ux_banner -->
+
                 <c:if test="${not empty newSaleThisWeek}">
                     <div id="banner_3" class="ux_banner dark    "  style="height:400px; " data-height="400px" role="banner">
                         <div class="banner-bg "  style="background-image:url('/resources/images/vintage-clothing-accessories.png'); ">

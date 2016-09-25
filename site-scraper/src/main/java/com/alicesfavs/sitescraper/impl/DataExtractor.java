@@ -16,6 +16,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -33,7 +34,7 @@ public class DataExtractor
         final Elements elements = extractElements(rootElement, categoryExtractSpec.containerSpec,
                 categoryExtractSpec.categorySpec);
 
-        final List<CategoryExtract> categoryList = new ArrayList<CategoryExtract>();
+        final Set<CategoryExtract> categorySet = new HashSet<>();
         for (final Element element : elements)
         {
             try
@@ -46,9 +47,10 @@ public class DataExtractor
                 }
                 else
                 {
-                    categoryExtract.url = extractData(element, categoryExtractSpec.urlSpec);
+                    final String extractedUrl = extractData(element, categoryExtractSpec.urlSpec);
+                    categoryExtract.url = extractedUrl.replaceAll(";jsessionid=.*\\?", "?");
                 }
-                categoryList.add(categoryExtract);
+                categorySet.add(categoryExtract);
             }
             catch (ElementNotFoundException | DataNotFoundException e)
             {
@@ -56,7 +58,7 @@ public class DataExtractor
             }
         }
 
-        return categoryList;
+        return new ArrayList<>(categorySet);
     }
 
     public List<ProductExtract> extractProducts(Element rootElement, ProductExtractSpec productExtractSpec)

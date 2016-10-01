@@ -6,7 +6,7 @@
   <div class="row"><div class="large-12 columns"><div class="top-divider"></div></div></div>
 
   <div class="page-header">
-    <div id="banner_1179620215" class="ux_banner dark    "  style="height:300px; " data-height="300px" role="banner">
+    <div id="banner_1179620215" class="ux_banner dark    "  style="height:400px; " data-height="300px" role="banner">
       <div class="banner-bg "  style="background-image:url('/resources/images/about-us.png'); "><img src="/resources/images/about-us.png"  alt="" style="visibility:hidden;" /></div>
       <div class="row" >
         <div class="inner center text-center "  style="width:60%;">
@@ -27,7 +27,7 @@
   <div  class="page-wrapper">
     <div class="row">
       <div id="content" class="large-12 columns" role="main">
-        <p class="lead text-center">Alice, my wife, loves to browse through her favorite brand websites, checking for good deals and sales.
+        <p class="lead text-center">Alice loves to browse through her favorite brand websites, checking for good deals and sales.
           I wanted to do the work for her and help her shop.</p>
         <hr>
         <div  class="row container ">

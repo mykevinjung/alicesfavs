@@ -174,7 +174,7 @@ public class SaleProductService
         // collect first items from each site
         productList = new ArrayList<>();
         final List<Site> siteList = getAliceCategorySites(aliceCategory);
-        final int todayEpochDay = (int) LocalDateUtils.now().toEpochDay();
+        final int todayEpochDay = (int) LocalDateUtils.now().toEpochDay() * webAppConfig.getHomeCategoryProductSize();
         for (int index = 0; ; index++)
         {
             final Site site = siteList.get((todayEpochDay + index) % siteList.size());

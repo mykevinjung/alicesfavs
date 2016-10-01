@@ -69,29 +69,12 @@ public class ModelConverter
         uiProduct.setSiteStringId(site.stringId);
         uiProduct.setSiteDisplayWeight(site.displayWeight);
         uiProduct.setCreatedDate(LocalDateUtils.getLocalDate(product.createdDate));
-        uiProduct.setSaleStartDate(LocalDateUtils.getLocalDate(product.saleStartDate));
+        uiProduct.setSaleStartDate(LocalDateUtils.getLocalDate(product.priceChangedDate));
 
         return uiProduct;
     }
 
-    public static List<UiProduct> convertProductList(int categoryDisplayOrder, Site site, List<Product> productList, AliceCategory aliceCategory)
-    {
-        final List<UiProduct> uiProductList = new ArrayList<>();
-        int productDisplayOrder = 0;
-        for (int index = 0 ; index < productList.size() ; index++)
-        {
-            // filter out sold out product
-            final Product product = productList.get(index);
-            if (!product.productExtract.soldOut)
-            {
-                uiProductList.add(convertProduct(site, product, aliceCategory, categoryDisplayOrder, ++productDisplayOrder));
-            }
-        }
-
-        return uiProductList;
-    }
-
-    public static  UiProduct convertProduct(Product product, Site site)
+    public static UiProduct convertProduct(Product product, Site site)
     {
         final UiProduct uiProduct = new UiProduct(product.id);
         uiProduct.setItemId(product.productExtract.id);
@@ -113,9 +96,26 @@ public class ModelConverter
         uiProduct.setSiteStringId(site.stringId);
         uiProduct.setSiteDisplayWeight(site.displayWeight);
         uiProduct.setCreatedDate(LocalDateUtils.getLocalDate(product.createdDate));
-        uiProduct.setSaleStartDate(LocalDateUtils.getLocalDate(product.saleStartDate));
+        uiProduct.setSaleStartDate(LocalDateUtils.getLocalDate(product.priceChangedDate));
 
         return uiProduct;
+    }
+
+    public static List<UiProduct> convertProductList(int categoryDisplayOrder, Site site, List<Product> productList, AliceCategory aliceCategory)
+    {
+        final List<UiProduct> uiProductList = new ArrayList<>();
+        int productDisplayOrder = 0;
+        for (int index = 0 ; index < productList.size() ; index++)
+        {
+            // filter out sold out product
+            final Product product = productList.get(index);
+            if (!product.productExtract.soldOut)
+            {
+                uiProductList.add(convertProduct(site, product, aliceCategory, categoryDisplayOrder, ++productDisplayOrder));
+            }
+        }
+
+        return uiProductList;
     }
 
     public static SearchResultList<UiProduct> convertProductList(SearchResultList<Product> productList, List<Site> allSiteList)

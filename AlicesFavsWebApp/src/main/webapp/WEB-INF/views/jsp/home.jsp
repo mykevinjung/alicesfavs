@@ -15,7 +15,7 @@
             "lazyLoad": 1,
             "freeScroll": false,
             "wrapAround": true,
-            "autoPlay": 6000,
+            "autoPlay": 5000,
             "prevNextButtons": true,
             "contain" : true,
             "percentPosition": true,
@@ -41,31 +41,30 @@
                 </div><!-- end .ux_banner -->
 
                 <div id="banner_2" class="ux_banner dark "  style="height:400px; " data-height="400px" role="banner">
-                    <div class="banner-bg " style="background-image:url('/resources/images/white2.png'); ">
-                        <img src="/resources/images/white2.png"  alt="" style="visibility:hidden;" /></div>
+                    <a target="_blank" href="http://www.rebeccaminkoff.com/sale/">
+                    <div class="banner-bg " style="background-image:url('/resources/images/rebeccaminkoff-pink.png'); ">
+                        <img src="/resources/images/rebeccaminkoff-pink.png"  alt="" style="visibility:hidden;" /></div>
                     <div class="row" >
-                        <a target="_blank" href="http://www.anthropologie.com/anthro/category/clothing/shopsale-clothing.jsp">
-                            <div class="inner center text-center "  style="width:80%;">
-                                <div class="inner-wrap animated fadeInRight" style=" ">
-                                    <h4 style="color: lightgray;">limited time</h4>
-                                    <h2 style="color: orange;">EXTRA 30% OFF</h2>
-                                    <h4 style="color: lightgray;">discount reflected at checkout</h4>
-                                    <div class="tx-div medium"  style="background-color: white;"></div>
-                                    <h3 style="color: gray;">from Anthropologie</h3>
-                                </div>
+                        <div class="inner right center text-center "  style="width:80%;">
+                            <div class="inner-wrap animated fadeInLeft">
+                                <h1 style="color: black;">A Pretty Big Deal</h1>
+                                <h2 style="color: black;">Up to 50% off</h2>
+                                <div class="tx-div medium" style="background-color: black;"></div>
+                                <h3 style="color: black;">from Rebecca Minkoff</h3>
                             </div>
-                        </a>
+                        </div>
                     </div>
+                    </a>
                 </div><!-- end .ux_banner -->
 
                 <c:if test="${not empty newSaleThisWeek}">
                     <div id="banner_3" class="ux_banner dark    "  style="height:400px; " data-height="400px" role="banner">
-                        <div class="banner-bg "  style="background-image:url('/resources/images/vintage-clothing-accessories.png'); ">
-                            <img src="/resources/images/vintage-clothing-accessories.png"  alt="" style="visibility:hidden;" /></div>
+                        <div class="banner-bg "  style="background-image:url('/resources/images/leaf-fall.png'); ">
+                            <img src="/resources/images/leaf-fall.png"  alt="" style="visibility:hidden;" /></div>
                         <div class="row" >
-                            <div class="inner right center text-center "  style="width:80%;">
+                            <div class="inner right center text-right "  style="width:100%;">
                                 <div class="inner-wrap animated fadeInLeft">
-                                    <h2 class="animated fadeInLeft">New Sale Items This Week&#8230;</h2>
+                                    <h2 class="animated fadeInLeft">New Items This Week</h2>
                                     <div class="tx-div medium"></div>
                                     <c:forEach items="${newSaleThisWeek}" var="saleSummary" varStatus="loop">
                                         <h3 class="animated fadeInLeft"><a href="${saleSummary.brandSaleUrl}" style="color: inherit;">${saleSummary.saleCountThisWeek} items from ${saleSummary.siteName}</a></h3>

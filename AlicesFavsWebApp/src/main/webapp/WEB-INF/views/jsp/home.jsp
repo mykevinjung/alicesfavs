@@ -41,16 +41,16 @@
                 </div><!-- end .ux_banner -->
 
                 <div id="banner_2" class="ux_banner dark "  style="height:400px; " data-height="400px" role="banner">
-                    <a target="_blank" href="http://www.rebeccaminkoff.com/sale/">
-                    <div class="banner-bg " style="background-image:url('/resources/images/rebeccaminkoff-pink.png'); ">
-                        <img src="/resources/images/rebeccaminkoff-pink.png"  alt="" style="visibility:hidden;" /></div>
+                    <a target="_blank" href="http://www.anntaylor.com/dresses/cata000012">
+                    <div class="banner-bg " style="background-image:url('/resources/images/white2.png'); ">
+                        <img src="/resources/images/white2.png"  alt="" style="visibility:hidden;" /></div>
                     <div class="row" >
                         <div class="inner right center text-center "  style="width:80%;">
                             <div class="inner-wrap animated fadeInLeft">
-                                <h1 style="color: black;">A Pretty Big Deal</h1>
-                                <h2 style="color: black;">Up to 50% off</h2>
+                                <h4 style="color: black;">ENDS SUNDAY NIGHT</h4>
+                                <h2 style="color: black;">40% Off Full-Price Dresses</h2>
                                 <div class="tx-div medium" style="background-color: black;"></div>
-                                <h3 style="color: black;">from Rebecca Minkoff</h3>
+                                <h3 style="color: black;">from Ann Taylor</h3>
                             </div>
                         </div>
                     </div>

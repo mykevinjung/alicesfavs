@@ -48,6 +48,7 @@ public class DataExtractor
                 else
                 {
                     final String extractedUrl = extractData(element, categoryExtractSpec.urlSpec);
+                    // To handle TOMS
                     categoryExtract.url = extractedUrl.replaceAll(";jsessionid=.*\\?", "?");
                 }
                 categorySet.add(categoryExtract);

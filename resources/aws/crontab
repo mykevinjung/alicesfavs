@@ -120,3 +120,7 @@
 # marcjacobs
 11 14 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh marcjacobs usePhantomJS >> /dev/null 2>&1
 11 20 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh marcjacobs usePhantomJS >> /dev/null 2>&1
+
+# swarovski
+14 14 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh swarovski >> /dev/null 2>&1
+14 20 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh swarovski >> /dev/null 2>&1

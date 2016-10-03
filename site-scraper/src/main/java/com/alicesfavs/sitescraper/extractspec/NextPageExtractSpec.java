@@ -8,9 +8,11 @@ public class NextPageExtractSpec
      */
     public ElementDataSpec nextPageSpec;
 
+    public ElementActionSpec nextPageActionSpec;
+
     public String toString()
     {
-        return "NextPageExtractSpec[nextPageSpec=" + nextPageSpec + "]";
+        return "NextPageExtractSpec[nextPageSpec=" + nextPageSpec + ", nextPageActionSpec" + nextPageActionSpec + "]";
     }
 
 }

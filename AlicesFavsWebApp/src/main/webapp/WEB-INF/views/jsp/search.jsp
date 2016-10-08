@@ -38,7 +38,7 @@
                                 <div class="inner-wrap">
                                     <a <c:if test="${mobile != true}">target="_blank"</c:if> href="/redirect/product?siteId=${product.siteStringId}&id=${product.id}&pageId=${pageId}&pageNo=${pageNo}&category=${product.aliceCategory}&position=${loop.index+1}">
                                         <div class="product-image">
-                                            <div class="front-image"><img width="247" height="300" src="${product.imageUrl}" class="attachment-shop_catalog wp-post-image aligncenter" alt="${product.name}" /></div>
+                                            <div class="front-image"><img width="247" height="300" src="${product.imageUrl}" class="attachment-shop_catalog wp-post-image aligncenter" alt="${product.name}" <c:if test="${not empty product.imageOnErrorUrl}">onerror="this.onerror=null;this.src='${product.imageOnErrorUrl}';"</c:if>/></div>
                                         </div><!-- end product-image -->
                                     </a>
                                     <div class="info style-grid1">

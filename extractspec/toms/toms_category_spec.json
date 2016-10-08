@@ -2,9 +2,9 @@
     {
         "baseUrl":"http://www.toms.com/sale",
         "containerSpec":{
-            "id":null,
-            "tagName":"dd",
-            "className":"show-for-small",
+            "id":"panel_gn1",
+            "tagName":"div",
+            "className":null,
             "attributeKey":null,
             "valuePattern":null
         },

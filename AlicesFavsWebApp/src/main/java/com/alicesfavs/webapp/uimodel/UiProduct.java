@@ -15,6 +15,7 @@ public class UiProduct
     private String aliceCategory;
     private String url;
     private String imageUrl;
+    private String imageOnErrorUrl;
     private String priceWithCurrency;
     private String wasPriceWithCurrency;
     private Double price;
@@ -101,6 +102,16 @@ public class UiProduct
     public void setImageUrl(String imageUrl)
     {
         this.imageUrl = imageUrl;
+    }
+
+    public String getImageOnErrorUrl()
+    {
+        return imageOnErrorUrl;
+    }
+
+    public void setImageOnErrorUrl(String imageOnErrorUrl)
+    {
+        this.imageOnErrorUrl = imageOnErrorUrl;
     }
 
     public String getPriceWithCurrency()

@@ -79,6 +79,28 @@
                     "id":null,
                     "tagName":"img",
                     "className":null,
+                    "attributeKey":"src",
+                    "valuePattern":null
+                },
+                "dataSpec":{
+                    "attributeKey":"src",
+                    "valuePattern":null,
+                    "valueExcludePattern":null,
+                    "substringPattern":null
+                }
+            },
+            {
+                "containerSpec":{
+                    "id":null,
+                    "tagName":"a",
+                    "className":"grid-product__image-link",
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "elementSpec":{
+                    "id":null,
+                    "tagName":"img",
+                    "className":null,
                     "attributeKey":"data-src",
                     "valuePattern":null
                 },

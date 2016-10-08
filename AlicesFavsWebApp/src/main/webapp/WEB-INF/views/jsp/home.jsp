@@ -41,19 +41,19 @@
                 </div><!-- end .ux_banner -->
 
                 <div id="banner_2" class="ux_banner dark "  style="height:400px; " data-height="400px" role="banner">
-                    <a target="_blank" href="http://www.anntaylor.com/dresses/cata000012">
-                    <div class="banner-bg " style="background-image:url('/resources/images/white2.png'); ">
-                        <img src="/resources/images/white2.png"  alt="" style="visibility:hidden;" /></div>
-                    <div class="row" >
-                        <div class="inner right center text-center "  style="width:80%;">
-                            <div class="inner-wrap animated fadeInLeft">
-                                <h4 style="color: black;">ENDS SUNDAY NIGHT</h4>
-                                <h2 style="color: black;">40% Off Full-Price Dresses</h2>
-                                <div class="tx-div medium" style="background-color: black;"></div>
-                                <h3 style="color: black;">from Ann Taylor</h3>
+                    <a href="/sale/brand/abercrombie">
+                        <div class="banner-bg " style="background-image:url('/resources/images/white2.png'); ">
+                            <img src="/resources/images/white2.png"  alt="" style="visibility:hidden;" /></div>
+                        <div class="row" >
+                            <div class="inner right center text-center "  style="width:80%;">
+                                <div class="inner-wrap animated fadeInLeft">
+                                    <h2 style="color: brown;">40% OFF ENTIRE STORE</h2>
+                                    <h2 style="color: brown;">1,000+ Items Added!</h2>
+                                    <div class="tx-div medium" style="background-color: brown;"></div>
+                                    <h3 style="color: brown;">Abercrombie & Fitch</h3>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </a>
                 </div><!-- end .ux_banner -->
 
@@ -98,7 +98,7 @@
                             <div class="inner-wrap" sale-start-date="${product.saleStartDate}">
                                 <a <c:if test="${mobile != true}">target="_blank"</c:if> href="/redirect/product?siteId=${product.siteStringId}&id=${product.id}&pageId=${pageId}&category=${product.aliceCategory}&position=${loop.index+1}">
                                     <div class="product-image">
-                                        <div class="front-image"><img width="247" height="300" src="${product.imageUrl}" class="attachment-shop_catalog wp-post-image aligncenter" alt="${product.name}" /></div>
+                                        <div class="front-image"><img width="247" height="300" src="${product.imageUrl}" class="attachment-shop_catalog wp-post-image aligncenter" alt="${product.name}" <c:if test="${not empty product.imageOnErrorUrl}">onerror="this.onerror=null;this.src='${product.imageOnErrorUrl}';"</c:if>/></div>
                                     </div><!-- end product-image -->
                                 </a>
                                 <div class="info style-grid1">

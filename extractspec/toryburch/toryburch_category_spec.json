@@ -1,16 +1,15 @@
 [
     {
-        "baseUrl":"http://www.toryburch.com",
         "containerSpec": {
             "id": null,
             "tagName": "li",
-            "className": "sale",
-            "attributeKey": null,
-            "valuePattern": null
+            "className": null,
+            "attributeKey": "class",
+            "valuePattern": ".*-sale"
         },
         "categorySpec": {
             "id": null,
-            "tagName": "a",
+            "tagName": "li",
             "className": null,
             "attributeKey": null,
             "valuePattern": null
@@ -19,13 +18,13 @@
             "containerSpec": null,
             "elementSpec": {
                 "id": null,
-                "tagName": "a",
+                "tagName": "li",
                 "className": null,
                 "attributeKey": null,
                 "valuePattern": null
             },
             "dataSpec": {
-                "attributeKey": "$nested_text",
+                "attributeKey": "class",
                 "valuePattern": null,
                 "valueExcludePattern": null,
                 "substringPattern": null
@@ -42,7 +41,7 @@
             },
             "dataSpec": {
                 "attributeKey": "abs:href",
-                "valuePattern": ".*toryburch.com/(sale|sales)-.*",
+                "valuePattern": ".*toryburch.com/.*/sale/",
                 "valueExcludePattern": null,
                 "substringPattern": null
             }

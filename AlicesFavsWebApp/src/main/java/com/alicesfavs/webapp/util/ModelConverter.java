@@ -52,6 +52,11 @@ public class ModelConverter
         uiProduct.setAliceCategory(aliceCategory.name.toLowerCase());
         uiProduct.setUrl(product.productExtract.url);
         uiProduct.setImageUrl(product.productExtract.imageUrl);
+        // To handle abercrombie
+        if (product.productExtract.imageUrl.indexOf("model1?$product-anf-v1") >= 0)
+        {
+            uiProduct.setImageOnErrorUrl(product.productExtract.imageUrl.replace("model1?$product-anf-v1", "prod1?$product-anf-v1"));
+        }
         uiProduct.setPrice(product.price);
         uiProduct.setWasPrice(product.wasPrice);
         uiProduct.setPriceWithCurrency(product.productExtract.price);

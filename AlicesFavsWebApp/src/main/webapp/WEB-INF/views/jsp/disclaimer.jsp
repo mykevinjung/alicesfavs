@@ -14,8 +14,8 @@
         <h3 class="section-title clearfix  "><span>Disclaimer</span>  </h3><!-- end section_title -->
 
         <p>We make our full effort to update product information as soon as possible.
-          However, the information is not real-time and there may be times of price variation between the data on Alice's Favs and the brand's website.
-          We try our best to gather product sales information but it is a possibility to have delayed updates to our site.</p>
+          However, the information is not in real-time, so there could be momentary times of information variation between Alice's Favs and the brands’ websites.
+          We try our best to gather product information but it is a possibility to have delayed updates to our site.</p>
       </div></div>
     </div>
 

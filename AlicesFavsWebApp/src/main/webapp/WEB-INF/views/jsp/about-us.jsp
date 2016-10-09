@@ -27,22 +27,22 @@
   <div  class="page-wrapper">
     <div class="row">
       <div id="content" class="large-12 columns" role="main">
-        <p class="lead text-center">Alice loves to browse through her favorite brand websites, checking for good deals and sales.
-          I wanted to do the work for her and help her shop.</p>
+        <p class="lead text-center">Alice loves shopping online and browses through her favorite brand websites, checking for good deals and sales.
+          I wanted to do the work for her and help her shop more efficiently.</p>
         <hr>
         <div  class="row container ">
           <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
 
             <div class="box-inner">
               <h4>All sales in one place<span> </span></h4>
-              <p>All sales from the favorite brands in one place! Start your shopping here.</p>
+              <p>Find all the sales from your favorite brands in one place! Start your shopping here.</p>
             </div>
           </div></div>
 
           <div class="small-12    large-4  columns   "  ><div class="column-inner"  >
             <div class="box-inner">
               <h4>More brands coming...<span> </span></h4>
-              <p>We are adding more brands you love. More brands, more choices!</p>
+              <p>We are adding more brands that you love. More brands, more choices!</p>
             </div>
           </div></div>
 

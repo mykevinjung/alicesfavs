@@ -19,11 +19,11 @@
           <h3 class="section-title clearfix  "><span>Frequently Asked Questions</span>  </h3><!-- end section_title -->
           <div class="accordion" rel="0">
             <div class="accordion-title"><a href="#">Do you sell the products?</a></div>
-            <div class="accordion-inner"><p>No, we do not sell any products. We simply gather the links to the products across multiple brands and put in one place.</p></div>
+            <div class="accordion-inner"><p>No, we do not sell any products. We simply gather the links to the products across multiple brands and put them all in one place to make your shopping experience more efficient and productive.</p></div>
             <div class="accordion-title"><a href="#">Some product information is not correct.</a></div>
-            <div class="accordion-inner"><p>It is possible that the product information on Alice's Favs does not reflect the information at real time. As our site is not updated every minute, there may be a delay updating the information. Please see <a href="/disclaimer">Disclaimer</a>.</p></div>
+            <div class="accordion-inner"><p>It is possible for the product information on Alice's Favs to occasionally be incorrect since our website is not updated every minute. There may be a slight delay in updating information from various website. Please see <a href="/disclaimer">Disclaimer</a>.</p></div>
             <div class="accordion-title"><a href="#">I have a brand that I like to see on Alice's Favs.</a></div>
-            <div class="accordion-inner"><p>Sure! Let us know what brand you would like to see. We will review and work to add it to our site.</p></div>
+            <div class="accordion-inner"><p>Definitely! Let us know what brand you would like to see. We will review and work to add it to our site.</p></div>
           </div>
         </div>
         </div>

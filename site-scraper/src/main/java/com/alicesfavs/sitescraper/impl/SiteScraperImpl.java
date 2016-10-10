@@ -244,16 +244,17 @@ public class SiteScraperImpl implements SiteScraper
                 webDriver.manage().window().maximize();
                 webDriver.get(url);
 
+                final String pageSource;
                 if (scrollDown)
                 {
-                    scrollDown(MAX_NEXT_PAGE_LOOP, 2000);
+                    pageSource = scrollDown(MAX_NEXT_PAGE_LOOP, 2000);
                 }
                 else
                 {
-                    scrollDown(1, 2000);
+                    pageSource = scrollDown(1, 2000);
                 }
 
-                final String pageSource = webDriver.getPageSource();
+                //final String pageSource = webDriver.getPageSource();
                 final Document document = Jsoup.parse(pageSource);
                 document.setBaseUri(url);
                 return document;
@@ -277,8 +278,9 @@ public class SiteScraperImpl implements SiteScraper
         }
     }
 
-    private void scrollDown(int count, int sleepMilliseconds)
+    private String scrollDown(int count, int sleepMilliseconds)
     {
+        String pageSource = null;
         final int MINIMUM_DIFFERENCE = 10;
         int pageSourceLength = 0;
         JavascriptExecutor jse = (JavascriptExecutor) webDriver;
@@ -286,7 +288,8 @@ public class SiteScraperImpl implements SiteScraper
         {
             jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
             sleep(sleepMilliseconds);
-            final int newPageSourceLength = webDriver.getPageSource().length();
+            pageSource = webDriver.getPageSource();
+            final int newPageSourceLength = pageSource.length();
             if (newPageSourceLength - pageSourceLength > MINIMUM_DIFFERENCE)
             {
                 pageSourceLength = newPageSourceLength;
@@ -296,6 +299,7 @@ public class SiteScraperImpl implements SiteScraper
                 break;
             }
         }
+        return pageSource;
     }
 
     private void sleep(int milliseconds)

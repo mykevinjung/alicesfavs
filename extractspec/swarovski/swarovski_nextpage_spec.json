@@ -1,2 +1,20 @@
 [
+  {
+    "nextPageSpec":{
+      "containerSpec":null,
+      "elementSpec":{
+        "id":null,
+        "tagName":"a",
+        "className":"next",
+        "attributeKey":"href",
+        "valuePattern":".*PageNumber=[0-9]+.*"
+      },
+      "dataSpec":{
+        "attributeKey":"abs:href",
+        "valuePattern":null,
+        "valueExcludePattern":null,
+        "substringPattern":null
+      }
+    }
+  }
 ]

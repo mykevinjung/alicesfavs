@@ -124,3 +124,7 @@
 # swarovski
 14 14 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh swarovski >> /dev/null 2>&1
 14 20 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh swarovski >> /dev/null 2>&1
+
+# vincecamuto
+19 14 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh vincecamuto usePhantomJS >> /dev/null 2>&1
+19 20 * * * /opt/alicesfavs/site-scrape-batch/site-scrape-batch.sh vincecamuto usePhantomJS >> /dev/null 2>&1

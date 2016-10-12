@@ -254,7 +254,6 @@ public class SiteScraperImpl implements SiteScraper
                     pageSource = scrollDown(1, 2000);
                 }
 
-                //final String pageSource = webDriver.getPageSource();
                 final Document document = Jsoup.parse(pageSource);
                 document.setBaseUri(url);
                 return document;

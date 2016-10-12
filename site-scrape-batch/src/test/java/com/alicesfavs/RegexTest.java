@@ -19,11 +19,8 @@ public class RegexTest
     @Test
     public void testRegex()
     {
-        String extractedUrl = "http://www.toms.com/sale;jsessionid=Xtt+UA7y-CJaQH3ffMOXewdP.f53c6999-b297-3a89-871a-397446e94d7e?N=218521578";
-        System.out.println("result: " + extractedUrl.replaceAll(";jsessionid=.*\\?", "?"));
-
-        final String testString = "Women's";
-        final String regex = "(Women|Men|Kid|Home|Luggage).*";
+        final String testString = "content/resources/artifacts/checkout/airflight_en_us.xml";
+        final String regex = "content/resources/(views/default|templates|artifacts)/.*air.*";
 
         assertTrue("Does not match!", testString.matches(regex));
     }

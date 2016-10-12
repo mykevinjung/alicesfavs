@@ -2,8 +2,8 @@
     {
         "containerSpec":{
             "id":null,
-            "tagName":"header",
-            "className":null,
+            "tagName":"nav",
+            "className":"c-main-navigation",
             "attributeKey":null,
             "valuePattern":null
         },
@@ -53,7 +53,7 @@
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":".*/anthro/category/.*/shopsale-.*",
+                "valuePattern":".*anthropologie.com/[a-z-]*sale[a-z-]*",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }

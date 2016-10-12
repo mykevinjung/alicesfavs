@@ -1,55 +1,43 @@
 [
     {
-        "containerSpec":{
-            "id":null,
-            "tagName":"div",
-            "className":"category-items",
-            "attributeKey":null,
-            "valuePattern":null
-        },
+        "containerSpec":null,
         "productSpec":{
             "id":null,
-            "tagName":"div",
-            "className":"category-item",
-            "attributeKey":null,
-            "valuePattern":null
+            "tagName":"span",
+            "className":null,
+            "attributeKey":"itemprop",
+            "valuePattern":"product"
         },
         "idSpec":{
-            "containerSpec":{
-                "id":null,
-                "tagName":"div",
-                "className":"item-description",
-                "attributeKey":null,
-                "valuePattern":null
-            },
+            "containerSpec":null,
             "elementSpec":{
                 "id":null,
-                "tagName":"a",
+                "tagName":"meta",
                 "className":null,
-                "attributeKey":"id",
-                "valuePattern":null
+                "attributeKey":"itemprop",
+                "valuePattern":"productID"
             },
             "dataSpec":{
-                "attributeKey":"abs:href",
+                "attributeKey":"content",
                 "valuePattern":null,
                 "valueExcludePattern":null,
-                "substringPattern":".*/([a-zA-Z0-9]+)\\.jsp.*"
+                "substringPattern":null
             }
         },
         "nameSpec":{
             "containerSpec":{
                 "id":null,
                 "tagName":"div",
-                "className":"item-description",
+                "className":"c-product-tile-details",
                 "attributeKey":null,
                 "valuePattern":null
             },
             "elementSpec":{
                 "id":null,
-                "tagName":"a",
+                "tagName":"span",
                 "className":null,
-                "attributeKey":"id",
-                "valuePattern":null
+                "attributeKey":"itemprop",
+                "valuePattern":"name"
             },
             "dataSpec":{
                 "attributeKey":"$nested_text",
@@ -62,7 +50,7 @@
             "containerSpec":{
                 "id":null,
                 "tagName":"div",
-                "className":"item-description",
+                "className":"c-product-tile-details",
                 "attributeKey":null,
                 "valuePattern":null
             },
@@ -70,7 +58,7 @@
                 "id":null,
                 "tagName":"a",
                 "className":null,
-                "attributeKey":"id",
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
@@ -84,20 +72,20 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":"div",
-                    "className":"item-image",
-                    "attributeKey":null,
-                    "valuePattern":null
+                    "tagName":"span",
+                    "className":null,
+                    "attributeKey":"itemprop",
+                    "valuePattern":"image"
                 },
                 "elementSpec":{
                     "id":null,
-                    "tagName":"img",
+                    "tagName":"meta",
                     "className":null,
-                    "attributeKey":null,
-                    "valuePattern":null
+                    "attributeKey":"itemprop",
+                    "valuePattern":"url"
                 },
                 "dataSpec":{
-                    "attributeKey":"data-original",
+                    "attributeKey":"content",
                     "valuePattern":null,
                     "valueExcludePattern":null,
                     "substringPattern":null
@@ -108,15 +96,15 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":"div",
-                    "className":"item-price",
+                    "tagName":"p",
+                    "className":"c-product-tile__price",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"PriceAlertText",
+                    "className":"c-product-meta__current-price",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -132,15 +120,15 @@
             {
                 "containerSpec":{
                     "id":null,
-                    "tagName":"div",
-                    "className":"item-description",
+                    "tagName":"p",
+                    "className":"c-product-tile__price",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"was-price",
+                    "className":"c-product-meta__original-price",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -148,7 +136,7 @@
                     "attributeKey":"$nested_text",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":".*\\((.*)\\).*"
+                    "substringPattern":null
                 }
             }
         ]

@@ -41,16 +41,17 @@
                 </div><!-- end .ux_banner -->
 
                 <div id="banner_2" class="ux_banner dark "  style="height:400px; " data-height="400px" role="banner">
-                    <a href="/sale/brand/abercrombie">
-                        <div class="banner-bg " style="background-image:url('/resources/images/white2.png'); ">
-                            <img src="/resources/images/white2.png"  alt="" style="visibility:hidden;" /></div>
+                    <a href="/sale/brand/armaniexchange">
+                        <div class="banner-bg " style="background-image:url('/resources/images/ax-blue.png'); ">
+                            <img src="/resources/images/ax-blue.png"  alt="" style="visibility:hidden;" /></div>
                         <div class="row" >
                             <div class="inner right center text-center "  style="width:80%;">
                                 <div class="inner-wrap animated fadeInLeft">
-                                    <h2 style="color: brown;">40% OFF ENTIRE STORE</h2>
-                                    <h2 style="color: brown;">1,000+ Items Added!</h2>
-                                    <div class="tx-div medium" style="background-color: brown;"></div>
-                                    <h3 style="color: brown;">Abercrombie & Fitch</h3>
+                                    <h4 style="color: white;">Until 10/12</h4>
+                                    <h2 style="color: white;">MID-SEASON SALE</h2>
+                                    <h2 style="color: white;">UP TO 60% OFF</h2>
+                                    <div class="tx-div medium" style="background-color: white;"></div>
+                                    <h3 style="color: white;">Armani Exchange</h3>
                                 </div>
                             </div>
                         </div>

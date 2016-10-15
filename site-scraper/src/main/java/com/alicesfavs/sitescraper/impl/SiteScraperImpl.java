@@ -119,15 +119,15 @@ public class SiteScraperImpl implements SiteScraper
         int loopCount = 0;
         final List<ProductExtract> productList = new ArrayList<>();
         final boolean scrollDown = nextPageExtractSpecList.size() == 0;
-        while (StringUtils.hasText(url) && loopCount++ < MAX_NEXT_PAGE_LOOP)
+        Document doc = openUrl(site, url, true, scrollDown);
+        while (loopCount++ < MAX_NEXT_PAGE_LOOP)
         {
-            final Document doc = openUrl(site, url, true, scrollDown);
             if (doc == null)
             {
                 break;
             }
             productList.addAll(extractProducts(doc, productExtractSpecList));
-            url = extractNextPageUrl(doc, nextPageExtractSpecList);
+            doc = extractNextPage(site, doc, nextPageExtractSpecList);
         }
 
         return productList;
@@ -184,22 +184,60 @@ public class SiteScraperImpl implements SiteScraper
     {
         for (NextPageExtractSpec nextPageExtractSpec : nextPageExtractSpecList)
         {
-            try
+            final String url = extractNextPageUrl(document, nextPageExtractSpec);
+            if (StringUtils.hasText(url))
             {
-                final String nextPageUrl = dataExtractor.extractNextPageUrl(document, nextPageExtractSpec);
-                if (nextPageUrl.matches(".*/[a-zA-Z0-9]+&goToPage=2"))
+                return url;
+            }
+        }
+        return null;
+    }
+
+    private Document extractNextPage(Site site, Document document, List<NextPageExtractSpec> nextPageExtractSpecList)
+        throws SiteScrapeException
+    {
+        final boolean scrollDown = nextPageExtractSpecList.size() == 0;
+        Document doc = null;
+        for (NextPageExtractSpec nextPageExtractSpec : nextPageExtractSpecList)
+        {
+            if (nextPageExtractSpec.nextPageActionSpec != null)
+            {
+                // TODO let's write code here!!!
+            }
+            else
+            {
+                final String url = extractNextPageUrl(document, nextPageExtractSpec);
+                if (StringUtils.hasText(url))
                 {
-                    return nextPageUrl.replace("&goToPage=2", "?&goToPage=2");
-                }
-                else
-                {
-                    return nextPageUrl;
+                    doc = openUrl(site, url, true, scrollDown);
+                    if (doc != null)
+                    {
+                        break;
+                    }
                 }
             }
-            catch (ElementNotFoundException | DataNotFoundException e)
+        }
+        return doc;
+    }
+
+    private String extractNextPageUrl(Document document, NextPageExtractSpec nextPageExtractSpec)
+    {
+        try
+        {
+            final String nextPageUrl = dataExtractor.extractNextPageUrl(document, nextPageExtractSpec);
+            // For Ann Taylor
+            if (nextPageUrl.matches(".*/[a-zA-Z0-9]+&goToPage=2"))
             {
-                // do nothing
+                return nextPageUrl.replace("&goToPage=2", "?&goToPage=2");
             }
+            else
+            {
+                return nextPageUrl;
+            }
+        }
+        catch (ElementNotFoundException | DataNotFoundException e)
+        {
+            // do nothing
         }
         return null;
     }

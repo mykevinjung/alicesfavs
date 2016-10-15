@@ -33,10 +33,11 @@ public class SiteScrapeBatchApp
         }
         LOGGER.info("args size: " + args.length);
 
+        final long startTime = System.currentTimeMillis();
+        final String siteId = args[0].trim();
         WebDriver webDriver = null;
         try
         {
-            final String siteId = args[0].trim();
             final boolean forceSave = args.length >= 2 && FORCE_SAVE.equalsIgnoreCase(args[1]) ? true : false;
             final boolean usePhantomJS = args.length >= 2 && USE_PHANTOMJS.equalsIgnoreCase(args[1]) ? true : false;
             final ApplicationContext context = new ClassPathXmlApplicationContext("site-scrape-batch.xml");
@@ -68,6 +69,8 @@ public class SiteScrapeBatchApp
             {
                 webDriver.quit();
             }
+            final long endTime = System.currentTimeMillis();
+            LOGGER.info("Total execution time for " + siteId + ": " + ((endTime - startTime)/1000) + " seconds");
         }
     }
 

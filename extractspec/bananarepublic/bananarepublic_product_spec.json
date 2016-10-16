@@ -103,16 +103,16 @@
                 },
                 "elementSpec":{
                     "id":null,
-                    "tagName":"span",
-                    "className":null,
-                    "attributeKey":"data-bind",
-                    "valuePattern":".*currentMaxPrice"
+                    "tagName":"div",
+                    "className":"product-card--mup-message",
+                    "attributeKey":null,
+                    "valuePattern":null
                 },
                 "dataSpec":{
                     "attributeKey":"$nested_text",
                     "valuePattern":null,
                     "valueExcludePattern":null,
-                    "substringPattern":null
+                    "substringPattern":"Now (\\$[0-9,\\.]+)"
                 }
             }
         ],
@@ -127,10 +127,10 @@
                 },
                 "elementSpec":{
                     "id":null,
-                    "tagName":"s",
-                    "className":null,
-                    "attributeKey":"data-bind",
-                    "valuePattern":".*regularMaxPrice"
+                    "tagName":"div",
+                    "className":"product-card--regular",
+                    "attributeKey":null,
+                    "valuePattern":null
                 },
                 "dataSpec":{
                     "attributeKey":"$nested_text",

@@ -1,7 +1,13 @@
 [
   {
     "nextPageSpec":{
-      "containerSpec":null,
+      "containerSpec":{
+        "id":null,
+        "tagName":"ul",
+        "className":"linkList",
+        "attributeKey":null,
+        "valuePattern":null
+      },
       "elementSpec":{
         "id":null,
         "tagName":"a",

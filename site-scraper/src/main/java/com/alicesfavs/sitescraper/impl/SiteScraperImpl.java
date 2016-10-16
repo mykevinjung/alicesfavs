@@ -14,6 +14,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -311,6 +312,12 @@ public class SiteScraperImpl implements SiteScraper
         {
             // ignore and move forward to next
             LOGGER.error("Http Status Code " + e.getStatusCode() + " in opening " + url, e);
+            return null;
+        }
+        catch (WebDriverException e)
+        {
+            // ignore and move forward to next
+            LOGGER.error("Error in opening " + url, e);
             return null;
         }
     }

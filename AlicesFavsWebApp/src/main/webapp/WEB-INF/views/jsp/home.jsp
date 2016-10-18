@@ -39,11 +39,10 @@
                         </div>
                     </div>
                 </div><!-- end .ux_banner -->
-
                 <div id="banner_2" class="ux_banner dark "  style="height:400px; " data-height="400px" role="banner">
-                    <a target="_blank" href="https://www.katespade.com/new/view-all">
-                        <div class="banner-bg " style="background-image:url('/resources/images/green.png'); ">
-                            <img src="/resources/images/green.png"  alt="" style="visibility:hidden;" /></div>
+                    <a target="_blank" href="http://bananarepublic.gap.com/browse/category.do?cid=1014739">
+                        <div class="banner-bg " style="background-image:url('/resources/images/white.png'); ">
+                            <img src="/resources/images/white.png"  alt="" style="visibility:hidden;" /></div>
                         <div class="row" >
                             <div class="inner right center text-center "  style="width:80%;">
                                 <div class="inner-wrap animated fadeInLeft">
@@ -65,7 +64,7 @@
                         <div class="row" >
                             <div class="inner right center text-right "  style="width:100%;">
                                 <div class="inner-wrap animated fadeInLeft">
-                                    <h2 class="animated fadeInLeft">New Items This Week</h2>
+                                    <h2 class="animated fadeInLeft">Updates This Week</h2>
                                     <div class="tx-div medium"></div>
                                     <c:forEach items="${newSaleThisWeek}" var="saleSummary" varStatus="loop">
                                         <h3 class="animated fadeInLeft"><a href="${saleSummary.brandSaleUrl}" style="color: inherit;">${saleSummary.saleCountThisWeek} items from ${saleSummary.siteName}</a></h3>

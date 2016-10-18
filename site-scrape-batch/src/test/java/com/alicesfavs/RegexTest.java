@@ -29,13 +29,13 @@ public class RegexTest
     public void testExtractText()
     {
 
-        final String testString = "$ 123.00";
-        final String regex = "\\$ ([0-9,.]+)";
+        final String testString = "Now $123.34";
+        final String regex = "[a-zA-Z ]*(\\$[0-9,\\.]+)";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(testString);
 
         assertTrue("Can't find the string!", matcher.find());
-        assertEquals("Can't extract the string!", "123.00", matcher.group(1));
+        assertEquals("Can't extract the string!", "$123.34", matcher.group(1));
     }
 }

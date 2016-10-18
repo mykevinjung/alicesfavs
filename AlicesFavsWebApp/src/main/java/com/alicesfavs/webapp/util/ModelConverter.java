@@ -57,6 +57,10 @@ public class ModelConverter
         {
             uiProduct.setImageOnErrorUrl(product.productExtract.imageUrl.replace("model1?$product-anf-v1", "prod1?$product-anf-v1"));
         }
+        else
+        {
+            uiProduct.setImageOnErrorUrl("/resources/images/white.png");
+        }
         uiProduct.setPrice(product.price);
         uiProduct.setWasPrice(product.wasPrice);
         uiProduct.setPriceWithCurrency(product.productExtract.price);

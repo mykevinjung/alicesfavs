@@ -114,6 +114,28 @@
                     "valueExcludePattern":null,
                     "substringPattern":"Now (\\$[0-9,\\.]+)"
                 }
+            },
+            {
+                "containerSpec":{
+                    "id":null,
+                    "tagName":"div",
+                    "className":"product-card--text",
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "elementSpec":{
+                    "id":null,
+                    "tagName":"div",
+                    "className":"product-card-price--highlight",
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "dataSpec":{
+                    "attributeKey":"$nested_text",
+                    "valuePattern":null,
+                    "valueExcludePattern":null,
+                    "substringPattern":null
+                }
             }
         ],
         "wasPriceSpecList":[
@@ -129,6 +151,28 @@
                     "id":null,
                     "tagName":"div",
                     "className":"product-card--regular",
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "dataSpec":{
+                    "attributeKey":"$nested_text",
+                    "valuePattern":null,
+                    "valueExcludePattern":null,
+                    "substringPattern":null
+                }
+            },
+            {
+                "containerSpec":{
+                    "id":null,
+                    "tagName":"div",
+                    "className":"product-card--text",
+                    "attributeKey":null,
+                    "valuePattern":null
+                },
+                "elementSpec":{
+                    "id":null,
+                    "tagName":"div",
+                    "className":"product-card-price--markdown",
                     "attributeKey":null,
                     "valuePattern":null
                 },

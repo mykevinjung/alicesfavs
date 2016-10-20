@@ -1,24 +1,30 @@
 [
     {
-        "containerSpec":null,
+        "containerSpec":{
+            "id":null,
+            "tagName":"div",
+            "className":"container-product-results",
+            "attributeKey":null,
+            "valuePattern":null
+        },
         "productSpec":{
             "id":null,
             "tagName":"div",
-            "className":"product-tile",
-            "attributeKey":"data-itemid",
+            "className":"product-item",
+            "attributeKey":null,
             "valuePattern":null
         },
         "idSpec":{
             "containerSpec":null,
             "elementSpec":{
                 "id":null,
-                "tagName":"div",
-                "className":"product-tile",
-                "attributeKey":"data-itemid",
+                "tagName":"button",
+                "className":"btn-primary",
+                "attributeKey":"data-aem-product-partnumber",
                 "valuePattern":null
             },
             "dataSpec":{
-                "attributeKey":"data-itemid",
+                "attributeKey":"data-aem-product-partnumber",
                 "valuePattern":null,
                 "valueExcludePattern":null,
                 "substringPattern":null
@@ -27,8 +33,8 @@
         "nameSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"h3",
-                "className":"product-name",
+                "tagName":"div",
+                "className":"product-information-link",
                 "attributeKey":null,
                 "valuePattern":null
             },
@@ -49,8 +55,8 @@
         "urlSpec":{
             "containerSpec":{
                 "id":null,
-                "tagName":"h3",
-                "className":"product-name",
+                "tagName":"div",
+                "className":"product-information-link",
                 "attributeKey":null,
                 "valuePattern":null
             },
@@ -73,19 +79,19 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"div",
-                    "className":"product-image",
+                    "className":"container-product-item-imgs",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"img",
-                    "className":null,
-                    "attributeKey":"src",
+                    "className":"img-product-main",
+                    "attributeKey":"data-src",
                     "valuePattern":null
                 },
                 "dataSpec":{
-                    "attributeKey":"src",
+                    "attributeKey":"data-src",
                     "valuePattern":null,
                     "valueExcludePattern":null,
                     "substringPattern":null
@@ -97,14 +103,14 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"div",
-                    "className":"product-pricing",
+                    "className":"container-subcategory-results-prices",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
                     "tagName":"span",
-                    "className":"product-sales-price",
+                    "className":"text-price",
                     "attributeKey":null,
                     "valuePattern":null
                 },
@@ -121,14 +127,14 @@
                 "containerSpec":{
                     "id":null,
                     "tagName":"div",
-                    "className":"product-pricing",
+                    "className":"container-subcategory-results-prices",
                     "attributeKey":null,
                     "valuePattern":null
                 },
                 "elementSpec":{
                     "id":null,
-                    "tagName":"span",
-                    "className":"product-standard-price",
+                    "tagName":"s",
+                    "className":null,
                     "attributeKey":null,
                     "valuePattern":null
                 },

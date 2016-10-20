@@ -7,14 +7,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alicesfavs.sitescraper.extractspec.ElementAction;
+import com.alicesfavs.sitescraper.extractspec.ElementActionSpec;
 import com.alicesfavs.sitescraper.extractspec.ProductDetailExtractSpec;
 import org.jsoup.Connection;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -203,7 +208,18 @@ public class SiteScraperImpl implements SiteScraper
         {
             if (nextPageExtractSpec.nextPageActionSpec != null)
             {
-                // TODO let's write code here!!!
+                final WebElement element = findElement(nextPageExtractSpec.nextPageActionSpec);
+                if (element != null && nextPageExtractSpec.nextPageActionSpec.elementAction == ElementAction.CLICK)
+                {
+                    // make the element visible
+                    webDriver.manage().window().maximize();
+                    element.click();
+                    final String pageSource = webDriver.getPageSource();
+                    final String currentUrl = webDriver.getCurrentUrl();
+                    doc = Jsoup.parse(pageSource);
+                    doc.setBaseUri(currentUrl);
+                    break;
+                }
             }
             else
             {
@@ -237,6 +253,22 @@ public class SiteScraperImpl implements SiteScraper
             }
         }
         catch (ElementNotFoundException | DataNotFoundException e)
+        {
+            // do nothing
+        }
+        return null;
+    }
+
+    private WebElement findElement(ElementActionSpec elementActionSpec)
+    {
+        try
+        {
+            if (StringUtils.hasText(elementActionSpec.xpath))
+            {
+                return webDriver.findElement(By.xpath(elementActionSpec.xpath));
+            }
+        }
+        catch (NoSuchElementException e)
         {
             // do nothing
         }

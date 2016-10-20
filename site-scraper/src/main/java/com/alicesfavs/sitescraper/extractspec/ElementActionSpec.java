@@ -5,31 +5,14 @@ package com.alicesfavs.sitescraper.extractspec;
  */
 public class ElementActionSpec
 {
-    // element with id
-    public String id;
-
-    // element with tag
-    public String tagName;
-
-    // element with class name
-    public String className;
-
-    // element with name
-    public String name;
-
-    // element with link text
-    public String linkText;
-
-    // element with partial link text
-    public String partialLinkText;
+    // xpath of the element
+    public String xpath;
 
     public ElementAction elementAction;
 
     public String toString()
     {
-        return "ElementActionSpec[id=" + id + ", tagName=" + tagName + ", className=" + className
-            + ", name=" + name + ", linkText=" + linkText + ", partialLinkText=" + partialLinkText
-            + ", elementAction=" + elementAction + "]";
+        return "ElementActionSpec[xpath=" + xpath + elementAction + "]";
     }
 
 }

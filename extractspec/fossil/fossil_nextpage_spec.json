@@ -1,0 +1,8 @@
+[
+  {
+    "nextPageActionSpec":{
+      "xpath":"//button[contains(@class, 'btn-action-viewall') and contains(text(), 'View All')]",
+      "elementAction":"CLICK"
+    }
+  }
+]

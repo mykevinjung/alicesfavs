@@ -1,16 +1,16 @@
 [
     {
-        "baseUrl":"http://www.ugg.com/master-sale",
+        "baseUrl":"https://www.fossil.com/us/en.html",
         "containerSpec":{
-            "id":null,
-            "tagName":"div",
-            "className":"refinements__item--product-type",
+            "id":"header-mainnav-skip",
+            "tagName":"ul",
+            "className":null,
             "attributeKey":null,
             "valuePattern":null
         },
         "categorySpec":{
             "id":null,
-            "tagName":"li",
+            "tagName":"a",
             "className":null,
             "attributeKey":null,
             "valuePattern":null
@@ -21,7 +21,7 @@
                 "id":null,
                 "tagName":"a",
                 "className":null,
-                "attributeKey":"title",
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
@@ -37,12 +37,12 @@
                 "id":null,
                 "tagName":"a",
                 "className":null,
-                "attributeKey":"title",
+                "attributeKey":null,
                 "valuePattern":null
             },
             "dataSpec":{
                 "attributeKey":"abs:href",
-                "valuePattern":null,
+                "valuePattern":".*fossil.com/us/en/sale/.*",
                 "valueExcludePattern":null,
                 "substringPattern":null
             }

@@ -40,24 +40,6 @@
                     </div>
                 </div><!-- end .ux_banner -->
 
-                <div id="banner_2" class="ux_banner dark "  style="height:400px; " data-height="400px" role="banner">
-                    <a target="_blank" href="http://www.loft.com/">
-                        <div class="banner-bg " style="background-image:url('/resources/images/loft-brown.png'); ">
-                            <img src="/resources/images/loft-brown.png"  alt="" style="visibility:hidden;" /></div>
-                        <div class="row" >
-                            <div class="inner right center text-center "  style="width:80%;">
-                                <div class="inner-wrap animated fadeInLeft">
-                                    <h3 style="color: white;">TODAY ONLY</h3>
-                                    <h1 style="color: white;">50% OFF EVERYTHING</h1>
-                                    <h3 style="color: white;">Code: <strong>THEBEST</strong></h3>
-                                    <div class="tx-div medium" style="background-color: white;"></div>
-                                    <h3 style="color: white;">LOFT</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div><!-- end .ux_banner -->
-
                 <c:if test="${not empty newSaleThisWeek}">
                     <div id="banner_3" class="ux_banner dark    "  style="height:400px; " data-height="400px" role="banner">
                         <div class="banner-bg "  style="background-image:url('/resources/images/leaf-fall.png'); ">
